@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { RegisterUser } from '../../interfaces/register-user';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,18 @@ export class RegisterComponent {
   constructor() { }
 
 
-  registerUser(){}
+  registerUser(){
+
+    let newUSer:RegisterUser = {
+      shown_name: this.shown_name,
+      first_name: this.first_name,
+      last_name: this.last_name,
+      email: this.email,
+      phone: this.phone,
+      password: this.password,
+      confirm_password: this.confirm_password
+    }
+  }
 
 
 }
