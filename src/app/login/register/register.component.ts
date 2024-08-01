@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RegisterUser } from '../../interfaces/register-user';
+import { UserService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-register',
@@ -23,13 +24,13 @@ export class RegisterComponent {
 
 
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
 
   registerUser(){
 
     let newUSer:RegisterUser = {
-      shown_name: this.shown_name,
+      username: this.shown_name,
       first_name: this.first_name,
       last_name: this.last_name,
       email: this.email,
@@ -37,6 +38,7 @@ export class RegisterComponent {
       password: this.password,
       confirm_password: this.confirm_password
     }
+    this.userService.registerUser(newUSer);
   }
 
 
