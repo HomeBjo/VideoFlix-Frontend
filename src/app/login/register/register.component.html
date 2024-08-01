@@ -1,0 +1,11 @@
+<section>
+    <input type="text" name="" id="" [(ngModel)]="shown_name" placeholder="shown name">
+    <input type="text" name="" id="" [(ngModel)]="first_name" placeholder="first name">
+    <input type="text" name="" id="" [(ngModel)]="last_name" placeholder="last name">
+    <input type="email" name="" id="" [(ngModel)]="email" placeholder="email">
+    <input type="tel" name="" id="" [(ngModel)]="phone" placeholder="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+    <input type="password" name="" id="" [(ngModel)]="password" placeholder="password">
+    <input type="password" name="" id="" [(ngModel)]="confirm_password" placeholder="confirm password">
+    <button routerLink="/login" routerLinkActive="router-link-active" >Back</button>
+    <button (click)="registerUser()">Register</button>
+</section>
