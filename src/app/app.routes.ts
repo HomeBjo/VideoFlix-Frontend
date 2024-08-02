@@ -8,6 +8,6 @@ export const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'registration_confirmation ', component: RegistrationConfirmationComponent },
-    { path: 'video-site ', component: VideoSiteComponent },
+    { path: 'registration_confirmation', component: RegistrationConfirmationComponent },
+    { path: 'video_site', component: VideoSiteComponent },
 ];

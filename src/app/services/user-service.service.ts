@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export class UserService {
 
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+  user_name: string = '';
+  user_email: string = '';
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -27,14 +28,17 @@ export class UserService {
 
 
   async registerUser(newUSer: RegisterUser) {
+    this.user_name = newUSer.username;
+    this.user_email = newUSer.email;
     const url = 'http://127.0.0.1:8000/users/register/';
     const body = JSON.stringify(newUSer);
+    console.log('Sending registration data:', body);
     try {
-      let response = (await lastValueFrom(this.http.post<RegisterResponse>(url, body, { headers: this.headers })));
+      const response = await lastValueFrom(this.http.post(url, body, { headers: this.headers }));
       if (response) {
-        localStorage.setItem('token', response.token);
+        this.router.navigateByUrl('/registration_confirmation');
       }
-      // this.router.navigateByUrl('/todos');
+      this.router.navigateByUrl('/registration_confirmation');
     } catch (e) {
         console.log('Fehler beim Registrieren', e);
     }
