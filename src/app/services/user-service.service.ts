@@ -34,10 +34,7 @@ export class UserService {
     const body = JSON.stringify(newUSer);
     console.log('Sending registration data:', body);
     try {
-      const response = await lastValueFrom(this.http.post(url, body, { headers: this.headers }));
-      if (response) {
-        this.router.navigateByUrl('/registration_confirmation');
-      }
+      await lastValueFrom(this.http.post(url, body, { headers: this.headers }));
       this.router.navigateByUrl('/registration_confirmation');
     } catch (e) {
         console.log('Fehler beim Registrieren', e);
