@@ -3,6 +3,7 @@ import { RegisterUser } from '../interfaces/register-user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class UserService {
   async registerUser(newUSer: RegisterUser) {
     this.user_name = newUSer.username;
     this.user_email = newUSer.email;
-    const url = 'http://127.0.0.1:8000/users/register/';
+    const url = `${environment.baseUrl}/users/register/`;
     const body = JSON.stringify(newUSer);
     console.log('Sending registration data:', body);
     try {
