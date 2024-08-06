@@ -19,8 +19,8 @@ export class AuthInterceptorService implements HttpInterceptor {
           Authorization: `Token ${authToken}`
         }
       });
-    } else {
-      console.log('No token found'); 
+     } else {
+      console.log('No token found');
     }
 
     return next.handle(req).pipe(
