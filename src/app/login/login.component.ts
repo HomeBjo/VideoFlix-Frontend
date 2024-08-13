@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { UserService } from '../services/user-service.service';
+import { VideoService } from '../services/video-service.service';
 
 @Component({
   selector: 'app-login',
@@ -17,11 +18,12 @@ export class LoginComponent {
   password: string = '';
   
   constructor(public userService: UserService, private route: Router,
-    private router: ActivatedRoute,) {}
+    private router: ActivatedRoute, private videoService: VideoService) {}
 
   ngOnInit() {
     this.ifUserLogin();
     this.routeUserId();
+    // this.videoService.startFetchVideo();
   }
 
 
