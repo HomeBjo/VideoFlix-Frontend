@@ -19,10 +19,20 @@ export class RegisterComponent {
   email:string = '';
   password:string = '';
   confirm_password:string = '';
-
+  passwordFieldType: string = 'password';
+  confirmPasswordFieldType: string = 'password';
 
 
   constructor(public userService: UserService) { }
+
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+}
+
+  toggleConfirmPasswordVisibility(): void {
+    this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
+}
 
 
   registerUser(){

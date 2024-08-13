@@ -1,7 +1,7 @@
 <section>
     <div class="headerDiv">
-        <img src="../../assets/img/Logo.svg" alt="Logo">
-        <button routerLink="login">Log in</button>
+        <img src="../../../assets/img/Logo.svg" alt="Logo">
+        <button [routerLink]="['/login']">Log in</button>
     </div>
 
     <div class="contentDiv">
@@ -10,12 +10,12 @@
         <span>Enter yopur email to create your membership</span>
         <div class="inputBox">
             <input type="email" [(ngModel)]="userService.user_email" placeholder="Email Adress">
-            <button routerLink="register">Sing up <img src="../../assets/img/white_arrow_right.svg" alt=""></button>
+            <button [routerLink]="['/register']">Sing up <img src="../../assets/img/white_arrow_right.svg" alt=""></button>
         </div>
     </div>
 
     <footer>
-        <span routerLink="privacy_policy">Datenschutz</span>
-        <span routerLink="imprint">Impressum</span>
+        <span [routerLink]="['/privacy_policy']">Datenschutz</span>
+        <span [routerLink]="['/imprint']">Impressum</span>
     </footer>
 </section>

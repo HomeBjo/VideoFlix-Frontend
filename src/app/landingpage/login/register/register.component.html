@@ -1,9 +1,27 @@
 <section>
-    <input type="text" name="" id="" [(ngModel)]="first_name" placeholder="first name">
-    <input type="text" name="" id="" [(ngModel)]="last_name" placeholder="last name">
-    <input type="email" name="" id="" [(ngModel)]="userService.user_email" placeholder="email">
-    <input type="password" name="" id="" [(ngModel)]="password" placeholder="password">
-    <input type="password" name="" id="" [(ngModel)]="confirm_password" placeholder="confirm password">
-    <button routerLink="/login" routerLinkActive="router-link-active" >Back</button>
-    <button (click)="registerUser()">Register</button>
+    <div class="headerDiv">
+        <img src="../../assets/img/Logo.svg" alt="Logo">
+        <button [routerLink]="['/login']" class="loginBtn">Log in</button>
+    </div>
+
+    <div class="contentDiv">
+        <h1>Sing Up</h1>
+        <input type="text" [(ngModel)]="first_name" placeholder="First name">
+        <input type="text" [(ngModel)]="last_name" placeholder="Last name">
+        <input type="email" [(ngModel)]="userService.user_email" placeholder="Email">
+        <div class="passwortImg">
+            <input [type]="passwordFieldType" [(ngModel)]="password" placeholder="Password">
+            <img src="../../assets/img/blue_eye.svg" alt="eye image" (click)="togglePasswordVisibility()">
+        </div>
+        <div class="passwortImg">
+            <input [type]="confirmPasswordFieldType" [(ngModel)]="confirm_password" placeholder="Confirm password">
+            <img src="../../assets/img/blue_eye.svg" alt="eye image" (click)="toggleConfirmPasswordVisibility()">
+        </div>
+        <button (click)="registerUser()">Get started</button>
+    </div>
+
+    <footer>
+        <span [routerLink]="['/privacy_policy']">Datenschutz</span>
+        <span [routerLink]="['/imprint']">Impressum</span>
+    </footer>
 </section>

@@ -1,11 +1,114 @@
+@import './../../../../styles.scss';
+
 section{
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
-    display: flex;
+    @include dFlex($j: space-between);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    input, button{
-        width: 20vw;
+    background-image: url('../../../../assets/img/background_img_woman.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.headerDiv{
+    @include dFlex($j: space-between);
+    padding: 3rem;
+    width: calc(100% - 6rem);
+    img{
+        width: 20rem;
+        height: auto;
+        object-fit: contain;
+    }
+    .loginBtn{
+        color: whitesmoke;
+        background-color: $btnColor;
+        padding: 26px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border: none;
+        border-radius: 40px;
+        font-size: larger;
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+        &:hover{
+            background-color: whitesmoke;
+            color: #2E3EDF;
+        }
+    }
+}
+
+.contentDiv{
+    @include dFlex($j: space-between, $g: 16px);
+    flex-direction: column;
+    background-color: white;
+    border-radius: 25px;
+    padding: 3rem;
+    h1{
+        font-size: 3.5em;
+        margin: 0;
+        margin-bottom: 0.5rem;
+        color: #2E3EDF;
+    }
+    input{
+        padding: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
+        border: 1px solid #2E3EDF;
+        border-radius: 30px;
+        outline: none;
+        font-size: larger;
+        min-width: 400px;
+    }
+    button{
+        margin-top: 1.2rem;
+        color: whitesmoke;
+        background-color: $btnColor;
+        padding: 26px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border: none;
+        border-radius: 40px;
+        font-size: larger;
+        border: 1px solid #2E3EDF;
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+        &:hover{
+            background-color: white;
+            color: #2E3EDF;
+        }
+    }
+}
+
+.passwortImg{
+    width: 100%;
+    input{
+        padding: 12px;
+        padding-left: 16px;
+        padding-right: 48px;
+        border: 1px solid #2E3EDF;
+        border-radius: 30px;
+        outline: none;
+        font-size: larger;
+        min-width: 368px
+    }
+    img{
+        margin-left: -40px;
+        cursor: pointer;
+    }
+}
+
+
+footer{
+    width: 100%;
+    margin: 2rem;
+    @include dFlex($g: 80px);
+    span{
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: ease-in-out 0.3s;
+        color: white;
+        &:hover{
+            color: $btnColor;
+        }
     }
 }

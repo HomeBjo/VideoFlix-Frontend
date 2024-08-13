@@ -10,6 +10,7 @@ import { PrivacyPolicyComponent } from './landingpage/imprint/privacy-policy/pri
 
 export const routes: Routes = [
     { path: '', component: LandingpageComponent },
+    { path: 'landingpage', component: LandingpageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'registration_confirmation', component: RegistrationConfirmationComponent },
