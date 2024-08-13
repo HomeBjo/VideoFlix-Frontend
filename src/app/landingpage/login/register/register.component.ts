@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { RegisterUser } from '../../interfaces/register-user';
-import { UserService } from '../../services/user-service.service';
-
+import { UserService } from '../../../services/user-service.service';
+import { RegisterUser } from '../../../interfaces/register-user';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -14,26 +13,24 @@ import { UserService } from '../../services/user-service.service';
 })
 export class RegisterComponent {
 
-  shown_name:string = '';
+
   first_name:string = '';
   last_name:string = '';
   email:string = '';
-  phone:number = 0;
   password:string = '';
   confirm_password:string = '';
 
 
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
 
   registerUser(){
     let newUSer:RegisterUser = {
-      username: this.shown_name,
+      username: this.first_name + '_' + this.last_name,
       first_name: this.first_name,
       last_name: this.last_name,
-      email: this.email,
-      phone: this.phone,
+      email: this.userService.user_email,
       password: this.password,
       confirm_password: this.confirm_password
     }
@@ -43,11 +40,9 @@ export class RegisterComponent {
 
 
   resetValues(){
-    this.shown_name = '';
     this.first_name = '';
     this.last_name = '';
-    this.email = '';
-    this.phone = 0;
+    this.userService.user_email = '';
     this.password = '';
     this.confirm_password = '';
   }

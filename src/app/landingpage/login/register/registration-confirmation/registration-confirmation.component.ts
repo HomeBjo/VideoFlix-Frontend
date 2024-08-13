@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../../../services/user-service.service';
+import { UserService } from '../../../../services/user-service.service';
 
 @Component({
   selector: 'app-registration-confirmation',

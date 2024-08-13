@@ -1,0 +1,21 @@
+<section>
+    <div class="headerDiv">
+        <img src="../../assets/img/Logo.svg" alt="Logo">
+        <button routerLink="login">Log in</button>
+    </div>
+
+    <div class="contentDiv">
+        <h1>Movies, TV shwos and more</h1>
+        <h2>Watch whenever you want wherever you want</h2>
+        <span>Enter yopur email to create your membership</span>
+        <div class="inputBox">
+            <input type="email" [(ngModel)]="userService.user_email" placeholder="Email Adress">
+            <button routerLink="register">Sing up <img src="../../assets/img/white_arrow_right.svg" alt=""></button>
+        </div>
+    </div>
+
+    <footer>
+        <span routerLink="privacy_policy">Datenschutz</span>
+        <span routerLink="imprint">Impressum</span>
+    </footer>
+</section>

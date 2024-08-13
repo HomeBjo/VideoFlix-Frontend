@@ -30,7 +30,6 @@ export class UserService {
 
   async registerUser(newUSer: RegisterUser) {
     this.user_name = newUSer.username;
-    this.user_email = newUSer.email;
     const url = `${environment.baseUrl}/users/register/`;
     const body = JSON.stringify(newUSer);
     console.log('Sending registration data:', body);
@@ -40,10 +39,6 @@ export class UserService {
     } catch (e) {
         console.log('Fehler beim Registrieren', e);
     }
-    setTimeout(() => {
-      this.user_name = '';
-      this.user_email = '';
-    }, 2000);
   }
 
 
