@@ -40,5 +40,13 @@ export class UserService {
     } catch (e) {
         console.log('Fehler beim Registrieren', e);
     }
+    setTimeout(() => {
+      this.user_name = '';
+      this.user_email = '';
+    }, 2000);
   }
+
+
+
+  
 }

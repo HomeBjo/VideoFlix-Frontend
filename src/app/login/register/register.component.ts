@@ -28,7 +28,6 @@ export class RegisterComponent {
 
 
   registerUser(){
-
     let newUSer:RegisterUser = {
       username: this.shown_name,
       first_name: this.first_name,
@@ -39,7 +38,17 @@ export class RegisterComponent {
       confirm_password: this.confirm_password
     }
     this.userService.registerUser(newUSer);
+    this.resetValues();
   }
 
 
+  resetValues(){
+    this.shown_name = '';
+    this.first_name = '';
+    this.last_name = '';
+    this.email = '';
+    this.phone = 0;
+    this.password = '';
+    this.confirm_password = '';
+  }
 }
