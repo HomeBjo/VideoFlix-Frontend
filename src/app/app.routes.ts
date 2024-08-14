@@ -6,6 +6,7 @@ import { VideoSiteComponent } from './landingpage/video-site/video-site.componen
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { ImprintComponent } from './landingpage/imprint/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './landingpage/imprint/privacy-policy/privacy-policy.component';
+import { EmailExistsComponent } from './landingpage/login/register/email-exists/email-exists.component';
 
 
 export const routes: Routes = [
@@ -17,4 +18,5 @@ export const routes: Routes = [
     { path: 'video_site', component: VideoSiteComponent },
     { path: 'imprint', component: ImprintComponent },
     { path: 'privacy_policy', component: PrivacyPolicyComponent },
+    { path: 'email_exists', component: EmailExistsComponent },
 ];

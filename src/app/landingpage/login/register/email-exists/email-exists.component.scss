@@ -10,31 +10,13 @@ section{
     background-position: center;
 
     .headerDiv {
-        @include dFlex($j: space-between);
+        @include dFlex($j: flex-start);
         padding: 3rem;
         width: calc(100% - 6rem);
         img {
             width: 20rem;
             height: auto;
             object-fit: contain;
-        }
-    
-        .loginBtn {
-            color: whitesmoke;
-            background-color: $btnColor;
-            padding: 26px;
-            padding-top: 12px;
-            padding-bottom: 12px;
-            border: none;
-            border-radius: 40px;
-            font-size: larger;
-            cursor: pointer;
-            transition: ease-in-out 0.3s;
-    
-            &:hover {
-                background-color: whitesmoke;
-                color: $btnColor;
-            }
         }
     }
 
@@ -44,6 +26,30 @@ section{
         background-color: white;
         padding: 2rem;
         border-radius: 25px;
+        @include dFlex();
+        flex-direction: column;
+        text-align: center;
+        p{
+            font-size: larger;
+        }
+        .loginBtn {
+            color: white;
+            background-color: $btnColor;
+            padding: 26px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            border: none;
+            border-radius: 40px;
+            border: 1px solid $btnColor;
+            font-size: larger;
+            cursor: pointer;
+            transition: ease-in-out 0.3s;
+        
+            &:hover {
+                background-color: whitesmoke;
+                color: $btnColor;
+            }
+        }
     }
 
     footer {

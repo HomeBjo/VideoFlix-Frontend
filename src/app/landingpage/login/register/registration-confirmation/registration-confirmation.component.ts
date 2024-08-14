@@ -2,16 +2,22 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../../services/user-service.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-registration-confirmation',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './registration-confirmation.component.html',
   styleUrl: './registration-confirmation.component.scss'
 })
 export class RegistrationConfirmationComponent {
 
   constructor(public userService: UserService){}
+
+  ngOnDestroy(): void {
+    this.userService.user_name = '';
+    this.userService.user_email_copy = '';
+  }
 
 }

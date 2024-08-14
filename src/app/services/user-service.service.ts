@@ -13,6 +13,7 @@ export class UserService {
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   user_name: string = '';
   user_email: string = '';
+  user_email_copy: string = '';
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -28,20 +29,40 @@ export class UserService {
   }
 
 
-  async registerUser(newUSer: RegisterUser) {
-    this.user_name = newUSer.username;
-    const url = `${environment.baseUrl}/users/register/`;
-    const body = JSON.stringify(newUSer);
-    console.log('Sending registration data:', body);
+  async registerUser(newUser: RegisterUser) {
+    const checkEmailUrl = `${environment.baseUrl}/users/check-email/`;
+
+    const registerUrl = `${environment.baseUrl}/users/register/`;
+
     try {
-      await lastValueFrom(this.http.post(url, body, { headers: this.headers }));
-      this.router.navigateByUrl('/registration_confirmation');
-      return true;
+      const checkEmailResponse = await lastValueFrom(this.http.post<{ exists: boolean }>(checkEmailUrl, { email: newUser.email }, { headers: this.headers }));
+      
+      if (checkEmailResponse.exists) {
+        console.log('E-Mail existiert bereits.');
+        this.router.navigateByUrl('/email_exists');
+        return true;
+      } else {
+        this.user_name = newUser.first_name;
+        this.user_email = newUser.email;
+        this.user_email_copy = newUser.email;
+        const body = JSON.stringify(newUser);
+        console.log('Sending registration data:', body);
+        
+        try {
+          await lastValueFrom(this.http.post(registerUrl, body, { headers: this.headers }));
+          this.router.navigateByUrl('/registration_confirmation');
+          return true;
+        } catch (e) {
+          console.log('Fehler beim Registrieren', e);
+          return false;
+        }
+      }
     } catch (e) {
-      console.log('Fehler beim Registrieren', e);
+      console.log('Fehler beim Überprüfen der E-Mail-Adresse', e);
       return false;
     }
   }
+  
 
 
 

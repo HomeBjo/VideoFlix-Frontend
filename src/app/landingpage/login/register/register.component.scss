@@ -41,7 +41,7 @@ section {
 }
 
 .contentDiv {
-    @include dFlex($j: space-between, $g: 16px);
+    @include dFlex($j: space-between);
     flex-direction: column;
     background-color: white;
     border-radius: 25px;
@@ -54,7 +54,7 @@ section {
         color: $btnColor;
     }
     .positionInputs{
-        @include dFlex($a: start, $g: 16px);
+        @include dFlex($a: start, $g: 12px);
         flex-direction: column;
         width: 100%;
         .normalInput {
