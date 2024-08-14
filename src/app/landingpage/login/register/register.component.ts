@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../../services/user-service.service';
 import { RegisterUser } from '../../../interfaces/register-user';
@@ -9,51 +9,112 @@ import { RegisterUser } from '../../../interfaces/register-user';
   standalone: true,
   imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-
-
-  first_name:string = '';
-  last_name:string = '';
-  email:string = '';
-  password:string = '';
-  confirm_password:string = '';
+  first_name: string = '';
+  last_name: string = '';
+  password: string = '';
+  confirm_password: string = '';
   passwordFieldType: string = 'password';
   confirmPasswordFieldType: string = 'password';
 
-
-  constructor(public userService: UserService) { }
-
+  constructor(public userService: UserService) {}
 
   togglePasswordVisibility(): void {
-    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-}
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
 
   toggleConfirmPasswordVisibility(): void {
-    this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
-}
+    this.confirmPasswordFieldType =
+      this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
+  }
 
+  checkFirstName() {
+    if (this.first_name.length >= 3) {
+      return true;
+    }
+    return false;
+  }
 
-  registerUser(){
-    let newUSer:RegisterUser = {
+  checkLastName() {
+    if (this.last_name.length >= 3) {
+      return true;
+    }
+    return false;
+  }
+
+  checkEmail() {
+    if (this.userService.user_email.length >= 5) {
+      return true;
+    }
+    return false;
+  }
+
+  checkPassword() {
+    if (this.password.length >= 5) {
+      return true;
+    }
+    return false;
+  }
+
+  checkConfirmPassword() {
+    if (this.confirm_password.length >= 5) {
+      return true;
+    }
+    return false;
+  }
+
+  checkEvenPasswords() {
+    if (this.password === this.confirm_password) {
+      return true;
+    }
+    return false;
+  }
+
+  async registerUser() {
+    let newUSer: RegisterUser = {
       username: this.first_name + '_' + this.last_name,
       first_name: this.first_name,
       last_name: this.last_name,
       email: this.userService.user_email,
       password: this.password,
-      confirm_password: this.confirm_password
+      confirm_password: this.confirm_password,
+    };
+    let done = this.userService.registerUser(newUSer);
+    if (await done) {
+      this.resetValues();
     }
-    this.userService.registerUser(newUSer);
-    this.resetValues();
   }
 
-
-  resetValues(){
+  resetValues() {
     this.first_name = '';
     this.last_name = '';
     this.userService.user_email = '';
     this.password = '';
     this.confirm_password = '';
+  }
+
+  checkAllInputs() {
+    if (
+      this.checkFirstName() &&
+      this.checkLastName() &&
+      this.checkEmail() &&
+      this.checkPassword() &&
+      this.checkConfirmPassword() &&
+      this.checkEvenPasswords()
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  onSubmit(ngForm: NgForm) {
+    if (ngForm.valid && this.checkAllInputs()) {
+      this.registerUser();
+    } else {
+      ngForm.resetForm();
+    }
   }
 }

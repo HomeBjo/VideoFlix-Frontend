@@ -4,21 +4,83 @@
         <button [routerLink]="['/login']" class="loginBtn">Log in</button>
     </div>
 
-    <div class="contentDiv">
+    <form class="contentDiv" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
         <h1>Sing Up</h1>
-        <input type="text" [(ngModel)]="first_name" placeholder="First name">
-        <input type="text" [(ngModel)]="last_name" placeholder="Last name">
-        <input type="email" [(ngModel)]="userService.user_email" placeholder="Email">
-        <div class="passwortImg">
-            <input [type]="passwordFieldType" [(ngModel)]="password" placeholder="Password">
-            <img src="../../assets/img/blue_eye.svg" alt="eye image" (click)="togglePasswordVisibility()">
+        <div class="positionInputs">
+            <!----First name------>
+            <input type="text" [(ngModel)]="first_name" placeholder="First name" name="firstName" #firstName="ngModel" required class="normalInput">
+            @if (!checkFirstName() && firstName.touched && !firstName.disabled) {
+                <div class="invalidFeedback">
+                    @if (first_name == ''){
+                        <span><img src="../../../../assets/img/warning.svg" alt="">First name is required</span>
+                    } @else {
+                        <span><img src="../../../../assets/img/warning.svg" alt="">First name should be longer as 3 character</span>
+                    }
+                </div>
+            }
+
+            <!----Last Name------>
+            <input type="text" [(ngModel)]="last_name" placeholder="Last name" name="lastName" #lastName="ngModel" required class="normalInput">
+            @if (!checkLastName() && lastName.touched) {
+                <div class="invalidFeedback">
+                    @if (last_name == ''){
+                        <span><img src="../../../../assets/img/warning.svg" alt="">Last name is required</span>
+                    } @else {
+                        <span><img src="../../../../assets/img/warning.svg" alt="">Last name should be longer as 3 character</span>
+                    }
+                </div>
+            }
+            
+            <!----Email------>
+            <input type="email" [(ngModel)]="userService.user_email" placeholder="Email" name="email" #email="ngModel" required pattern="[^@]+@[^\.]+\..+" class="normalInput">
+            @if (!email.valid && email.touched && !email.disabled) {
+                <div class="invalidFeedback">
+                    @if (userService.user_email == ''){
+                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Email is required</span>
+                    } @else {
+                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Please check whether the email is correct</span>
+                    }
+                </div>
+            }
+
+            <!----Password------>
+            <div class="passwortImg">
+                <input [type]="passwordFieldType" [(ngModel)]="password" placeholder="Password" name="firstPassword" #firstPassword="ngModel" required class="passwordInput">
+                <img src="../../assets/img/blue_eye.svg" alt="eye image" (click)="togglePasswordVisibility()">
+            </div>
+            @if (!checkPassword() &&firstPassword.touched) {
+                <div class="invalidFeedback">
+                    @if (password == ''){
+                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Password is required</span>
+                    } @else if(!checkPassword()) {
+                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Password should have at least 5 characters</span>
+                    } 
+                </div>
+            }
+
+            <!----Confirm Password------>
+            <div class="passwortImg">
+                <input [type]="confirmPasswordFieldType" [(ngModel)]="confirm_password" placeholder="Confirm password" name="confirmPassword" #confirmPassword="ngModel" required class="passwordInput">
+                <img src="../../assets/img/blue_eye.svg" alt="eye image" (click)="toggleConfirmPasswordVisibility()">
+            </div>
+            @if (!checkConfirmPassword() && confirmPassword.touched) {
+                <div class="invalidFeedback">
+                    @if (confirm_password == ''){
+                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Password is required</span>
+                    } @else if(!checkConfirmPassword()) {
+                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Password should have at least 5 characters</span>
+                    } 
+                </div>
+            }
+            @if (!checkEvenPasswords()) {
+                <div class="invalidFeedback">
+                    <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Please check whether the passwords match</span>
+                </div>
+            }
+
         </div>
-        <div class="passwortImg">
-            <input [type]="confirmPasswordFieldType" [(ngModel)]="confirm_password" placeholder="Confirm password">
-            <img src="../../assets/img/blue_eye.svg" alt="eye image" (click)="toggleConfirmPasswordVisibility()">
-        </div>
-        <button (click)="registerUser()">Get started</button>
-    </div>
+        <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Get started</button>
+    </form>
 
     <footer>
         <span [routerLink]="['/privacy_policy']">Datenschutz</span>

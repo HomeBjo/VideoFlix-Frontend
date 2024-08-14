@@ -36,8 +36,10 @@ export class UserService {
     try {
       await lastValueFrom(this.http.post(url, body, { headers: this.headers }));
       this.router.navigateByUrl('/registration_confirmation');
+      return true;
     } catch (e) {
-        console.log('Fehler beim Registrieren', e);
+      console.log('Fehler beim Registrieren', e);
+      return false;
     }
   }
 
