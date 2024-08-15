@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environments';
+import { LoginResponse } from '../interfaces/login-response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,21 +18,17 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  /**
-   * Retrieves the current user's ID from local storage.
-   * @returns {string|number|undefined} The ID of the current user if found in local storage, otherwise undefined.
-   */
   getCurrentUserId() {
-    let currentUser = localStorage.getItem('currentUser');
+    let currentUser = localStorage.getItem('userId');
     if (currentUser !== null) {
-      return JSON.parse(currentUser);
+      return true;
     }
+    return false;
   }
 
 
   async registerUser(newUser: RegisterUser) {
     const checkEmailUrl = `${environment.baseUrl}/users/check-email/`;
-
     const registerUrl = `${environment.baseUrl}/users/register/`;
 
     try {
@@ -63,7 +60,27 @@ export class UserService {
     }
   }
   
+  async login(email: string, password: string) {
+    const loginUrl = `${environment.baseUrl}/users/login/`;
+    let userData = {
+      email: email,
+      password: password
+    }
+    const body = JSON.stringify(userData);
+    console.log('Login data:', body);
 
+    try {
+      let userDate = await lastValueFrom(this.http.post<LoginResponse>(loginUrl, body, { headers: this.headers }));
+      if (userDate) {
+        this.router.navigateByUrl('/video_site');
+        return userDate; 
+      }
+      return null;
+    } catch (e) {
+      console.log('Fehler beim Registrieren', e);
+      return null;
+    }
+  }
 
 
   

@@ -28,7 +28,7 @@ export class LoginComponent {
 
 
   ifUserLogin() {
-    if (this.userService.getCurrentUserId() === undefined) {
+    if (this.userService.getCurrentUserId()) {
       this.route.navigateByUrl('/login');
     }
   }
@@ -41,4 +41,23 @@ export class LoginComponent {
       });
     }
   }
+
+
+  async login() {
+    try {
+      const user = await this.userService.login(this.email, this.password);
+      if (user) {
+        localStorage.setItem('authUser', user.token);
+        localStorage.setItem('userId', user.user_id.toString());
+      } else {
+        console.error('Login fehlgeschlagen: Kein gültiges Token oder User-ID erhalten.');
+      }
+    } catch (error) {
+      console.error('Fehler beim Login:', error);
+    }
+  }
+  
+
+
+  guestLogin(){}
 }
