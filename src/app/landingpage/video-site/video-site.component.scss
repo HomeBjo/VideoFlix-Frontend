@@ -1,0 +1,71 @@
+@import './../../../styles.scss';
+
+section{
+    width: 100%;
+    height: auto;
+    background-color: #030303;
+}
+
+.backgroundVideo{
+    width: 100%;
+    height: 100dvh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    object-fit: cover;
+}
+
+
+.blueBtn{
+    @include dFlex($g: 8px);
+    color: whitesmoke;
+    background-color: $btnColor;
+    padding: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: none;
+    border-radius: 26px;
+    font-size: large;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    &:hover {
+        background-color: white;
+        color: $btnColor;
+        img {
+            filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
+        }
+    }
+}
+
+
+header{
+    @include dFlex($j: space-between);
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    position: absolute;
+}
+
+
+.descriptionDivBreakout{
+    color: whitesmoke;
+    position: absolute;
+    top: 28%;
+    left: 8%;
+    width: 400px;
+    @include dFlex($a: flex-start, $g: 32px);
+    flex-direction: column;
+    text-align: start;
+    h1{
+        font-size: 5rem;
+        margin: 0;
+    }
+    span{
+        font-size: large;
+    }
+}
+
+.videoDiv{
+    width: 20px;
+    height: 2000px;
+    background-color: aqua;
+}
