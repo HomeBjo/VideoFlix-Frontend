@@ -18,14 +18,6 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  getCurrentUserId() {
-    let currentUser = localStorage.getItem('userId');
-    if (currentUser !== null) {
-      return true;
-    }
-    return false;
-  }
-
 
   async registerUser(newUser: RegisterUser) {
     const checkEmailUrl = `${environment.baseUrl}/users/check-email/`;
