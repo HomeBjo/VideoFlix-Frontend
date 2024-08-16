@@ -5,13 +5,16 @@
     <div class="shadow"></div>
 </div>
 
-
-<!-- <video autoplay muted loop id="myVideo" class="backgroundVideo">
-    <source src="../../../assets/videos/Breakout.mp4" type="video/mp4">
-</video> -->
 <section>
     <header>
-        <img src="../../../assets/img/logo_small.svg" alt="logo" class="logo"/>
+        <div class="logoBox">
+            <img src="../../../assets/img/logo_small.svg" alt="logo" class="logo"/>
+            <div class="headerBtns">
+              <button class="headerBtns">Category</button>
+              <button class="headerBtns">Favorites</button>
+              <button class="headerBtns">Profile</button>
+            </div>
+        </div>
         <button class="blueBtn"><img src="../../../assets/icons/logout.svg" alt="" />Log out</button>
     </header>
 
@@ -26,5 +29,30 @@
         <button class="blueBtn"><img src="../../../assets/icons/play_arrow.svg" alt="">Play</button>
     </div>
     
-    <div class="videoDiv"></div>
+    <div class="videoDiv">
+        <div>
+            <h1>New on Videoflix</h1>
+            @for (video of newVideos; track $index) {
+                <app-video-preview></app-video-preview>
+            }
+        </div>
+        <div>
+            <h1>Category 1</h1>
+            @for (video of newVideos; track $index) {
+                <app-video-preview></app-video-preview>
+            }
+        </div>
+        <div>
+            <h1>Category 2</h1>
+            @for (video of newVideos; track $index) {
+                <app-video-preview></app-video-preview>
+            }
+        </div>
+        <div>
+            <h1>Category 3</h1>
+            @for (video of newVideos; track $index) {
+                <app-video-preview></app-video-preview>
+            }
+        </div>
+    </div>
 </section>

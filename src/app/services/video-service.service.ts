@@ -1,18 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-
-  async startFetchVideo() {
+  async startFetchVideos() {
     const url = 'http://127.0.0.1:8000/videos/get_videos/';
-    const response = await fetch(url);
-    const jsonData = await response.json();
-    console.log('jsonData:', jsonData);
-    return jsonData
+    return await lastValueFrom(this.http.get<any>(url));
   }
 }

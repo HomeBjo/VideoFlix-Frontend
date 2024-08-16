@@ -61,8 +61,25 @@ header{
     padding: 1rem;
     width: calc(100% - 2rem);
     position: absolute;
-    .logo{
-        z-index: 2;
+    top: 0;
+    .logoBox{
+        width: auto;
+        display: flex;
+        .logo{
+            z-index: 2;
+            margin-right: 5rem;
+        }
+        .headerBtns{
+            @include dFlex($g: 2rem);
+            z-index: 2;
+            .headerBtns{
+                color: whitesmoke;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: x-large;
+            }
+        }
     }
 }
 
@@ -87,7 +104,8 @@ header{
 
 
 .videoDiv{
-    width: 20px;
-    height: 2000px;
+    width: 100%;
+    min-height: 2000px;
     background-color: aqua;
+    margin-top: 80dvh;
 }
