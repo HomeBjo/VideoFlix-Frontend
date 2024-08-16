@@ -42,7 +42,7 @@ export class LoginComponent {
     try {
       const user = await this.userService.login(this.email, this.password);
       if (user) {
-        localStorage.setItem('authUser', user.token);
+        localStorage.setItem('token', user.token);
         localStorage.setItem('userId', user.user_id.toString());
       } else {
         console.error(

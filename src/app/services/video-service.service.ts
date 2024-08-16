@@ -1,16 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoService {
 
+  headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   constructor(private http: HttpClient) { }
 
-  async startFetchVideos() {
+  startFetchVideos(): Observable<any> {
     const url = 'http://127.0.0.1:8000/videos/get_videos/';
-    return await lastValueFrom(this.http.get<any>(url));
+    return this.http.get<any>(url, { headers: this.headers });
   }
 }
