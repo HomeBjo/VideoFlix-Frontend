@@ -1,0 +1,32 @@
+@import './../../../../styles.scss';
+
+.headerDiv {
+    @include dFlex($j: space-between);
+    padding: 3rem;
+    // width: calc(100% - 6rem);
+    width: calc(100vw - 6rem);
+
+    img {
+        width: 20rem;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .loginBtn {
+        color: whitesmoke;
+        background-color: $btnColor;
+        padding: 26px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border: none;
+        border-radius: 40px;
+        font-size: larger;
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+
+        &:hover {
+            background-color: whitesmoke;
+            color: $btnColor;
+        }
+    }
+}

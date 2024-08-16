@@ -4,10 +4,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../../services/user-service.service';
 import { RegisterUser } from '../../../interfaces/register-user';
+import { HeaderComponent } from "../../../shared/login/header/header.component";
+import { FooterComponent } from '../../../shared/login/footer/footer.component';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink, FooterComponent, HeaderComponent, HeaderComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
