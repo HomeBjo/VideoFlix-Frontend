@@ -1,1 +1,6 @@
-<p>video-preview works!</p>
+<section (mouseenter)="shwowDescription()" (mouseleave)="hideDescription()">
+    <img src="{{ video.screenshot }}" alt="">
+    <div class="descriptionBox" [ngClass]="{ 'descriptionVisible' : isDescriptionVisible, 'descriptionHide' : !isDescriptionVisible }">
+        <span>{{ video.description }}</span>
+    </div>
+</section>

@@ -88,7 +88,7 @@ header{
     color: whitesmoke;
     position: absolute;
     top: 28%;
-    left: 8%;
+    left: 6rem;
     width: 400px;
     @include dFlex($a: flex-start, $g: 32px);
     flex-direction: column;
@@ -104,8 +104,20 @@ header{
 
 
 .videoDiv{
-    width: 100%;
+    width: calc(100% - 6rem);
     min-height: 2000px;
-    background-color: aqua;
     margin-top: 80dvh;
+    padding-left: 6rem;
+    .videoDiv2{
+        position: absolute;
+        margin-top: -6rem;
+        z-index: 2;
+        .videoPosition{
+            color: whitesmoke;
+            .video4LoopBox{
+                display: flex;
+                gap: 4rem;
+            }
+        }
+    }
 }

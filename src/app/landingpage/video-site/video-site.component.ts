@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { VideoService } from '../../services/video-service.service';
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-video-site',
@@ -22,6 +23,11 @@ export class VideoSiteComponent {
   async ngOnInit() {
     this.checkUserLoginStatus();
     (await this.videoService.startFetchVideos()).subscribe((data: any) => {
+      data.map((video: any) => {
+        video.screenshot = `${environment.baseUrl}${video.screenshot}`;
+        video.video_folder = `${environment.baseUrl}${video.video_folder}`;
+        return video;
+      });
       this.newVideos = data;
       console.log(this.newVideos);
     }, (error: any) => {
