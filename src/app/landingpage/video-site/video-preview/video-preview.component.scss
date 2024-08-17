@@ -1,6 +1,6 @@
 section {
-    width: 240px;
-    height: 160px;
+    width: 360px;
+    height: 240px;
     position: relative;
     cursor: pointer;
 
@@ -30,7 +30,7 @@ section {
 
 
 .descriptionVisible {
-    animation: slideIn 0.5s ease-in-out forwards;
+    animation: slideIn 0.5s linear forwards;
 }
 
 @keyframes slideIn {
@@ -52,7 +52,7 @@ section {
 }
 
 .descriptionHide {
-    animation: slideOut 0.5s ease-in-out forwards;
+    animation: slideOut 0.5s linear forwards;
 }
 
 @keyframes slideOut {
