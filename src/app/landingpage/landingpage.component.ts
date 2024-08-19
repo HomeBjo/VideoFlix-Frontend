@@ -15,4 +15,7 @@ export class LandingpageComponent {
 
   constructor(public userService: UserService) { }
 
+    ngOnInit() {
+      this.userService.checkGuestUser();
+    }
 }

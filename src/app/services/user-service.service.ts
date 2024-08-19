@@ -15,8 +15,17 @@ export class UserService {
   user_name: string = '';
   user_email: string = '';
   user_email_copy: string = '';
+
+
   constructor(private http: HttpClient, private router: Router) { }
 
+
+  checkGuestUser(){
+    let userID = localStorage.getItem('userId')?.toString();
+    if (userID === "86") {
+      localStorage.clear();
+    }
+  }
 
 
   async registerUser(newUser: RegisterUser) {
@@ -59,7 +68,6 @@ export class UserService {
       password: password
     }
     const body = JSON.stringify(userData);
-    console.log('Login data:', body);
 
     try {
       let userDate = await lastValueFrom(this.http.post<LoginResponse>(loginUrl, body, { headers: this.headers }));
@@ -74,15 +82,19 @@ export class UserService {
     }
   }
 
-  async userLogout(){
+  async userLogout(userID:string){
     const loginUrl = `${environment.baseUrl}/users/logout/`;
     try {
       await lastValueFrom(this.http.post(loginUrl, { headers: this.headers }));
       this.router.navigateByUrl('/login');
-      localStorage.clear();
+      if (userID === "86") {
+        localStorage.clear(); 
+        console.log('LocalStorage gelöscht');
+        
+      }
     } catch (e) {
       console.log('Fehler beim ausloggen:', e);
     }
   }
-  
+
 }

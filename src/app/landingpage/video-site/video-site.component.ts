@@ -48,7 +48,8 @@ export class VideoSiteComponent {
 
 
   logout(){
-    this.userService.userLogout();
+    let userID = localStorage.getItem('userId')?.toString();
+    this.userService.userLogout(userID!);
   }
 
   ngOnDestroy() {

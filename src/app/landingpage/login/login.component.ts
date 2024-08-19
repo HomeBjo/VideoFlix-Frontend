@@ -26,6 +26,7 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
+    this.userService.checkGuestUser();
     this.routeUserId();
   }
 

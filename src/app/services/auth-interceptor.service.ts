@@ -12,7 +12,6 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>  {
     const authToken = localStorage.getItem('token');
-    console.log('token found:', localStorage.getItem('token'));
     if (authToken && !req.url.endsWith('/register/')) {
       req = req.clone({
         setHeaders: {
@@ -20,7 +19,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         }
       });
      } else {
-      console.log('No token found');
+      console.log('Current no token found');
     }
 
     return next.handle(req).pipe(
