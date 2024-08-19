@@ -8,17 +8,6 @@ section{
     background-image: url('../../../../../assets/img/background_img_woman.webp');
     background-size: cover;
     background-position: center;
-
-    .headerDiv {
-        @include dFlex($j: space-between);
-        padding: 3rem;
-        width: calc(100% - 6rem);
-        img {
-            width: 20rem;
-            height: auto;
-            object-fit: contain;
-        }
-    
         .loginBtn {
             color: whitesmoke;
             background-color: $btnColor;
@@ -45,21 +34,3 @@ section{
         padding: 2rem;
         border-radius: 25px;
     }
-
-    footer {
-        width: 100%;
-        margin: 2rem;
-        @include dFlex($g: 80px);
-    
-        span {
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: ease-in-out 0.3s;
-            color: white;
-    
-            &:hover {
-                color: $btnColor;
-            }
-        }
-    }
-}

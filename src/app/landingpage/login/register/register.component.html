@@ -1,9 +1,4 @@
 <section>
-    <!-- <div class="headerDiv">
-        <img src="../../assets/img/Logo.svg" alt="Logo">
-        <button [routerLink]="['/login']" class="loginBtn">Log in</button>
-    </div> -->
-
     <app-header></app-header>
 
     <form class="contentDiv" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
@@ -84,9 +79,4 @@
         <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Get started</button>
     </form>
     <app-footer></app-footer>
-    <!-- <footer>
-        <span [routerLink]="['/privacy_policy']">Datenschutz</span>
-        <span [routerLink]="['/imprint']">Impressum</span>
-    </footer> -->
-   
 </section>
