@@ -20,10 +20,21 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  checkGuestUser(){
-    let userID = localStorage.getItem('userId')?.toString();
-    if (userID === "86") {
+  async checkGuestUser(){
+    let userId = localStorage.getItem('userId')?.toString();
+    const token = localStorage.getItem('token');
+    const logoutInProgress = localStorage.getItem('logoutInProgress');
+    if (logoutInProgress === 'true') {
+      localStorage.removeItem('logoutInProgress');
+      return;
+    }
+    if (userId === "86") {
       localStorage.clear();
+    } else {
+      const user = await this.verifyToken(token!, userId!);
+        if (user) {
+          this.router.navigateByUrl('/video_site');
+        }
     }
   }
 
@@ -72,6 +83,7 @@ export class UserService {
     try {
       let userDate = await lastValueFrom(this.http.post<LoginResponse>(loginUrl, body, { headers: this.headers }));
       if (userDate) {
+        localStorage.removeItem('logoutInProgress');
         this.router.navigateByUrl('/video_site');
         return userDate; 
       }
@@ -90,11 +102,24 @@ export class UserService {
       if (userID === "86") {
         localStorage.clear(); 
         console.log('LocalStorage gelöscht');
-        
       }
     } catch (e) {
       console.log('Fehler beim ausloggen:', e);
     }
   }
+
+  
+  async verifyToken(token: string, userId: string) {
+    const verifyUrl = `${environment.baseUrl}/users/verify-token/`;
+    const body = JSON.stringify({ token, user_id: userId });
+    try {
+      const user = await lastValueFrom(this.http.post<LoginResponse>(verifyUrl, body, { headers: this.headers }));
+      return user;
+    } catch (e) {
+      console.log('Token ungültig', e);
+      return null;
+    }
+  }
+  
 
 }

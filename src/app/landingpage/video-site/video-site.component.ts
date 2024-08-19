@@ -48,6 +48,7 @@ export class VideoSiteComponent {
 
 
   logout(){
+    localStorage.setItem('logoutInProgress', 'true');
     let userID = localStorage.getItem('userId')?.toString();
     this.userService.userLogout(userID!);
   }
