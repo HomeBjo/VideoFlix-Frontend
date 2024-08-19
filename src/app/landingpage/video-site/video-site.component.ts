@@ -20,9 +20,9 @@ export class VideoSiteComponent {
   constructor(public userService: UserService, private route: Router, private videoService: VideoService) {}
 
   
-  async ngOnInit() {
+  ngOnInit() {
     this.checkUserLoginStatus();
-    (await this.videoService.startFetchVideos()).subscribe((data: any) => {
+    this.videoService.startFetchVideos().subscribe((data: any) => {
       data.map((video: any) => {
         video.screenshot = `${environment.baseUrl}${video.screenshot}`;
         video.video_folder = `${environment.baseUrl}${video.video_folder}`;
@@ -46,6 +46,10 @@ export class VideoSiteComponent {
     }, 500);
   }
 
+
+  logout(){
+    this.userService.userLogout();
+  }
 
   ngOnDestroy() {
     if (this.checkUserInterval) {

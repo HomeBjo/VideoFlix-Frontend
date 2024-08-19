@@ -74,6 +74,15 @@ export class UserService {
     }
   }
 
-
+  async userLogout(){
+    const loginUrl = `${environment.baseUrl}/users/logout/`;
+    try {
+      await lastValueFrom(this.http.post(loginUrl, { headers: this.headers }));
+      this.router.navigateByUrl('/login');
+      localStorage.clear();
+    } catch (e) {
+      console.log('Fehler beim ausloggen:', e);
+    }
+  }
   
 }
