@@ -33,7 +33,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/dotenv/config"
             ]
           },
           "configurations": {
@@ -95,7 +94,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/dotenv/config"
             ]
           }
         }
