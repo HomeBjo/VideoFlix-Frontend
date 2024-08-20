@@ -5,7 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environments';
 import { LoginResponse } from '../interfaces/login-response';
-
+import { GUEST_ID } from '../../../config';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +28,7 @@ export class UserService {
       localStorage.removeItem('logoutInProgress');
       return;
     }
-    if (userId === '11') {
+    if (userId === GUEST_ID) {
       localStorage.clear();
     } else {
       const user = await this.verifyToken(token!, userId!);
@@ -99,7 +99,7 @@ export class UserService {
     try {
       await lastValueFrom(this.http.post(loginUrl, { headers: this.headers }));
       this.router.navigateByUrl('/login');
-      if (userID === '11') {
+      if (userID === GUEST_ID) {
         localStorage.clear(); 
         console.log('LocalStorage gelöscht');
       }
