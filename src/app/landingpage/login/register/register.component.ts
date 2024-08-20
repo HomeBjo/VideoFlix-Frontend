@@ -14,6 +14,7 @@ import { FooterComponent } from '../../../shared/login/footer/footer.component';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  
   first_name: string = '';
   last_name: string = '';
   password: string = '';
@@ -21,17 +22,21 @@ export class RegisterComponent {
   passwordFieldType: string = 'password';
   confirmPasswordFieldType: string = 'password';
 
+
   constructor(public userService: UserService) {}
+
 
   togglePasswordVisibility(): void {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
+
   toggleConfirmPasswordVisibility(): void {
     this.confirmPasswordFieldType =
       this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
   }
+
 
   checkFirstName() {
     if (this.first_name.length >= 3) {
@@ -40,12 +45,14 @@ export class RegisterComponent {
     return false;
   }
 
+
   checkLastName() {
     if (this.last_name.length >= 3) {
       return true;
     }
     return false;
   }
+
 
   checkEmail() {
     if (this.userService.user_email.length >= 5) {
@@ -54,12 +61,14 @@ export class RegisterComponent {
     return false;
   }
 
+
   checkPassword() {
     if (this.password.length >= 5) {
       return true;
     }
     return false;
   }
+
 
   checkConfirmPassword() {
     if (this.confirm_password.length >= 5) {
@@ -68,12 +77,14 @@ export class RegisterComponent {
     return false;
   }
 
+
   checkEvenPasswords() {
     if (this.password === this.confirm_password) {
       return true;
     }
     return false;
   }
+
 
   async registerUser() {
     let newUSer: RegisterUser = {
@@ -90,6 +101,7 @@ export class RegisterComponent {
     }
   }
 
+
   resetValues() {
     this.first_name = '';
     this.last_name = '';
@@ -97,6 +109,7 @@ export class RegisterComponent {
     this.password = '';
     this.confirm_password = '';
   }
+
 
   checkAllInputs() {
     if (
@@ -111,6 +124,7 @@ export class RegisterComponent {
     }
     return false;
   }
+
 
   onSubmit(ngForm: NgForm) {
     if (ngForm.valid && this.checkAllInputs()) {

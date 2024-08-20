@@ -45,32 +45,36 @@ export class UserService {
 
     try {
       const checkEmailResponse = await lastValueFrom(this.http.post<{ exists: boolean }>(checkEmailUrl, { email: newUser.email }, { headers: this.headers }));
-      
       if (checkEmailResponse.exists) {
         console.log('E-Mail existiert bereits.');
         this.router.navigateByUrl('/email_exists');
         return true;
       } else {
-        this.user_name = newUser.first_name;
-        this.user_email = newUser.email;
-        this.user_email_copy = newUser.email;
-        const body = JSON.stringify(newUser);
-        console.log('Sending registration data:', body);
-        
-        try {
-          await lastValueFrom(this.http.post(registerUrl, body, { headers: this.headers }));
-          this.router.navigateByUrl('/registration_confirmation');
-          return true;
-        } catch (e) {
-          console.log('Fehler beim Registrieren', e);
-          return false;
-        }
+        return this.checkUserToken(newUser, registerUrl);
       }
     } catch (e) {
       console.log('Fehler beim Überprüfen der E-Mail-Adresse', e);
       return false;
     }
   }
+
+
+  async checkUserToken(newUser: RegisterUser, registerUrl: string) {
+    this.user_name = newUser.first_name;
+    this.user_email = newUser.email;
+    this.user_email_copy = newUser.email;
+    const body = JSON.stringify(newUser);
+    
+    try {
+      await lastValueFrom(this.http.post(registerUrl, body, { headers: this.headers }));
+      this.router.navigateByUrl('/registration_confirmation');
+      return true;
+    } catch (e) {
+      console.log('Fehler beim Registrieren', e);
+      return false;
+    }
+  }
+
   
   async login(email: string, password: string) {
     const loginUrl = `${environment.baseUrl}/users/login/`;
@@ -96,6 +100,7 @@ export class UserService {
 
   async userLogout(userID:string){
     const loginUrl = `${environment.baseUrl}/users/logout/`;
+
     try {
       await lastValueFrom(this.http.post(loginUrl, { headers: this.headers }));
       this.router.navigateByUrl('/login');
@@ -112,6 +117,7 @@ export class UserService {
   async verifyToken(token: string, userId: string) {
     const verifyUrl = `${environment.baseUrl}/users/verify-token/`;
     const body = JSON.stringify({ token, user_id: userId });
+
     try {
       const user = await lastValueFrom(this.http.post<LoginResponse>(verifyUrl, body, { headers: this.headers }));
       return user;
@@ -139,13 +145,12 @@ export class UserService {
 
   async sendNewPassword(newPassword: string, uid: string | null, token: string | null): Promise<boolean> {
     const resetUrl = `${environment.baseUrl}/password_reset/confirm/${uid}/${token}/`;
-
+    
     try {
       const passwordData = {
         new_password1: newPassword, 
         new_password2: newPassword
       };
-      
       await lastValueFrom(this.http.post(resetUrl, passwordData, { headers: this.headers }));
       return true;
     } catch (e) {
