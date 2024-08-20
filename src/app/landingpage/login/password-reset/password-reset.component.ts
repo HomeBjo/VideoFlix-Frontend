@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { FooterComponent } from '../../../shared/login/footer/footer.component';
 import { HeaderComponent } from '../../../shared/login/header/header.component';
 import { UserService } from '../../../services/user-service.service';
-import { RegisterUser } from '../../../interfaces/register-user';
+
 
 @Component({
   selector: 'app-password-reset',

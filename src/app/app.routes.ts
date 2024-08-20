@@ -9,7 +9,8 @@ import { PrivacyPolicyComponent } from './landingpage/imprint/privacy-policy/pri
 import { EmailExistsComponent } from './landingpage/login/register/email-exists/email-exists.component';
 
 import { PasswordResetComponent } from './landingpage/login/password-reset/password-reset.component';
-import { EmailSentComponent } from './landingpage/login/email-sent/email-sent.component';
+import { EmailSendComponent } from './landingpage/login/email-sent/email-send.component';
+
 
 
 export const routes: Routes = [
@@ -17,7 +18,7 @@ export const routes: Routes = [
     { path: 'landingpage', component: LandingpageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'passwort-reset', component: PasswordResetComponent },
-    { path: 'email-sent', component: EmailSentComponent },
+    { path: 'email-send', component: EmailSendComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'registration_confirmation', component: RegistrationConfirmationComponent },
     { path: 'video_site', component: VideoSiteComponent },
