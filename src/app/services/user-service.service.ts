@@ -28,7 +28,7 @@ export class UserService {
       localStorage.removeItem('logoutInProgress');
       return;
     }
-    if (userId === environment.GUSER_ID) {
+    if (userId === '11') {
       localStorage.clear();
     } else {
       const user = await this.verifyToken(token!, userId!);
@@ -99,7 +99,7 @@ export class UserService {
     try {
       await lastValueFrom(this.http.post(loginUrl, { headers: this.headers }));
       this.router.navigateByUrl('/login');
-      if (userID === environment.GUSER_ID) {
+      if (userID === '11') {
         localStorage.clear(); 
         console.log('LocalStorage gelöscht');
       }
