@@ -122,4 +122,34 @@ export class UserService {
   }
   
 
+  async sendPasswordResetEmail(email: string): Promise<boolean> {
+    const resetUrl = `${environment.baseUrl}/password_reset/`; 
+
+    try {
+      const emailData = { email: email };
+      await lastValueFrom(this.http.post(resetUrl, emailData, { headers: this.headers }));
+      console.log('E-Mail wurde erfolgreich gesendet');
+      return true;
+    } catch (e) {
+      console.error('Fehler beim Senden der E-Mail:', e);
+      return false;
+    }
+  }
+
+
+  async sendNewPassword(newPassword: string, uid: string | null, token: string | null): Promise<boolean> {
+    const resetUrl = `${environment.baseUrl}/password_reset/confirm/${uid}/${token}/`;
+
+    try {
+      const passwordData = {
+        new_password1: newPassword, 
+        new_password2: newPassword
+      };
+      
+      await lastValueFrom(this.http.post(resetUrl, passwordData, { headers: this.headers }));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

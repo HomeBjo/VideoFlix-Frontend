@@ -17,7 +17,7 @@ export const routes: Routes = [
     { path: '', component: LandingpageComponent },
     { path: 'landingpage', component: LandingpageComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'passwort-reset', component: PasswordResetComponent },
+    { path: 'password_reset/:uid/:token', component: PasswordResetComponent },
     { path: 'email-send', component: EmailSendComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'registration_confirmation', component: RegistrationConfirmationComponent },

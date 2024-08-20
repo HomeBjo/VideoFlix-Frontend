@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FooterComponent } from '../../../shared/login/footer/footer.component';
 import { HeaderComponent } from '../../../shared/login/header/header.component';
 import { UserService } from '../../../services/user-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class PasswordResetComponent {
   passwordFieldType: string = 'password';
   confirmPasswordFieldType: string = 'password';
 
-constructor(public userService: UserService) {}
+constructor(public userService: UserService, private route: ActivatedRoute,private router: Router) {}
 
 togglePasswordVisibility(): void {
   this.passwordFieldType =
@@ -34,17 +35,11 @@ toggleConfirmPasswordVisibility(): void {
 }
 
 checkPassword() {
-  if (this.password.length >= 5) {
-    return true;
-  }
-  return false;
+  return this.password && this.password.length >= 5;
 }
 
 checkConfirmPassword() {
-  if (this.confirm_password.length >= 5) {
-    return true;
-  }
-  return false;
+  return this.confirm_password && this.confirm_password.length >= 5;
 }
 
 checkEvenPasswords() {
@@ -56,11 +51,19 @@ checkEvenPasswords() {
 
 async setNewPassword() {
   
-    
-   this.password,
-   this.confirm_password,
-   console.log(this.password,this.confirm_password)
+  const uid = this.route.snapshot.paramMap.get('uid');
+  const token = this.route.snapshot.paramMap.get('token');
 
+  const success = await this.userService.sendNewPassword(this.confirm_password, uid, token);
+  if (success) {
+    console.log('Passwort wurde erfolgreich zurückgesetzt.');
+    // this.router.navigateByUrl('/login');
+    
+  } else {
+    console.log('Fehler beim Zurücksetzen des Passworts.');
+    console.log(this.confirm_password, uid, token);
+    
+  }
 }
 
 resetValues() {
