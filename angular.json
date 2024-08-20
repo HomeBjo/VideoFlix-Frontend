@@ -32,7 +32,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/dotenv/config"
+            ]
           },
           "configurations": {
             "production": {
@@ -92,7 +94,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/dotenv/config"
+            ]
           }
         }
       }
