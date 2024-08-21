@@ -16,8 +16,10 @@ export class VideoDisplayComponent {
     if (Hls.isSupported()) {
         const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
         const hls = new Hls();
-        hls.loadSource(this.video.video_folder); // werte aus unseren pfad
+        hls.loadSource(this.video.video_folder); // werte aus unseren pfad 
+        // hls.loadSource('http://127.0.0.1:8000/media/videos/city/city_480p.m3u8');
         hls.attachMedia(videoElement);
+
     } else if ((document.getElementById('videoPlayer') as HTMLVideoElement).canPlayType('application/vnd.apple.mpegurl')) {
         // von gpt ein fallback falls was nicht klappt 
         const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
