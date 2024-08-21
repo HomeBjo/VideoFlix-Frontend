@@ -7,6 +7,7 @@ import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { VideoService } from '../../services/video-service.service';
 import { environment } from '../../../environments/environments';
 import { VideoDisplayComponent } from "./video-display/video-display.component";
+import { VideoJson } from '../../interfaces/video-json';
 
 @Component({
   selector: 'app-video-site',
@@ -16,7 +17,7 @@ import { VideoDisplayComponent } from "./video-display/video-display.component";
   styleUrl: './video-site.component.scss'
 })
 export class VideoSiteComponent {
-  newVideos: any[] = [];
+  newVideos: VideoJson[] = [];
   selectedVideo: any;
   private checkUserInterval: any;
   constructor(public userService: UserService, private route: Router, private videoService: VideoService) {}
