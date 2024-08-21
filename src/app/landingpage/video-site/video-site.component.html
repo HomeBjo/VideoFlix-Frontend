@@ -12,10 +12,15 @@
             <div class="headerBtns">
               <button class="headerBtns">Category</button>
               <button class="headerBtns">Favorites</button>
-              <button class="headerBtns">Profile</button>
             </div>
         </div>
-        <button class="blueBtn" (click)="logout()"><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
+        <div class="btnBoxRight">
+            <button class="blueBtn" (click)="openSmallMenu()">Profile</button>
+            <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}">
+                <button class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
+                <button (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
+            </div>
+        </div>
     </header>
 
     <div class="descriptionDivBreakout">
@@ -74,10 +79,10 @@
                         ></app-video-preview>
                     }
                     <app-video-display
-  *ngIf="selectedVideo"
-  [video]="selectedVideo"
-  (closeDisplay)="closeVideoDisplay()"
-></app-video-display>
+                      *ngIf="selectedVideo"
+                      [video]="selectedVideo"
+                      (closeDisplay)="closeVideoDisplay()"
+                    ></app-video-display>
                 </div>
             </div>
         </div>

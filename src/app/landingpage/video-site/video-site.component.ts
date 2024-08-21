@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { VideoPreviewComponent } from './video-preview/video-preview.component';
@@ -12,12 +12,13 @@ import { VideoJson } from '../../interfaces/video-json';
 @Component({
   selector: 'app-video-site',
   standalone: true,
-  imports: [FormsModule, CommonModule, VideoPreviewComponent, VideoDisplayComponent],
+  imports: [FormsModule, CommonModule, VideoPreviewComponent, VideoDisplayComponent, RouterLink],
   templateUrl: './video-site.component.html',
   styleUrl: './video-site.component.scss'
 })
 export class VideoSiteComponent {
   newVideos: VideoJson[] = [];
+  shwonProfilSelection:boolean = false;
   selectedVideo: any;
   private checkUserInterval: any;
   constructor(public userService: UserService, private route: Router, private videoService: VideoService) {}
@@ -56,17 +57,26 @@ export class VideoSiteComponent {
     this.userService.userLogout(userID!);
   }
 
+
   ngOnDestroy() {
     if (this.checkUserInterval) {
       clearInterval(this.checkUserInterval);
     }
   }
+
+
   onVideoSelected(video: any) {
     this.selectedVideo = video;
   }
 
+
   closeVideoDisplay() {
     this.selectedVideo = null;
+  }
+
+
+  openSmallMenu(){
+    this.shwonProfilSelection = !this.shwonProfilSelection;
   }
  
 }
