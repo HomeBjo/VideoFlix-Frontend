@@ -10,6 +10,7 @@ import { EmailExistsComponent } from './landingpage/login/register/email-exists/
 
 import { PasswordResetComponent } from './landingpage/login/password-reset/password-reset.component';
 import { EmailSendComponent } from './landingpage/login/email-sent/email-send.component';
+import { ProfileDetailsComponent } from './landingpage/video-site/profile-details/profile-details.component';
 
 
 
@@ -25,4 +26,5 @@ export const routes: Routes = [
     { path: 'imprint', component: ImprintComponent },
     { path: 'privacy_policy', component: PrivacyPolicyComponent },
     { path: 'email_exists', component: EmailExistsComponent },
+    { path: 'profile_details', component: ProfileDetailsComponent },
 ];
