@@ -1,0 +1,11 @@
+<div class="video-display-overlay">
+    <div class="video-display-content">
+        <button (click)="close()">Close</button>
+        <h2>{{ video.title }}</h2>
+        <video controls>
+            <source [src]="video.video_folder" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p>{{ video.description }}</p>
+    </div>
+</div>

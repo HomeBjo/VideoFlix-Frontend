@@ -37,6 +37,7 @@
                     @for (video of newVideos; track $index) {
                         <app-video-preview
                             [video]="video"
+                            (videoSelected)="onVideoSelected($event)"
                         ></app-video-preview>
                     }
                 </div>
@@ -47,6 +48,7 @@
                     @for (video of newVideos; track $index) {
                         <app-video-preview
                             [video]="video"
+                            (videoSelected)="onVideoSelected($event)"
                         ></app-video-preview>
                     }
                 </div>
@@ -57,6 +59,7 @@
                     @for (video of newVideos; track $index) {
                         <app-video-preview
                             [video]="video"
+                            (videoSelected)="onVideoSelected($event)"
                         ></app-video-preview>
                     }
                 </div>
@@ -67,8 +70,14 @@
                     @for (video of newVideos; track $index) {
                         <app-video-preview
                             [video]="video"
+                            (videoSelected)="onVideoSelected($event)"
                         ></app-video-preview>
                     }
+                    <app-video-display
+  *ngIf="selectedVideo"
+  [video]="selectedVideo"
+  (closeDisplay)="closeVideoDisplay()"
+></app-video-display>
                 </div>
             </div>
         </div>

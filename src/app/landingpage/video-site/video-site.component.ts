@@ -6,16 +6,18 @@ import { CommonModule } from '@angular/common';
 import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { VideoService } from '../../services/video-service.service';
 import { environment } from '../../../environments/environments';
+import { VideoDisplayComponent } from "./video-display/video-display.component";
 
 @Component({
   selector: 'app-video-site',
   standalone: true,
-  imports: [FormsModule, CommonModule, VideoPreviewComponent],
+  imports: [FormsModule, CommonModule, VideoPreviewComponent, VideoDisplayComponent],
   templateUrl: './video-site.component.html',
   styleUrl: './video-site.component.scss'
 })
 export class VideoSiteComponent {
   newVideos: any[] = [];
+  selectedVideo: any;
   private checkUserInterval: any;
   constructor(public userService: UserService, private route: Router, private videoService: VideoService) {}
 
@@ -57,6 +59,13 @@ export class VideoSiteComponent {
     if (this.checkUserInterval) {
       clearInterval(this.checkUserInterval);
     }
+  }
+  onVideoSelected(video: any) {
+    this.selectedVideo = video;
+  }
+
+  closeVideoDisplay() {
+    this.selectedVideo = null;
   }
  
 }
