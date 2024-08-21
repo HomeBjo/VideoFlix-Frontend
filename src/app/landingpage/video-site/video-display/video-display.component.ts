@@ -29,4 +29,7 @@ export class VideoDisplayComponent {
   close() {
     this.closeDisplay.emit();
   }
+  onOverlayClick(event: MouseEvent) {
+    this.close();
+  }
 }
