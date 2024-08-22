@@ -1,12 +1,26 @@
 <section>
     <header>
         <img src="../../../assets/img/logo_small.svg" alt="logo_small">
+        <button (click)="back()" class="mainBtn">Back</button>
     </header>
-    <main>
+    <form>
         <div>
             <h1>Your profile</h1>
             <span>Ff you want, you can add here more details to your profile.</span>
         </div>
-
-    </main>
+        <div class="lineBox">
+            @for (field of profileFields; track $index) {
+                <span class="profileDetailsTitle">{{ field.name }}</span>
+                <div class="profileDetails">
+                    <input *ngIf="field.isEditing" [(ngModel)]="field.value" [placeholder]="field.placeholder" type="{{field.inputType}}" [name]="field.name">
+                    <span *ngIf="!field.isEditing">{{ field.value }}</span>
+                    <button class="editBtn" (click)="toggleEdit($index)">
+                        {{ field.isEditing ? 'Check' : 'Edit' }}
+                    </button>
+                </div>
+            }
+        </div>
+        <button (click)="saveData()" class="mainBtn">Save</button>
+    </form>
+    <app-footer></app-footer>
 </section>

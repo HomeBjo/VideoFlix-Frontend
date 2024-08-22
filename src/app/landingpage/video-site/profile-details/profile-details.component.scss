@@ -1,11 +1,79 @@
+@import './../../../../styles.scss';
+
 section{
     width: 100vw;
     height: 100dvh;
     background-color: #060606;
     color: whitesmoke;
+    @include dFlex($j: space-between);
+    flex-direction: column;
     header{
+        width: 100%;
+        @include dFlex($j: space-between);
         img{
             margin: 1rem;
         }
     }
 }
+
+
+.mainBtn{
+    margin: 1rem;
+    color: whitesmoke;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: x-large;
+    transition: 0.3s ease-in-out;
+    &:hover{
+        color: #6e67d1;
+        text-shadow: 0px 0px 20px white;
+        filter: dropshadow(color=#ffffff, offx=2, offy=2);
+    }
+}
+
+
+form{
+    @include dFlex($g: 2rem);
+    flex-direction: column;
+    text-align: center;
+    input{
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid whitesmoke;
+        color: whitesmoke;
+        font-size: large;  
+        width: 100%;
+        outline: none;
+    }
+}
+
+.lineBox{
+    width: 100%;
+    @include dFlex($a: flex-start);
+    flex-direction: column;
+    text-align: start;
+    font-size: x-large;
+    .profileDetailsTitle{
+        border-bottom: 2px solid grey;
+    }
+    .profileDetails{
+        width: 100%;
+        @include dFlex($j: space-between, $g: 3rem);
+        font-size: large;
+        margin-bottom: 1rem;
+    }
+    .editBtn{
+        margin: none;
+        color: whitesmoke;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: large;
+        transition: 0.3s ease-in-out;
+        &:hover{
+            color: #6e67d1;
+        }
+    }
+}
+

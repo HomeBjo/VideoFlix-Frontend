@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { RegisterUser } from '../interfaces/register-user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environments';
 import { LoginResponse } from '../interfaces/login-response';
 import { GUEST_ID } from '../../../config';
+import { UserData } from '../interfaces/user-data';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,10 @@ export class UserService {
   user_name: string = '';
   user_email: string = '';
   user_email_copy: string = '';
-
+  userData: UserData | undefined;
+  private userDataSubject = new BehaviorSubject<UserData[] | null>(null); //spezielle art von Observable, die immer den letzten Wert speichert und diesen neuen abonnenten sofort bereitstellt
+  userData$ = this.userDataSubject.asObservable(); // kovertiere die daten zu einer Observable - kann abonniert werden
+  
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -157,4 +161,24 @@ export class UserService {
       return false;
     }
   }
+
+
+  async getUserData() { //fetsht die daten vom eingeloggten user
+    if (this.userData === undefined) { // check ob userDataSubject leer ist
+      const userId = localStorage.getItem('userId');
+      const url = `${environment.baseUrl}/users/user-data/?userId=${userId}`; //suchge direkt nach dem user in der url
+      
+      try {
+        //starte get anfrage - kein header benötigt, weil user für diese angfrage authentiziert sein muss
+        let user = await lastValueFrom(this.http.get<UserData[]>(url));
+        if (user) {
+          this.userDataSubject.next(user); // speicher die daten nach der get anfrage
+          console.log('fetshed userdata:', this.userDataSubject.getValue());
+        }
+      } catch (e) {
+        console.error('Fehler beim Laden der UserData:', e);
+      }
+    }
+  }
+  
 }
