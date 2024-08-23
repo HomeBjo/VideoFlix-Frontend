@@ -1,16 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import Hls from 'hls.js';
 
 @Component({
   selector: 'app-video-display',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './video-display.component.html',
   styleUrl: './video-display.component.scss'
 })
 export class VideoDisplayComponent {
   @Input() video: any;
   @Output() closeDisplay = new EventEmitter<void>();
+  isVideoVisible = false;
+  // closeOverlayPlayButton = false;
 
   ngAfterViewInit(): void {
     if (Hls.isSupported()) {
@@ -31,5 +34,14 @@ export class VideoDisplayComponent {
   }
   onOverlayClick(event: MouseEvent) {
     this.close();
+  }
+
+  showVideo(): void {
+    // this.closeOverlayPlayButton = true;
+    this.isVideoVisible = true;
+  }
+  close2(): void {
+    // Deine Logik zum Schließen des Video-Overlays
+    this.isVideoVisible = false;
   }
 }

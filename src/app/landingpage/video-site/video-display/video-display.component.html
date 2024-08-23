@@ -1,41 +1,33 @@
-<!-- <div class="video-display-overlay">
-    <div class="video-display-content">
-        <button (click)="close()">Close</button>
-        <h2>{{ video.title }}</h2>
-        <video controls>
-            <source [src]="video.video_folder" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <p>{{ video.description }}</p>
-    </div>
-</div> -->
 <div class="video-display-overlay" (click)="onOverlayClick($event)">
-    <div class="video-display-content" (click)="$event.stopPropagation()">
-        <button class="button" (click)="close()">Close</button>
-        <div class="video-img-container">
-            <img [src]="video.screenshot" alt="">
-            <h2>{{ video.title }}</h2>
-            <span class="presents-logo">V </span><span class="presents-text">Film</span>
-
-        </div>
-       
-            
-            <div class="video-player-content">
-                
-                
-            
-            <span>Video Description</span>
-            <p>{{ video.description }}</p>
-            <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" data-setup="{}">
-                <source [src]="video.video_folder" type="application/x-mpegURL">
-                Your browser does not support the video tag.
-            </video>
-            
-            </div>
-            
-        
-       
+  <div class="video-display-content" (click)="$event.stopPropagation()">
+    <img class="img-back" src="/assets/img/arrow_back.png" (click)="close()" />
+    <div class="video-img-container">
+      <img [src]="video.screenshot" alt="" />
+      <h2>{{ video.title }}</h2>
+      <span class="presents-logo">V </span
+      ><span class="presents-text">Film</span>
     </div>
+
+    <div class="video-player-content">
+      <div class="description-container">
+        <span>Video Description</span>
+        <span class="description-text">{{ video.description }}</span>
+      </div>
+
+      <video
+        id="videoPlayer"
+        class="video-js vjs-default-skin"
+        controls
+        preload="auto"
+        width="640"
+        height="264"
+        data-setup="{}"
+      >
+        <source [src]="video.video_folder" type="application/x-mpegURL" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
 </div>
 
 <!-- <div class="video-display-overlay">
@@ -47,5 +39,35 @@
             Your browser does not support the video tag.
         </video>
         <p>{{ video.description }}</p>
+    </div>
+</div> -->
+
+<!-- <div class="video-display-overlay" (click)="onOverlayClick($event)">
+
+    <div class="video-display-content" (click)="$event.stopPropagation()">
+        <button class="button" (click)="close()">Close</button>
+        <div class="video-img-container">
+            <img [src]="video.screenshot" alt="">
+            <h2>{{ video.title }}</h2>
+            <span class="presents-logo">V</span><span class="presents-text">Film</span>
+        </div>
+       
+        
+
+        <div class="video-player-content" >
+            <div class="button-play-container" [ngClass]="{'d-none': closeOverlayPlayButton}">
+                <button class="play-button" (click)="showVideo()">Play Video</button>
+            </div>
+          
+            
+            <div  class="video-container">
+                <span>Video Description</span>
+                <p>{{ video.description }}</p>
+                <video id="videoPlayer" [ngClass]="{'visible': isVideoVisible}" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" data-setup="{}">
+                    <source [src]="video.video_folder" type="application/x-mpegURL">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
     </div>
 </div> -->
