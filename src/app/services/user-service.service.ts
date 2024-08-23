@@ -163,23 +163,6 @@ export class UserService {
   }
 
 
-  // async getUserData() { //fetsht die daten vom eingeloggten user
-  //   if (this.userData === undefined) { // check ob userDataSubject leer ist
-  //     const userId = localStorage.getItem('userId');
-  //     const url = `${environment.baseUrl}/users/user-data/?userId=${userId}`; //suchge direkt nach dem user in der url
-      
-  //     try {
-  //       //starte get anfrage - kein header benötigt, weil user für diese angfrage authentiziert sein muss
-  //       let user = await lastValueFrom(this.http.get<UserData[]>(url));
-  //       if (user) {
-  //         this.userDataSubject.next(user); // speicher die daten nach der get anfrage
-  //         console.log('fetshed userdata:', this.userDataSubject.getValue());
-  //       }
-  //     } catch (e) {
-  //       console.error('Fehler beim Laden der UserData:', e);
-  //     }
-  //   }
-  // }
   async getUserData() { //fetsht die daten vom eingeloggten user
     if (this.userData === undefined) { // check ob userDataSubject leer ist
       const userId = localStorage.getItem('userId');
@@ -189,14 +172,12 @@ export class UserService {
         //starte get anfrage - kein header benötigt, weil user für diese angfrage authentiziert sein muss
         let user = await lastValueFrom(this.http.get<UserData[]>(url));
         if (user) {
-          return user;
+          this.userDataSubject.next(user); // speicher die daten nach der get anfrage
         }
       } catch (e) {
         console.error('Fehler beim Laden der UserData:', e);
-        return null;
       }
     }
-    return null;
   }
   
 }

@@ -21,30 +21,17 @@ export class ProfileDetailsComponent {
   allInputsChecked: boolean = false;
   valuesChanged: boolean = false;
   showCheckWarningBoolean: boolean = false;
+  phoneNumerIsOK: boolean = false;
+  emailIsOK: boolean = false;
+  diabledBtn: boolean = false;
+  enableBtn: boolean = false;
 
   constructor(public userService: UserService, private router: Router, private cdr: ChangeDetectorRef) { }
   
 
-  // async ngOnInit() {
-  //   await this.userService.getUserData(); //lade die daten erneut (wenn user die seite zB reloadet)
-  //   this.userService.userData$.subscribe((userData: UserData[] | null) => { //abonniere die daten - sobald die verfügbar sind, werden die ausgelesen
-  //     if (userData) { //wenn daten vorhanden -> zuweisen
-  //       const user = userData[0];
-  //       this.profileFields = [
-  //         { name: 'Firstname', value: user.first_name || 'This field is empty', originalValue: user.first_name, placeholder: 'Firstname (required)', isEditing: false, inputType: 'text' },
-  //         { name: 'Lastname', value: user.last_name || 'This field is empty', originalValue: user.last_name, placeholder: 'Lastname (required)', isEditing: false, inputType: 'text' },
-  //         { name: 'Email', value: user.email || 'This field is empty', originalValue: user.email, placeholder: 'Email (required)', isEditing: false, inputType: 'email' },
-  //         { name: 'Phone', value: user.phone || 'This field is empty', originalValue: user.phone, placeholder: 'Phone (optional)', isEditing: false, inputType: 'tel' },
-  //         { name: 'Address', value: user.address || 'This field is empty', originalValue: user.address, placeholder: 'Address (optional)', isEditing: false, inputType: 'text' },
-  //       ];
-  //     // this.cdr.detectChanges(); //angular überprüft automatisch änderungen
-  //     console.log(this.profileFields);
-  //     }
-  //   });  
-  // }
-
   async ngOnInit() {
-    let userData = await this.userService.getUserData(); //lade die daten erneut (wenn user die seite zB reloadet)
+    await this.userService.getUserData(); //lade die daten erneut (wenn user die seite zB reloadet)
+    this.userService.userData$.subscribe((userData: UserData[] | null) => { //abonniere die daten - sobald die verfügbar sind, werden die ausgelesen
       if (userData) { //wenn daten vorhanden -> zuweisen
         const user = userData[0];
         this.profileFields = [
@@ -56,7 +43,8 @@ export class ProfileDetailsComponent {
         ];
       this.cdr.detectChanges(); //angular überprüft automatisch änderungen
       console.log(this.profileFields);
-      } 
+      }
+    });  
   }
 
 
@@ -67,15 +55,14 @@ export class ProfileDetailsComponent {
 
   toggleEdit(index: number) {
     this.profileFields[index].isEditing = !this.profileFields[index].isEditing;
-    console.log(`this.profileFields${index}.isEditing:`,this.profileFields[index].isEditing);
-    console.log(this.profileFields);
-    console.log(`Value index${index}:`, this.profileFields[index].value);
-    // this.cdr.detectChanges();  //angular überprüft automatisch änderungen
+    if (!this.profileFields[index].isEditing) {
+      this.enableBtn = true;
+      this.isFormValid(); //überprüfe, ob der btn enabeld werden kann
+    }
   }
   
 
-  
-  showCheckWarning() {
+  showCheckWarning() { // zeigt check warnung an
     return this.profileFields.some(field => field.isEditing);
   }
 
@@ -85,30 +72,12 @@ export class ProfileDetailsComponent {
   }
 
 
-  // checkAllInputs(){
-  //   if (typeof this.profileFields[0].value === 'string' && this.profileFields[0].value.length >= 3 || 
-  //     typeof this.profileFields[1].value === 'string' && this.profileFields[1].value.length >= 3 || 
-  //     typeof this.profileFields[2].value === 'string' && this.profileFields[2].value.length >= 3) {
-    
-  //     console.log('All fields are filled!');
-  //   }
-  // }
-
   checkLenght(i : number): boolean { //überprüft, ob index 0-2 ein sting ist und  größer 3 Zeichen ist
     const value = this.profileFields[i].value;
-    if (i >= 0 && i <= 2 && typeof value === 'string') {
+    if (typeof value === 'string') {
       return value.length >= 3;
     }
     return false;
-  }
-
-
-  onInputChange(newValue: string, index: number) {
-    this.profileFields[index].value = newValue;
-    console.log(`this.profileFields${index}.value`, this.profileFields[index].value);
-    console.log('newValue:', newValue);
-    
-    this.valuesChanged = this.checkChangedValues();
   }
 
 
@@ -117,26 +86,83 @@ export class ProfileDetailsComponent {
   }
 
 
-  checkChangedValues() {
-    let value = this.profileFields.some(field => field.value !== field.originalValue);
-    if (value) {
-      console.log('values changed!');
+  checkIfFieldIsEmpty(i: number): boolean { //checkt, ob ein Feld den standart text hat
+    if (this.profileFields[i].value === 'This field is empty') {
       return true;
     }
-    console.log('values not changed!');
     return false;
   }
 
 
+  checkEmailFormat(i: number): boolean {
+    if (i === 2) {
+      const email = this.profileFields[i].value as string;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      this.emailIsOK = true;
+      return emailRegex.test(email);
+    }
+    this.emailIsOK = false;
+    return false;
+  }
+
+
+  checkPhoneFormat(i: number): boolean {
+    if (i === 3) {
+
+      if (this.checkIfFieldIsEmpty(i)) {
+        this.phoneNumerIsOK = true;
+        return true;
+      }
+
+      const phone = this.profileFields[i].value as string; //überprüfe, ob value buchstaben hat 
+      const phoneRegex = /^\+?[0-9\s\-()]{7,15}$/;
+      this.phoneNumerIsOK = true;
+      return phoneRegex.test(phone);
+    }
+    this.phoneNumerIsOK = false;
+    return false;
+  }
+
+
+  isFormValid(): boolean {
+    if (!this.enableBtn) {
+      return false;  // Wenn `enableBtn` noch nicht aktiviert wurde, immer false zurückgeben
+    }
+
+    const allFieldsValid = this.checkAllFieldsValidthis();// prüfe, ob alle values den angaben entsprechen
+    const noEditingInProgress = !this.checkIfInputsChecked(); // überpfrüfe ob alle felder getchekt sind
+    const hasChangedValues = this.profileFields.some(field => field.value !== field.originalValue); //überprüfe, ob value geändert wurde
+    if (hasChangedValues) {
+      this.enableBtn = true;
+    }
+    console.log(allFieldsValid && noEditingInProgress && hasChangedValues && this.enableBtn);
+    
+    return allFieldsValid && noEditingInProgress && hasChangedValues && this.enableBtn;
+  }
+
+
+  checkAllFieldsValidthis(){
+    return this.profileFields.every((field, index) => {
+      if (index === 0 || index === 1) {
+          return this.checkLenght(index);
+      } else if (index === 2) {
+          return this.checkEmailFormat(index);
+      } else if (index === 3) {
+          return this.checkPhoneFormat(index);
+      }
+      return true;
+    });
+  }
+
+
   onSubmit(ngForm: NgForm) {
-    // if (ngForm.valid && this.checkIfInputsChecked() && this.checkChangedValues()) {
-    if (ngForm.valid && this.valuesChanged) {
-      this.allInputsChecked = true;
-      // this.registerUser();
+    if (ngForm.valid) {
       this.saveData();
+      // guck dir die beschreibung mal an und behalt im hinterkopf. könnte nützlich sein
+      // ngForm.form.markAsPristine();  //setzt den Zustand des Formulars oder eines Formularfeldes auf "pristine", was signalisiert, dass der Benutzer das Feld noch nicht berührt hat, unabhängig davon, ob er es tatsächlich getan hat.
+      // ngForm.form.markAsUntouched(); // setzt den Zustand eines Formularfeldes oder des gesamten Formulars auf "untouched", was signalisiert, dass das Feld noch nie vom Benutzer fokussiert wurde.
     } else {
-      this.allInputsChecked = false;
-      ngForm.resetForm();
+      console.log('Formular ist nicht korrekt ausgeführt');
     }
   }
 
@@ -155,6 +181,5 @@ export class ProfileDetailsComponent {
       }
       console.log('newUserData: ',newUserData);
     }
-    
   }
 }

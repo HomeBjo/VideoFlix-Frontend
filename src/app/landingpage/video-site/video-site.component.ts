@@ -37,7 +37,7 @@ export class VideoSiteComponent {
       this.userService.getUserData();
     }, (error: any) => {
       console.error('Error fetching videos:', error);
-    });
+    }); 
   }
 
 
