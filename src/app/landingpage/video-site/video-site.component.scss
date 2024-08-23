@@ -37,28 +37,6 @@ section{
     z-index: 4;
 }
 
-.blueBtn{
-    @include dFlex($g: 8px);
-    color: whitesmoke;
-    background-color: $btnColor;
-    padding: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border: none;
-    border-radius: 26px;
-    font-size: large;
-    cursor: pointer;
-    transition: ease-in-out 0.3s;
-    z-index: 2;
-    &:hover {
-        background-color: white;
-        color: $btnColor;
-        img {
-            filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
-        }
-    }
-}
-
 
 header{
     @include dFlex($j: space-between);

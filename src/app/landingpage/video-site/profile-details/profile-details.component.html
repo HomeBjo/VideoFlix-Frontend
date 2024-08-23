@@ -1,18 +1,47 @@
 <section>
     <header>
         <img src="../../../assets/img/logo_small.svg" alt="logo_small">
-        <button (click)="back()" class="mainBtn">Back</button>
+        <button (click)="back()" class="blueBtn">Back</button>
     </header>
-    <form>
+    <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
         <div>
             <h1>Your profile</h1>
-            <span>Ff you want, you can add here more details to your profile.</span>
+            <span>If you want, you can add more details to your profile here.</span>
         </div>
         <div class="lineBox">
             @for (field of profileFields; track $index) {
-                <span class="profileDetailsTitle">{{ field.name }}</span>
+                <div class="headerDiv">
+                    <span class="profileDetailsTitle">{{ field.name }}</span>
+                    @if(!checkLenght($index)) {
+                        @if ($index == 0 || $index == 1 || $index == 2) {
+                            <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
+                                This vield have 3 or more than characters.</span>
+                        }
+                    }
+                </div>
+                <!-- <div class="profileDetails">
+                    @if (field.isEditing) {
+                        <input 
+                            [(ngModel)]="field.value"
+                            [placeholder]="field.placeholder" 
+                            [type]="field.inputType" 
+                            [name]="field.name" 
+                            #fieldModel="ngModel">
+                    } @else {
+                        <span *ngIf="!field.isEditing">{{ field.value }}</span>
+                    }
+                        <button class="editBtn" (click)="toggleEdit($index)">
+                            {{ field.isEditing ? 'Check' : 'Edit' }}
+                        </button>
+                </div> -->
                 <div class="profileDetails">
-                    <input *ngIf="field.isEditing" [(ngModel)]="field.value" [placeholder]="field.placeholder" type="{{field.inputType}}" [name]="field.name">
+                    <input *ngIf="field.isEditing" 
+                        [(ngModel)]="field.value" 
+                        [placeholder]="field.placeholder" 
+                        [type]="field.inputType" 
+                        [name]="field.name" 
+                        #fieldModel="ngModel">
+                        <!-- (ngModelChange)="onInputChange($event, $index)"> -->
                     <span *ngIf="!field.isEditing">{{ field.value }}</span>
                     <button class="editBtn" (click)="toggleEdit($index)">
                         {{ field.isEditing ? 'Check' : 'Edit' }}
@@ -20,7 +49,12 @@
                 </div>
             }
         </div>
-        <button (click)="saveData()" class="mainBtn">Save</button>
+        @if (showCheckWarning()) {
+            <span class="invalidFeedbackBottom">Make sure to click on check.</span>
+        }
+        <button type="submit" [disabled]="!valuesChanged"
+            [ngClass]="{'saveBlueBtn': valuesChanged, 'saveBlueBtnDisabled': !valuesChanged}"
+        >Save</button>
     </form>
     <app-footer></app-footer>
 </section>

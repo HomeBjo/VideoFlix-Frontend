@@ -8,11 +8,9 @@ section{
     @include dFlex($j: space-between);
     flex-direction: column;
     header{
-        width: 100%;
+        width: calc(100% - 2rem);
         @include dFlex($j: space-between);
-        img{
-            margin: 1rem;
-        }
+        padding: 1rem;
     }
 }
 
@@ -37,6 +35,7 @@ form{
     @include dFlex($g: 2rem);
     flex-direction: column;
     text-align: center;
+    margin: 1rem;
     input{
         background-color: transparent;
         border: none;
@@ -54,8 +53,18 @@ form{
     flex-direction: column;
     text-align: start;
     font-size: x-large;
-    .profileDetailsTitle{
-        border-bottom: 2px solid grey;
+
+    .headerDiv{
+        width: 100%;
+        @include dFlex($j: space-between, $g: 32px);
+        .profileDetailsTitle{
+            border-bottom: 2px solid grey;
+        }
+        .invalidFeedback{
+            @include dFlex();
+            font-size: small;
+            color: red;
+        }
     }
     .profileDetails{
         width: 100%;
@@ -77,3 +86,39 @@ form{
     }
 }
 
+
+.saveBlueBtn{
+    color: whitesmoke;
+    background-color: $btnColor;
+    padding: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: none;
+    border-radius: 26px;
+    font-size: x-large;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    z-index: 2;
+    &:hover {
+        background-color: white;
+        color: $btnColor;
+        img {
+            filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
+        }
+    }
+}
+
+.saveBlueBtnDisabled{
+    color: whitesmoke;
+    background-color: #7782eb;
+    padding: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: none;
+    border-radius: 26px;
+    font-size: x-large;
+}
+
+.invalidFeedbackBottom{
+    margin-bottom: -1.8rem;
+}

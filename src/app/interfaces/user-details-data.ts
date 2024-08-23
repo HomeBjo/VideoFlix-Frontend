@@ -1,7 +1,8 @@
-export interface UserDetailsData {
+export interface UserArrayData {
     name: string,
     value: string | number, 
     placeholder: string, 
     isEditing: boolean, 
-    inputType: string
+    inputType: string,
+    originalValue: string | number
 }
