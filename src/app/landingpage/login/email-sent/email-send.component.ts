@@ -18,7 +18,7 @@ export class EmailSendComponent {
   constructor(public userService: UserService, private router: Router) {}
 
   checkEmail() {
-    if (this.email.length >= 5) {
+    if (this.email && this.email.length >= 5) {
       return true;
     }
     return false;

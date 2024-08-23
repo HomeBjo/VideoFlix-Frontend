@@ -1,24 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink, RouterModule} from '@angular/router';
 import { UserService } from '../../services/user-service.service';
 import { GUEST_EMAIL, GUEST_PW } from '../../../../config';
+import { FooterComponent } from "../../shared/login/footer/footer.component";
+import { HeaderComponent } from "../../shared/login/header/header.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterModule, RouterLink, FooterComponent, HeaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
 
   currentChannel: string = '';
-  email: string = '';
   password: string = '';
   GUEST_MAIL : string = GUEST_EMAIL;
   GUEST_PW : string = GUEST_PW;
+  passwordFieldType: string = 'password';
 
 
   constructor(
@@ -31,7 +33,7 @@ export class LoginComponent {
 
 
   async login() {
-    this.loadLogin(this.email, this.password);
+    this.loadLogin(this.userService.user_email, this.password);
   }
 
 
@@ -54,5 +56,42 @@ export class LoginComponent {
     } catch (error) {
       console.error('Fehler beim Login:', error);
     }
+  }
+  checkEmail() {
+    if (this.userService.user_email.length >= 5) {
+      return true;
+    }
+    return false;
+  }
+
+
+  checkPassword() {
+    if (this.password.length >= 5) {
+      return true;
+    }
+    return false;
+  }
+
+  checkAllInputs() {
+    if (
+      this.checkEmail() &&
+      this.checkPassword()
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  onSubmit(ngForm: NgForm) {
+    if (ngForm.valid && this.checkAllInputs()) {
+      this.loadLogin(this.userService.user_email, this.password);
+    } else {
+      ngForm.resetForm();
+    }
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 }

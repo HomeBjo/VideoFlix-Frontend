@@ -137,7 +137,7 @@ export class UserService {
 
     try {
       const emailData = { email: email };
-      await lastValueFrom(this.http.post(resetUrl, emailData, { headers: this.headers }));
+      await lastValueFrom(this.http.post(resetUrl, emailData));
       console.log('E-Mail wurde erfolgreich gesendet');
       return true;
     } catch (e) {

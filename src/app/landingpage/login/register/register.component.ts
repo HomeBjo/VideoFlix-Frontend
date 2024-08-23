@@ -9,7 +9,7 @@ import { FooterComponent } from '../../../shared/login/footer/footer.component';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink, FooterComponent, HeaderComponent, HeaderComponent],
+  imports: [FormsModule, CommonModule, RouterLink, FooterComponent, HeaderComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })

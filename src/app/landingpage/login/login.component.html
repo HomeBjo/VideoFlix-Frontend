@@ -1,11 +1,46 @@
-<section>
-    <button routerLink="/register">Register</button>
-    <div class="input_box">
-        <input type="text" name="" id="" [(ngModel)]="email">
-        <input type="password" name="" id="" [(ngModel)]="password">
-    </div>
-    <div class="input_button_box">
-        <button (click)="login()">Login</button>
-        <button (click)="guestLogin()">Guest login</button>
-    </div>
-</section>
+
+    <section>
+        <app-header></app-header>
+        <div class="mainContent">
+        <form class="contentDiv" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+            <h1>Log in</h1>
+            <div class="positionInputs">
+                <!----Email------>
+                <input type="email" [(ngModel)]="userService.user_email" placeholder="Email" name="email" #email="ngModel" required pattern="[^@]+@[^\.]+\..+" class="normalInput">
+                @if (!email.valid && email.touched && !email.disabled) {
+                    <div class="invalidFeedback">
+                        @if (userService.user_email == ''){
+                            <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Email is required</span>
+                        } @else {
+                            <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Please check whether the email is correct</span>
+                        }
+                    </div>
+                }
+                <!----Password------>
+                <div class="passwortImg">
+                    <input [type]="passwordFieldType" [(ngModel)]="password" placeholder="Password" name="firstPassword" #firstPassword="ngModel" required class="passwordInput">
+                    <img src="../../assets/img/blue_eye.svg" alt="eye image" (click)="togglePasswordVisibility()">
+                </div>
+                @if (!checkPassword() &&firstPassword.touched) {
+                    <div class="invalidFeedback">
+                        @if (password == ''){
+                            <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Password is required</span>
+                        } @else if(!checkPassword()) {
+                            <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Password should have at least 5 characters</span>
+                        } 
+                    </div>
+                }
+            </div>
+            <div class="rememberContainer"><input type="checkbox"><span>Remember me</span></div>
+    
+            <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Get started</button>
+        </form>
+        <div class="forgotContainer"><span [routerLink]="['/email-send']" class="blueText">Forgot password?</span></div>
+        <div class="signContainer"><span class="blackText">New to Videoflix?</span><span [routerLink]="['/register']" class="blueText">Sign Up now</span></div>
+        </div>
+      
+        
+
+
+        <app-footer></app-footer>
+    </section>
