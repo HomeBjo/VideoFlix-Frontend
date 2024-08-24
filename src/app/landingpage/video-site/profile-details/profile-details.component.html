@@ -1,62 +1,77 @@
 <section>
     <header>
-        <img src="../../../assets/img/logo_small.svg" alt="logo_small">
+        <img src="../../../assets/img/logo_small.svg" alt="logo_small" [routerLink]="['/video_site']">
         <button (click)="back()" class="blueBtn">Back</button>
     </header>
-    <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
-        <div>
-            <h1>Your profile</h1>
-            <span>If you want, you can add more details to your profile here.</span>
-        </div>
-        <div class="lineBox">
-            <!-- render 4-loop -->
-            @for (field of profileFields; track $index) {
-                <div class="headerDiv">
-                    <span class="profileDetailsTitle">{{ field.name }}</span>
-                    <!-- render errors -->
-                    @if(!checkLenght($index)) {
-                        @if ($index == 0 || $index == 1) {
-                            <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
-                                This field must have 3 or more characters.</span>
+    @if (!continueMessage) {
+        <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+            <div class="formHeaderDiv">
+                <h1>Your profile</h1>
+                <span>If you want, you can add more details to your profile here.</span>
+            </div>
+            <div class="lineBox">
+                <!-- render 4-loop -->
+                @for (field of profileFields; track $index) {
+                    <div class="headerDiv">
+                        <span class="profileDetailsTitle">{{ field.name }}</span>
+                        <!-- render errors (first / last name + email)-->
+                        @if(!checkLenght($index)) {
+                            @if ($index == 0 || $index == 1) {
+                                <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
+                                    This field must have 3 or more characters.</span>
+                            }
+                            @if ($index == 2 && !checkEmailFormat($index)) {
+                                <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
+                                    Please enter a valid email.</span>
+                            }
                         }
-                        @if ($index == 2 && !checkEmailFormat($index)) {
-                            <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
-                                Please enter a valid email.</span>
+                        <!-- render error (phone)-->
+                        @if (!checkPhoneFormat($index)) {
+                            @if ($index == 3 && !checkPhoneFormat($index) && !checkIfFieldIsEmpty($index)) {
+                                <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
+                                    Please enter a valid phonenumber.</span>
+                            }
                         }
-                        @if ($index == 3 && !checkPhoneFormat($index) && !checkIfFieldIsEmpty($index)) {
-                            <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
-                                Please enter a valid phonenumber.</span>
+                    </div>
+                    <div class="profileDetails">
+                        <!-- render inputs -->
+                        @if (field.isEditing) {
+                            <input 
+                                [(ngModel)]="field.value"
+                                [placeholder]="field.placeholder" 
+                                [type]="field.inputType" 
+                                [name]="field.name" 
+                                #fieldModel="ngModel">
+                        } @else {
+                            <span *ngIf="!field.isEditing">{{ field.value }}</span>
                         }
-                    }
-                </div>
-                <div class="profileDetails">
-                    <!-- render inputs -->
-                    @if (field.isEditing) {
-                        <input 
-                            [(ngModel)]="field.value"
-                            [placeholder]="field.placeholder" 
-                            [type]="field.inputType" 
-                            [name]="field.name" 
-                            #fieldModel="ngModel">
-                    } @else {
-                        <span *ngIf="!field.isEditing">{{ field.value }}</span>
-                    }
-                    <span class="editBtn" (click)="toggleEdit($index)">
-                        {{ field.isEditing ? 'Check' : 'Edit' }}
-                    </span>
-                </div>
+                        <span class="editBtn" (click)="toggleEdit($index)">
+                            {{ field.isEditing ? 'Check' : 'Edit' }}
+                        </span>
+                    </div>
+                }
+            </div>
+            <!-- render check warning -->
+            @if (showCheckWarning()) {
+                <span class="invalidFeedbackBottom">Make sure to click on check.</span>
             }
+           
+            <button type="submit"
+            [disabled]="!isFormValid()"
+            [ngClass]="{'saveBlueBtn': isFormValid(), 'saveBlueBtnDisabled': !isFormValid()}">
+              Save
+            </button>
+        </form>
+    } @else {
+        <div class="loaderContainer">
+            <div class="loader"></div>
+            <!-- <div class="loader2"></div> -->
+            <h1>The data is being processed. <br>
+                This could take some time. <br>
+                Please check back later.</h1>
+            <button (click)="back()" class="saveBlueBtn" style="font-size: x-large;">Back to the video page</button>
         </div>
-        <!-- render check warning -->
-        @if (showCheckWarning()) {
-            <span class="invalidFeedbackBottom">Make sure to click on check.</span>
-        }
-       
-        <button type="submit"
-        [disabled]="!isFormValid()"
-        [ngClass]="{'saveBlueBtn': isFormValid(), 'saveBlueBtnDisabled': !isFormValid()}">
-          Save
-        </button>
-    </form>
+    }
+    
     <app-footer></app-footer>
 </section>

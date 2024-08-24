@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserService } from '../../../services/user-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FooterComponent } from "../../../shared/login/footer/footer.component";
 import { UserData } from '../../../interfaces/user-data';
 import { UserArrayData } from '../../../interfaces/user-details-data';
@@ -10,7 +10,7 @@ import { UserArrayData } from '../../../interfaces/user-details-data';
 @Component({
   selector: 'app-profile-details',
   standalone: true,
-  imports: [FormsModule, CommonModule, FooterComponent],
+  imports: [FormsModule, CommonModule, FooterComponent, RouterLink],
   templateUrl: './profile-details.component.html',
   styleUrl: './profile-details.component.scss'
 })
@@ -18,12 +18,6 @@ export class ProfileDetailsComponent {
   
   changeFirstname: boolean = false;
   profileFields: UserArrayData [] = [];
-  allInputsChecked: boolean = false;
-  valuesChanged: boolean = false;
-  showCheckWarningBoolean: boolean = false;
-  phoneNumerIsOK: boolean = false;
-  emailIsOK: boolean = false;
-  diabledBtn: boolean = false;
   enableBtn: boolean = false;
   continueMessage:boolean = false;
 
@@ -99,10 +93,8 @@ export class ProfileDetailsComponent {
     if (i === 2) {
       const email = this.profileFields[i].value as string;
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      this.emailIsOK = true;
       return emailRegex.test(email);
     }
-    this.emailIsOK = false;
     return false;
   }
 
@@ -111,16 +103,18 @@ export class ProfileDetailsComponent {
     if (i === 3) {
 
       if (this.checkIfFieldIsEmpty(i)) {
-        this.phoneNumerIsOK = true;
         return true;
       }
 
-      const phone = this.profileFields[i].value as string; //überprüfe, ob value buchstaben hat 
-      const phoneRegex = /^\+?[0-9\s\-()]{7,15}$/;
-      this.phoneNumerIsOK = true;
-      return phoneRegex.test(phone);
+      const phone = this.profileFields[i].value as string;
+      const cleanedPhone = phone.replace(/[\s\-\(\)]+/g, '');//überprüfe, ob value buchstaben hat 
+      const isValid = /^\d{7,15}$/.test(cleanedPhone);   // Überprüfe, ob die Länge zwischen 7 und 15 liegt und ob alle Zeichen Ziffern sind
+      if (isValid || this.profileFields[i].value == '') {
+        return true; 
+      }
+      return isValid;
     }
-    this.phoneNumerIsOK = false;
+    
     return false;
   }
 
@@ -179,7 +173,7 @@ export class ProfileDetailsComponent {
         address: this.profileFields[4].value as string,
         username: (this.profileFields[0].value + '_' + this.profileFields[1].value) as string
       }
-      
+
       let done = await this.userService.updaterUserData(newUserData);
       if (done) {
         this.continueMessage = true;

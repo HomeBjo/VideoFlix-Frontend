@@ -11,6 +11,9 @@ section{
         width: calc(100% - 2rem);
         @include dFlex($j: space-between);
         padding: 1rem;
+        img{
+            cursor: pointer;
+        }
     }
 }
 
@@ -36,6 +39,17 @@ form{
     flex-direction: column;
     text-align: center;
     margin: 1rem;
+    .formHeaderDiv{
+        h1{
+            margin: auto;
+            font-size: 3.5rem;
+            font-weight: 500;
+            animation: lights 5s 750ms linear infinite
+        }
+        span{
+            font-size: x-large;
+        }
+    }
     input{
         background-color: transparent;
         border: none;
@@ -90,12 +104,12 @@ form{
 .saveBlueBtn{
     color: whitesmoke;
     background-color: $btnColor;
-    padding: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 22px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     border: none;
-    border-radius: 26px;
-    font-size: x-large;
+    border-radius: 34px;
+    font-size: xx-large;
     cursor: pointer;
     transition: ease-in-out 0.3s;
     z-index: 2;
@@ -111,14 +125,112 @@ form{
 .saveBlueBtnDisabled{
     color: whitesmoke;
     background-color: #7782eb;
-    padding: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 22px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     border: none;
-    border-radius: 26px;
-    font-size: x-large;
+    border-radius: 34px;
+    font-size: xx-large;
 }
 
 .invalidFeedbackBottom{
     margin-bottom: -1.8rem;
+    color: darkorange;
+}
+
+.loaderContainer{
+    width: 480px;
+    @include dFlex($g: 1rem);
+    flex-direction: column;
+    text-align: center;
+    .loader2 {
+        display: inline-flex;
+        gap: 10px;
+    }
+    .loader2:before,
+    .loader2:after {
+        content: "";
+        height: 20px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background:
+          radial-gradient(farthest-side,#000 95%,#0000) 35% 35%/6px 6px no-repeat
+          #fff;
+        animation: l5 3s infinite;
+    }
+
+    .loader {
+        width: 80%;
+        height: 20px;
+        background: 
+          linear-gradient(90deg, #0000 , #443AFF) left -50px top 0/50px 20px no-repeat 
+          #8307FF;
+        animation: l2 2s infinite linear;
+        border-radius: 20px;
+    }
+}
+
+
+
+
+//------------------ animation ---------------------
+@keyframes lights {
+    0% {
+      color: hsl(230, 40%, 80%);
+      text-shadow:
+        0 0 1em hsla(320, 100%, 50%, 0.2),
+        0 0 0.125em hsla(320, 100%, 60%, 0.3),
+        -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+        1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+    }
+    
+    30% { 
+      color: hsl(230, 80%, 90%);
+      text-shadow:
+        0 0 1em hsla(320, 100%, 50%, 0.5),
+        0 0 0.125em hsla(320, 100%, 60%, 0.5),
+        -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+        0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+    }
+    
+    40% { 
+      color: hsl(230, 100%, 95%);
+      text-shadow:
+        0 0 1em hsla(320, 100%, 50%, 0.5),
+        0 0 0.125em hsla(320, 100%, 90%, 0.5),
+        -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+        0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+    }
+    
+    70% {
+      color: hsl(230, 80%, 90%);
+      text-shadow:
+        0 0 1em hsla(320, 100%, 50%, 0.5),
+        0 0 0.125em hsla(320, 100%, 60%, 0.5),
+        0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+        -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+    }
+    
+    100% {
+      color: hsl(230, 40%, 80%);
+      text-shadow:
+        0 0 1em hsla(320, 100%, 50%, 0.2),
+        0 0 0.125em hsla(320, 100%, 60%, 0.3),
+        1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+        -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+    }  
+}
+
+
+@keyframes l5 {
+    0%,11%   {background-position:35% 35%}
+    14%,36%  {background-position:65% 35%}
+    38%,61%  {background-position:65% 65%}
+    64%,86%  {background-position:35% 65%}
+    88%,100% {background-position:35% 35%}
+}
+
+
+@keyframes l2 {
+    100% {background-position: right -50px top 0}
 }
