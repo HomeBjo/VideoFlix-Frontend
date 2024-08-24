@@ -25,6 +25,7 @@ export class ProfileDetailsComponent {
   emailIsOK: boolean = false;
   diabledBtn: boolean = false;
   enableBtn: boolean = false;
+  continueMessage:boolean = false;
 
   constructor(public userService: UserService, private router: Router, private cdr: ChangeDetectorRef) { }
   
@@ -166,7 +167,7 @@ export class ProfileDetailsComponent {
   }
 
 
-  saveData(){
+  async saveData(){
     let userID = localStorage.getItem('userId');
     if (userID) {
       let newUserData: UserData = { //überschreibe die alten daten mit den neuen
@@ -178,8 +179,13 @@ export class ProfileDetailsComponent {
         address: this.profileFields[4].value as string,
         username: (this.profileFields[0].value + '_' + this.profileFields[1].value) as string
       }
-      console.log('newUserData: ',newUserData);
-      this.userService.updaterUserData(newUserData);
+      
+      let done = await this.userService.updaterUserData(newUserData);
+      if (done) {
+        this.continueMessage = true;
+      } else {
+        this.continueMessage = false;
+      }
     }
   }
 }

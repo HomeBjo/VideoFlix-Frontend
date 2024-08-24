@@ -181,16 +181,21 @@ export class UserService {
   }
 
   async updaterUserData(newUserData: UserData){
-    const url = `${environment.baseUrl}/users/update-user-data/${newUserData.id}/`; //suchge direkt nach dem user in der url
+    const url = `${environment.baseUrl}/users/update-user-data/${newUserData.id}/`; // Suche nach dem Benutzer anhand der ID
+    const token = localStorage.getItem('token'); // Token aus dem Local Storage holen
+
     try {
-      //starte get anfrage - kein header benötigt, weil user für diese angfrage authentiziert sein muss
-      let user = await lastValueFrom(this.http.put<UserData[]>(url, newUserData));
-      if (user) {
-        console.log('user updated', user); 
-      }
+        let user = await lastValueFrom(this.http.put<UserData[]>(url, newUserData, {
+            headers: {'Authorization': `Bearer ${token}`}}));
+        if (user) {
+            return true;
+        }
     } catch (e) {
-      console.error('Fehler beim Laden der UserData:', e);
+        console.error('Fehler beim Laden der UserData:', e);
+        return false;
     }
-  }
+    return false;
+}
+
   
 }
