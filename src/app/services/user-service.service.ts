@@ -163,39 +163,41 @@ export class UserService {
   }
 
 
-  async getUserData() { //fetsht die daten vom eingeloggten user
-    if (this.userData === undefined) { // check ob userDataSubject leer ist
-      const userId = localStorage.getItem('userId');
-      const url = `${environment.baseUrl}/users/user-data/?userId=${userId}`; //suchge direkt nach dem user in der url
-      
+  async getUserData() {
+    if (this.userData === undefined) {
+      const url = `${environment.baseUrl}/users/user-data/`;
+      const token = localStorage.getItem('token');
+
       try {
-        //starte get anfrage - kein header benötigt, weil user für diese angfrage authentiziert sein muss
-        let user = await lastValueFrom(this.http.get<UserData[]>(url));
-        if (user) {
-          this.userDataSubject.next(user); // speicher die daten nach der get anfrage
-        }
+          let user = await lastValueFrom(this.http.get<UserData[]>(url, { 
+              headers: {'Authorization': `Bearer ${token}`}}));//benutze statt id den token der schwerer zu manipulieren ist
+          if (user) {
+            this.userDataSubject.next(user); // Speichere die Daten nach der GET-Anfrage
+          }
       } catch (e) {
-        console.error('Fehler beim Laden der UserData:', e);
+          console.error('Fehler beim Laden der UserData:', e);
       }
     }
-  }
+}
+
+
 
   async updaterUserData(newUserData: UserData){
     const url = `${environment.baseUrl}/users/update-user-data/${newUserData.id}/`; // Suche nach dem Benutzer anhand der ID
-    const token = localStorage.getItem('token'); // Token aus dem Local Storage holen
+    const token = localStorage.getItem('token');
 
     try {
         let user = await lastValueFrom(this.http.put<UserData[]>(url, newUserData, {
-            headers: {'Authorization': `Bearer ${token}`}}));
+            headers: {'Authorization': `Bearer ${token}`}})); //benutze statt id den token der schwerer zu manipulieren ist
         if (user) {
-            return true;
+          return true;
         }
     } catch (e) {
-        console.error('Fehler beim Laden der UserData:', e);
-        return false;
+      console.error('Fehler beim Laden der UserData:', e);
+      return false;
     }
     return false;
-}
+  }
 
   
 }
