@@ -135,7 +135,6 @@ export class ProfileDetailsComponent {
     if (hasChangedValues) {
       this.enableBtn = true;
     }
-    console.log(allFieldsValid && noEditingInProgress && hasChangedValues && this.enableBtn);
     
     return allFieldsValid && noEditingInProgress && hasChangedValues && this.enableBtn;
   }
@@ -180,6 +179,7 @@ export class ProfileDetailsComponent {
         username: (this.profileFields[0].value + '_' + this.profileFields[1].value) as string
       }
       console.log('newUserData: ',newUserData);
+      this.userService.updaterUserData(newUserData);
     }
   }
 }
