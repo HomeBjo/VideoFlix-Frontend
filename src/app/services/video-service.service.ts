@@ -35,13 +35,13 @@ export class VideoService {
     const url = `${environment.baseUrl}/videos/category/${category}/`;
     return this.http.get<any>(url, { headers: this.headers });
   }
-  
+
   async setFavorite(body: FavoriteBody) {
-    const loginUrl = `${environment.baseUrl}/videos/get_videos/`;
+    const loginUrl = `${environment.baseUrl}/videos/get_videos/set_favorites/`;
 
     try {
       await lastValueFrom(this.http.post(loginUrl, body, { headers: this.headers }));
-      console.log(`user mit token: ${body} hat das Video mit id: ${body.fav_videos} favorisiert`);
+      console.log(`user mit token: ${this.headers} hat das Video mit id: ${body.fav_videos} favorisiert`);
     } catch (e) {
       console.log('Fehler beim favoresieren:', e);
     }

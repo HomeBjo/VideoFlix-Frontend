@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import Hls from 'hls.js';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoService } from '../../../services/video-service.service';
+import { FavoriteBody } from '../../../interfaces/favorite-body';
 
 @Component({
   selector: 'app-video-display',
@@ -55,12 +56,7 @@ export class VideoDisplayComponent {
 
   addFavorite(id: number){
     this.isFavorite = !this.isFavorite;
-    const token = localStorage.getItem('token');
-    const user_id = Number(localStorage.getItem('userId'));
-    const body = {
-      fav_videos: id,
-      user_id: user_id,
-    }
+    const body: FavoriteBody = {  fav_videos : [id] };
     console.log(body);
     
     if (this.isFavorite) {
