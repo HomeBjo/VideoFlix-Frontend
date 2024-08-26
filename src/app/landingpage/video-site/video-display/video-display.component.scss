@@ -82,12 +82,24 @@ h2 {
   top: 6px;
   flex-direction: column;
   text-align: justify;
-  padding-left: 8px;
-  max-width: 80%;
+  padding: 8px;
+  max-width: 100%;
   overflow: hidden;
   overflow-wrap: break-word;
-  span {
-    font-size: 32px;
+  .description-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 32px;
+    }
+    .starIconImg{
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      z-index: 2;
+      cursor: pointer;
+    }
   }
   .description-text {
     font-size: 16px;

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import Hls from 'hls.js';
+import { VideoJson } from '../../../interfaces/video-json';
+import { VideoService } from '../../../services/video-service.service';
 
 @Component({
   selector: 'app-video-display',
@@ -10,10 +12,13 @@ import Hls from 'hls.js';
   styleUrl: './video-display.component.scss'
 })
 export class VideoDisplayComponent {
-  @Input() video: any;
+  @Input() video!: VideoJson;
   @Output() closeDisplay = new EventEmitter<void>();
   isVideoVisible = false;
   // closeOverlayPlayButton = false;
+  isFavorite: boolean = false;
+
+  constructor(private videoService: VideoService) { }
 
   ngAfterViewInit(): void {
     if (Hls.isSupported()) {
@@ -28,10 +33,12 @@ export class VideoDisplayComponent {
         const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
         videoElement.src = this.video.video_folder;
     }
-}
+  }
+
   close() {
     this.closeDisplay.emit();
   }
+
   onOverlayClick(event: MouseEvent) {
     this.close();
   }
@@ -40,8 +47,24 @@ export class VideoDisplayComponent {
     // this.closeOverlayPlayButton = true;
     this.isVideoVisible = true;
   }
+
   close2(): void {
     // Deine Logik zum Schließen des Video-Overlays
     this.isVideoVisible = false;
+  }
+
+  addFavorite(id: number){
+    this.isFavorite = !this.isFavorite;
+    const token = localStorage.getItem('token');
+    const user_id = Number(localStorage.getItem('userId'));
+    const body = {
+      fav_videos: id,
+      user_id: user_id,
+    }
+    console.log(body);
+    
+    if (this.isFavorite) {
+      this.videoService.setFavorite(body);
+    }
   }
 }

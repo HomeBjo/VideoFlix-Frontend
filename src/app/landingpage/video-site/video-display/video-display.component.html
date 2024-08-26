@@ -10,7 +10,10 @@
 
     <div class="video-player-content">
       <div class="description-container">
-        <span>Video Description</span>
+        <div class="description-header">
+          <span>Video Description</span>
+          <img src="../../../../assets/icons/{{isFavorite ? 'icon-star' : 'star-empty-icon'}}.png" alt="starImg" class="starIconImg" (click)="addFavorite(video.id)">
+        </div>
         <span class="description-text">{{ video.description }}</span>
       </div>
 
@@ -29,6 +32,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- <div class="video-display-overlay">
     <div class="video-display-content">
