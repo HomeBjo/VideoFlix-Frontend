@@ -1,1 +1,59 @@
-<p>video-category works!</p>
+<div class="videoPlayerBox">
+    <video autoplay muted loop id="myVideo" class="backgroundVideo">
+        <source src="../../../assets/videos/Breakout.mp4" type="video/mp4">
+    </video>
+    <div class="shadow"></div>
+</div>
+
+<section>
+    <header>
+        <div class="logoBox">
+            <img src="../../../assets/img/logo_small.svg" alt="logo" class="logo"/>
+            <div class="headerBtns">
+                <button [routerLink]="['/video_categorys', 'action']" class="headerBtns">Category</button>
+              <button class="headerBtns">Favorites</button>
+            </div>
+        </div>
+        <div class="btnBoxRight">
+            <button class="blueBtn" (click)="openSmallMenu()">Profile</button>
+            <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}">
+                <button class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
+                <button (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="descriptionDivBreakout">
+        <h1>Breakout</h1>
+        <span>
+            In a high-security prison, a wrongly convicted man formulates a
+            meticulous plan to break out and prove his innocence. He must navigate a
+            web of alliances and betrayals to reclaim his freedom and expose the
+            truth.
+        </span>
+        <button class="blueBtn"><img src="../../../assets/icons/play_arrow.svg" alt="">Play</button>
+    </div>
+    
+    <div class="videoDiv">
+        <div class="videoDiv2">
+            <div class="videoPosition">
+                <h1>New on Videoflix</h1>
+                <div class="video4LoopBox">
+                    @for (video of categoryVideos; track $index) {
+                         <app-video-preview
+                            [video]="video"
+                            (videoSelected)="onVideoSelected($event)"
+                        ></app-video-preview>
+                    }
+                </div>
+            </div>
+        
+            </div>
+        </div>
+        <app-video-display
+                      *ngIf="selectedVideo"
+                      [video]="selectedVideo"
+                      (closeDisplay)="closeVideoDisplay()"
+                    ></app-video-display>
+</section>
+

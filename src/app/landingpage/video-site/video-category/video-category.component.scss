@@ -1,0 +1,169 @@
+@import './../../../../styles.scss';
+
+section{
+    width: 100%;
+    height: auto;
+    background-color: #060606;
+}
+
+.videoPlayerBox {
+    @include dFlex();
+    width: 100%;
+    height: 80dvh;
+    position: absolute;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    object-fit: cover;
+    overflow: hidden;
+    .backgroundVideo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .shadow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-shadow: inset 0px -62px 80px 0px rgba(0, 0, 0, 0.80);
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+}
+
+.btnBoxRight{
+    position: relative;
+    z-index: 4;
+}
+
+
+header{
+    @include dFlex($j: space-between);
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    position: absolute;
+    top: 0;
+    .logoBox{
+        width: auto;
+        display: flex;
+        .logo{
+            z-index: 2;
+            margin-right: 5rem;
+        }
+        .headerBtns{
+            @include dFlex($g: 2rem);
+            z-index: 2;
+            .headerBtns{
+                color: whitesmoke;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: x-large;
+            }
+        }
+    }
+}
+
+
+.descriptionDivBreakout{
+    color: whitesmoke;
+    position: absolute;
+    top: 28%;
+    left: 6rem;
+    width: 400px;
+    @include dFlex($a: flex-start, $g: 32px);
+    flex-direction: column;
+    text-align: start;
+    h1{
+        font-size: 5rem;
+        margin: 0;
+    }
+    span{
+        font-size: large;
+    }
+}
+
+
+.videoDiv{
+    width: calc(100% - 6rem);
+    min-height: 2000px;
+    margin-top: 80dvh;
+    padding-left: 6rem;
+    .videoDiv2{
+        position: absolute;
+        margin-top: -6rem;
+        z-index: 2;
+        .videoPosition{
+            color: whitesmoke;
+            .video4LoopBox{
+                display: flex;
+                gap: 4rem;
+            }
+        }
+    }
+}
+
+.profilSelection{
+    position: absolute;
+    top: 120%;
+    right: 0;
+    width: 140px;
+    height: auto;
+    padding: 12px;
+    @include dFlex($g: 12px);
+    flex-direction: column;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    .profilSelectionBtn{
+        color: whitesmoke;
+        border: none;
+        background: transparent;
+        font-size: large;
+        cursor: pointer;
+        @include dFlex($g: 6px);
+        &:hover {
+            color: #6e67d1;
+            img {
+                filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
+            }
+        }
+    }
+}
+
+
+.slideInAnimation {
+    animation: slideDown 0.3s forwards;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+    80%{
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slideOutAnimation {
+    animation: slideUp 0.3s forwards;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    10%{
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+}

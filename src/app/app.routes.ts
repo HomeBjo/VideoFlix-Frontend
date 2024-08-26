@@ -11,6 +11,7 @@ import { EmailExistsComponent } from './landingpage/login/register/email-exists/
 import { PasswordResetComponent } from './landingpage/login/password-reset/password-reset.component';
 import { EmailSendComponent } from './landingpage/login/email-sent/email-send.component';
 import { ProfileDetailsComponent } from './landingpage/video-site/profile-details/profile-details.component';
+import { VideoCategoryComponent } from './landingpage/video-site/video-category/video-category.component';
 
 
 
@@ -27,4 +28,5 @@ export const routes: Routes = [
     { path: 'privacy_policy', component: PrivacyPolicyComponent },
     { path: 'email_exists', component: EmailExistsComponent },
     { path: 'profile_details', component: ProfileDetailsComponent },
+    { path: 'video_categorys/:category', component: VideoCategoryComponent },
 ];
