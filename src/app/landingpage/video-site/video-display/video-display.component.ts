@@ -56,11 +56,11 @@ export class VideoDisplayComponent {
 
   addFavorite(id: number){
     this.isFavorite = !this.isFavorite;
-    const body: FavoriteBody = {  fav_videos : [id] };
-    console.log(body);
+    const body: FavoriteBody = { fav_video : id };
+    console.log('favorite video-id: ',body);
     
     if (this.isFavorite) {
-      this.videoService.setFavorite(body);
+      this.videoService.addFavoriteVideo(body);
     }
   }
 }
