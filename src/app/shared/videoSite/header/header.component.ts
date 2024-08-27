@@ -28,6 +28,7 @@ export class HeaderComponent {
     @HostListener('document:click', ['$event'])
     onClick(event: MouseEvent) {
       this.showCategorySelection = false;
+      this.shwonProfilSelection = false;
     }
 
     logout(){
@@ -35,7 +36,8 @@ export class HeaderComponent {
       let userID = localStorage.getItem('userId')?.toString();
       this.userService.userLogout(userID!);
     }
-    openSmallMenu(){
+    openSmallMenu(event: MouseEvent){
+      event.stopPropagation();
       this.shwonProfilSelection = !this.shwonProfilSelection;
     }
   

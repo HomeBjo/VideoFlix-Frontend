@@ -63,7 +63,7 @@ export class ProfileDetailsComponent {
 
   
   back() {
-    this.router.navigateByUrl('/video_site');
+    this.router.navigateByUrl('/video_site'); 
   }
 
 

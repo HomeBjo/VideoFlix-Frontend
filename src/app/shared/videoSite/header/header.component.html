@@ -16,10 +16,10 @@
         </div>
     </div>
     <div class="btnBoxRight">
-        <button class="blueBtn" (click)="openSmallMenu()">Profile</button>
-        <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}">
-            <button class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
-            <button (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
+        <button class="blueBtn" (click)="openSmallMenu($event)">Profile</button>
+        <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}" (click)="$event.stopPropagation()">
+            <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
+            <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
         </div>
     </div>
 </header>
