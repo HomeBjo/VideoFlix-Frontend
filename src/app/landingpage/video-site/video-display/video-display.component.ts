@@ -19,7 +19,17 @@ export class VideoDisplayComponent {
   // closeOverlayPlayButton = false;
   isFavorite: boolean = false;
 
+
   constructor(private videoService: VideoService) { }
+
+
+  async ngOnInit(): Promise<void> {
+   let videoBoolean = await this.videoService.checkIfVideoIsFav(this.video.id);
+    if (videoBoolean) {
+      this.isFavorite = true;
+    }
+  }
+
 
   ngAfterViewInit(): void {
     if (Hls.isSupported()) {
