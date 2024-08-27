@@ -49,13 +49,15 @@
                 </div>
             </div>
             <div class="videoPosition">
-                <h1>Category 1</h1>
+                <h1>Action</h1>
                 <div class="video4LoopBox">
                     @for (video of newVideos; track $index) {
-                        <app-video-preview
-                            [video]="video"
-                            (videoSelected)="onVideoSelected($event)"
-                        ></app-video-preview>
+                        <ng-container *ngIf="video.category === 'action'">
+                            <app-video-preview
+                                [video]="video"
+                                (videoSelected)="onVideoSelected($event)"
+                            ></app-video-preview>
+                        </ng-container>
                     }
                 </div>
             </div>
