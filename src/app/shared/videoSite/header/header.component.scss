@@ -5,33 +5,6 @@ section{
     height: auto;
     background-color: #060606;
 }
-
-.videoPlayerBox {
-    @include dFlex();
-    width: 100%;
-    height: 80dvh;
-    position: absolute;
-    flex-direction: column;
-    top: 0;
-    right: 0;
-    object-fit: cover;
-    overflow: hidden;
-    .backgroundVideo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .shadow {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        box-shadow: inset 0px -62px 80px 0px rgba(0, 0, 0, 0.80);
-        top: 0;
-        left: 0;
-        z-index: 1;
-    }
-}
-
 .btnBoxRight{
     position: relative;
     z-index: 4;
@@ -65,44 +38,6 @@ header{
     }
 }
 
-
-.descriptionDivBreakout{
-    color: whitesmoke;
-    position: absolute;
-    top: 28%;
-    left: 6rem;
-    width: 400px;
-    @include dFlex($a: flex-start, $g: 32px);
-    flex-direction: column;
-    text-align: start;
-    h1{
-        font-size: 5rem;
-        margin: 0;
-    }
-    span{
-        font-size: large;
-    }
-}
-
-
-.videoDiv{
-    width: calc(100% - 6rem);
-    min-height: 2000px;
-    margin-top: 80dvh;
-    padding-left: 6rem;
-    .videoDiv2{
-        position: absolute;
-        margin-top: -6rem;
-        z-index: 2;
-        .videoPosition{
-            color: whitesmoke;
-            .video4LoopBox{
-                display: flex;
-                gap: 4rem;
-            }
-        }
-    }
-}
 
 .profilSelection{
     position: absolute;

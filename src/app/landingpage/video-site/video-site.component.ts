@@ -7,11 +7,12 @@ import { VideoPreviewComponent } from './video-preview/video-preview.component';
 import { VideoService } from '../../services/video-service.service';
 import { VideoDisplayComponent } from "./video-display/video-display.component";
 import { VideoJson } from '../../interfaces/video-json';
+import { HeaderComponent } from "../../shared/videoSite/header/header.component";
 
 @Component({
   selector: 'app-video-site',
   standalone: true,
-  imports: [FormsModule, CommonModule, VideoPreviewComponent, VideoDisplayComponent, RouterLink],
+  imports: [FormsModule, CommonModule, VideoPreviewComponent, VideoDisplayComponent, RouterLink, HeaderComponent],
   templateUrl: './video-site.component.html',
   styleUrl: './video-site.component.scss'
 })

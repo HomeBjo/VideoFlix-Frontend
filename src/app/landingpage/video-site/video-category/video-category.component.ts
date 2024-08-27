@@ -1,22 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { UserService } from '../../../services/user-service.service';
 import { VideoService } from '../../../services/video-service.service';
 import { RouterLink,ActivatedRoute } from '@angular/router';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoPreviewComponent } from "../video-preview/video-preview.component";
 import { VideoDisplayComponent } from '../video-display/video-display.component';
+import { HeaderComponent } from '../../../shared/videoSite/header/header.component';
+
 
 
 @Component({
   selector: 'app-video-category',
   standalone: true,
-  imports: [CommonModule, RouterLink, VideoPreviewComponent,VideoDisplayComponent],
+  imports: [CommonModule, RouterLink, VideoPreviewComponent, VideoDisplayComponent, HeaderComponent],
   templateUrl: './video-category.component.html',
   styleUrl: './video-category.component.scss'
 })
 export class VideoCategoryComponent {
   shwonProfilSelection:boolean = false;
+  showCategorySelection:boolean = false;
   selectedVideo: any;
   categoryVideos: VideoJson[] = [];
 
@@ -46,6 +49,18 @@ export class VideoCategoryComponent {
   openSmallMenu(){
     this.shwonProfilSelection = !this.shwonProfilSelection;
   }
+  // toggle anzeige 
+  toggleCategoryMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.showCategorySelection = !this.showCategorySelection;
+  }
+
+// prüfe den klick auserhalb der div
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    this.showCategorySelection = false;
+  }
+
 
  
   onVideoSelected(video: any) {
