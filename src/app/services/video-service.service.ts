@@ -37,7 +37,7 @@ export class VideoService {
   }
 
   async addFavoriteVideo(body: FavoriteBody) {
-    const loginUrl = `${environment.baseUrl}/videos/get_videos/add_favorite/`;
+    const loginUrl = `${environment.baseUrl}/videos/get_videos/toggle_favorite/`;
 
     try {
       await lastValueFrom(this.http.post(loginUrl, body, { headers: this.headers }));

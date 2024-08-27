@@ -59,8 +59,6 @@ export class VideoDisplayComponent {
     const body: FavoriteBody = { fav_video : id };
     console.log('favorite video-id: ',body);
     
-    if (this.isFavorite) {
-      this.videoService.addFavoriteVideo(body);
-    }
+    this.videoService.addFavoriteVideo(body);
   }
 }
