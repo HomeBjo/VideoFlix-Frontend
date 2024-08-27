@@ -37,17 +37,17 @@ export class VideoService {
   }
 
 
-  async checkIfVideoIsFav(id: number) {
-    const loginUrl = `${environment.baseUrl}/videos/get_videos/is_favorite/${id}/`;
-    
-    try{
-      const response = await lastValueFrom(this.http.get<{is_favorite: boolean}>(loginUrl, { headers: this.headers }));
-      return response.is_favorite;
-    } catch(e) {
-      console.log('Fehler beim auslese des favoriten:', e);
-      return false;
-    }
-  }
+  // async checkIfVideoIsFav(id: number) {
+  //   const loginUrl = `${environment.baseUrl}/videos/get_videos/is_favorite/${id}/`;
+
+  //   try{
+  //     const response = await lastValueFrom(this.http.get<{is_favorite: boolean}>(loginUrl, { headers: this.headers }));
+  //     return response.is_favorite;
+  //   } catch(e) {
+  //     console.log('Fehler beim auslese des favoriten:', e);
+  //     return false;
+  //   }
+  // }
 
 
   async addFavoriteVideo(body: FavoriteBody) {

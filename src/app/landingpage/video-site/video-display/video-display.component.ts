@@ -24,8 +24,7 @@ export class VideoDisplayComponent {
 
 
   async ngOnInit(): Promise<void> {
-   let videoBoolean = await this.videoService.checkIfVideoIsFav(this.video.id);
-    if (videoBoolean) {
+    if(this.video.is_favorite){
       this.isFavorite = true;
     }
   }
