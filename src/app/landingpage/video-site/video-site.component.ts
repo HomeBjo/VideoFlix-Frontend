@@ -19,7 +19,7 @@ import { HeaderComponent } from "../../shared/videoSite/header/header.component"
 export class VideoSiteComponent {
   newVideos: VideoJson[] = [];
   shwonProfilSelection:boolean = false;
-  selectedVideo: any;
+  selectedVideo: VideoJson | null = null;
   private checkUserInterval: any;
   @ViewChild('video4LoopBox1') video4LoopBox1!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox2') video4LoopBox2!: ElementRef<HTMLElement>;
@@ -34,6 +34,7 @@ export class VideoSiteComponent {
     this.videoService.startFetchVideos().subscribe((data: any) => {
       this.newVideos = data;
       console.log(this.newVideos);
+      this.videoService.allVideos = this.newVideos;
       this.userService.getUserData();
     }, (error: any) => {
       console.error('Error fetching videos:', error);
@@ -73,7 +74,7 @@ export class VideoSiteComponent {
   }
 
 
-  onVideoSelected(video: any) {
+  onVideoSelected(video: VideoJson) {
     this.selectedVideo = video;
   }
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom, map, Observable } from 'rxjs';
 import { FavoriteBody } from '../interfaces/favorite-body';
 import { environment } from '../../environments/environments';
+import { VideoJson } from '../interfaces/video-json';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { environment } from '../../environments/environments';
 export class VideoService {
 
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  allVideos: VideoJson[] = [];
 
   constructor(private http: HttpClient) { }
 

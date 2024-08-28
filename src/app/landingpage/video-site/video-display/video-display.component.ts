@@ -14,7 +14,7 @@ import { FavoriteBody } from '../../../interfaces/favorite-body';
 })
 export class VideoDisplayComponent {
   @Input() video!: VideoJson;
-  @Output() closeDisplay = new EventEmitter<void>();
+  @Output() closeDisplay = new EventEmitter<VideoJson>();
   isVideoVisible = false;
   // closeOverlayPlayButton = false;
   isFavorite: boolean = false;

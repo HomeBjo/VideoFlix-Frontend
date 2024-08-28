@@ -1,0 +1,18 @@
+<section>
+    <app-header></app-header>
+    <div class="body">
+        @if(videoService.allVideos.length > 0){
+            @for (video of videoService.allVideos; track $index) {
+                <app-video-preview
+                    [video]="video"
+                    (videoSelected)="onVideoSelected($event)"
+                ></app-video-preview>
+            }
+            <app-video-display
+                *ngIf="selectedVideo"
+                [video]="selectedVideo"
+                (closeDisplay)="closeVideoDisplay()"
+            ></app-video-display>
+        }
+    </div>
+</section>

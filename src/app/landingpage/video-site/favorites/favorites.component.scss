@@ -1,0 +1,14 @@
+section{
+    height: 100dvh;
+    width: 100vw;
+    .body{
+        height: calc(100% - 160px);
+        width: calc(100% - 80px);
+        background-color: #0F1F26;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 26px;
+        margin-top: 80px;
+        padding: 40px;
+    }
+}

@@ -12,7 +12,7 @@
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'romance']" class="profilSelectionBtn">Romance</button>
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'adventure']" class="profilSelectionBtn">Adventure</button>
             </div>
-          <button class="headerBtns">Favorites</button>
+          <button class="headerBtns" [routerLink]="['/favorites',]">Favorites</button>
         </div>
     </div>
     <div class="btnBoxRight">

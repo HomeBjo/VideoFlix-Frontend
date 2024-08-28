@@ -12,6 +12,7 @@ import { PasswordResetComponent } from './landingpage/login/password-reset/passw
 import { EmailSendComponent } from './landingpage/login/email-sent/email-send.component';
 import { ProfileDetailsComponent } from './landingpage/video-site/profile-details/profile-details.component';
 import { VideoCategoryComponent } from './landingpage/video-site/video-category/video-category.component';
+import { FavoritesComponent } from './landingpage/video-site/favorites/favorites.component';
 
 
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
     { path: 'email_exists', component: EmailExistsComponent },
     { path: 'profile_details', component: ProfileDetailsComponent },
     { path: 'video_categorys/:category', component: VideoCategoryComponent },
+    { path: 'favorites', component: FavoritesComponent },
 ];
 
 // @NgModule({

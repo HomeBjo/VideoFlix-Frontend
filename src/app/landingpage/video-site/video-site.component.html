@@ -64,8 +64,8 @@
                     </div>
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
-                            
-                            <app-video-preview *ngIf="video.category === 'action'"
+                            <app-video-preview
+                                *ngIf="video.category === 'action'"
                                 [video]="video"
                                 (videoSelected)="onVideoSelected($event)"
                             ></app-video-preview>
