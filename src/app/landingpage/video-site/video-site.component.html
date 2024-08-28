@@ -57,18 +57,19 @@
                 </div>
             </div>
             <div class="videoPosition">
-                <h1>Action</h1>
+                <h1>Meine Liste</h1>
                 <div class="video4LoopContainer">
                     <div class="arrowLeft">
                         <button (click)="ArrowLeftClick(2)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                     </div>
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
-                            <app-video-preview
-                                *ngIf="video.category === 'action'"
-                                [video]="video"
-                                (videoSelected)="onVideoSelected($event)"
-                            ></app-video-preview>
+                            @if (video.is_favorite) {
+                                <app-video-preview
+                                    [video]="video"
+                                    (videoSelected)="onVideoSelected($event)"
+                                ></app-video-preview>
+                            }
                         }
                     </div>
                     <div class="arrowRight">
@@ -82,12 +83,14 @@
                     <div class="arrowLeft">
                         <button (click)="ArrowLeftClick(3)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                     </div>
-                    <div class="video4LoopBox" #video4LoopBox3>
+                    <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
-                            <app-video-preview
-                                [video]="video"
-                                (videoSelected)="onVideoSelected($event)"
-                            ></app-video-preview>
+                            @if (video.category === 'anime') {
+                                <app-video-preview
+                                    [video]="video"
+                                    (videoSelected)="onVideoSelected($event)"
+                                ></app-video-preview>
+                            }
                         }
                     </div>
                     <div class="arrowRight">
@@ -101,12 +104,14 @@
                     <div class="arrowLeft">
                         <button (click)="ArrowLeftClick(4)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                     </div>
-                    <div class="video4LoopBox" #video4LoopBox4>
+                    <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
-                            <app-video-preview
-                                [video]="video"
-                                (videoSelected)="onVideoSelected($event)"
-                            ></app-video-preview>
+                            @if (video.category === 'action') {
+                                <app-video-preview
+                                    [video]="video"
+                                    (videoSelected)="onVideoSelected($event)"
+                                ></app-video-preview>
+                            }
                         }
                     </div>
                     <div class="arrowRight">
