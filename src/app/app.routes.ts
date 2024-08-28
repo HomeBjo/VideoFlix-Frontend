@@ -30,3 +30,14 @@ export const routes: Routes = [
     { path: 'profile_details', component: ProfileDetailsComponent },
     { path: 'video_categorys/:category', component: VideoCategoryComponent },
 ];
+
+// @NgModule({
+//     imports: [RouterModule.forRoot(routes)],
+//     exports: [RouterModule]
+//   })
+//   export class AppRoutingModule {}
+
+// { path: 'video_site', component: VideoSiteComponent, children: [
+//     { path: 'video_categorys/:category', component: VideoCategoryComponent, outlet: 'videoContent' },
+//     { path: 'profile_details', component: ProfileDetailsComponent }
+// ]},
