@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../../shared/videoSite/header/header.component';
+import { HeaderComponent } from '../../../shared/category/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../../../services/video-service.service';

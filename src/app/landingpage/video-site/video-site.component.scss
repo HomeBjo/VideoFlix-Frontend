@@ -33,40 +33,6 @@ section{
     }
 }
 
-.btnBoxRight{
-    position: relative;
-    z-index: 4;
-}
-
-
-header{
-    @include dFlex($j: space-between);
-    padding: 1rem;
-    width: calc(100% - 2rem);
-    position: absolute;
-    top: 0;
-    .logoBox{
-        width: auto;
-        display: flex;
-        .logo{
-            z-index: 2;
-            margin-right: 5rem;
-        }
-        .headerBtns{
-            @include dFlex($g: 2rem);
-            z-index: 2;
-            .headerBtns{
-                color: whitesmoke;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                font-size: x-large;
-            }
-        }
-    }
-}
-
-
 .descriptionDivBreakout{
     color: whitesmoke;
     position: absolute;
@@ -210,65 +176,3 @@ header{
 //         }
 //     }
 // }
-
-.profilSelection{
-    position: absolute;
-    top: 120%;
-    right: 0;
-    width: 140px;
-    height: auto;
-    padding: 12px;
-    @include dFlex($g: 12px);
-    flex-direction: column;
-    background-color: #1e1e1e;
-    border-radius: 12px;
-    .profilSelectionBtn{
-        color: whitesmoke;
-        border: none;
-        background: transparent;
-        font-size: large;
-        cursor: pointer;
-        @include dFlex($g: 6px);
-        &:hover {
-            color: #6e67d1;
-            img {
-                filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
-            }
-        }
-    }
-}
-.slideInAnimation {
-    animation: slideDown 0.3s forwards;
-}
-
-@keyframes slideDown {
-    0% {
-        transform: translateY(-200%);
-        opacity: 0;
-    }
-    80%{
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.slideOutAnimation {
-    animation: slideUp 0.3s forwards;
-}
-
-@keyframes slideUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    10%{
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(-200%);
-        opacity: 0;
-    }
-}
