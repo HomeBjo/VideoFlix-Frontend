@@ -86,24 +86,130 @@ header{
 }
 
 
-.videoDiv{
-    width: calc(100% - 6rem);
+.videoDiv {
     min-height: 2000px;
     margin-top: 80dvh;
-    padding-left: 6rem;
-    .videoDiv2{
+    padding-left: 120px;
+
+    .videoDiv2 {
         position: absolute;
-        margin-top: -6rem;
-        z-index: 2;
-        .videoPosition{
+        overflow-x: hidden;
+        width: calc(100% - 120px);
+
+        .videoPosition {
             color: whitesmoke;
-            .video4LoopBox{
-                display: flex;
-                gap: 4rem;
+            width: 100%;
+
+            .video4LoopContainer {
+                position: relative;
+                width: 100%;
+
+                .video4LoopBox {
+                    display: flex;
+                    gap: 4rem;
+                    width: 100%;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    scroll-behavior: smooth;
+                }
+
+                .arrowLeft {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 4rem;
+                    height: 100%;
+                    @include dFlex();
+                    z-index: 2;
+                    background: linear-gradient(to right, #000000 0%, rgba(30, 30, 30, 0) 100%);
+
+                    button {
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        transition: .2s all ease-in-out;
+                        &:hover{
+                            scale: 1.2;
+                        }
+                        img {
+                            width: 20px;
+                            height: 20px;
+                            object-fit: contain;
+                        }
+                    }
+                }
+
+                .arrowRight {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 4rem;
+                    height: 100%;
+                    @include dFlex();
+                    z-index: 2;
+                    background: linear-gradient(to right, rgba(30, 30, 30, 0) 0%, #000000 100% );
+
+                    button {
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        transition: .2s all ease-in-out;
+                        &:hover{
+                            scale: 1.2;
+                        }
+                        img {
+                            width: 20px;
+                            height: 20px;
+                            object-fit: contain;
+                        }
+                    }
+                }
             }
         }
     }
 }
+
+// .arrowLeft{
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 4rem;
+//     height: 100%;
+//     @include dFlex();
+//     z-index: 2;
+//     background: linear-gradient(to right, #000000  0%, rgba(30, 30, 30, 0) 100%);
+//     button{
+//         background: none;
+//         border: none;
+//         cursor: pointer;
+//         img{
+//             width: 20px;
+//             height: 20px;
+//             object-fit: contain;
+//         }
+//     }
+// }
+
+// .arrowRight{
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     width: 4rem;
+//     height: 100%;
+//     @include dFlex();
+//     z-index: 2;
+//     background: linear-gradient(to right, #000000  0%, rgba(30, 30, 30, 0) 100%);
+//     button{
+//         background: none;
+//         border: none;
+//         cursor: pointer;
+//         img{
+//             width: 20px;
+//             height: 20px;
+//             object-fit: contain;
+//         }
+//     }
+// }
 
 .profilSelection{
     position: absolute;

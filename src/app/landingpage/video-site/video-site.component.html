@@ -39,54 +39,84 @@
         <div class="videoDiv2">
             <div class="videoPosition">
                 <h1>New on Videoflix</h1>
-                <div class="video4LoopBox">
-                    @for (video of newVideos; track $index) {
-                        <app-video-preview
-                            [video]="video"
-                            (videoSelected)="onVideoSelected($event)"
-                        ></app-video-preview>
-                    }
-                </div>
-            </div>
-            <div class="videoPosition">
-                <h1>Action</h1>
-                <div class="video4LoopBox">
-                    @for (video of newVideos; track $index) {
-                        <ng-container *ngIf="video.category === 'action'">
+                <div class="video4LoopContainer">
+                    <div class="arrowLeft">
+                        <button (click)="ArrowLeftClick(1)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                    </div>
+                    <div class="video4LoopBox" #video4LoopBox1>
+                        @for (video of newVideos; track $index) {
                             <app-video-preview
                                 [video]="video"
                                 (videoSelected)="onVideoSelected($event)"
                             ></app-video-preview>
-                        </ng-container>
-                    }
+                        }
+                    </div>
+                    <div class="arrowRight">
+                        <button (click)="ArrowRightClick(1)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                    </div>
+                </div>
+            </div>
+            <div class="videoPosition">
+                <h1>Action</h1>
+                <div class="video4LoopContainer">
+                    <div class="arrowLeft">
+                        <button (click)="ArrowLeftClick(2)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                    </div>
+                    <div class="video4LoopBox" #video4LoopBox2>
+                        @for (video of newVideos; track $index) {
+                            <app-video-preview
+                                [video]="video"
+                                (videoSelected)="onVideoSelected($event)"
+                            ></app-video-preview>
+                        }
+                    </div>
+                    <div class="arrowRight">
+                        <button (click)="ArrowRightClick(2)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                    </div>
                 </div>
             </div>
             <div class="videoPosition">
                 <h1>Category 2</h1>
-                <div class="video4LoopBox">
-                    @for (video of newVideos; track $index) {
-                        <app-video-preview
-                            [video]="video"
-                            (videoSelected)="onVideoSelected($event)"
-                        ></app-video-preview>
-                    }
+                <div class="video4LoopContainer">
+                    <div class="arrowLeft">
+                        <button (click)="ArrowLeftClick(3)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                    </div>
+                    <div class="video4LoopBox" #video4LoopBox3>
+                        @for (video of newVideos; track $index) {
+                            <app-video-preview
+                                [video]="video"
+                                (videoSelected)="onVideoSelected($event)"
+                            ></app-video-preview>
+                        }
+                    </div>
+                    <div class="arrowRight">
+                        <button (click)="ArrowRightClick(3)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                    </div>
                 </div>
             </div>
             <div class="videoPosition">
                 <h1>Category 3</h1>
-                <div class="video4LoopBox">
-                    @for (video of newVideos; track $index) {
-                        <app-video-preview
-                            [video]="video"
-                            (videoSelected)="onVideoSelected($event)"
-                        ></app-video-preview>
-                    }
-                    <app-video-display
-                      *ngIf="selectedVideo"
-                      [video]="selectedVideo"
-                      (closeDisplay)="closeVideoDisplay()"
-                    ></app-video-display>
+                <div class="video4LoopContainer">
+                    <div class="arrowLeft">
+                        <button (click)="ArrowLeftClick(4)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                    </div>
+                    <div class="video4LoopBox" #video4LoopBox4>
+                        @for (video of newVideos; track $index) {
+                            <app-video-preview
+                                [video]="video"
+                                (videoSelected)="onVideoSelected($event)"
+                            ></app-video-preview>
+                        }
+                    </div>
+                    <div class="arrowRight">
+                        <button (click)="ArrowRightClick(4)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                    </div>
                 </div>
+                <app-video-display
+                    *ngIf="selectedVideo"
+                    [video]="selectedVideo"
+                    (closeDisplay)="closeVideoDisplay()"
+                ></app-video-display>
             </div>
         </div>
     </div>
