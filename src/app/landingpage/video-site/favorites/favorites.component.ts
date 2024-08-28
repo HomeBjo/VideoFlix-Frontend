@@ -21,8 +21,7 @@ export class FavoritesComponent {
   constructor(public videoService: VideoService) { }
 
   ngOnInit(){
-    console.log(this.videoService.allVideos);
-    
+    this.videoService.fetshFavorites();
   }
 
   onVideoSelected(video: VideoJson) {

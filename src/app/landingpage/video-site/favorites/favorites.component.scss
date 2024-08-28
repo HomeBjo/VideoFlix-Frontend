@@ -1,14 +1,22 @@
-section{
-    height: 100dvh;
-    width: 100vw;
-    .body{
-        height: calc(100% - 160px);
-        width: calc(100% - 80px);
+
+section {
+    height: calc(100dvh - 160px);
+    width: calc(100% - 80px);
+
+    .body {
+        height: 100%;
+        width: 100%;
         background-color: #0F1F26;
         display: flex;
         flex-wrap: wrap;
+        justify-content: flex-start; 
+        align-content: flex-start;
         gap: 26px;
         margin-top: 80px;
         padding: 40px;
+    }
+
+    app-video-preview {
+        flex: 0 1 auto;
     }
 }

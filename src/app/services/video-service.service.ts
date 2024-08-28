@@ -12,6 +12,7 @@ export class VideoService {
 
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   allVideos: VideoJson[] = [];
+  favVideos: VideoJson[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -39,17 +40,19 @@ export class VideoService {
   }
 
 
-  // async checkIfVideoIsFav(id: number) {
-  //   const loginUrl = `${environment.baseUrl}/videos/get_videos/is_favorite/${id}/`;
+  async fetshFavorites() {
+    const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
 
-  //   try{
-  //     const response = await lastValueFrom(this.http.get<{is_favorite: boolean}>(loginUrl, { headers: this.headers }));
-  //     return response.is_favorite;
-  //   } catch(e) {
-  //     console.log('Fehler beim auslese des favoriten:', e);
-  //     return false;
-  //   }
-  // }
+    try{
+      const response = await lastValueFrom(this.http.get<VideoJson[]>(loginUrl, { headers: this.headers }));
+      if (response) {
+        this.favVideos = response;
+        console.log('favVideos:',this.favVideos);
+      }
+    } catch(e) {
+      console.log('Fehler beim fetshen der favoriten:', e);
+    }
+  }
 
 
   async addFavoriteVideo(body: FavoriteBody) {
