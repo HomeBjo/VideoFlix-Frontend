@@ -1,0 +1,25 @@
+<header>
+    <div class="logoBox">
+        <img [routerLink]="['/video_site']" src="../../../assets/img/logo_small.svg" alt="logo" class="logo"/>
+        <div class="headerBtns">
+            <button [routerLink]="['/video_site']" class="headerBtns">Home</button>
+            <button class="headerBtns" (click)="toggleCategoryMenu($event)">Category</button>
+            
+            <div class="categorySelection" [ngClass]="{'slideInAnimation': showCategorySelection, 'slideOutAnimation': !showCategorySelection}"(click)="$event.stopPropagation()">
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'anime']" class="profilSelectionBtn">Anime</button>
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'drama']" class="profilSelectionBtn">Drama</button>
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'romance']" class="profilSelectionBtn">Romance</button>
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'adventure']" class="profilSelectionBtn">Adventure</button>
+            </div>
+          <button class="headerBtns" [routerLink]="['/favorites',]">Favorites</button>
+        </div>
+    </div>
+    <div class="btnBoxRight">
+        <button class="blueBtn" (click)="openSmallMenu($event)">Profile</button>
+        <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}" (click)="$event.stopPropagation()">
+            <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
+            <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
+        </div>
+    </div>
+</header>

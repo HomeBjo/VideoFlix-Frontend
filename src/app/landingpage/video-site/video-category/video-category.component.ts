@@ -6,7 +6,7 @@ import { RouterLink,ActivatedRoute } from '@angular/router';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoPreviewComponent } from "../video-preview/video-preview.component";
 import { VideoDisplayComponent } from '../video-display/video-display.component';
-import { HeaderComponent } from '../../../shared/videoSite/header/header.component';
+import { HeaderComponent } from '../../../shared/category/header/header.component';
 
 
 
@@ -22,6 +22,8 @@ export class VideoCategoryComponent {
   showCategorySelection:boolean = false;
   selectedVideo: any;
   categoryVideos: VideoJson[] = [];
+  selectedCategory: string | null = null;
+
 
   constructor(public userService: UserService, private videoService: VideoService, private route: ActivatedRoute) {}
 
@@ -32,6 +34,7 @@ export class VideoCategoryComponent {
       if (category) {
         this.videoService.loadCategoryVideos(category).subscribe((data: any) => {
           this.categoryVideos = data;
+          this.selectedCategory = this.firstLetterBig(category);
           console.log('1111111111111',this.categoryVideos);
         }, (error: any) => {
           console.error('Error fetching videos:', error);
@@ -69,6 +72,10 @@ export class VideoCategoryComponent {
 
   closeVideoDisplay() {
     this.selectedVideo = null;
+  }
+
+  firstLetterBig(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
 }

@@ -5,7 +5,9 @@ section{
     height: auto;
     background-color: #060606;
 }
-
+h1{
+    color: white;
+}
 .videoPlayerBox {
     @include dFlex();
     width: 100%;
@@ -35,6 +37,7 @@ section{
 .btnBoxRight{
     position: relative;
     z-index: 4;
+    padding-right: 5rem;
 }
 
 
@@ -47,6 +50,7 @@ header{
     .logoBox{
         width: auto;
         display: flex;
+        padding-left: 5rem;
         .logo{
             z-index: 2;
             margin-right: 5rem;
@@ -88,7 +92,7 @@ header{
 .videoDiv{
     width: calc(100% - 6rem);
     min-height: 2000px;
-    margin-top: 80dvh;
+    padding-top: 400px;
     padding-left: 6rem;
     .videoDiv2{
         position: absolute;
