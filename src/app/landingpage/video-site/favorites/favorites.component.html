@@ -9,10 +9,10 @@
                 ></app-video-preview>
             }
         }
-        <app-video-display
-            *ngIf="selectedVideo"
-            [video]="selectedVideo"
-            (closeDisplay)="closeVideoDisplay()"
-        ></app-video-display>
     </div>
+    <app-video-display
+        *ngIf="selectedVideo"
+        [video]="selectedVideo"
+        (closeDisplay)="closeVideoDisplay()"
+    ></app-video-display>
 </section>
