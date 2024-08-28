@@ -1,6 +1,6 @@
 <section (click)="showVideoDetails()" (mouseenter)="shwowDescription()" (mouseleave)="hideDescription()">
     <img src="{{ video.screenshot }}" alt="videoPreviewImg">
-    <div class="descriptionBox" [ngClass]="{ 'descriptionVisible' : isDescriptionVisible, 'descriptionHide' : !isDescriptionVisible }">
+    <div class="descriptionBox" [ngClass]="{ 'descriptionVisible' : isDescriptionVisible, 'descriptionHide' : !isDescriptionVisible , 'd-none' : isDescriptionVisible == null}">
         <span>{{ video.description }}</span>
     </div>
 </section>

@@ -13,7 +13,7 @@ import { VideoJson } from '../../../interfaces/video-json';
 export class VideoPreviewComponent {
   @Input() video!: VideoJson;
   @Output() videoSelected = new EventEmitter<any>();
-  isDescriptionVisible: boolean = false;
+  isDescriptionVisible: true | false | null = null;
 
 
   shwowDescription(){
