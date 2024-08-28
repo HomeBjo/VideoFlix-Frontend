@@ -22,7 +22,7 @@ export class AppComponent {
     ).subscribe((event: NavigationEnd) => {
       const url = event.urlAfterRedirects;
       
-      this.isVideoSitePage = url.includes('video_categorys') || url.includes('video_site') ;
+      this.isVideoSitePage = url.includes('video_categorys') || url.includes('video_site') || url.includes('favorite') ;
     });
   }
 }

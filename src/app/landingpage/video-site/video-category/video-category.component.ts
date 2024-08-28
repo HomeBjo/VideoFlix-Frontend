@@ -6,14 +6,14 @@ import { RouterLink,ActivatedRoute } from '@angular/router';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoPreviewComponent } from "../video-preview/video-preview.component";
 import { VideoDisplayComponent } from '../video-display/video-display.component';
-import { HeaderComponent } from '../../../shared/category/header/header.component';
+
 
 
 
 @Component({
   selector: 'app-video-category',
   standalone: true,
-  imports: [CommonModule, RouterLink, VideoPreviewComponent, VideoDisplayComponent, HeaderComponent],
+  imports: [CommonModule, RouterLink, VideoPreviewComponent, VideoDisplayComponent],
   templateUrl: './video-category.component.html',
   styleUrl: './video-category.component.scss'
 })
