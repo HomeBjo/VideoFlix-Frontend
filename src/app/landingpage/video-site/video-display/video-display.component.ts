@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import Hls from 'hls.js';
+import videojs from 'video.js';
+import 'videojs-hls-quality-selector'; // Importiere das Plugin
+// import HlsQualitySelector2 from 'videojs-hls-quality-selector';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoService } from '../../../services/video-service.service';
 import { FavoriteBody } from '../../../interfaces/favorite-body';
@@ -31,18 +34,34 @@ export class VideoDisplayComponent {
 
 
   ngAfterViewInit(): void {
+    // Initialisiere den Video.js-Player und das Plugin nach dem DOM-Laden
     if (Hls.isSupported()) {
-        const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
-        const hls = new Hls();
-        hls.loadSource(this.video.video_folder); // werte aus unseren pfad 
-        // hls.loadSource('http://127.0.0.1:8000/media/videos/city/city_480p.m3u8');
-        hls.attachMedia(videoElement);
-
+      const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
+      const hls = new Hls();
+      hls.loadSource(this.video.video_folder);
+      hls.attachMedia(videoElement);
     } else if ((document.getElementById('videoPlayer') as HTMLVideoElement).canPlayType('application/vnd.apple.mpegurl')) {
-        // von gpt ein fallback falls was nicht klappt 
-        const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
-        videoElement.src = this.video.video_folder;
+      const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
+      videoElement.src = this.video.video_folder;
     }
+
+    // Video.js-Player initialisieren
+    const player = videojs('videoPlayer');
+    console.log(player);
+    
+    // Füge Plugin zu Video.js hinzu
+    (player as any).hlsQualitySelector({
+      displayCurrentQuality: true
+    });
+    // const player = videojs('videoPlayer');
+
+    // // Warte, bis der Player bereit ist, bevor das Plugin hinzugefügt wird
+    // player.ready(() => {
+    //   // Füge das Plugin hinzu
+    //   (player as any).hlsQualitySelector({
+    //     displayCurrentQuality: true
+    //   });
+    // });
   }
 
   close() {
