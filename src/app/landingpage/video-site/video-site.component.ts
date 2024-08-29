@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user-service.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,10 @@ export class VideoSiteComponent {
   @ViewChild('video4LoopBox3') video4LoopBox3!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox4') video4LoopBox4!: ElementRef<HTMLElement>;
   private scrollDistance = 420;
-  constructor(public userService: UserService, private route: Router, private videoService: VideoService) {}
+  showArrows: boolean[] = [false, false, false, false];
+
+
+  constructor(private cdr: ChangeDetectorRef,public userService: UserService, private route: Router, private videoService: VideoService) {}
 
   
   ngOnInit() {
@@ -41,13 +44,27 @@ export class VideoSiteComponent {
     }); 
   }
 
-  ngAfterViewInit() { // check, ob das element mit der id vorhanden ist bach dem laden
-    if (this.video4LoopBox1) {
-      console.log('video4LoopBox:', this.video4LoopBox1);
-    } else {
-      console.warn('video4LoopBox element not found');
-    }
+
+  ngAfterViewChecked() { //angularproblem- überprüfung der werte nach dem laden
+    this.updateArrowVisibility();
+    this.cdr.detectChanges();
   }
+  
+
+  updateArrowVisibility() { //angularproblem- überprüfung der werte nach dem laden
+    const videoLoopBoxes = [
+      this.video4LoopBox1,
+      this.video4LoopBox2,
+      this.video4LoopBox3,
+      this.video4LoopBox4
+    ];
+
+    videoLoopBoxes.forEach((box, index) => {
+      const videoLoopBox = box?.nativeElement;
+      this.showArrows[index] = videoLoopBox && (videoLoopBox.scrollWidth > videoLoopBox.clientWidth);
+    });
+  }
+  
 
   checkUserLoginStatus(){
     this.checkUserInterval = setInterval(() => {
@@ -88,6 +105,7 @@ export class VideoSiteComponent {
     this.shwonProfilSelection = !this.shwonProfilSelection;
   }
  
+
   ArrowRightClick(index: number) {
     switch (index) {
       case 1:
@@ -107,6 +125,7 @@ export class VideoSiteComponent {
     }
   }
 
+
   ArrowLeftClick(index: number) {
     switch (index) {
       case 1:
@@ -125,4 +144,28 @@ export class VideoSiteComponent {
         console.error('Invalid index on left arrow:', index);
     }
   }
+
+
+   // überprüfe ob die breite der videoDiv breiter ist als der bildschim. wenn ja, dann zeig preile an
+  checkShowArrow(index: number): boolean {
+    if (index) {
+      const videoLoopBoxes = [
+        this.video4LoopBox1,
+        this.video4LoopBox2,
+        this.video4LoopBox3,
+        this.video4LoopBox4
+      ];
+    
+      const videoLoopBox = videoLoopBoxes[index - 1]?.nativeElement;
+    
+      if (!videoLoopBox) {
+        return false;
+      }
+    
+      return videoLoopBox.scrollWidth > videoLoopBox.clientWidth;
+    }
+    return false;
+  }
+  
+  
 }

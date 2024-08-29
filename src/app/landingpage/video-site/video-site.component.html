@@ -21,9 +21,11 @@
             <div class="videoPosition">
                 <h1>New on Videoflix</h1>
                 <div class="video4LoopContainer">
-                    <div class="arrowLeft">
-                        <button (click)="ArrowLeftClick(1)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
-                    </div>
+                    @if (showArrows[0]) {
+                        <div class="arrowLeft">
+                            <button (click)="ArrowLeftClick(1)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                        </div>
+                    }
                     <div class="video4LoopBox" #video4LoopBox1>
                         @for (video of newVideos; track $index) {
                             <app-video-preview
@@ -32,17 +34,21 @@
                             ></app-video-preview>
                         }
                     </div>
-                    <div class="arrowRight">
-                        <button (click)="ArrowRightClick(1)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
-                    </div>
+                    @if (showArrows[0]) {
+                        <div class="arrowRight">
+                            <button (click)="ArrowRightClick(1)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="videoPosition">
                 <h1>Meine Liste</h1>
                 <div class="video4LoopContainer">
-                    <div class="arrowLeft">
-                        <button (click)="ArrowLeftClick(2)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
-                    </div>
+                    @if (showArrows[1]) {
+                        <div class="arrowLeft">
+                            <button (click)="ArrowLeftClick(2)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                        </div>
+                    }
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
                             @if (video.is_favorite) {
@@ -53,17 +59,21 @@
                             }
                         }
                     </div>
-                    <div class="arrowRight">
-                        <button (click)="ArrowRightClick(2)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
-                    </div>
+                    @if (showArrows[1]) {
+                        <div class="arrowRight">
+                            <button (click)="ArrowRightClick(2)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="videoPosition">
                 <h1>Anime</h1>
                 <div class="video4LoopContainer">
-                    <div class="arrowLeft">
-                        <button (click)="ArrowLeftClick(3)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
-                    </div>
+                    @if (showArrows[2]) {
+                        <div class="arrowLeft">
+                            <button (click)="ArrowLeftClick(3)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                        </div>
+                    }
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
                             @if (video.category === 'anime') {
@@ -74,17 +84,21 @@
                             }
                         }
                     </div>
-                    <div class="arrowRight">
-                        <button (click)="ArrowRightClick(3)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
-                    </div>
+                    @if (showArrows[2]) {
+                        <div class="arrowRight">
+                            <button (click)="ArrowRightClick(3)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="videoPosition">
                 <h1>Action</h1>
                 <div class="video4LoopContainer">
-                    <div class="arrowLeft">
-                        <button (click)="ArrowLeftClick(4)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
-                    </div>
+                    @if (showArrows[3]) {
+                        <div class="arrowLeft">
+                            <button (click)="ArrowLeftClick(4)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                        </div>   
+                    }
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
                             @if (video.category === 'action') {
@@ -95,9 +109,11 @@
                             }
                         }
                     </div>
-                    <div class="arrowRight">
-                        <button (click)="ArrowRightClick(4)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
-                    </div>
+                    @if (showArrows[3]) {
+                        <div class="arrowRight">
+                            <button (click)="ArrowRightClick(4)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                        </div>
+                    }
                 </div>
                 <app-video-display
                     *ngIf="selectedVideo"
