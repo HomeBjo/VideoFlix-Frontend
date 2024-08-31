@@ -3,28 +3,36 @@ section {
     width: calc(100% - 80px);
 }
 
-.body {
-    height: 100%;
-    width: 100%;
+.videoBox {
+    color: whitesmoke;
+    width: calc(100% - 4rem);
     background: linear-gradient(to bottom, 
         #0F1F26 3%,
         #060606 16%,
         #060606 100% 
     );
-    display: flex;
-    flex-wrap: wrap;
-    // justify-content: flex-start; 
-    justify-content: space-evenly; 
-    align-content: flex-start;
-    gap: 26px;
-    margin-top: 80px;
-    padding: 40px;
-    overflow: auto; /* Ermöglicht Scrollen */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    flex: 1 0 auto; 
+    padding: 3rem;
+    padding-left: 6rem;
+    margin-top: 64px;
+    height: 100%;
+    .h1Div {
+        margin-top: 6rem;
+    }
+    .videoList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start; 
+        align-content: flex-start;
+        gap: 26px;
+        overflow-y: auto; /* Vertikales Scrollen erlauben */
+        overflow-x: hidden; /* Kein horizontales Scrollen */
+        scrollbar-width: none; /* Firefox scrollbar verstecken */
+        -ms-overflow-style: none; /* Internet Explorer scrollbar verstecken */
+        max-height: calc(100dvh - 160px - 3rem - 64px - 6rem); /* Höchsthöhe der Liste für das Scrollen begrenzen */
+    }
 }
 
-.body::-webkit-scrollbar {
-    display: none; /* Safari und Chrome */
+.videoBox::-webkit-scrollbar {
+    display: none; /* Safari und Chrome scrollbar verstecken */
 }
+

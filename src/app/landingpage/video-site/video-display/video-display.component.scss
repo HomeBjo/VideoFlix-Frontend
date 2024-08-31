@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  color: #ffff;
 }
 
 .video-display-content {
@@ -38,7 +39,7 @@ h2 {
 }
 .presents-logo {
   position: absolute;
-  top: 18%;
+  top: 0;
   left: 8px;
   background: linear-gradient(0deg, #3547ff -0.03%, #8903ff 100%);
   -webkit-background-clip: text;
@@ -49,12 +50,13 @@ h2 {
 }
 .presents-text {
   position: absolute;
-  top: 22%;
+  top: 25px;
   left: 39px;
   opacity: 72%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: #ffff;
+  -webkit-background-clip: text; // ????
+  background-clip: text; // ????
+  color: #6F17FF;
+  font-weight: 900;
 }
 .img-back {
   position: absolute;

@@ -2,10 +2,9 @@
   <div class="video-display-content" (click)="$event.stopPropagation()">
     <img class="img-back" src="/assets/img/arrow_back.png" (click)="close()" />
     <div class="video-img-container">
-      <img [src]="video.screenshot" alt="" />
-      <h2>{{ video.title }}</h2>
-      <span class="presents-logo">V </span
-      ><span class="presents-text">Film</span>
+      <img [src]="video.screenshot" alt="previewImg" />
+      <span class="presents-logo">V </span>
+      <span class="presents-text">Film</span>
     </div>
 
     <div class="video-player-content">

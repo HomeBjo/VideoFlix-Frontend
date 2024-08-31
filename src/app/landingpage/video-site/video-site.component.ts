@@ -154,7 +154,7 @@ export class VideoSiteComponent {
   ArrowRightClick(index: number) {
     switch (index) {
       case 0:
-        this.video4LoopBox1!.nativeElement.scrollLeft += this.scrollDistance;
+        this.video4LoopBox0!.nativeElement.scrollLeft += this.scrollDistance;
         break;
       case 1:
         this.video4LoopBox1!.nativeElement.scrollLeft += this.scrollDistance;
@@ -177,7 +177,7 @@ export class VideoSiteComponent {
   ArrowLeftClick(index: number) {
     switch (index) {
       case 0:
-        this.video4LoopBox1!.nativeElement.scrollLeft -= this.scrollDistance;
+        this.video4LoopBox0!.nativeElement.scrollLeft -= this.scrollDistance;
         break;
       case 1:
         this.video4LoopBox1!.nativeElement.scrollLeft -= this.scrollDistance;
