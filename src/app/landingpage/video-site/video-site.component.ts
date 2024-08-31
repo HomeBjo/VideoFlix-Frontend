@@ -27,21 +27,24 @@ export class VideoSiteComponent {
   @ViewChild('video4LoopBox4') video4LoopBox4!: ElementRef<HTMLElement>;
   private scrollDistance = 420;
   showArrows: boolean[] = [false, false, false, false];
+  showFavDiv: true | false | null = null;
 
-
-  constructor(private cdr: ChangeDetectorRef,public userService: UserService, private route: Router, private videoService: VideoService) {}
+  constructor(private cdr: ChangeDetectorRef,public userService: UserService, private route: Router, public videoService: VideoService) {}
 
   
   ngOnInit() {
     this.checkUserLoginStatus();
     this.videoService.startFetchVideos().subscribe((data: any) => {
       this.newVideos = data;
-      console.log(this.newVideos);
+      // console.log(this.newVideos);
       this.videoService.allVideos = this.newVideos;
       this.userService.getUserData();
     }, (error: any) => {
       console.error('Error fetching videos:', error);
     }); 
+    this.videoService.fetshFavorites().then(() => {
+      this.updateShowFavDiv();
+    });
   }
 
 
@@ -167,5 +170,26 @@ export class VideoSiteComponent {
     return false;
   }
   
-  
+
+  checkIfFavoreitesAvailable(){
+    return this.videoService.favVideos.length > 0;
+  }
+  updateShowFavDiv() {
+    this.showFavDiv = this.videoService.favVideos.length > 0 ? true : false;
+  }
+
+  addFavoriteToComponent(video: VideoJson) {
+    this.videoService.favVideos.push(video);
+    this.updateShowFavDiv();
+    this.cdr.detectChanges();
+  }
+
+  removeFavoriteFromComponent(video: VideoJson) {
+    const index = this.videoService.favVideos.findIndex(favVideo => favVideo.id === video.id);
+    if (index > -1) {
+      this.videoService.favVideos.splice(index, 1);
+      this.updateShowFavDiv();
+      this.cdr.detectChanges();
+    }
+  }
 }

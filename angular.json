@@ -30,8 +30,6 @@
               "https://unpkg.com/@videojs/themes@1/dist/city/index.css"
             ],
             "scripts": [
-              "https://vjs.zencdn.net/8.16.1/video.min.js",
-              "https://cdn.jsdelivr.net/npm/videojs-hls-quality-selector@latest/dist/videojs-hls-quality-selector.min.js"
             ]
           },
           "configurations": {
@@ -89,8 +87,6 @@
               "https://unpkg.com/@videojs/themes@1/dist/city/index.css"
             ],
             "scripts": [
-              "https://vjs.zencdn.net/8.16.1/video.min.js",
-              "https://cdn.jsdelivr.net/npm/videojs-hls-quality-selector@latest/dist/videojs-hls-quality-selector.min.js"
             ]
           }
         }

@@ -18,6 +18,33 @@
     </div>
     <div class="videoDiv">
         <div class="videoDiv2">
+            @if (checkIfFavoreitesAvailable()) {
+                <div class="videoPosition">
+                    <h1>Favorites</h1>
+                    <div class="video4LoopContainer">
+                        <!-- @if (showArrows[0]) {
+                            <div class="arrowLeft">
+                                <button (click)="ArrowLeftClick(1)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                            </div>
+                        } -->
+                        <div class="video4LoopBox" #video4LoopBox1>
+                            @for (video of videoService.favVideos; track $index) {
+                                <app-video-preview
+                                    [ngClass]="{ 'descriptionVisible' : showFavDiv, 'descriptionHide' : !showFavDiv , 'd-none' : showFavDiv == null}"
+                                    [video]="video"
+                                    (videoSelected)="onVideoSelected($event)"
+                                ></app-video-preview>
+                            }
+                        </div>
+                        <!-- @if (showArrows[0]) {
+                            <div class="arrowRight">
+                                <button (click)="ArrowRightClick(1)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                            </div>
+                        } -->
+                    </div>
+                </div>
+            }
+            
             <div class="videoPosition">
                 <h1>New on Videoflix</h1>
                 <div class="video4LoopContainer">
