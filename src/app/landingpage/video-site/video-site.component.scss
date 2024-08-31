@@ -9,7 +9,7 @@ section{
 .videoPlayerBox {
     @include dFlex();
     width: 100%;
-    height: 80dvh;
+    height: 100dvh;
     position: absolute;
     flex-direction: column;
     top: 0;
@@ -54,7 +54,7 @@ section{
 
 .videoDiv {
     min-height: 2000px;
-    margin-top: 80dvh;
+    margin-top: 100dvh;
     padding-left: 6rem;
 
     .videoDiv2 {

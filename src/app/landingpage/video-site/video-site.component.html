@@ -1,5 +1,5 @@
 <div class="videoPlayerBox">
-    <video autoplay muted loop id="myVideo" class="backgroundVideo">
+    <video autoplay muted loop #myVideo class="backgroundVideo">
         <source src="../../../assets/videos/Breakout.mp4" type="video/mp4">
     </video>
     <div class="shadow"></div>
@@ -14,7 +14,7 @@
             web of alliances and betrayals to reclaim his freedom and expose the
             truth.
         </span>
-        <button class="blueBtn"><img src="../../../assets/icons/play_arrow.svg" alt="">Play</button>
+        <button class="blueBtn" (click)="playVideo('../../../assets/videos/Breakout.mp4')"><img src="../../../assets/icons/play_arrow.svg" alt="playImg">Play</button>
     </div>
     <div class="videoDiv">
         <div class="videoDiv2">
@@ -22,25 +22,24 @@
                 <div class="videoPosition">
                     <h1>Favorites</h1>
                     <div class="video4LoopContainer">
-                        <!-- @if (showArrows[0]) {
+                        @if (showArrows[0]) {
                             <div class="arrowLeft">
                                 <button (click)="ArrowLeftClick(1)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                             </div>
-                        } -->
-                        <div class="video4LoopBox" #video4LoopBox1>
+                        }
+                        <div class="video4LoopBox" #video4LoopBox0>
                             @for (video of videoService.favVideos; track $index) {
                                 <app-video-preview
-                                    [ngClass]="{ 'descriptionVisible' : showFavDiv, 'descriptionHide' : !showFavDiv , 'd-none' : showFavDiv == null}"
                                     [video]="video"
                                     (videoSelected)="onVideoSelected($event)"
                                 ></app-video-preview>
                             }
                         </div>
-                        <!-- @if (showArrows[0]) {
+                        @if (showArrows[0]) {
                             <div class="arrowRight">
                                 <button (click)="ArrowRightClick(1)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
                             </div>
-                        } -->
+                        }
                     </div>
                 </div>
             }
@@ -48,7 +47,7 @@
             <div class="videoPosition">
                 <h1>New on Videoflix</h1>
                 <div class="video4LoopContainer">
-                    @if (showArrows[0]) {
+                    @if (showArrows[1]) {
                         <div class="arrowLeft">
                             <button (click)="ArrowLeftClick(1)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                         </div>
@@ -61,7 +60,7 @@
                             ></app-video-preview>
                         }
                     </div>
-                    @if (showArrows[0]) {
+                    @if (showArrows[1]) {
                         <div class="arrowRight">
                             <button (click)="ArrowRightClick(1)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
                         </div>
@@ -71,7 +70,7 @@
             <div class="videoPosition">
                 <h1>Meine Liste</h1>
                 <div class="video4LoopContainer">
-                    @if (showArrows[1]) {
+                    @if (showArrows[2]) {
                         <div class="arrowLeft">
                             <button (click)="ArrowLeftClick(2)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                         </div>
@@ -86,7 +85,7 @@
                             }
                         }
                     </div>
-                    @if (showArrows[1]) {
+                    @if (showArrows[2]) {
                         <div class="arrowRight">
                             <button (click)="ArrowRightClick(2)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
                         </div>
@@ -96,7 +95,7 @@
             <div class="videoPosition">
                 <h1>Anime</h1>
                 <div class="video4LoopContainer">
-                    @if (showArrows[2]) {
+                    @if (showArrows[3]) {
                         <div class="arrowLeft">
                             <button (click)="ArrowLeftClick(3)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                         </div>
@@ -111,7 +110,7 @@
                             }
                         }
                     </div>
-                    @if (showArrows[2]) {
+                    @if (showArrows[3]) {
                         <div class="arrowRight">
                             <button (click)="ArrowRightClick(3)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
                         </div>
@@ -121,7 +120,7 @@
             <div class="videoPosition">
                 <h1>Action</h1>
                 <div class="video4LoopContainer">
-                    @if (showArrows[3]) {
+                    @if (showArrows[4]) {
                         <div class="arrowLeft">
                             <button (click)="ArrowLeftClick(4)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                         </div>   
@@ -136,7 +135,7 @@
                             }
                         }
                     </div>
-                    @if (showArrows[3]) {
+                    @if (showArrows[4]) {
                         <div class="arrowRight">
                             <button (click)="ArrowRightClick(4)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
                         </div>
