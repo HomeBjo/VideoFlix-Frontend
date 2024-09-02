@@ -9,7 +9,7 @@
 
         <div class="positionInputs">
             <div class="inputContainer">
-                <input [(ngModel)]="email" placeholder="Email Address" name="email" #emailField="ngModel" required class="emailInput">
+                <input [(ngModel)]="email" placeholder="Email Address" name="email" required pattern="[^@]+@[^\.]+\..+" #emailField="ngModel" required class="emailInput">
             </div>
             @if (!checkEmail() &&emailField.touched) {
                 <div class="invalidFeedback">

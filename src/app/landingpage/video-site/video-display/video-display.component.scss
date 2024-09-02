@@ -77,6 +77,7 @@ h2 {
   margin-top: 24px;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
+  min-height: 200px;
 }
 
 .description-container {
@@ -108,4 +109,26 @@ h2 {
     font-size: 16px;
     padding-left: 8px;
   }
+}
+
+.test {
+  
+  position: absolute;
+  top: 253px;
+  left: 0;
+  width: 10%;
+  height: 10%;
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  z-index: 1000;
+}
+
+.inactive {
+  display: none;
+}
+
+.active {
+  display: block; 
 }

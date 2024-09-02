@@ -22,6 +22,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "videojs-hls-quality-selector": "^2.0.0",
+    "videojs-http-source-selector": "^1.1.6",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
