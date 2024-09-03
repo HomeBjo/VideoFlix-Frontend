@@ -17,10 +17,13 @@ export class EmailSendComponent {
   email: string = '';
   constructor(public userService: UserService, private router: Router) {}
 
-  checkEmail() {
-    if (this.email && this.email.length >= 5) {
+  checkEmail(): boolean {
+    const emailPattern = /^[^@]+@[^\.]+\..+$/; 
+  
+    if (emailPattern.test(this.email)) {
       return true;
     }
+  
     return false;
   }
   
