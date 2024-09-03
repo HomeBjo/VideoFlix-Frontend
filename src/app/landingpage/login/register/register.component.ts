@@ -69,6 +69,23 @@ export class RegisterComponent {
     return false;
   }
 
+  getLastNameError(last_name: string): string {
+    if (this.checkNameLength(last_name)) {
+        return 'tooLong';
+    } else if (last_name === '') {
+        return 'required';
+    } else {
+        return 'tooShort';
+    }
+}
+
+
+  checkNameLength(name: string) {
+    if (name.length >= 20) {
+      return true;
+    }
+    return false;
+  }
 
   checkConfirmPassword() {
     if (this.confirm_password.length >= 5) {

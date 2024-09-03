@@ -2,8 +2,8 @@
     <div class="logoBox">
         <img [routerLink]="['/video_site']" src="../../../assets/img/logo_small.svg" alt="logo" class="logo"/>
         <div class="headerBtns">
-            <button [routerLink]="['/video_site']" class="headerBtns">Home</button>
-            <button class="headerBtns" (click)="toggleCategoryMenu($event)">Category</button>
+            <button [routerLink]="['/video_site']" class="headerBtn">Home</button>
+            <button class="headerBtn" (click)="toggleCategoryMenu($event)">Category</button>
             
             <div class="categorySelection" [ngClass]="{'slideInAnimation': showCategorySelection, 'slideOutAnimation': !showCategorySelection}"(click)="$event.stopPropagation()">
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
@@ -12,12 +12,12 @@
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'romance']" class="profilSelectionBtn">Romance</button>
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'adventure']" class="profilSelectionBtn">Adventure</button>
             </div>
-          <button class="headerBtns" [routerLink]="['/favorites',]">Favorites</button>
+            <button class="headerBtn" [routerLink]="['/favorites',]">Favorites</button>
         </div>
     </div>
     <div class="btnBoxRight">
         <div class="userNameBox">
-            <h1>Willcome </h1>
+            <h1 class="welcomeH1">Welcome</h1>
             <div class="role">
                 <div class="block"></div>
                 <h1 (click)="openSmallMenu($event)">{{userService.currentUserFirstName}}</h1>

@@ -6,28 +6,28 @@
         <div class="positionInputs">
             <!----First name------>
             <input type="text" [(ngModel)]="first_name" placeholder="First name" name="firstName" #firstName="ngModel" required class="normalInput">
-            @if (!checkFirstName() && firstName.touched && !firstName.disabled) {
-                <div class="invalidFeedback">
-                    @if (first_name == ''){
-                        <span><img src="../../../../assets/img/warning.svg" alt="">First name is required</span>
-                    } @else {
-                        <span><img src="../../../../assets/img/warning.svg" alt="">First name should be longer as 3 character</span>
-                    }
-                </div>
+            @if (firstName.touched) {
+                @if(checkNameLength(first_name)){
+                    <span class="warSpan"><img src="../../../../assets/img/warning.svg" alt="">Name is too long</span>
+                } @else if (first_name == ''){
+                    <span class="warSpan"><img src="../../../../assets/img/warning.svg" alt="">First name is required</span>
+                } @else if (!checkFirstName()) {
+                    <span class="warSpan"><img src="../../../../assets/img/warning.svg" alt="">First name should be longer as 3 character</span>
+                }
             }
 
             <!----Last Name------>
             <input type="text" [(ngModel)]="last_name" placeholder="Last name" name="lastName" #lastName="ngModel" required class="normalInput">
-            @if (!checkLastName() && lastName.touched) {
-                <div class="invalidFeedback">
-                    @if (last_name == ''){
-                        <span><img src="../../../../assets/img/warning.svg" alt="">Last name is required</span>
-                    } @else {
-                        <span><img src="../../../../assets/img/warning.svg" alt="">Last name should be longer as 3 character</span>
-                    }
-                </div>
+            @if (lastName.touched) {
+                @if(checkNameLength(last_name)){
+                    <span class="warSpan"><img src="../../../../assets/img/warning.svg" alt="">Name is too long</span>
+                } @else if(last_name == '') {
+                    <span class="warSpan"><img src="../../../../assets/img/warning.svg" alt="">Last name is required</span>
+                } @else if (!checkLastName())  {
+                    <span class="warSpan"><img src="../../../../assets/img/warning.svg" alt="">Last name should be longer as 3 character</span>
+                }
             }
-            
+
             <!----Email------>
             <input type="email" [(ngModel)]="userService.user_email" placeholder="Email" name="email" #email="ngModel" required pattern="[^@]+@[^\.]+\..+" class="normalInput">
             @if (!email.valid && email.touched && !email.disabled) {

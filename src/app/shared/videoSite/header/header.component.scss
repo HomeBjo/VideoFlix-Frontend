@@ -12,8 +12,10 @@ section {
     padding-right: 1rem;
     @include dFlex($j: flex-end, $g: 1rem);
 
-    h1 {
+    .welcomeH1 {
         margin: 0;
+        animation: fadeOut 1s ease-in forwards;
+        animation-delay: 4s;
     }
 
     .userNameBox {
@@ -32,7 +34,7 @@ section {
                 background: linear-gradient(90deg, #7F0AFF, #3A44FF);
                 position: absolute;
                 animation: secBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
-                animation-delay: 2s;
+                animation-delay: 1s;
                 display: flex;
             }
 
@@ -44,7 +46,7 @@ section {
                 position: relative;
                 left: 0;
                 animation: left-to-right-fade-in 1s ease-in forwards;
-                animation-delay: 3.1s;
+                animation-delay: 2.1s;
                 -webkit-mask-repeat: no-repeat;
                 opacity: 0;
                 &::after {
@@ -68,6 +70,17 @@ section {
                 }
             }
         }
+    }
+}
+
+@keyframes fadeOut{
+    0% {
+        opacity: 1;
+
+    }
+
+    100% {
+        opacity: 0;
     }
 }
 
@@ -131,12 +144,32 @@ header {
             @include dFlex($g: 2rem);
             z-index: 2;
 
-            .headerBtns {
+            .headerBtn {
                 color: whitesmoke;
                 background-color: transparent;
                 border: none;
                 cursor: pointer;
                 font-size: x-large;
+                position: relative; 
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, #7F0AFF, #3A44FF);
+                    transition: width 0.5s ease-in-out;
+                }
+
+                &:hover::after {
+                    width: 100%;
+                }
+
+                &:not(:hover)::after {
+                    right: 0;
+                    left: auto;
+                }
             }
         }
     }

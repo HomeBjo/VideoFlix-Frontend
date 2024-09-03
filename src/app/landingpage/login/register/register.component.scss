@@ -9,23 +9,22 @@ section {
     background-size: cover;
     background-position: center;
 }
-    .loginBtn {
-        color: whitesmoke;
-        background-color: $btnColor;
-        padding: 26px;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        border: none;
-        border-radius: 40px;
-        font-size: larger;
-        cursor: pointer;
-        transition: ease-in-out 0.3s;
-
-        &:hover {
-            background-color: whitesmoke;
-            color: $btnColor;
-        }
+.loginBtn {
+    color: whitesmoke;
+    background-color: $btnColor;
+    padding: 26px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: none;
+    border-radius: 40px;
+    font-size: larger;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    &:hover {
+        background-color: whitesmoke;
+        color: $btnColor;
     }
+}
 
 .contentDiv {
     @include dFlex($j: space-between);
@@ -94,11 +93,20 @@ section {
 
 .invalidFeedback{
     width: 100%;
-    @include dFlex($j: flex-start, $g: 16px);
+    @include dFlex($j: flex-start, $g: 8px);
     color: red;
     img{
         margin-left: 16px;
-        margin-right: 16px;
+        margin-right: 8px;
+    }
+}
+
+.warSpan{
+    width: 100%;
+    @include dFlex($j: flex-start, $g: 8px);
+    color: red;
+    img{
+        margin-left: 16px;
     }
 }
 
