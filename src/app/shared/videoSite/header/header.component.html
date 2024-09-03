@@ -16,7 +16,14 @@
         </div>
     </div>
     <div class="btnBoxRight">
-        <button class="blueBtn" (click)="openSmallMenu($event)">Profile</button>
+        <div class="userNameBox">
+            <h1>Willcome </h1>
+            <div class="role">
+                <div class="block"></div>
+                <h1 (click)="openSmallMenu($event)">{{userService.currentUserFirstName}}</h1>
+            </div>
+        </div>
+        <!-- <button class="blueBtn" (click)="openSmallMenu($event)">Profile</button> -->
         <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}" (click)="$event.stopPropagation()">
             <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
             <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>

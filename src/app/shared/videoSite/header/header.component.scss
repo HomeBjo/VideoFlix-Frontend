@@ -1,37 +1,137 @@
 @import './../../../../styles.scss';
 
-section{
+section {
     width: 100%;
     height: auto;
     background-color: #060606;
 }
-.btnBoxRight{
+
+.btnBoxRight {
     position: relative;
     z-index: 4;
-    padding-right: 5rem;
+    padding-right: 1rem;
+    @include dFlex($j: flex-end, $g: 1rem);
+
+    h1 {
+        margin: 0;
+    }
+
+    .userNameBox {
+        @include dFlex($g: 1rem);
+        color: #ffffff;
+
+        .role {
+            width: 100%;
+            position: relative;
+            @include dFlex($g: 0.5rem);
+            height: 44px;
+
+            .block {
+                width: 0%;
+                height: inherit;
+                background: linear-gradient(90deg, #7F0AFF, #3A44FF);
+                position: absolute;
+                animation: secBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
+                animation-delay: 2s;
+                display: flex;
+            }
+
+            h1 {
+                color: #ffffff;
+                text-transform: uppercase;
+                letter-spacing: 5px;
+                cursor: pointer;
+                position: relative;
+                left: 0;
+                animation: left-to-right-fade-in 1s ease-in forwards;
+                animation-delay: 3.1s;
+                -webkit-mask-repeat: no-repeat;
+                opacity: 0;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 0;
+                    height: 3px;
+                    background: linear-gradient(90deg, #7F0AFF, #3A44FF);
+                    transition: width 0.5s ease-in-out;
+                }
+
+                &:hover::after {
+                    width: 100%;
+                }
+
+                &:not(:hover)::after {
+                    right: 0;
+                    left: auto;
+                }
+            }
+        }
+    }
 }
 
+@keyframes secBlock {
+    0% {
+        width: 0%;
+        left: 0;
 
-header{
+    }
+
+    50% {
+        width: 100%;
+        left: 0;
+
+    }
+
+    100% {
+        width: 0;
+        left: 100%;
+    }
+}
+
+@keyframes left-to-right-fade-in {
+    0% {
+        -webkit-mask-size: 0%;
+        -webkit-mask-image: linear-gradient(to right,
+                rgba(0, 0, 0, 1) 70%,
+                rgba(0, 0, 0, 0));
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-mask-size: 100%;
+        -webkit-mask-image: linear-gradient(to right,
+                rgba(0, 0, 0, 1) 100%,
+                rgba(0, 0, 0, 0));
+        opacity: 1;
+    }
+}
+
+header {
     @include dFlex($j: space-between);
     padding: 1rem;
     width: calc(100% - 2rem);
     position: absolute;
     top: 0;
     background-color: #0F1F26;
-    .logoBox{
+
+    .logoBox {
         width: auto;
         display: flex;
         padding-left: 5rem;
-        .logo{
+
+        .logo {
             cursor: pointer;
             z-index: 2;
             margin-right: 5rem;
         }
-        .headerBtns{
+
+        .headerBtns {
             @include dFlex($g: 2rem);
             z-index: 2;
-            .headerBtns{
+
+            .headerBtns {
                 color: whitesmoke;
                 background-color: transparent;
                 border: none;
@@ -43,10 +143,9 @@ header{
 }
 
 
-.profilSelection{
+.profilSelection {
     position: absolute;
     top: 120%;
-    right: 77px;
     width: 140px;
     height: auto;
     padding: 12px;
@@ -54,15 +153,18 @@ header{
     flex-direction: column;
     background-color: #1e1e1e;
     border-radius: 12px;
-    .profilSelectionBtn{
+
+    .profilSelectionBtn {
         color: whitesmoke;
         border: none;
         background: transparent;
         font-size: large;
         cursor: pointer;
         @include dFlex($g: 6px);
+
         &:hover {
             color: #6e67d1;
+
             img {
                 filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
             }
@@ -80,9 +182,11 @@ header{
         transform: translateY(-200%);
         opacity: 0;
     }
-    80%{
+
+    80% {
         opacity: 0;
     }
+
     100% {
         transform: translateY(0);
         opacity: 1;
@@ -98,15 +202,18 @@ header{
         transform: translateY(0);
         opacity: 1;
     }
-    10%{
+
+    10% {
         opacity: 0;
     }
+
     100% {
         transform: translateY(-200%);
         opacity: 0;
     }
 }
-.categorySelection{
+
+.categorySelection {
     position: absolute;
     top: 81%;
     left: 221px;
@@ -117,15 +224,18 @@ header{
     flex-direction: column;
     background-color: #1e1e1e;
     border-radius: 12px;
-    .profilSelectionBtn{
+
+    .profilSelectionBtn {
         color: whitesmoke;
         border: none;
         background: transparent;
         font-size: large;
         cursor: pointer;
         @include dFlex($g: 6px);
+
         &:hover {
             color: #6e67d1;
+
             img {
                 filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
             }

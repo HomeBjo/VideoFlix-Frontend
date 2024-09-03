@@ -174,7 +174,7 @@ export class ProfileDetailsComponent {
         username: (this.profileFields[0].value + '_' + this.profileFields[1].value) as string
       }
 
-      let done = await this.userService.updaterUserData(newUserData);
+      let done = await this.userService.updateUserData(newUserData);
       if (done) {
         this.continueMessage = true;
       } else {

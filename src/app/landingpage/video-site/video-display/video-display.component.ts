@@ -48,24 +48,22 @@ export class VideoDisplayComponent {
       hls.attachMedia(videoElement);
     // const player = videojs(videoElement); // aufrug der qualitatsauswahl - extension
 
-    // Warte, bis der Player bereit ist, bevor das Plugin hinzugefügt wird
-    // player.ready(() => {
-    //   // Füge das Plugin hinzu
-    //   new (player as any).hlsQualitySelector({
-    //     displayCurrentQuality: true
-    //   });
+    // // Warte, bis der Player bereit ist, bevor das Plugin hinzugefügt wird
+    // var player = videojs('my-video', this.videoJsConfigObj);
+    // player.qualitySelectorHls({
+    //   vjsIconClass: 'vjs-icon-cog',
     // });
 
-    // //  aufrug der qualitatsauswahl - extension mit mehr logs
-    // const player = videojs(videoElement);
+    //  aufrug der qualitatsauswahl - extension mit mehr logs
+    // const myPlayer = videojs(videoElement);
     // console.log('HLS Quality Selector Plugin loaded:', typeof videojs.getPlugin('hlsQualitySelector') === 'function');
-    // player.ready(() => {
-    //   console.log('Player:', player);
-    //   console.log('Player methods:', Object.keys(player));
+    // myPlayer.ready(() => {
+    //   console.log('Player:', myPlayer);
+    //   console.log('Player methods:', Object.keys(myPlayer));
       
-    //   if (typeof (player as any).hlsQualitySelector === 'function') {
+    //   if (typeof (myPlayer as any).hlsQualitySelector === 'function') {
     //     try {
-    //       new (player as any).hlsQualitySelector({
+    //       new (myPlayer as any).hlsQualitySelector({
     //         displayCurrentQuality: true
     //       });
     //     } catch (error) {

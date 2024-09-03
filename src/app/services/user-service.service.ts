@@ -22,7 +22,7 @@ export class UserService {
   userData: UserData | undefined;
   private userDataSubject = new BehaviorSubject<UserData[] | null>(null); //spezielle art von Observable, die immer den letzten Wert speichert und diesen neuen abonnenten sofort bereitstellt
   userData$ = this.userDataSubject.asObservable(); // kovertiere die daten zu einer Observable - kann abonniert werden
-  
+  currentUserFirstName: string = '';
 
   constructor(private http: HttpClient, private router: Router,private toastService: ToastServiceService) { }
 
@@ -185,6 +185,7 @@ export class UserService {
           let user = await lastValueFrom(this.http.get<UserData[]>(url, { 
               headers: {'Authorization': `Bearer ${token}`}}));//benutze statt id den token der schwerer zu manipulieren ist
           if (user) {
+            this.currentUserFirstName = user[0].first_name;
             this.userDataSubject.next(user); // Speichere die Daten nach der GET-Anfrage
           }
       } catch (e) {
@@ -195,7 +196,7 @@ export class UserService {
 
 
 
-  async updaterUserData(newUserData: UserData){
+  async updateUserData(newUserData: UserData){
     const url = `${environment.baseUrl}/users/update-user-data/${newUserData.id}/`; // Suche nach dem Benutzer anhand der ID
     const token = localStorage.getItem('token');
 
@@ -203,6 +204,7 @@ export class UserService {
         let user = await lastValueFrom(this.http.put<UserData[]>(url, newUserData, {
             headers: {'Authorization': `Bearer ${token}`}})); //benutze statt id den token der schwerer zu manipulieren ist
         if (user) {
+          this.currentUserFirstName = user[0].first_name;
           return true;
         }
     } catch (e) {

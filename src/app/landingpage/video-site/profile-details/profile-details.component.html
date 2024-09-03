@@ -14,7 +14,7 @@
                 @for (field of profileFields; track $index) {
                     <div class="headerDiv">
                         <span class="profileDetailsTitle">{{ field.name }}</span>
-                        <!-- render errors (first / last name + email)-->
+                        <!-- render errors (first / last name)-->
                         @if(!checkLenght($index)) {
                             @if ($index == 0 || $index == 1) {
                                 <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">

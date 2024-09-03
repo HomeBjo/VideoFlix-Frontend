@@ -206,6 +206,7 @@ export class VideoSiteComponent {
   checkShowArrow(index: number): boolean {
     if (index) {
       const videoLoopBoxes = [
+        this.video4LoopBox0,
         this.video4LoopBox1,
         this.video4LoopBox2,
         this.video4LoopBox3,
