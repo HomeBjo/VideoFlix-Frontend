@@ -1,5 +1,5 @@
 @if (show) {
-<div class="toast-container" [ngClass]="type">
+<div class="toast-container" [ngClass]="[type, show ? 'show' : '', hide ? 'hide' : '']">
   <div class="left-side"></div>
   <img src="/assets/img/info.png" alt="">
     <!-- hier könnte man je nach type andere icons anzeigen  -->

@@ -143,7 +143,7 @@ export class UserService {
       await lastValueFrom(this.http.post(resetUrl, emailData));
       return true;
     } catch (e: any) {
-      console.error('11111Fehler beim Senden der E-Mail:', e);
+      // console.error('11111Fehler beim Senden der E-Mail:', e);
       // Fehlermeldung anzeigen mit text
       const errorMessage = 'Oops, something went wrong. Please try again.';
       this.toastService.showMessage(errorMessage, 'error');

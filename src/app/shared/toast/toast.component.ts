@@ -13,22 +13,28 @@ export class ToastComponent {
   @Input() message: string = '';
   @Input() type: 'success' | 'error' | 'info' = 'info'; // Typen können angepasst werden
   show: boolean = false;
+  hide: boolean = false;
+
+  showToast() {
+    this.show = true;  // zur sicherheit booleans setzen !
+    this.hide = false; 
+  
+    // Starte die SlideOut nach 5 sek
+    setTimeout(() => {
+      this.hide = true;
+  
+      // Entferne show klasse nach der animation
+      setTimeout(() => {
+        this.show = false;
+      }, 500); //  Verzögerung für slideout
+    }, 5000); // zeit wan slideout benutzt wird
+  }
 
   // showToast() {
   //   console.log('Toast wird angezeigt'); 
   //   this.show = true;
-  //   setTimeout(() => {
-  //     this.show = false;
-  //   }, 5000); // Blendet die Nachricht nach 5 Sekunden automatisch aus
+  // zum css stylen 
   // }
-
-  showToast() {
-    console.log('Toast wird angezeigt'); 
-    this.show = true;
-    
-     
-     // Blendet die Nachricht nach 5 Sekunden automatisch aus
-  }
 
   closeToast() {
     this.show = false;
