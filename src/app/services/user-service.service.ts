@@ -141,17 +141,11 @@ export class UserService {
     try {
       const emailData = { email: email };
       await lastValueFrom(this.http.post(resetUrl, emailData));
-      console.log('E-Mail wurde erfolgreich gesendet');
-      
-      // Erfolgsmeldung anzeigen
-      this.toastService.showMessage('E-Mail zum Zurücksetzen des Passworts wurde gesendet.', 'success');
-  
       return true;
     } catch (e: any) {
       console.error('11111Fehler beim Senden der E-Mail:', e);
-  
-      // Fehlermeldung anzeigen
-      const errorMessage = e.error?.detail || '22222Fehler beim Senden der E-Mail. Bitte versuche es erneut.';
+      // Fehlermeldung anzeigen mit text
+      const errorMessage = 'Oops, something went wrong. Please try again.';
       this.toastService.showMessage(errorMessage, 'error');
   
       return false;

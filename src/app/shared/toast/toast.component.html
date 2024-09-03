@@ -1,13 +1,15 @@
 @if (show) {
 <div class="toast-container" [ngClass]="type">
-  <div class="toast-icon">
+  <div class="left-side"></div>
+  <img src="/assets/img/info.png" alt="">
     <!-- hier könnte man je nach type andere icons anzeigen  -->
     <!-- @if (type === 'error') {
                 <i class=""></i>
             } -->
-  </div>
   <div class="toast-message">
     {{ message }}
   </div>
+  <img src="/assets/img/vector.png" alt="">
+  <img (click)="closeToast()" class="close-img" src="/assets/img/close_small.png" alt="">
 </div>
 }

@@ -1,25 +1,38 @@
 .toast-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    color: #fff;
-    transition: opacity 0.3s ease-in-out;
-    position: absolute;
-    top: 38%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  color: #fff;
+  transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  top: 73%;
+  width: 540px;
+  height: 80px;
+  border-radius: 20px;
+  gap: 16px;
+  left: 8px;
   
     &.success {
       background-color: green;
     }
   
     &.error {
-      background-color: red;
+      background-color: #2E3EDF;
     }
   
     &.info {
-      background-color: blue;
+      background-color: rgb(30, 30, 37);
     }
+  }
+  .left-side{
+    background-color: red;
+    width: 20px;
+    height: 80px;
+    /* border-radius: 20px; */
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
   }
   
   .toast-icon {
@@ -34,5 +47,9 @@
     background: none;
     border: none;
     color: inherit;
+    cursor: pointer;
+  }
+  .close-img{
+    padding-right: 20px;
     cursor: pointer;
   }
