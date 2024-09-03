@@ -20,7 +20,7 @@
         <div class="videoDiv2">
             @if (checkIfFavoreitesAvailable()) {
                 <div class="videoPosition">
-                    <h1>Favorites</h1>
+                    <h1>My List</h1>
                     <div class="video4LoopContainer">
                         @if (showArrows[0]) {
                             <div class="arrowLeft">
@@ -28,7 +28,7 @@
                             </div>
                         }
                         <div class="video4LoopBox" #video4LoopBox0>
-                            @for (video of videoService.favVideos; track $index) {
+                            @for (video of getFavorites(); track $index) {
                                 <app-video-preview
                                     [video]="video"
                                     (videoSelected)="onVideoSelected($event)"
@@ -68,8 +68,7 @@
                 </div>
             </div>
             <div class="videoPosition">
-                <h1>Meine Liste</h1>
-                
+                <h1>Anime</h1>
                 <div class="video4LoopContainer">
                     @if (showArrows[2]) {
                         <div class="arrowLeft">
@@ -78,8 +77,7 @@
                     }
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
-                            <button class="favoriteIcon" (click)="toggleFavorite(video)"></button>
-                            @if (video.is_favorite) {
+                            @if (video.category === 'anime') {
                                 <app-video-preview
                                     [video]="video"
                                     (videoSelected)="onVideoSelected($event)"
@@ -95,16 +93,16 @@
                 </div>
             </div>
             <div class="videoPosition">
-                <h1>Anime</h1>
+                <h1>Action</h1>
                 <div class="video4LoopContainer">
                     @if (showArrows[3]) {
                         <div class="arrowLeft">
                             <button (click)="ArrowLeftClick(3)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
-                        </div>
+                        </div>   
                     }
-                    <div class="video4LoopBox" #video4LoopBox2>
+                    <div class="video4LoopBox" #video4LoopBox3>
                         @for (video of newVideos; track $index) {
-                            @if (video.category === 'anime') {
+                            @if (video.category === 'action') {
                                 <app-video-preview
                                     [video]="video"
                                     (videoSelected)="onVideoSelected($event)"
@@ -115,31 +113,6 @@
                     @if (showArrows[3]) {
                         <div class="arrowRight">
                             <button (click)="ArrowRightClick(3)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="videoPosition">
-                <h1>Action</h1>
-                <div class="video4LoopContainer">
-                    @if (showArrows[4]) {
-                        <div class="arrowLeft">
-                            <button (click)="ArrowLeftClick(4)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
-                        </div>   
-                    }
-                    <div class="video4LoopBox" #video4LoopBox2>
-                        @for (video of newVideos; track $index) {
-                            @if (video.category === 'action') {
-                                <app-video-preview
-                                    [video]="video"
-                                    (videoSelected)="onVideoSelected($event)"
-                                ></app-video-preview>
-                            }
-                        }
-                    </div>
-                    @if (showArrows[4]) {
-                        <div class="arrowRight">
-                            <button (click)="ArrowRightClick(4)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
                         </div>
                     }
                 </div>

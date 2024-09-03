@@ -11,7 +11,7 @@
       <div class="description-container">
         <div class="description-header">
           <span>Video Description</span>
-          <img src="../../../../assets/icons/{{isFavorite ? 'icon-star' : 'star-empty-icon'}}.png" alt="starImg" class="starIconImg" (click)="addFavorite(video.id)">
+          <img src="../../../../assets/icons/{{video.is_favorite ? 'icon-star' : 'star-empty-icon'}}.png" alt="starImg" class="starIconImg" (click)="addFavorite(video)">
         </div>
         <span class="description-text">{{ video.description }}</span>
       </div>

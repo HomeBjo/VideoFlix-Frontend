@@ -37,7 +37,7 @@ export class VideoSiteComponent {
   @ViewChild('video4LoopBox1') video4LoopBox1!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox2') video4LoopBox2!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox3') video4LoopBox3!: ElementRef<HTMLElement>;
-  @ViewChild('video4LoopBox4') video4LoopBox4!: ElementRef<HTMLElement>;
+  // @ViewChild('video4LoopBox4') video4LoopBox4!: ElementRef<HTMLElement>;
   @ViewChild('myVideo') myVideo!: ElementRef<HTMLVideoElement>;
   private scrollDistance = 420;
   showArrows: boolean[] = [false, false, false, false, false];
@@ -50,11 +50,6 @@ export class VideoSiteComponent {
     private route: Router,
     public videoService: VideoService
   ) {}
-  toggleFavorite(video: any) {
-    video.is_favorite = !video.is_favorite;
-    console.log(this.newVideos,'test')
-    console.log(video,'test222222')
-  }
 
 
   ngOnInit() {
@@ -70,9 +65,6 @@ export class VideoSiteComponent {
         console.error('Error fetching videos:', error);
       }
     );
-    this.videoService.fetshFavorites().then(() => {
-      this.updateShowFavDiv();
-    });
   }
 
 
@@ -90,7 +82,6 @@ export class VideoSiteComponent {
       this.video4LoopBox1,
       this.video4LoopBox2,
       this.video4LoopBox3,
-      this.video4LoopBox4,
     ];
 
     videoLoopBoxes.forEach((box, index) => {
@@ -105,7 +96,6 @@ export class VideoSiteComponent {
     this.checkUserInterval = setInterval(() => {
       let user_id = localStorage.getItem('userId')?.toString();
       if (!user_id) {
-        console.log('No user ID found, redirecting to login...');
         this.route.navigateByUrl('/login');
       }
     }, 500);
@@ -170,9 +160,6 @@ export class VideoSiteComponent {
       case 3:
         this.video4LoopBox3!.nativeElement.scrollLeft += this.scrollDistance;
         break;
-      case 4:
-        this.video4LoopBox4!.nativeElement.scrollLeft += this.scrollDistance;
-        break;
       default:
         console.error('Invalid index on rigth arrow:', index);
     }
@@ -193,9 +180,6 @@ export class VideoSiteComponent {
       case 3:
         this.video4LoopBox3!.nativeElement.scrollLeft -= this.scrollDistance;
         break;
-      case 4:
-        this.video4LoopBox4!.nativeElement.scrollLeft -= this.scrollDistance;
-        break;
       default:
         console.error('Invalid index on left arrow:', index);
     }
@@ -210,7 +194,6 @@ export class VideoSiteComponent {
         this.video4LoopBox1,
         this.video4LoopBox2,
         this.video4LoopBox3,
-        this.video4LoopBox4,
       ];
 
       const videoLoopBox = videoLoopBoxes[index - 1]?.nativeElement;
@@ -226,35 +209,12 @@ export class VideoSiteComponent {
 
 
   checkIfFavoreitesAvailable() {
-    return this.videoService.favVideos.length > 0;
+    return this.videoService.allVideos.some(v => v.is_favorite === true);
   }
 
 
-  updateShowFavDiv() {
-    this.showFavDiv = this.videoService.favVideos.length > 0 ? true : false;
-  }
-
-
-  addFavoriteToComponent(video: VideoJson) {
-    this.videoService.favVideos.push(video);
-    console.log('Added video to favorites:', this.videoService.favVideos);
-
-    this.updateShowFavDiv();
-    this.cdr.detectChanges();
-  }
-
-
-  removeFavoriteFromComponent(video: VideoJson) {
-    const index = this.videoService.favVideos.findIndex(
-      (favVideo) => favVideo.id === video.id
-    );
-    if (index > -1) {
-      this.videoService.favVideos.splice(index, 1);
-      console.log('Removed video from favorites:', this.videoService.favVideos);
-
-      this.updateShowFavDiv();
-      this.cdr.detectChanges();
-    }
+  getFavorites(){
+    return this.videoService.allVideos.filter(v => v.is_favorite === true);
   }
 
 

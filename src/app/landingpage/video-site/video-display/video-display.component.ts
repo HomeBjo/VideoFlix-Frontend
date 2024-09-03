@@ -1,17 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import Hls from 'hls.js';
-import videojs from 'video.js';
-import 'videojs-hls-quality-selector'; // Importiere das Plugin
-// import HlsQualitySelector2 from 'videojs-hls-quality-selector';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoService } from '../../../services/video-service.service';
 import { FavoriteBody } from '../../../interfaces/favorite-body';
 import { VideoSiteComponent } from '../video-site.component';
-// import hlsQualitySelector from 'videojs-hls-quality-selector';
-
-//initialisiere hlsQualitySelector extra
-// videojs.registerPlugin('hlsQualitySelector', hlsQualitySelector);
 
 
 @Component({
@@ -26,17 +19,18 @@ export class VideoDisplayComponent {
   @Output() closeDisplay = new EventEmitter<VideoJson>();
   isVideoVisible = false;
   // closeOverlayPlayButton = false;
+  private favoriteTimeout!: ReturnType<typeof setTimeout>;
   isFavorite: boolean = false;
 
 
   constructor(private videoService: VideoService, private videoSiteComponent: VideoSiteComponent) { }
 
 
-  async ngOnInit(): Promise<void> {
-    if(this.video.is_favorite){
-      this.isFavorite = true;
-    }
-  }
+  // ngOnInit(): void {
+  //   this.isFavorite = this.video.is_favorite;
+  //   console.log('isFavorite:',this.isFavorite);
+    
+  // }
 
 
   ngAfterViewInit(): void {
@@ -46,33 +40,6 @@ export class VideoDisplayComponent {
       const hls = new Hls();
       hls.loadSource(this.video.video_folder);
       hls.attachMedia(videoElement);
-    // const player = videojs(videoElement); // aufrug der qualitatsauswahl - extension
-
-    // // Warte, bis der Player bereit ist, bevor das Plugin hinzugefügt wird
-    // var player = videojs('my-video', this.videoJsConfigObj);
-    // player.qualitySelectorHls({
-    //   vjsIconClass: 'vjs-icon-cog',
-    // });
-
-    //  aufrug der qualitatsauswahl - extension mit mehr logs
-    // const myPlayer = videojs(videoElement);
-    // console.log('HLS Quality Selector Plugin loaded:', typeof videojs.getPlugin('hlsQualitySelector') === 'function');
-    // myPlayer.ready(() => {
-    //   console.log('Player:', myPlayer);
-    //   console.log('Player methods:', Object.keys(myPlayer));
-      
-    //   if (typeof (myPlayer as any).hlsQualitySelector === 'function') {
-    //     try {
-    //       new (myPlayer as any).hlsQualitySelector({
-    //         displayCurrentQuality: true
-    //       });
-    //     } catch (error) {
-    //       console.error('Error initializing hlsQualitySelector:', error);
-    //     }
-    //   } else {
-    //     console.error('hlsQualitySelector plugin is not available.');
-    //   }
-    // });    
     } else if ((document.getElementById('videoPlayer') as HTMLVideoElement).canPlayType('application/vnd.apple.mpegurl')) {
       const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
       videoElement.src = this.video.video_folder;
@@ -98,25 +65,26 @@ export class VideoDisplayComponent {
     this.isVideoVisible = false;
   }
 
-  // addFavorite(id: number){
-  //   this.isFavorite = !this.isFavorite;
-  //   const body: FavoriteBody = { fav_video : id };
-  //   console.log('favorite video-id: ',body);
-    
-  //   this.videoService.addFavoriteVideo(body);
-  // }
+  addFavorite(video: VideoJson) {
+    video.is_favorite = !video.is_favorite;
+  
+    if (this.favoriteTimeout) { // reset timer
+      clearTimeout(this.favoriteTimeout);
+    }
 
-  addFavorite(id: number) {
-    this.isFavorite = !this.isFavorite;
-    const body: FavoriteBody = { fav_video: id };
-
-    this.videoService.addFavoriteVideo(body).then(() => {
-      if (this.isFavorite) {
-        this.videoSiteComponent.addFavoriteToComponent(this.video);  // Hinzufügen zu Favoriten
-      } else {
-        this.videoSiteComponent.removeFavoriteFromComponent(this.video);  // Entfernen von Favoriten
-      }
-    });
+    console.log(this.isFavorite, '-' ,video.is_favorite);
+    // Wenn der Zustand geändert wurde (d.h., wenn `video.is_favorite` nicht mehr dem ursprünglichen Zustand entspricht)
+    if (video.is_favorite != this.isFavorite) { // verbuggt
+      const body: FavoriteBody = {
+        fav_video: video.id
+      };
+  
+      this.favoriteTimeout = setTimeout(() => { //  pushe das video nach 2 sek, wenn timer nicht resettet wird
+        console.log('_____');
+        this.videoService.addFavoriteVideo(body);
+      }, 2000);
+    }
   }
+  
 
 }

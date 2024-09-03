@@ -3,7 +3,7 @@ export interface VideoJson {
   created_at: string;
   description: string;
   id: number;
-  is_favorite: false;
+  is_favorite: boolean;
   screenshot: string;
   title: string;
   url?: null;
