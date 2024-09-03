@@ -1,30 +1,41 @@
 <section>
     <app-header></app-header>
-
-    <form class="contentDiv" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+  
+    <!-- Formular Container  -->
+    @if (!emailSent) {
+      <form class="contentDiv" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
         <h1>Forgot your <br> password?</h1>
         <div class="infoText">
-            <span>We will send you an email with instructions to <br> reset your password</span>
+          <span>We will send you an email with instructions to <br> reset your password</span>
         </div>
-
+  
         <div class="positionInputs">
-            <div class="inputContainer">
-                <!-- <input [(ngModel)]="email" placeholder="Email Address" name="email" required pattern="[^@]+@[^\.]+\..+" #emailField="ngModel" required class="emailInput"> -->
-                <input [(ngModel)]="email" placeholder="Email Address" name="email" #emailField="ngModel" required class="emailInput">
+          <div class="inputContainer">
+            <input [(ngModel)]="email" placeholder="Email Address" name="email" #emailField="ngModel" required class="emailInput">
+          </div>
+          @if (!checkEmail() && emailField.touched) {
+            <div class="invalidFeedback">
+              @if (email == '') {
+                <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Email is required</span>
+              } @else if(!checkEmail()) {
+                <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Please enter a valid email</span>
+              }
             </div>
-            @if (!checkEmail() &&emailField.touched) {
-                <div class="invalidFeedback">
-                    @if (email == ''){
-                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Email is required</span>
-                    } @else if(!checkEmail()) {
-                        <span><img src="../../../../assets/img/warning.svg" alt="allertImg">Please enter a valid email </span>
-                    } 
-                </div>
-            }
+          }
         </div>
-        <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Send Email</button>
-    </form>
+        <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkEmail(), 'submitBtnDisabled': !checkEmail()}" [disabled]="!checkEmail()">Send Email</button>
+      </form>
+    }
+  
+    <!-- email wurde gesendet container -->
+    @if (emailSent) {
+      <div class="successMessage">
+        <h1>Email Sent</h1>
+        <p>An email has been sent to {{ email }} with instructions to reset your password.</p>
+        <button [routerLink]="['/login']" class="loginBtn">Back to Login</button>
+      </div>
+    }
+  
     <app-footer></app-footer>
-</section>
-
+  </section>
 

@@ -9,54 +9,60 @@ import { UserService } from '../../../services/user-service.service';
 @Component({
   selector: 'app-email-send',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink, FooterComponent, HeaderComponent, HeaderComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    RouterLink,
+    FooterComponent,
+    HeaderComponent,
+    HeaderComponent,
+  ],
   templateUrl: './email-send.component.html',
-  styleUrl: './email-send.component.scss'
+  styleUrl: './email-send.component.scss',
 })
 export class EmailSendComponent {
   email: string = '';
+  emailSent: boolean = false;
   constructor(public userService: UserService, private router: Router) {}
 
   checkEmail(): boolean {
-    const emailPattern = /^[^@]+@[^\.]+\..+$/; 
-  
+    const emailPattern = /^[^@]+@[^\.]+\..+$/;
+
     if (emailPattern.test(this.email)) {
       return true;
     }
-  
+
     return false;
   }
-  
 
-  
   async sendEmail() {
     const success = await this.userService.sendPasswordResetEmail(this.email);
     if (success) {
       console.log('E-Mail erfolgreich gesendet.');
       // this.router.navigateByUrl('/login');
-      
     } else {
       console.log('Fehler beim Senden der E-Mail.');
-      
     }
   }
 
-  checkAllInputs() {
-    if (
-      this.checkEmail()
-    ) {
-      return true;
+  // async onSubmit(ngForm: NgForm) {
+  //   if (ngForm.valid && this.checkAllInputs()) {
+  //     await this.sendEmail();
+  //     ngForm.resetForm();
+  //   } else {
+  //     ngForm.resetForm();
+  //   }
+  // }
+  async onSubmit(form: NgForm) {
+    if (this.checkEmail()) {
+      try {
+        const success = await this.userService.sendPasswordResetEmail(
+          this.email
+        );
+        if (success) {
+          this.emailSent = true; //bei erfolg den anderen container anzeigen
+        }
+      } catch (error) {}
     }
-    return false;
   }
-  
-  async onSubmit(ngForm: NgForm) {
-    if (ngForm.valid && this.checkAllInputs()) {
-      await this.sendEmail(); 
-      ngForm.resetForm(); 
-    } else {
-      ngForm.resetForm();
-    }
-  }
-  }
-  
+}
