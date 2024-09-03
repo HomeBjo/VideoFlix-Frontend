@@ -69,6 +69,7 @@
             </div>
             <div class="videoPosition">
                 <h1>Meine Liste</h1>
+                
                 <div class="video4LoopContainer">
                     @if (showArrows[2]) {
                         <div class="arrowLeft">
@@ -77,6 +78,7 @@
                     }
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
+                            <button class="favoriteIcon" (click)="toggleFavorite(video)"></button>
                             @if (video.is_favorite) {
                                 <app-video-preview
                                     [video]="video"

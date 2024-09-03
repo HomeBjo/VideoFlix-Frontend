@@ -7,6 +7,9 @@ import { environment } from '../../environments/environments';
 import { LoginResponse } from '../interfaces/login-response';
 import { GUEST_ID } from '../../../config';
 import { UserData } from '../interfaces/user-data';
+import { ToastServiceService } from './toast-service.service';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,10 +24,10 @@ export class UserService {
   userData$ = this.userDataSubject.asObservable(); // kovertiere die daten zu einer Observable - kann abonniert werden
   
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private toastService: ToastServiceService) { }
 
 
-  async checkGuestUser(){
+  async checkGuestUser(){ 
     let userId = localStorage.getItem('userId')?.toString();
     const token = localStorage.getItem('token');
     const logoutInProgress = localStorage.getItem('logoutInProgress');
@@ -133,18 +136,28 @@ export class UserService {
   
 
   async sendPasswordResetEmail(email: string): Promise<boolean> {
-    const resetUrl = `${environment.baseUrl}/password_reset/`; 
-
+    const resetUrl = `${environment.baseUrl}/password_reset/`;
+  
     try {
       const emailData = { email: email };
       await lastValueFrom(this.http.post(resetUrl, emailData));
       console.log('E-Mail wurde erfolgreich gesendet');
+      
+      // Erfolgsmeldung anzeigen
+      this.toastService.showMessage('E-Mail zum Zurücksetzen des Passworts wurde gesendet.', 'success');
+  
       return true;
-    } catch (e) {
-      console.error('Fehler beim Senden der E-Mail:', e);
+    } catch (e: any) {
+      console.error('11111Fehler beim Senden der E-Mail:', e);
+  
+      // Fehlermeldung anzeigen
+      const errorMessage = e.error?.detail || '22222Fehler beim Senden der E-Mail. Bitte versuche es erneut.';
+      this.toastService.showMessage(errorMessage, 'error');
+  
       return false;
     }
   }
+
 
 
   async sendNewPassword(newPassword: string, uid: string | null, token: string | null): Promise<boolean> {

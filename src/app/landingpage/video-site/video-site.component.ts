@@ -50,6 +50,11 @@ export class VideoSiteComponent {
     private route: Router,
     public videoService: VideoService
   ) {}
+  toggleFavorite(video: any) {
+    video.is_favorite = !video.is_favorite;
+    console.log(this.newVideos,'test')
+    console.log(video,'test222222')
+  }
 
 
   ngOnInit() {

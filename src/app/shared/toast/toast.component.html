@@ -1,0 +1,13 @@
+@if (show) {
+<div class="toast-container" [ngClass]="type">
+  <div class="toast-icon">
+    <!-- hier könnte man je nach type andere icons anzeigen  -->
+    <!-- @if (type === 'error') {
+                <i class=""></i>
+            } -->
+  </div>
+  <div class="toast-message">
+    {{ message }}
+  </div>
+</div>
+}
