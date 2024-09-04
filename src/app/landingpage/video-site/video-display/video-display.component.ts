@@ -20,7 +20,7 @@ export class VideoDisplayComponent {
   isVideoVisible = false;
   // closeOverlayPlayButton = false;
   private favoriteTimeout!: ReturnType<typeof setTimeout>;
-  isFavorite: boolean = false;
+  // isFavorite: boolean = false;
   isRequestInProgress: boolean = false; 
 
   constructor(private videoService: VideoService, private videoSiteComponent: VideoSiteComponent) { }

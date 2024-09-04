@@ -36,6 +36,10 @@
                 <input type="checkbox" id="styledCheckbox">
                 <label for="styledCheckbox">Remember me</label>
               </div>
+            <div class="rememberContainer">
+                <input type="checkbox" [checked]="rememberMe" (click)="checkRememberMe()">
+                <span>Remember me</span>
+            </div>
     
             <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Get started</button>
         </form>
