@@ -165,6 +165,8 @@ export class UserService {
       await lastValueFrom(this.http.post(resetUrl, passwordData, { headers: this.headers }));
       return true;
     } catch (e) {
+      const errorMessage = 'Oops, something went wrong. Please try again.';
+      this.toastService.showMessage(errorMessage, 'error');
       return false;
     }
   }
