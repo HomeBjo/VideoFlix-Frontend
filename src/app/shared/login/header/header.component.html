@@ -1,4 +1,16 @@
 <div class="headerDiv">
-    <img src="../../assets/img/Logo.svg" alt="Logo">
+    <picture>
+        <source media="(min-width: 768px)" srcset="../../assets/img/Logo.svg">
+        <source media="(max-width: 600px)" srcset="../../assets/img/logo_small.svg">
+        
+        <!-- default wert -->
+        <img src="../../assets/img/Logo.svg" alt="Logo">
+    </picture>
     <button [routerLink]="['/login']" class="loginBtn">Log in</button>
 </div>
+
+<!-- grundaufbau gucken ob das obere klappt mit verschiednen browsern  -->
+<!-- <div class="headerDiv">
+    <img src="../../assets/img/Logo.svg" alt="Logo">
+    <button [routerLink]="['/login']" class="loginBtn">Log in</button>
+</div> -->

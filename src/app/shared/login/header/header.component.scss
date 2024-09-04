@@ -30,3 +30,18 @@
         }
     }
 }
+
+@media (max-width: 600px) {
+   
+    .headerDiv {
+        img {
+            width: 3rem;
+            height: auto;
+            object-fit: contain;
+        }
+    
+        .loginBtn {
+         
+        }
+    }
+  }
