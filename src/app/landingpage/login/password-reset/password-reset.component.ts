@@ -102,7 +102,6 @@ export class PasswordResetComponent {
     if (ngForm.valid && this.checkAllInputs()) {
       try {
         const success = await this.setNewPassword(ngForm);
-        // ngForm.resetForm();
         if (success) {
           this.passwordSent = true;
         }

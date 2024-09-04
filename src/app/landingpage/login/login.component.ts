@@ -57,8 +57,9 @@ export class LoginComponent {
       console.error('Fehler beim Login:', error);
     }
   }
-  checkEmail() {
-    if (this.userService.user_email.length >= 5) {
+  checkEmail(): boolean {
+    const emailPattern = /^[^@]+@[^\.]+\..+$/;
+    if (this.userService.user_email.length >= 5 && emailPattern.test(this.userService.user_email)) {
       return true;
     }
     return false;

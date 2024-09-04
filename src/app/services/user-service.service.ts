@@ -61,6 +61,8 @@ export class UserService {
       }
     } catch (e) {
       console.log('Fehler beim Überprüfen der E-Mail-Adresse', e);
+      const errorMessage = 'Oops, something went wrong. Please try again.';
+      this.toastService.showMessage(errorMessage, 'error');
       return false;
     }
   }
@@ -101,6 +103,8 @@ export class UserService {
       return null;
     } catch (e) {
       console.log('Fehler beim Registrieren', e);
+      const errorMessage = 'Incorrect login credentials. Please check your username and password and try again.';
+      this.toastService.showMessage(errorMessage, 'error');
       return null;
     }
   }
@@ -129,7 +133,6 @@ export class UserService {
       const user = await lastValueFrom(this.http.post<LoginResponse>(verifyUrl, body, { headers: this.headers }));
       return user;
     } catch (e) {
-      console.log('Token ungültig', e);
       return null;
     }
   }

@@ -33,7 +33,7 @@ export class ToastComponent {
   // showToast() {
   //   console.log('Toast wird angezeigt'); 
   //   this.show = true;
-  // zum css stylen 
+  // zum css stylen ----------------------------
   // }
 
   closeToast() {
