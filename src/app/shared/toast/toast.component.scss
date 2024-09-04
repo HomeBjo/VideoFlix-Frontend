@@ -27,7 +27,7 @@
   }
 
   &.error {
-    background-color: #2e3edf;
+    background: linear-gradient(to right, red 4%, #2e3edf 0%);
   }
 
   &.info {
@@ -58,7 +58,7 @@
 }
 
 .left-side {
-  background-color: red;
+  
   width: 20px;
   height: 80px;
   /* border-radius: 20px; */
@@ -83,4 +83,13 @@
 .close-img {
   padding-right: 20px;
   cursor: pointer;
+}
+
+@media (max-width: 550px) {
+  .toast-container {
+    width: 300px;
+    font-size: 12px;
+  }
+
+  
 }
