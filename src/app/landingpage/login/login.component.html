@@ -1,7 +1,7 @@
 
-    <section>
-        <app-header></app-header>
-        <div class="mainContent">
+<section>
+    <app-header></app-header>
+    <div class="mainContent">
         <form class="contentDiv" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
             <h1>Log in</h1>
             <div class="positionInputs">
@@ -31,20 +31,38 @@
                     </div>
                 }
             </div>
-           
             <div class="rememberContainer">
                 <input type="checkbox" id="styledCheckbox" [checked]="rememberMe" (click)="checkRememberMe()">
-                <label for="styledCheckbox">Remember me</label>
-              </div>
-        
-            <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Get started</button>
+                @if (!checkWindowWidth()) {
+                    <span>Remember me 
+                        <img src="../../../../assets/icons/icons-help.png" alt="icon-question-mark"
+                        (mouseenter)="shwoQuestionWindow()" (mouseleave)="shwoQuestionWindow()">
+                        <div class="questionDiv" [ngClass]="{'shwoQ-Div': shwoQesttionDiv ,'hideQ-Div' : !shwoQesttionDiv }">Remember me does not work on gest login.</div>
+                    </span>
+                } @else {
+                    <span>Remember me 
+                        <img src="../../../../assets/icons/icons-help.png" alt="icon-question-mark"
+                        (click)="shwoQuestionWindow()">
+                        <div class="questionDiv" [ngClass]="{'shwoQ-Div': shwoQesttionDiv ,'hideQ-Div' : !shwoQesttionDiv }">Remember me does not work on gest login.</div>
+                    </span>
+                }
+
+            </div>
+
+            <div class="btnBox">
+                <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Log in</button>
+                <span class="guestLogin" (click)="guestLogin()">Guest login</span>
+            </div>
         </form>
-        <div class="forgotContainer"><span [routerLink]="['/email-send']" class="blueText">Forgot password?</span></div>
-        <div class="signContainer"><span class="blackText">New to Videoflix?</span><span [routerLink]="['/register']" class="blueText">Sign Up now</span></div>
+        <div class="forgotContainer">
+            <span [routerLink]="['/email-send']" class="blueText">Forgot password?</span>
         </div>
-      
-        
-
-
-        <app-footer></app-footer>
-    </section>
+        <div class="signContainer">
+            <span class="blackText">New to Videoflix?</span>
+            <span [routerLink]="['/register']" class="blueText">Sign Up now</span>
+        </div>
+    </div>
+  
+    
+    <app-footer></app-footer>
+</section>

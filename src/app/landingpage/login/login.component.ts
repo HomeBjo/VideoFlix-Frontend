@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink, RouterModule} from '@angular/router';
 import { UserService } from '../../services/user-service.service';
@@ -23,6 +23,9 @@ export class LoginComponent {
   passwordFieldType: string = 'password';
   isRememberMeChecked: boolean = false;
   rememberMe: boolean = false;
+  questionMartMobile: boolean = false;
+  shwoQesttionDiv: boolean = false;
+
 
   constructor(
     public userService: UserService,
@@ -31,10 +34,13 @@ export class LoginComponent {
 
   ngOnInit() {
     this.checkRememberMe2();
-    // this.isRememberMeChecked = this.userService.rememberMe;
     this.userService.checkGuestUser();
   }
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.checkWindowWidth();
+  }
 
   async login() {
     this.loadLogin(this.userService.user_email, this.password);
@@ -123,6 +129,20 @@ export class LoginComponent {
     } else {
       this.rememberMe = false;
     }
+  }
+
+
+  checkWindowWidth(){
+    if (window.innerWidth < 1200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  shwoQuestionWindow(){
+    this.shwoQesttionDiv = !this.shwoQesttionDiv;
   }
 
 }

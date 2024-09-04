@@ -62,11 +62,31 @@ section {
         color: black;
         font-weight: 400;
         font-size: 16px;
+        @include dFlex($g: 8px);
+        position: relative;
+        img{
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .questionDiv{
+            padding: 4px;
+            width: 168px;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 14px;
+            border-bottom-left-radius: 0;
+            position: absolute;
+            left: 136px;
+            bottom: 12px;
+        }
     }
 }
+
 .signContainer{
     padding-top: 8px;
     display: flex;
+    align-items: flex-end;
     gap: 16px;
 }
 
@@ -100,6 +120,27 @@ section {
             color: $btnColor;
         }
     }
+    .btnBox{
+        @include dFlex($g: 12px);
+        .guestLogin{
+            margin-top: 1.2rem;
+            color: whitesmoke;
+            background-color: $btnColor;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            border: none;
+            border-radius: 40px;
+            font-size: larger;
+            cursor: pointer;
+            transition: ease-in-out 0.3s;
+            width: 120px;
+            text-align: center;
+            &:hover {
+                background-color: #0919ce;
+                color: white;
+            }
+        }
+    }
 }
 
 .submitBtn {
@@ -115,7 +156,7 @@ section {
     border: 1px solid $btnColor;
     cursor: pointer;
     transition: ease-in-out 0.3s;
-
+    width: 120px;
     &:hover {
         background-color: #0919ce;
         color: white;
@@ -134,6 +175,7 @@ section {
     font-size: larger;
     border: 1px solid $btnColor;
     transition: ease-in-out 0.3s;
+    width: 120px;
 }
 
 .invalidFeedback{
@@ -178,42 +220,6 @@ section {
     }
 }
 
-@media (max-width: 630px) {
-   
-    .mainContent{
-        padding: 1rem;
-            min-width: auto;
-             margin: 2rem;
-       
-        .blueText{
-            font-weight: 700;
-            font-size: 18px;
-        }
-     
-        .blackText{
-            color: black;
-            font-weight: 500;
-            font-size: 16px;
-        }
-        }
-
-        .contentDiv {
-            padding-bottom: 16px;
-            min-width: auto;
-            width: 253px;
-            padding: 0.5rem;
-          
-            h1 {
-                font-size: 2.3em;
-                margin: 0;
-                margin-bottom: 0.5rem;
-            }
-        }
-        .signContainer{
-            margin-bottom: 12px;
-        }
-  }
-
 /* Checkbox styling */
 input[type="checkbox"] {
     -webkit-appearance: none;
@@ -248,4 +254,132 @@ input[type="checkbox"] {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+
+.shwoQ-Div{
+    animation: showDiv 0.2s ease-in-out;
+}
+
+@keyframes showDiv {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.hideQ-Div{
+    opacity: 0;
+    visibility: hidden; 
+    animation: hideDiv 0.2s ease-in-out;
+}
+
+@keyframes hideDiv {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 630px) {
+   
+    .mainContent{
+        padding: 1rem;
+            min-width: auto;
+             margin: 2rem;
+       
+        .blueText{
+            font-weight: 700;
+            font-size: 16px;
+        }
+     
+        .blackText{
+            color: black;
+            font-weight: 500;
+            font-size: 15px;
+        }
+    }
+
+    .contentDiv {
+        padding-bottom: 16px;
+        min-width: auto;
+        width: 253px;
+        padding: 0.5rem;
+      
+        h1 {
+            font-size: 2.3em;
+            margin: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .btnBox{
+            .guestLogin{
+                padding: 0;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                font-size: medium;
+                width: 96px;
+            }
+        }
+    }
+
+    .forgotContainer{
+        margin-top: 12px;
+    }
+
+    .rememberContainer{
+        display: flex;
+        justify-content: flex-start;
+        width: -webkit-fill-available;
+        gap: 4px;
+        padding-top: 12px;
+        span{
+            color: black;
+            font-weight: 400;
+            font-size: 16px;
+            @include dFlex($g: 8px);
+            position: relative;
+            img{
+                width: 16px;
+                height: 16px;
+            }
+            .questionDiv{
+                bottom: 22px;
+                left: -36px;
+                border-radius: 14px;
+                border-bottom-right-radius: 0;
+                font-size: smaller;
+                width: 160px;
+            }
+        }
+    }
+
+    .submitBtn {
+        padding: 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: medium;
+        width: 96px;
+    }
+    
+    .submitBtnDisabled{
+        padding: 0;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: medium;
+        width: 96px;
+    }
+
+    input[type="checkbox"]{
+        width: 16px;
+        height: 16px;
+    }
+}
+
+
   
