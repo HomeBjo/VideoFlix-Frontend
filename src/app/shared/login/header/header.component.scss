@@ -3,7 +3,6 @@
 .headerDiv {
     @include dFlex($j: space-between);
     padding: 3rem;
-    // width: calc(100% - 6rem);
     width: calc(100vw - 6rem);
 
     img {
@@ -34,17 +33,12 @@
 @media (max-width: 600px) {
    
     .headerDiv {
-        width: calc(100vw - 2rem);
+        width: calc(100vw - 2.1rem);
+        padding: 1rem;
         img {
             width: 3rem;
             height: auto;
             object-fit: contain;
         }
     }
-  }
-  @media (max-width: 500px) {
-   
-    .headerDiv {
-        padding: 1rem;
-    }
-  }
+}

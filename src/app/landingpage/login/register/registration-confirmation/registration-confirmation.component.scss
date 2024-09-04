@@ -209,3 +209,10 @@ section{
     	}
     }
 }
+
+@media (max-width: 630px) {
+	.textDiv{
+		max-width: 254px;
+		padding: 1rem;
+	}
+}
