@@ -31,7 +31,11 @@
                     </div>
                 }
             </div>
-            <div class="rememberContainer"><input type="checkbox"><span>Remember me</span></div>
+           
+            <div class="rememberContainer">
+                <input type="checkbox" id="styledCheckbox">
+                <label for="styledCheckbox">Remember me</label>
+              </div>
     
             <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Get started</button>
         </form>
