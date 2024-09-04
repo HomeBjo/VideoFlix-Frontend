@@ -33,14 +33,10 @@
             </div>
            
             <div class="rememberContainer">
-                <input type="checkbox" id="styledCheckbox">
+                <input type="checkbox" id="styledCheckbox" [checked]="rememberMe" (click)="checkRememberMe()">
                 <label for="styledCheckbox">Remember me</label>
               </div>
-            <div class="rememberContainer">
-                <input type="checkbox" [checked]="rememberMe" (click)="checkRememberMe()">
-                <span>Remember me</span>
-            </div>
-    
+        
             <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Get started</button>
         </form>
         <div class="forgotContainer"><span [routerLink]="['/email-send']" class="blueText">Forgot password?</span></div>
