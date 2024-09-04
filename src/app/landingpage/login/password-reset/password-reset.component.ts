@@ -60,7 +60,7 @@ export class PasswordResetComponent {
     return false;
   }
 
-  async setNewPassword() {
+  async setNewPassword(ngForm: NgForm) {
     const uid = this.route.snapshot.paramMap.get('uid');
     const token = this.route.snapshot.paramMap.get('token');
 
@@ -74,9 +74,10 @@ export class PasswordResetComponent {
       return true;
       // this.router.navigateByUrl('/login');
     } else {
-    
+      
       console.log('Fehler beim Zurücksetzen des Passworts.');
       console.log(this.confirm_password, uid, token);
+      ngForm.resetForm();
       return false;
     }
   }
@@ -100,13 +101,12 @@ export class PasswordResetComponent {
   async onSubmit(ngForm: NgForm) {
     if (ngForm.valid && this.checkAllInputs()) {
       try {
-        const success = await this.setNewPassword();
+        const success = await this.setNewPassword(ngForm);
         // ngForm.resetForm();
         if (success) {
           this.passwordSent = true;
         }
       } catch (error) {
-        // ngForm.resetForm();
       }
     }
   }
