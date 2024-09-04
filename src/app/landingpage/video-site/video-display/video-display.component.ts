@@ -21,16 +21,10 @@ export class VideoDisplayComponent {
   // closeOverlayPlayButton = false;
   private favoriteTimeout!: ReturnType<typeof setTimeout>;
   isFavorite: boolean = false;
-
+  isRequestInProgress: boolean = false; 
 
   constructor(private videoService: VideoService, private videoSiteComponent: VideoSiteComponent) { }
 
-
-  // ngOnInit(): void {
-  //   this.isFavorite = this.video.is_favorite;
-  //   console.log('isFavorite:',this.isFavorite);
-    
-  // }
 
 
   ngAfterViewInit(): void {
@@ -65,25 +59,30 @@ export class VideoDisplayComponent {
     this.isVideoVisible = false;
   }
 
-  addFavorite(video: VideoJson) {
-    video.is_favorite = !video.is_favorite;
-  
-    if (this.favoriteTimeout) { // reset timer
-      clearTimeout(this.favoriteTimeout);
+
+  async addFavorite(video: VideoJson) {
+    if (this.isRequestInProgress) {
+      return; 
     }
 
-    console.log(this.isFavorite, '-' ,video.is_favorite);
-    // Wenn der Zustand geändert wurde (d.h., wenn `video.is_favorite` nicht mehr dem ursprünglichen Zustand entspricht)
-    if (video.is_favorite != this.isFavorite) { // verbuggt
-      const body: FavoriteBody = {
-        fav_video: video.id
-      };
-  
-      this.favoriteTimeout = setTimeout(() => { //  pushe das video nach 2 sek, wenn timer nicht resettet wird
-        console.log('_____');
-        this.videoService.addFavoriteVideo(body);
-      }, 2000);
-    }
+    video.is_favorite = !video.is_favorite;
+
+    const body: FavoriteBody = {
+      fav_video: video.id
+    };
+
+    this.isRequestInProgress = true;
+    this.favoriteTimeout = setTimeout(async () => {
+      try {
+        console.log('_____update fav');
+        await this.videoService.addFavoriteVideo(body);
+      } catch (e) {
+        console.log('Fehler beim Favorisieren:', e);
+        video.is_favorite = !video.is_favorite;
+      } finally {
+        this.isRequestInProgress = false;
+      }
+    }, 1000);
   }
   
 

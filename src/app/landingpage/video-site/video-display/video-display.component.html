@@ -11,7 +11,13 @@
       <div class="description-container">
         <div class="description-header">
           <span>Video Description</span>
-          <img src="../../../../assets/icons/{{video.is_favorite ? 'icon-star' : 'star-empty-icon'}}.png" alt="starImg" class="starIconImg" (click)="addFavorite(video)">
+          <img src="../../../../assets/icons/{{video.is_favorite ? 'icon-star' : 'star-empty-icon'}}.png" 
+            alt="starImg" 
+            class="starIconImg" 
+            (click)="addFavorite(video)"
+            [class.disabled]="isRequestInProgress"
+            [style.pointer-events]="isRequestInProgress ? 'none' : 'auto'"
+            >
         </div>
         <span class="description-text">{{ video.description }}</span>
       </div>

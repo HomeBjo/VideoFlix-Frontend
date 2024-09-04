@@ -132,3 +132,8 @@ h2 {
 .active {
   display: block; 
 }
+
+.starIconImg.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
