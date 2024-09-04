@@ -75,6 +75,13 @@ export class ProfileDetailsComponent {
     return false;
   }
 
+  checkIfNameIsTooLong(i : number): boolean { //überprüft, ob index 0-2 ein sting ist und  größer 20 Zeichen ist
+    const value = this.profileFields[i].value;
+    if (typeof value === 'string') {
+      return value.length >= 20;
+    }
+    return false;
+  }
 
   checkIfInputsChecked(): boolean { //checkt das array ung guckt ob isEditing = true ist
     return this.profileFields.some(field => field.isEditing);

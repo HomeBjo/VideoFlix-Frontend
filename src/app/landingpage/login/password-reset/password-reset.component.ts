@@ -103,6 +103,7 @@ export class PasswordResetComponent {
       try {
         const success = await this.setNewPassword(ngForm);
         if (success) {
+          localStorage.clear();
           this.passwordSent = true;
         }
       } catch (error) {

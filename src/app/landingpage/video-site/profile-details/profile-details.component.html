@@ -1,7 +1,7 @@
 <section>
     <header>
         <img src="../../../assets/img/logo_small.svg" alt="logo_small" [routerLink]="['/video_site']">
-        <button (click)="back()" class="blueBtn">Back</button>
+        <button (click)="back()" class="blueBtnTopRight">Back</button>
     </header>
     @if (!continueMessage) {
         <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
@@ -19,6 +19,12 @@
                             @if ($index == 0 || $index == 1) {
                                 <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
                                     This field must have 3 or more characters.</span>
+                            }
+                        }
+                        @if(checkIfNameIsTooLong($index)) {
+                            @if ($index == 0 || $index == 1) {
+                                <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
+                                    Name is too long</span>
                             }
                         }
                         <!-- render error (email)-->

@@ -30,6 +30,7 @@ export class UserService {
   async checkGuestUser(){ 
     let userId = localStorage.getItem('userId')?.toString();
     const token = localStorage.getItem('token');
+    const rememberMe = localStorage.getItem('rememberMe');
     const logoutInProgress = localStorage.getItem('logoutInProgress');
     if (logoutInProgress === 'true') {
       localStorage.removeItem('logoutInProgress');
@@ -38,10 +39,12 @@ export class UserService {
     if (userId === GUEST_ID) {
       localStorage.clear();
     } else {
-      const user = await this.verifyToken(token!, userId!);
+      if (rememberMe === 'true') {
+        const user = await this.verifyToken(token!, userId!);
         if (user) {
           this.router.navigateByUrl('/video_site');
-        }
+        } 
+      }
     }
   }
 
@@ -109,13 +112,14 @@ export class UserService {
     }
   }
 
+
   async userLogout(userID:string){
     const loginUrl = `${environment.baseUrl}/users/logout/`;
-
+    const rememberMe = localStorage.getItem('rememberMe');
     try {
       await lastValueFrom(this.http.post(loginUrl, { headers: this.headers }));
       this.router.navigateByUrl('/login');
-      if (userID === GUEST_ID) {
+      if (userID === GUEST_ID || rememberMe === 'false') {
         localStorage.clear(); 
         console.log('LocalStorage gelöscht');
       }
@@ -146,8 +150,6 @@ export class UserService {
       await lastValueFrom(this.http.post(resetUrl, emailData));
       return true;
     } catch (e: any) {
-      // console.error('11111Fehler beim Senden der E-Mail:', e);
-      // Fehlermeldung anzeigen mit text
       const errorMessage = 'Oops, something went wrong. Please try again.';
       this.toastService.showMessage(errorMessage, 'error');
   
@@ -191,8 +193,7 @@ export class UserService {
           console.error('Fehler beim Laden der UserData:', e);
       }
     }
-}
-
+  }
 
 
   async updateUserData(newUserData: UserData){

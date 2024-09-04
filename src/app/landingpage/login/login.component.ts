@@ -21,13 +21,17 @@ export class LoginComponent {
   GUEST_MAIL : string = GUEST_EMAIL;
   GUEST_PW : string = GUEST_PW;
   passwordFieldType: string = 'password';
-
+  isRememberMeChecked: boolean = false;
+  rememberMe: boolean = false;
 
   constructor(
     public userService: UserService,
   ) {}
 
+
   ngOnInit() {
+    this.checkRememberMe2();
+    // this.isRememberMeChecked = this.userService.rememberMe;
     this.userService.checkGuestUser();
   }
 
@@ -57,6 +61,8 @@ export class LoginComponent {
       console.error('Fehler beim Login:', error);
     }
   }
+
+
   checkEmail(): boolean {
     const emailPattern = /^[^@]+@[^\.]+\..+$/;
     if (this.userService.user_email.length >= 5 && emailPattern.test(this.userService.user_email)) {
@@ -73,26 +79,50 @@ export class LoginComponent {
     return false;
   }
 
+
   checkAllInputs() {
-    if (
-      this.checkEmail() &&
-      this.checkPassword()
-    ) {
+    if (this.checkEmail() && this.checkPassword()) {
       return true;
     }
     return false;
   }
 
+
   onSubmit(ngForm: NgForm) {
     if (ngForm.valid && this.checkAllInputs()) {
       this.loadLogin(this.userService.user_email, this.password);
+      if (!this.rememberMe) {
+        localStorage.setItem('rememberMe', 'false');
+      }
     } else {
       ngForm.resetForm();
     }
   }
 
+
   togglePasswordVisibility(): void {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
   }
+
+
+  checkRememberMe(){
+    this.rememberMe = !this.rememberMe;
+    if (this.rememberMe) {
+      localStorage.setItem('rememberMe', 'true');
+    } else {
+      localStorage.setItem('rememberMe', 'false');
+    }
+  }
+
+  
+  checkRememberMe2(){
+    let remember = localStorage.getItem('rememberMe');
+    if (remember === 'true') {
+      this.rememberMe = true;
+    } else {
+      this.rememberMe = false;
+    }
+  }
+
 }
