@@ -258,3 +258,78 @@ form{
 @keyframes l2 {
     100% {background-position: right -50px top 0}
 }
+
+@media (max-width: 630px) {
+    section{
+        header{
+            img{
+                margin-left: 1rem;
+            }
+        }
+    }
+
+
+    .blueBtnTopRight{
+        padding: 12px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        margin-right: 1rem;
+    }
+
+    form{
+        @include dFlex($g: 1rem);
+        margin: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        .formHeaderDiv{
+            h1{
+                font-size: 2.5rem;
+            }
+            span{
+                font-size: medium;
+            }
+        }
+    }
+
+    .invalidFeedbackBottom{
+        margin-top: -1.2rem;
+        margin-bottom: 0;
+    }
+
+    .lineBox{
+        font-size: large;
+        .headerDiv{
+            @include dFlex($j: space-between, $g: 64px);
+            .invalidFeedback{
+                @include dFlex($a:flex-start, $g: 4px);
+                font-size: x-small;
+            }
+        }
+        .profileDetails{
+            font-size: medium;
+            margin-bottom: 0.6rem;
+        }
+    }
+
+    .saveBlueBtn{
+        padding: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
+        font-size: x-large;
+    }
+    
+    .saveBlueBtnDisabled{
+        padding: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
+        font-size: x-large;
+    }
+
+    .loaderContainer{
+        @include dFlex($g: 1rem);
+        h1{
+            font-size: 1.2rem;
+        }
+    }
+
+}

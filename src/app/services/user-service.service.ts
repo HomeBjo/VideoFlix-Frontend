@@ -201,10 +201,10 @@ export class UserService {
     const token = localStorage.getItem('token');
 
     try {
-        let user = await lastValueFrom(this.http.put<UserData[]>(url, newUserData, {
+        let user = await lastValueFrom(this.http.put<UserData>(url, newUserData, {
             headers: {'Authorization': `Bearer ${token}`}})); //benutze statt id den token der schwerer zu manipulieren ist
         if (user) {
-          this.currentUserFirstName = user[0].first_name;
+          this.currentUserFirstName = user.first_name;
           return true;
         }
     } catch (e) {
