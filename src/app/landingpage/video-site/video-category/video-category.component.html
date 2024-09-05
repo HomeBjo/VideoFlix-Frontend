@@ -10,23 +10,34 @@
     <div class="videoDiv">
         <div class="videoDiv2">
             <div class="videoPosition">
-                <h2>{{ selectedCategory}}</h2>
-                <div class="video4LoopBox">
-                    @for (video of categoryVideos; track $index) {
-                         <app-video-preview
-                            [video]="video"
-                            (videoSelected)="onVideoSelected($event)"
-                        ></app-video-preview>
+                <h1>My List</h1>
+                <div class="video4LoopContainer">
+                    @if (showArrows[0]) {
+                        <div class="arrowLeft">
+                            <button (click)="ArrowLeftClick(0)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
+                        </div>
+                    }
+                    <div class="video4LoopBox" #video4LoopBox0>
+                        @for (video of videoService.allVideos; track $index) {
+                            <app-video-preview
+                                [video]="video"
+                                (videoSelected)="onVideoSelected($event)"
+                            ></app-video-preview>
+                        }
+                    </div>
+                    @if (showArrows[0]) {
+                        <div class="arrowRight">
+                            <button (click)="ArrowRightClick(0)"><img src="../../../assets/icons/arrowRight.png" alt=""></button>
+                        </div>
                     }
                 </div>
             </div>
-        
-            </div>
         </div>
-        <app-video-display
-                      *ngIf="selectedVideo"
-                      [video]="selectedVideo"
-                      (closeDisplay)="closeVideoDisplay()"
-                    ></app-video-display>
+    </div>           
+    <app-video-display
+      *ngIf="selectedVideo"
+      [video]="selectedVideo"
+      (closeDisplay)="closeVideoDisplay()"
+    ></app-video-display>
 </section>
 

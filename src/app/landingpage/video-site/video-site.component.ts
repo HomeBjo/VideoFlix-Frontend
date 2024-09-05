@@ -57,7 +57,7 @@ export class VideoSiteComponent {
     this.videoService.startFetchVideos().subscribe(
       (data: any) => {
         this.newVideos = data;
-        // console.log(this.newVideos);
+        console.log(this.newVideos);
         this.videoService.allVideos = this.newVideos;
         this.userService.getUserData();
       },
@@ -183,28 +183,6 @@ export class VideoSiteComponent {
       default:
         console.error('Invalid index on left arrow:', index);
     }
-  }
-
-
-  // überprüfe ob die breite der videoDiv breiter ist als der bildschim. wenn ja, dann zeig preile an
-  checkShowArrow(index: number): boolean {
-    if (index) {
-      const videoLoopBoxes = [
-        this.video4LoopBox0,
-        this.video4LoopBox1,
-        this.video4LoopBox2,
-        this.video4LoopBox3,
-      ];
-
-      const videoLoopBox = videoLoopBoxes[index - 1]?.nativeElement;
-
-      if (!videoLoopBox) {
-        return false;
-      }
-
-      return videoLoopBox.scrollWidth > videoLoopBox.clientWidth;
-    }
-    return false;
   }
 
 
