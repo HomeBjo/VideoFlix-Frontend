@@ -10,7 +10,7 @@
     <div class="videoDiv">
         <div class="videoDiv2">
             <div class="videoPosition">
-                <h1>My List</h1>
+                <h1>{{ selectedCategory}}</h1>
                 <div class="video4LoopContainer">
                     @if (showArrows[0]) {
                         <div class="arrowLeft">
@@ -18,7 +18,7 @@
                         </div>
                     }
                     <div class="video4LoopBox" #video4LoopBox0>
-                        @for (video of videoService.allVideos; track $index) {
+                        @for (video of categoryVideos; track $index) {
                             <app-video-preview
                                 [video]="video"
                                 (videoSelected)="onVideoSelected($event)"
