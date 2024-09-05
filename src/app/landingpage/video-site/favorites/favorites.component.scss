@@ -14,7 +14,7 @@ section {
     padding: 3rem;
     padding-left: 6rem;
     margin-top: 64px;
-    height: 100%;
+    height: auto;
     .h1Div {
         margin-top: 6rem;
     }
@@ -24,15 +24,6 @@ section {
         justify-content: flex-start; 
         align-content: flex-start;
         gap: 26px;
-        overflow-y: auto; /* Vertikales Scrollen erlauben */
-        overflow-x: hidden; /* Kein horizontales Scrollen */
-        scrollbar-width: none; /* Firefox scrollbar verstecken */
-        -ms-overflow-style: none; /* Internet Explorer scrollbar verstecken */
-        max-height: calc(100dvh - 160px - 3rem - 64px - 6rem); /* Höchsthöhe der Liste für das Scrollen begrenzen */
     }
-}
-
-.videoBox::-webkit-scrollbar {
-    display: none; /* Safari und Chrome scrollbar verstecken */
 }
 

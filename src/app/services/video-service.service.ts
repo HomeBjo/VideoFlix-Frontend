@@ -17,7 +17,7 @@ export class VideoService {
   constructor(private http: HttpClient) { }
 
   startFetchVideos(): Observable<any> {
-    const url = `${environment.baseUrl}/videos/get_videos/`;
+    const url = `${environment.baseUrl}/videos/get_videos/get_videos/`;
     return this.http.get<any>(url, { headers: this.headers });
   }
 
