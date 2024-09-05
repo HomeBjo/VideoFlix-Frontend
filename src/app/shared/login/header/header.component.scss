@@ -35,6 +35,8 @@
     .headerDiv {
         width: calc(100vw - 2.1rem);
         padding: 1rem;
+        gap: 150px;  // mal testen wegen handy und nach vorlage 
+        justify-content: center; // mal testen wegen handy und nach vorlage 
         img {
             width: 3rem;
             height: auto;
