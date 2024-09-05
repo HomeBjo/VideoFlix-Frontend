@@ -43,7 +43,6 @@ export class VideoSiteComponent {
   showArrows: boolean[] = [false, false, false, false, false];
   showFavDiv: true | false | null = null;
 
-
   constructor(
     private cdr: ChangeDetectorRef,
     public userService: UserService,
@@ -54,6 +53,11 @@ export class VideoSiteComponent {
 
   ngOnInit() {
     this.checkUserLoginStatus();
+    this.fetshFavVideos();
+    this.fetshAllVideos();
+  }
+
+  fetshAllVideos(){
     this.videoService.startFetchVideos().subscribe(
       (data: any) => {
         this.newVideos = data;
@@ -63,6 +67,18 @@ export class VideoSiteComponent {
       },
       (error: any) => {
         console.error('Error fetching videos:', error);
+      }
+    );
+  }
+
+  fetshFavVideos(){
+    this.videoService.fetshFavorites().subscribe(
+      (data: any) => {
+        this.videoService.favVideos = data;
+        console.log(this.videoService.favVideos);
+      },
+      (error: any) => {
+        console.error('Error fetching fav videos:', error);
       }
     );
   }
@@ -187,19 +203,12 @@ export class VideoSiteComponent {
 
 
   checkIfFavoreitesAvailable() {
-    return this.videoService.allVideos.some(v => v.is_favorite === true);
+    return this.videoService.favVideos.some(v => v.is_favorite === true);
   }
 
 
   getFavorites(){
-    return this.videoService.allVideos.filter(v => v.is_favorite === true);
-  }
-
-
-  ngOnDestroy() {
-    if (this.checkUserInterval) {
-      clearInterval(this.checkUserInterval);
-    }
+    return this.videoService.favVideos.filter(v => v.is_favorite === true);
   }
 
 }

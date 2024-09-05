@@ -21,6 +21,12 @@ export class VideoService {
     return this.http.get<any>(url, { headers: this.headers });
   }
 
+
+  fetshFavorites(): Observable<any> {
+    const url = `${environment.baseUrl}/videos/get_videos/favorites/`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
   // loadCategoryVideos(category:string): Observable<any> {
   //   const url = `${environment.baseUrl}/videos/category/${category}/`;
   //   return this.http.get<any>(url, { headers: this.headers }).pipe(
@@ -40,19 +46,19 @@ export class VideoService {
   }
 
 
-  async fetshFavorites() {
-    const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
+  // async fetshFavorites() {
+  //   const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
 
-    try{
-      const response = await lastValueFrom(this.http.get<VideoJson[]>(loginUrl, { headers: this.headers }));
-      if (response) {
-        this.favVideos = response;
-        console.log('favVideos:',this.favVideos);
-      }
-    } catch(e) {
-      console.log('Fehler beim fetshen der favoriten:', e);
-    }
-  }
+  //   try{
+  //     const response = await lastValueFrom(this.http.get<VideoJson[]>(loginUrl, { headers: this.headers }));
+  //     if (response) {
+  //       this.favVideos = response;
+  //       console.log('favVideos:',this.favVideos);
+  //     }
+  //   } catch(e) {
+  //     console.log('Fehler beim fetshen der favoriten:', e);
+  //   }
+  // }
 
 
   async addFavoriteVideo(body: FavoriteBody) {
