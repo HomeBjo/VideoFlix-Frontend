@@ -287,6 +287,8 @@ header {
     width: 78px;
     height: 78px;
     cursor: pointer;
+    //  filter: sepia(1) saturate(1000%) hue-rotate(218deg) brightness(85%);
+    filter: hue-rotate(338deg) brightness(82%) contrast(85%);
   }
   .mobileSection {
     position: absolute;
