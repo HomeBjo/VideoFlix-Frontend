@@ -115,3 +115,24 @@ footer{
         }
     }
 }
+
+
+@media (max-width: 680px) {
+
+    .contentDiv{
+        margin-bottom: 0rem;
+        flex-direction: column;
+        text-align: center;
+        
+        h1{
+            font-size: 2rem;
+            margin-bottom: 0;
+        }
+        .inputBox{
+          
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+    
+}
