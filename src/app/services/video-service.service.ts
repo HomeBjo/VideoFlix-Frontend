@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, map, Observable } from 'rxjs';
+import { lastValueFrom, map, Observable, Subject } from 'rxjs';
 import { FavoriteBody } from '../interfaces/favorite-body';
 import { environment } from '../../environments/environments';
 import { VideoJson } from '../interfaces/video-json';
@@ -13,7 +13,7 @@ export class VideoService {
   headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   allVideos: VideoJson[] = [];
   favVideos: VideoJson[] = [];
-
+  public reloadFavs$ = new Subject<void>();
   constructor(private http: HttpClient) { }
 
   startFetchVideos(): Observable<any> {
@@ -46,19 +46,19 @@ export class VideoService {
   }
 
 
-  // async fetshFavorites() {
-  //   const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
+  async fetshFavForFavoriteSite() {
+    const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
 
-  //   try{
-  //     const response = await lastValueFrom(this.http.get<VideoJson[]>(loginUrl, { headers: this.headers }));
-  //     if (response) {
-  //       this.favVideos = response;
-  //       console.log('favVideos:',this.favVideos);
-  //     }
-  //   } catch(e) {
-  //     console.log('Fehler beim fetshen der favoriten:', e);
-  //   }
-  // }
+    try{
+      const response = await lastValueFrom(this.http.get<VideoJson[]>(loginUrl, { headers: this.headers }));
+      if (response) {
+        this.favVideos = response;
+        console.log('favVideos:',this.favVideos);
+      }
+    } catch(e) {
+      console.log('Fehler beim fetshen der favoriten:', e);
+    }
+  }
 
 
   async addFavoriteVideo(body: FavoriteBody) {

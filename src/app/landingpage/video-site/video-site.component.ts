@@ -13,6 +13,8 @@ import { VideoService } from '../../services/video-service.service';
 import { VideoDisplayComponent } from './video-display/video-display.component';
 import { VideoJson } from '../../interfaces/video-json';
 import { HeaderComponent } from '../../shared/videoSite/header/header.component';
+import { Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-video-site',
@@ -53,9 +55,11 @@ export class VideoSiteComponent {
 
   ngOnInit() {
     this.checkUserLoginStatus();
-    this.fetshFavVideos();
+    this.userService.getUserData();
     this.fetshAllVideos();
+    this.fetshFavVideos();
   }
+
 
   fetshAllVideos(){
     this.videoService.startFetchVideos().subscribe(
@@ -63,7 +67,6 @@ export class VideoSiteComponent {
         this.newVideos = data;
         console.log(this.newVideos);
         this.videoService.allVideos = this.newVideos;
-        this.userService.getUserData();
       },
       (error: any) => {
         console.error('Error fetching videos:', error);
@@ -71,16 +74,26 @@ export class VideoSiteComponent {
     );
   }
 
+
   fetshFavVideos(){
-    this.videoService.fetshFavorites().subscribe(
+    this.videoService.reloadFavs$.pipe( // initaliere die Observable 
+      //switchMap ist ein RxJS-Operator. Er nimmt eine Observable (in diesem Fall reloadFavs$) 
+      //und projiziert jedes Ereignis auf eine neue Observable (fetshFavorites()), 
+      //wobei er die vorherige Observable abmeldet und nur die neueste Observable verwendet.
+      switchMap(() => this.videoService.fetshFavorites())
+    ).subscribe( // empfängt die neue Observable
       (data: any) => {
         this.videoService.favVideos = data;
-        console.log(this.videoService.favVideos);
+        console.log('dddd', this.videoService.favVideos);
       },
       (error: any) => {
         console.error('Error fetching fav videos:', error);
       }
     );
+    
+    //Dies löst die Kette erneut aus. Es wird ein Ereignis in reloadFavs$ gesendet, 
+    //das den gesamten pipe- und switchMap-Prozess von vorne startet.
+    this.videoService.reloadFavs$.next();
   }
 
 

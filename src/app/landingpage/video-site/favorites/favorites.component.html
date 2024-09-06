@@ -8,13 +8,11 @@
             }
         </div>
         <div class="videoList">
-            @if(videoService.favVideos.length > 0){
-                @for (video of videoService.favVideos; track $index) {
-                    <app-video-preview
-                        [video]="video"
-                        (videoSelected)="onVideoSelected($event)"
-                    ></app-video-preview>
-                }
+            @for (video of videoService.favVideos; track $index) {
+                <app-video-preview
+                    [video]="video"
+                    (videoSelected)="onVideoSelected($event)"
+                ></app-video-preview>
             }
         </div>
         
