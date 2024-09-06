@@ -19,11 +19,17 @@ section {
         margin-top: 6rem;
     }
     .videoList {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start; 
-        align-content: flex-start;
-        gap: 26px;
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 10px;
+    }
+}
+
+@media (max-width: 510px) {
+    .videoBox{
+        padding-left: 3rem;
+        width: calc(100% - 1rem);
     }
 }
 
