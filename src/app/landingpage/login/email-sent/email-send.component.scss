@@ -168,3 +168,110 @@ section {
     font-weight: 400;
    }
 }
+@media (max-width: 630px) {
+   
+  .mainContent{
+      padding: 1rem;
+      min-width: auto;
+     
+      .blueText{
+          font-weight: 700;
+          font-size: 16px;
+      }
+   
+      .blackText{
+          color: black;
+          font-weight: 500;
+          font-size: 15px;
+      }
+  }
+
+  .contentDiv {
+      padding-bottom: 16px;
+      min-width: auto;
+      width: 254px;
+      padding: 1.5rem;
+    
+      h1 {
+          font-size: 2.3em;
+          margin: 0;
+          margin-bottom: 0.5rem;
+      }
+
+      .btnBox{
+          .guestLogin{
+              padding: 0;
+              padding-top: 8px;
+              padding-bottom: 8px;
+              font-size: medium;
+              width: 96px;
+          }
+      }
+  }
+
+  .forgotContainer{
+      margin-top: 12px;
+  }
+
+  .rememberContainer{
+      display: flex;
+      justify-content: flex-start;
+      width: -webkit-fill-available;
+      gap: 4px;
+      padding-top: 12px;
+      span{
+          color: black;
+          font-weight: 400;
+          font-size: 16px;
+          @include dFlex($g: 8px);
+          position: relative;
+          img{
+              width: 16px;
+              height: 16px;
+          }
+          .questionDiv{
+              bottom: 22px;
+              left: -36px;
+              border-radius: 14px;
+              border-bottom-right-radius: 0;
+              font-size: smaller;
+              width: 160px;
+          }
+      }
+  }
+
+  .submitBtn {
+      padding: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: medium;
+      width: 96px;
+  }
+  
+  .submitBtnDisabled{
+      padding: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: medium;
+      width: 96px;
+  }
+
+  input[type="checkbox"]{
+      width: 16px;
+      height: 16px;
+  }
+}
+.infoText {
+  padding: 4px;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  span {
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    /* Font DM Sans */
+  }
+}
+
+
