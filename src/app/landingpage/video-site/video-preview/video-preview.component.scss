@@ -81,3 +81,11 @@ section {
         opacity: 0;
     }
 }
+
+@media (max-width: 1200px){
+    section {
+        .descriptionBox {
+            display: none;
+        }
+    }
+}

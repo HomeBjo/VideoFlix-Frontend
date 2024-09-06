@@ -35,27 +35,6 @@ section{
     }
 }
 
-
-
-// .videoDiv{
-//     width: calc(100% - 6rem);
-//     min-height: 2000px;
-//     padding-top: 400px;
-//     padding-left: 6rem;
-//     .videoDiv2{
-//         position: absolute;
-//         margin-top: -6rem;
-//         z-index: 2;
-//         .videoPosition{
-//             color: whitesmoke;
-//             .video4LoopBox{
-//                 display: flex;
-//                 gap: 4rem;
-//             }
-//         }
-//     }
-// }
-
 .videoDiv {
     height: calc(100dvh - 80px);
     margin-top: 80px;
@@ -76,12 +55,22 @@ section{
 
                 .video4LoopBox {
                     display: flex;
-                    gap: 4rem;
+                    gap: 1em;
                     width: 100%;
                     overflow-x: auto;
                     overflow-y: hidden;
                     scroll-behavior: smooth;
-                     
+                    align-items: center;
+                    
+                    // einkommentieren wenn man fest größe habe will 
+                    // & > app-video-preview {
+                    //     flex: 0 0 auto;  // Stelle sicher, dass die Größe der Elemente nicht vom gap beeinflusst wird
+                    //     min-width: 160px; 
+                    //     // min-height: 90px; 
+                    //     max-width: 240px;
+                    //     aspect-ratio: 16/9;
+                    // }
+                    
                     &::-webkit-scrollbar {
                         height: 4px;
                     }
