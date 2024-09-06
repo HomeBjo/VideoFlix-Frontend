@@ -1,255 +1,297 @@
-@import './../../../../styles.scss';
-
-section {
-    width: 100%;
-    height: auto;
-    background-color: #060606;
-}
+@import "./../../../../styles.scss";
 
 .btnBoxRight {
-    position: relative;
-    z-index: 4;
-    padding-right: 4rem;
-    @include dFlex($j: flex-end, $g: 1rem);
+  position: relative;
+  z-index: 4;
+  padding-right: 4rem;
+  @include dFlex($j: flex-end, $g: 1rem);
 
-    .welcomeH1 {
-        margin: 0;
-        animation: fadeOut 1s ease-in forwards;
-        animation-delay: 4s;
-    }
+  .welcomeH1 {
+    margin: 0;
+    animation: fadeOut 1s ease-in forwards;
+    animation-delay: 4s;
+  }
 
-    .userNameBox {
-        @include dFlex($g: 1rem);
+  .userNameBox {
+    @include dFlex($g: 1rem);
+    color: #ffffff;
+
+    .role {
+      width: 100%;
+      position: relative;
+      @include dFlex($g: 0.5rem);
+      height: 44px;
+
+      .block {
+        width: 0%;
+        height: inherit;
+        background: linear-gradient(90deg, #7f0aff, #3a44ff);
+        position: absolute;
+        animation: secBlock 2s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+        animation-delay: 1s;
+        display: flex;
+      }
+
+      h1 {
         color: #ffffff;
-
-        .role {
-            width: 100%;
-            position: relative;
-            @include dFlex($g: 0.5rem);
-            height: 44px;
-
-            .block {
-                width: 0%;
-                height: inherit;
-                background: linear-gradient(90deg, #7F0AFF, #3A44FF);
-                position: absolute;
-                animation: secBlock 2s cubic-bezier(.74, .06, .4, .92) forwards;
-                animation-delay: 1s;
-                display: flex;
-            }
-
-            h1 {
-                color: #ffffff;
-                text-transform: uppercase;
-                letter-spacing: 5px;
-                cursor: pointer;
-                position: relative;
-                left: 0;
-                animation: left-to-right-fade-in 0.7s ease-in forwards;
-                animation-delay: 2.1s;
-                -webkit-mask-repeat: no-repeat;
-                opacity: 0;
-                &::after {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    bottom: 0;
-                    width: 0;
-                    height: 3px;
-                    background: linear-gradient(90deg, #7F0AFF, #3A44FF);
-                    transition: width 0.5s ease-in-out;
-                }
-
-                &:hover::after {
-                    width: 100%;
-                }
-
-                &:not(:hover)::after {
-                    right: 0;
-                    left: auto;
-                }
-            }
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        cursor: pointer;
+        position: relative;
+        left: 0;
+        animation: left-to-right-fade-in 0.7s ease-in forwards;
+        animation-delay: 2.1s;
+        -webkit-mask-repeat: no-repeat;
+        opacity: 0;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 3px;
+          background: linear-gradient(90deg, #7f0aff, #3a44ff);
+          transition: width 0.5s ease-in-out;
         }
+
+        &:hover::after {
+          width: 100%;
+        }
+
+        &:not(:hover)::after {
+          right: 0;
+          left: auto;
+        }
+      }
     }
+  }
 }
 
-@keyframes fadeOut{
-    0% {
-        opacity: 1;
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
 
-    }
-
-    100% {
-        opacity: 0;
-    }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes secBlock {
-    0% {
-        width: 0%;
-        left: 0;
+  0% {
+    width: 0%;
+    left: 0;
+  }
 
-    }
+  50% {
+    width: 100%;
+    left: 0;
+  }
 
-    50% {
-        width: 100%;
-        left: 0;
-
-    }
-
-    100% {
-        width: 0;
-        left: 100%;
-    }
+  100% {
+    width: 0;
+    left: 100%;
+  }
 }
 
 @keyframes left-to-right-fade-in {
-    0% {
-        -webkit-mask-size: 0%;
-        -webkit-mask-image: linear-gradient(to right,
-                rgba(0, 0, 0, 1) 70%,
-                rgba(0, 0, 0, 0));
-        opacity: 0;
-    }
+  0% {
+    -webkit-mask-size: 0%;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1) 70%,
+      rgba(0, 0, 0, 0)
+    );
+    opacity: 0;
+  }
 
-    100% {
-        -webkit-mask-size: 100%;
-        -webkit-mask-image: linear-gradient(to right,
-                rgba(0, 0, 0, 1) 100%,
-                rgba(0, 0, 0, 0));
-        opacity: 1;
-    }
+  100% {
+    -webkit-mask-size: 100%;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1) 100%,
+      rgba(0, 0, 0, 0)
+    );
+    opacity: 1;
+  }
 }
 
 header {
-    @include dFlex($j: space-between);
-    padding: 1rem;
-    width: calc(100% - 2rem);
-    position: absolute;
-    top: 0;
-    background-color: #0F1F26;
+  @include dFlex($j: space-between);
+  padding: 1rem;
+  width: calc(100% - 2rem);
+  position: absolute;
+  top: 0;
+  background-color: #0f1f26;
 
-    .logoBox {
-        width: auto;
-        display: flex;
-        padding-left: 5rem;
+  .logoBox {
+    width: auto;
+    display: flex;
+    padding-left: 5rem;
 
-        .logo {
-            cursor: pointer;
-            z-index: 2;
-            margin-right: 5rem;
-        }
-
-        .headerBtns {
-            @include dFlex($g: 2rem);
-            z-index: 2;
-
-            .headerBtn {
-                color: whitesmoke;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                font-size: x-large;
-                position: relative; 
-                &::after {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    bottom: 0;
-                    width: 0;
-                    height: 3px;
-                    background: linear-gradient(90deg, #7F0AFF, #3A44FF);
-                    transition: width 0.5s ease-in-out;
-                }
-
-                &:hover::after {
-                    width: 100%;
-                }
-
-                &:not(:hover)::after {
-                    right: 0;
-                    left: auto;
-                }
-            }
-        }
+    .logo {
+      cursor: pointer;
+      z-index: 2;
+      margin-right: 5rem;
     }
-}
 
+    .headerBtns {
+      @include dFlex($g: 2rem);
+      z-index: 2;
+
+      .headerBtn {
+        color: whitesmoke;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: x-large;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 3px;
+          background: linear-gradient(90deg, #7f0aff, #3a44ff);
+          transition: width 0.5s ease-in-out;
+        }
+
+        &:hover::after {
+          width: 100%;
+        }
+
+        &:not(:hover)::after {
+          right: 0;
+          left: auto;
+        }
+      }
+    }
+  }
+}
 
 .profilSelection {
-    position: absolute;
-    top: 120%;
-    width: 140px;
-    height: auto;
-    padding: 12px;
-    @include dFlex($g: 12px);
-    flex-direction: column;
-    background-color: #1e1e1e;
-    border-radius: 12px;
+  position: absolute;
+  top: 120%;
+  width: 140px;
+  height: auto;
+  padding: 12px;
+  @include dFlex($g: 12px);
+  flex-direction: column;
+  background-color: #1e1e1e;
+  border-radius: 12px;
 
-    .profilSelectionBtn {
-        color: whitesmoke;
-        border: none;
-        background: transparent;
-        font-size: large;
-        cursor: pointer;
-        @include dFlex($g: 6px);
+  .profilSelectionBtn {
+    color: whitesmoke;
+    border: none;
+    background: transparent;
+    font-size: large;
+    cursor: pointer;
+    @include dFlex($g: 6px);
 
-        &:hover {
-            color: #6e67d1;
+    &:hover {
+      color: #6e67d1;
 
-            img {
-                filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
-            }
-        }
+      img {
+        filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg)
+          brightness(95%) contrast(90%);
+      }
     }
+  }
 }
 
-
 .slideInAnimation {
-    animation: slideDown 0.1s forwards;
+  animation: slideDown 0.1s forwards;
 }
 
 @keyframes slideDown {
-    0% {
-        transform: translateY(-200%);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
 
-    80% {
-        opacity: 0;
-    }
+  80% {
+    opacity: 0;
+  }
 
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .slideOutAnimation {
-    animation: slideUp 0.3s forwards;
+  animation: slideUp 0.3s forwards;
 }
 
 @keyframes slideUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 
-    10% {
-        opacity: 0;
-    }
+  10% {
+    opacity: 0;
+  }
 
-    100% {
-        transform: translateY(-200%);
-        opacity: 0;
-    }
+  100% {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
 }
 
 .categorySelection {
+  position: absolute;
+  top: 81%;
+  left: 221px;
+  width: 265px;
+  height: auto;
+  padding: 12px;
+  @include dFlex($g: 12px);
+  flex-direction: column;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+
+  .profilSelectionBtn {
+    color: whitesmoke;
+    border: none;
+    background: transparent;
+    font-size: large;
+    cursor: pointer;
+    @include dFlex($g: 6px);
+
+    &:hover {
+      color: #6e67d1;
+
+      img {
+        filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg)
+          brightness(95%) contrast(90%);
+      }
+    }
+  }
+}
+.mobileSectionOff {
+  display: none;
+}
+.burgerMenuIcon {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .burgerMenuIcon {
+    display: flex;
+    z-index: 55;
+    position: absolute;
+    top: 0%;
+    left: calc(50% - 38px);
+    width: 78px;
+    height: 78px;
+    cursor: pointer;
+  }
+  .mobileSection {
     position: absolute;
     top: 81%;
-    left: 221px;
+    left: calc(50% - 144px);
     width: 265px;
     height: auto;
     padding: 12px;
@@ -257,21 +299,57 @@ header {
     flex-direction: column;
     background-color: #1e1e1e;
     border-radius: 12px;
+    z-index: 2;
+    button {
+      color: whitesmoke;
+      border: none;
+      background: transparent;
+      font-size: large;
+      cursor: pointer;
+      @include dFlex($g: 6px);
 
-    .profilSelectionBtn {
-        color: whitesmoke;
-        border: none;
-        background: transparent;
-        font-size: large;
-        cursor: pointer;
-        @include dFlex($g: 6px);
+      &:hover {
+        color: #6e67d1;
 
-        &:hover {
-            color: #6e67d1;
-
-            img {
-                filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg) brightness(95%) contrast(90%);
-            }
+        img {
+          filter: invert(42%) sepia(100%) saturate(4000%) hue-rotate(220deg)
+            brightness(95%) contrast(90%);
         }
+      }
     }
+  }
+
+  header {
+    @include dFlex($j: space-between);
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    position: absolute;
+    top: 0;
+    background-color: #0f1f26;
+
+    .logoBox {
+      .headerBtns {
+        display: none;
+      }
+    }
+  }
+}
+@media (max-width: 560px) {
+  .burgerMenuIcon {
+    right: 6rem;
+    left: unset;
+  }
+  .btnBoxRight {
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .burgerMenuIcon {
+    right: 1rem;
+    left: unset;
+  }
+
+  .logoBox {
+    padding-left: 1rem !important;
+  }
 }

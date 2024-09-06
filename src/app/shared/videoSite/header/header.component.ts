@@ -17,18 +17,38 @@ export class HeaderComponent {
   constructor(public userService: UserService, private videoService: VideoService, private route: ActivatedRoute) {}
   shwonProfilSelection:boolean = false;
   showCategorySelection:boolean = false;
+  showMobileSelection:boolean = false;
 
     // toggle anzeige 
     toggleCategoryMenu(event: MouseEvent) {
       event.stopPropagation();
       this.showCategorySelection = !this.showCategorySelection;
     }
+    toggleMobileMenu(){
+      this.showMobileSelection = !this.showMobileSelection;
+    }
   
   // prüfe den klick auserhalb der div
+    // @HostListener('document:click', ['$event'])
+    // onClick(event: MouseEvent) {
+    //   this.showCategorySelection = false;
+    //   this.shwonProfilSelection = false;
+    // }
+    
     @HostListener('document:click', ['$event'])
-    onClick(event: MouseEvent) {
-      this.showCategorySelection = false;
-      this.shwonProfilSelection = false;
+    handleOutsideClick(event: MouseEvent) {
+      const target = event.target as HTMLElement;
+      // Schließe das mobile Menü, wenn außerhalb des Menüs geklickt wird
+      if (!target.closest('.mobileSection') && !target.closest('.burgerMenuIcon')) {
+        this.showMobileSelection = false;
+      }
+      // Schließe das Kategorie-Menü, wenn außerhalb geklickt wird
+      if (!target.closest('.categorySelection') && !target.closest('.headerBtn')) {
+        this.showCategorySelection = false;
+      }
+      if(!target.closest('slideInAnimation')&& !target.closest('slideOutAnimation')){
+        this.shwonProfilSelection = false;
+      }
     }
 
     logout(){
