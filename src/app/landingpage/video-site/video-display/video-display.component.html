@@ -7,7 +7,11 @@
       <span class="presents-text">Film</span>
     </div>
 
-    <div class="video-player-content">
+    <div class="video-player-content"
+      (mouseenter)="showQualitySelector()"
+      (mouseleave)="hideQualitySelector()"
+      (mousemove)="checkMouseMove()"
+    >
       <div class="description-container">
         <div class="description-header">
           <span>Video Description</span>
@@ -22,6 +26,24 @@
         <span class="description-text">{{ video.description }}</span>
       </div>
 
+      <div class="quality-selector">
+        <button class="dropdown-toggle" 
+          (click)="toggleDropdown()"
+          [ngClass]="{ 
+            'hideQualitySelector': !showQualitySelectorBool && showQualitySelectorBool !== null,
+            'showQualitySelector': showQualitySelectorBool
+          }"
+          >{{currentQuality}}</button>
+          @if (dropdownOpen) {
+            <div class="dropdown-menu">
+              <div (click)="onQualityChange('auto')">Auto</div>
+              <div (click)="onQualityChange('480p')">480p</div>
+              <div (click)="onQualityChange('720p')">720p</div>
+              <div (click)="onQualityChange('1080p')">1080p</div>
+            </div>
+          }
+      </div>
+      
       <video
         id="videoPlayer"
         class="video-js vjs-theme-city"
