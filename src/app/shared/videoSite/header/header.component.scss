@@ -296,10 +296,10 @@ header {
   }
   .mobileSection {
     position: absolute;
-    top: 82%;
+    top: 86%;
     // left: calc(50% - 144px); mittige version
-    right: 0;
-    width: 265px;
+    right: 50px;
+    width: 144px;
     height: auto;
     padding: 12px;
     @include dFlex($g: 12px);
@@ -341,16 +341,31 @@ header {
     }
   }
 }
+
 @media (max-width: 560px) {
+  header {
+    .logoBox {
+      padding-left: 1rem;
+    }
+  }
   .burgerMenuIcon {
-    right: 6rem;
+    right: 2rem;
     left: unset;
   }
   .btnBoxRight {
     display: none;
   }
 }
-@media (max-width: 400px) {
+
+@media (max-width: 431px) {
+  .mobileSection {
+    top: 86%;
+    right: 24px;
+    width: 132px;
+    padding: 6px;
+    @include dFlex($g: 10px);
+  }
+
   .burgerMenuIcon {
     right: 1rem;
     left: unset;

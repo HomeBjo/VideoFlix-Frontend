@@ -39,17 +39,17 @@
 
     
       <!-- Dropdown-Menü (mobile Ansicht) -->
-  <div (click)="$event.stopPropagation()" [ngClass]="{'mobileSection':showMobileSelection, 'mobileSectionOff':!showMobileSelection}">
-               
-                <button (click)="toggleMobileMenu()"  [routerLink]="['/video_site']" >Home</button>
-                <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
-                <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'anime']" >Anime</button>
-                <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'drama']">Drama</button>
-                <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'romance']" >Romance</button>
-                <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'adventure']">Adventure</button>
-                <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
-                <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
-  </div>
+    <div (click)="$event.stopPropagation()" [ngClass]="{'mobileSection':showMobileSelection, 'mobileSectionOff':!showMobileSelection}"> 
+        <button (click)="toggleMobileMenu()"  [routerLink]="['/video_site']" >Home</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'anime']" >Anime</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'drama']">Drama</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'romance']" >Romance</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'adventure']">Adventure</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/favorites',]">Favorites</button>
+        <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
+        <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
+    </div>
 </header>
 
 

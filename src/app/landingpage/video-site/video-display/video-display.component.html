@@ -35,11 +35,11 @@
           }"
           >{{currentQuality}}</button>
           @if (dropdownOpen) {
-            <div class="dropdown-menu">
-              <div (click)="onQualityChange('auto')">Auto</div>
-              <div (click)="onQualityChange('480p')">480p</div>
-              <div (click)="onQualityChange('720p')">720p</div>
-              <div (click)="onQualityChange('1080p')">1080p</div>
+            <div class="dropdown-menu" [ngClass]="{'hideQualitySelector': !showQualitySelectorBool}">
+              <div class="qualityBtn" (click)="onQualityChange('1080p')">1080p</div>
+              <div class="qualityBtn" (click)="onQualityChange('720p')">720p</div>
+              <div class="qualityBtn" (click)="onQualityChange('480p')">480p</div>
+              <div class="qualityBtn" (click)="onQualityChange('auto')">Auto</div>
             </div>
           }
       </div>

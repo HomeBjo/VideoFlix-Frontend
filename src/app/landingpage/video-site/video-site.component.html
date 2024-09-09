@@ -100,7 +100,7 @@
                             <button (click)="ArrowLeftClick(3)"><img src="../../../assets/icons/arrowLeft.png" alt=""></button>
                         </div>   
                     }
-                    <div class="video4LoopBox" #video4LoopBox3>
+                    <div class="video4LoopBox marginBottom" #video4LoopBox3>
                         @for (video of newVideos; track $index) {
                             @if (video.category === 'action') {
                                 <app-video-preview

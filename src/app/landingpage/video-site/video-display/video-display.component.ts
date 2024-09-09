@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
   ChangeDetectorRef,
+  HostListener,
 } from '@angular/core';
 import Hls from 'hls.js';
 import { VideoJson } from '../../../interfaces/video-json';
@@ -191,15 +192,22 @@ export class VideoDisplayComponent {
     this.startInactivityTimer();
   }
 
+//  @HostListener('document:mousemove')
   hideQualitySelector(): void {
+    console.log('ddd');
+    
+    if (this.videoElement.paused) {
+      return;
+    }
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
     }
+    this.dropdownOpen = false;
     this.showQualitySelectorBool = false;
     this.cdr.detectChanges();
   }
 
-
+  
   startInactivityTimer(): void {
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);

@@ -57,7 +57,7 @@ section {
 
 
 .videoDiv {
-    min-height: 2000px;
+    // min-height: 2000px;
     margin-top: 100dvh;
     padding-left: 6rem;
 
@@ -69,6 +69,7 @@ section {
         .videoPosition {
             color: whitesmoke;
             width: 100%;
+            font-size: 1.7em;
 
             .video4LoopContainer {
                 position: relative;
@@ -166,6 +167,9 @@ section {
     }
 }
 
+.marginBottom{
+    margin-bottom: 4rem;
+}
 
 .descriptionVisible {
     animation: slideIn 0.5s linear forwards;
@@ -214,44 +218,131 @@ section {
     }
 }
 
-// .arrowLeft{
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 4rem;
-//     height: 100%;
-//     @include dFlex();
-//     z-index: 2;
-//     background: linear-gradient(to right, #000000  0%, rgba(30, 30, 30, 0) 100%);
-//     button{
-//         background: none;
-//         border: none;
-//         cursor: pointer;
-//         img{
-//             width: 20px;
-//             height: 20px;
-//             object-fit: contain;
-//         }
-//     }
-// }
+@media (max-width: 560px) {
+    .marginBottom{
+        margin-bottom: 2rem;
+    }    
 
-// .arrowRight{
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-//     width: 4rem;
-//     height: 100%;
-//     @include dFlex();
-//     z-index: 2;
-//     background: linear-gradient(to right, #000000  0%, rgba(30, 30, 30, 0) 100%);
-//     button{
-//         background: none;
-//         border: none;
-//         cursor: pointer;
-//         img{
-//             width: 20px;
-//             height: 20px;
-//             object-fit: contain;
-//         }
-//     }
-// }
+    .descriptionDivBreakout {
+        top: 56%;
+        left: 2rem;
+        width: 340px;
+        @include dFlex($a: flex-start, $g: 8px);
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+    
+        span {
+            font-size: medium;
+        }
+    }
+
+    .videoDiv {
+        padding-left: 2rem;
+    
+        .videoDiv2 {
+            width: calc(100% - 34px);
+    
+            .videoPosition {
+                font-size: 1.3em;
+                .video4LoopContainer {
+                    position: relative;
+                    width: 100%;
+    
+                    .video4LoopBox {
+                        display: flex;
+                        gap: 1em;
+                        width: 100%;
+                        overflow-x: auto;
+                        overflow-y: hidden;
+                        scroll-behavior: smooth;
+                        align-items: center;
+                        
+                        // einkommentieren wenn man fest größe habe will 
+                        // & > app-video-preview {
+                        //     flex: 0 0 auto;  // Stelle sicher, dass die Größe der Elemente nicht vom gap beeinflusst wird
+                        //     min-width: 160px; 
+                        //     // min-height: 90px; 
+                        //     max-width: 240px;
+                        //     aspect-ratio: 16/9;
+                        // }
+    
+                        &::-webkit-scrollbar {
+                            height: 4px;
+                        }
+    
+                        &::-webkit-scrollbar-thumb {
+                            background-color: #7810FF;
+                            border-radius: 2px;
+                        }
+    
+                        &::-webkit-scrollbar-track {
+                            background-color: transparent;
+                        }
+                    }
+    
+                    .arrowLeft {
+                        width: 2rem;
+                        button {
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            transition: .2s all ease-in-out;
+    
+                            &:hover {
+                                scale: 1.2;
+                            }
+    
+                            img {
+                                width: 20px;
+                                height: 20px;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+    
+                    .arrowRight {
+                        width: 2rem;
+    
+                        button {
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            transition: .2s all ease-in-out;
+    
+                            &:hover {
+                                scale: 1.2;
+                            }
+    
+                            img {
+                                width: 20px;
+                                height: 20px;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media (max-width: 380px) {
+    .descriptionDivBreakout {
+        top: 54%;
+        width: 300px;
+    }
+
+}
+
+@media (max-width: 350px) {
+    .descriptionDivBreakout {
+        width: 280px;
+        span{
+            font-size: small;
+        }
+    }
+
+}

@@ -138,6 +138,7 @@ h2 {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 //----------------------------------------------------------------------------------------------------------------
 select {
   -webkit-appearance: none; /* Entfernt Standard-Stile in WebKit-basierten Browsern wie Chrome und Safari */
@@ -151,7 +152,7 @@ select {
 
 .quality-selector {
   position: absolute;
-  bottom: 38px;
+  bottom: 35px;
   left: 120px;
   z-index: 2;
   
@@ -183,10 +184,9 @@ select {
     transition: opacity 0.3s ease; /* Sanfte Übergangsanimation */
     visibility: visible; /* Sicherstellen, dass es sichtbar ist */
     
-    div {
-      padding: 2px;
+    .qualityBtn {
       cursor: pointer;
-      font-size: smaller;
+      font-size: small;
       
       &:hover {
         background-color: #333;
