@@ -5,7 +5,6 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { VideoSiteComponent } from './landingpage/video-site/video-site.component';
-import { LoginComponent } from './landingpage/login/login.component';
 
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +17,7 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthInterceptorService,
       multi: true,
     },
-    VideoSiteComponent //verhindert NullInjectorError beim laden der Videos unter Favoriten
+    VideoSiteComponent 
   ],
 };
 
