@@ -25,9 +25,9 @@ export class ProfileDetailsComponent {
   
 
   async ngOnInit() {
-    await this.userService.getUserData(); //lade die daten erneut (wenn user die seite zB reloadet)
-    this.userService.userData$.subscribe((userData: UserData[] | null) => { //abonniere die daten - sobald die verfügbar sind, werden die ausgelesen
-      if (userData) { //wenn daten vorhanden -> zuweisen
+    await this.userService.getUserData();
+    this.userService.userData$.subscribe((userData: UserData[] | null) => { 
+      if (userData) { 
         const user = userData[0];
         this.profileFields = [
           { name: 'Firstname', value: user.first_name || 'This field is empty', originalValue: user.first_name, placeholder: 'Firstname (required)', isEditing: false, inputType: 'text' },
@@ -36,8 +36,7 @@ export class ProfileDetailsComponent {
           { name: 'Phone', value: user.phone || 'This field is empty', originalValue: user.phone, placeholder: 'Phone (optional)', isEditing: false, inputType: 'tel' },
           { name: 'Address', value: user.address || 'This field is empty', originalValue: user.address, placeholder: 'Address (optional)', isEditing: false, inputType: 'text' },
         ];
-      this.cdr.detectChanges(); //angular überprüft automatisch änderungen
-      console.log(this.profileFields);
+      this.cdr.detectChanges();
       }
     });  
   }
@@ -52,12 +51,12 @@ export class ProfileDetailsComponent {
     this.profileFields[index].isEditing = !this.profileFields[index].isEditing;
     if (!this.profileFields[index].isEditing) {
       this.enableBtn = true;
-      this.isFormValid(); //überprüfe, ob der btn enabeld werden kann
+      this.isFormValid();
     }
   }
   
 
-  showCheckWarning() { // zeigt check warnung an
+  showCheckWarning() {
     return this.profileFields.some(field => field.isEditing);
   }
 
@@ -67,7 +66,7 @@ export class ProfileDetailsComponent {
   }
 
 
-  checkLenght(i : number): boolean { //überprüft, ob index 0-2 ein sting ist und  größer 3 Zeichen ist
+  checkLenght(i : number): boolean {
     const value = this.profileFields[i].value;
     if (typeof value === 'string') {
       return value.length >= 3;
@@ -75,7 +74,8 @@ export class ProfileDetailsComponent {
     return false;
   }
 
-  checkIfNameIsTooLong(i : number): boolean { //überprüft, ob index 0-2 ein sting ist und  größer 20 Zeichen ist
+
+  checkIfNameIsTooLong(i : number): boolean {
     const value = this.profileFields[i].value;
     if (typeof value === 'string') {
       return value.length >= 20;
@@ -83,12 +83,13 @@ export class ProfileDetailsComponent {
     return false;
   }
 
-  checkIfInputsChecked(): boolean { //checkt das array ung guckt ob isEditing = true ist
+
+  checkIfInputsChecked(): boolean { 
     return this.profileFields.some(field => field.isEditing);
   }
 
 
-  checkIfFieldIsEmpty(i: number): boolean { //checkt, ob ein Feld den standart text hat
+  checkIfFieldIsEmpty(i: number): boolean {
     if (this.profileFields[i].value === 'This field is empty') {
       return true;
     }
@@ -112,10 +113,9 @@ export class ProfileDetailsComponent {
       if (this.checkIfFieldIsEmpty(i)) {
         return true;
       }
-
       const phone = this.profileFields[i].value as string;
-      const cleanedPhone = phone.replace(/[\s\-\(\)]+/g, '');//überprüfe, ob value buchstaben hat 
-      const isValid = /^\d{7,15}$/.test(cleanedPhone);   // Überprüfe, ob die Länge zwischen 7 und 15 liegt und ob alle Zeichen Ziffern sind
+      const cleanedPhone = phone.replace(/[\s\-\(\)]+/g, '');
+      const isValid = /^\d{7,15}$/.test(cleanedPhone);   
       if (isValid || this.profileFields[i].value == '') {
         return true; 
       }
@@ -128,12 +128,12 @@ export class ProfileDetailsComponent {
 
   isFormValid(): boolean {
     if (!this.enableBtn) {
-      return false;  // Wenn `enableBtn` noch nicht aktiviert wurde, immer false zurückgeben
+      return false;
     }
 
-    const allFieldsValid = this.checkAllFieldsValidthis();// prüfe, ob alle values den angaben entsprechen
-    const noEditingInProgress = !this.checkIfInputsChecked(); // überpfrüfe ob alle felder getchekt sind
-    const hasChangedValues = this.profileFields.some(field => field.value !== field.originalValue); //überprüfe, ob value geändert wurde
+    const allFieldsValid = this.checkAllFieldsValidthis();
+    const noEditingInProgress = !this.checkIfInputsChecked(); 
+    const hasChangedValues = this.profileFields.some(field => field.value !== field.originalValue);
     if (hasChangedValues) {
       this.enableBtn = true;
     }
@@ -159,11 +159,7 @@ export class ProfileDetailsComponent {
   onSubmit(ngForm: NgForm) {
     if (ngForm.valid) {
       this.saveData();
-      // guck dir die beschreibung mal an und behalt im hinterkopf. könnte nützlich sein
-      // ngForm.form.markAsPristine();  //setzt den Zustand des Formulars oder eines Formularfeldes auf "pristine", was signalisiert, dass der Benutzer das Feld noch nicht berührt hat, unabhängig davon, ob er es tatsächlich getan hat.
-      // ngForm.form.markAsUntouched(); // setzt den Zustand eines Formularfeldes oder des gesamten Formulars auf "untouched", was signalisiert, dass das Feld noch nie vom Benutzer fokussiert wurde.
     } else {
-      console.log('Formular ist nicht korrekt ausgeführt');
     }
   }
 
@@ -171,7 +167,7 @@ export class ProfileDetailsComponent {
   async saveData(){
     let userID = localStorage.getItem('userId');
     if (userID) {
-      let newUserData: UserData = { //überschreibe die alten daten mit den neuen
+      let newUserData: UserData = { 
         id: +userID,
         first_name : this.profileFields[0].value as string,
         last_name: this.profileFields[1].value as string,
@@ -180,7 +176,6 @@ export class ProfileDetailsComponent {
         address: this.profileFields[4].value as string,
         username: (this.profileFields[0].value + '_' + this.profileFields[1].value) as string
       }
-
       let done = await this.userService.updateUserData(newUserData);
       if (done) {
         this.continueMessage = true;

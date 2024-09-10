@@ -28,7 +28,6 @@ export class FavoritesComponent {
     this.selectedVideo = video;
   }
 
-  
   closeVideoDisplay() {
     this.selectedVideo = null;
   }

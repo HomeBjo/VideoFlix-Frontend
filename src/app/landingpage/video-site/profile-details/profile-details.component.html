@@ -36,7 +36,7 @@
                         @if (!checkPhoneFormat($index)) {
                             @if ($index == 3 && !checkPhoneFormat($index) && !checkIfFieldIsEmpty($index)) {
                                 <span class="invalidFeedback"><img src="../../../../assets/img/warning.svg" alt="warningImg">
-                                    Please enter a valid phonenumber.</span>
+                                    Please enter a valid phone number.</span>
                             }
                         }
                     </div>
@@ -60,7 +60,7 @@
             </div>
             <!-- render check warning -->
             @if (showCheckWarning()) {
-                <span class="invalidFeedbackBottom">Make sure to click on check.</span>
+                <span class="invalidFeedbackBottom">Make sure to click 'Check'.</span>
             }
            
             <button type="submit"
