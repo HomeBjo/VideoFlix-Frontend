@@ -46,9 +46,7 @@
                         <div class="questionDiv" [ngClass]="{'shwoQ-Div': shwoQesttionDiv ,'hideQ-Div' : !shwoQesttionDiv }">Remember me does not work on gest login.</div>
                     </span>
                 }
-
             </div>
-
             <div class="btnBox">
                 <button type="submit" class="submitBtn" [ngClass]="{'submitBtn': checkAllInputs(), 'submitBtnDisabled': !checkAllInputs()}" [disabled]="!checkAllInputs()">Log in</button>
                 <span class="guestLogin" (click)="guestLogin()">Guest login</span>
@@ -62,7 +60,5 @@
             <span [routerLink]="['/register']" class="blueText">Sign Up now</span>
         </div>
     </div>
-  
-    
     <app-footer></app-footer>
 </section>
