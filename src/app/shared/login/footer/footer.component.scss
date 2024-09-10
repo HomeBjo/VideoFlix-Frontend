@@ -16,6 +16,15 @@
     }
   }
 }
+
+@media (min-width: $screanWidthQHD) {
+  .footer{
+    span {
+      font-size: xx-large;
+    }
+  }
+}
+
 @media (max-width: 500px) {
   .footer {
     margin-bottom: 1rem;

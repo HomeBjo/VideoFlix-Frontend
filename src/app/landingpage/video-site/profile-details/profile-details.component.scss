@@ -263,6 +263,82 @@ form {
   }
 }
 
+@media (min-width: $screanWidthQHD) {
+  section {
+    header {
+      img {
+        width: 88px;
+        height: 88px;
+      }
+    }
+  }
+
+  .blueBtnTopRight {
+    @include dFlex($g: 16px);
+    padding: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border: none;
+    border-radius: 45px;
+    font-size: xx-large;
+  }
+
+  form {
+    .formHeaderDiv {
+      h1 {
+        font-size: 5.5rem;
+      }
+      span {
+        font-size: xx-large;
+      }
+    }
+    input {
+      font-size: xx-large;
+    }
+  }
+
+  .lineBox {
+    font-size: xx-large;
+  
+    .headerDiv {
+      .invalidFeedback {
+        font-size: x-large;
+        img{
+          width: 22px;
+        }
+      }
+    }
+    .profileDetails {
+      font-size: xx-large;
+    }
+    .editBtn {
+      font-size: xx-large;
+    }
+  }
+
+  .invalidFeedbackBottom {
+    margin-bottom: -1rem;
+    font-size: larger;
+  }
+
+  .saveBlueBtnDisabled {
+    padding: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 50px;
+    font-size: xxx-large;
+  }
+
+  .saveBlueBtn {
+    padding: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 50px;
+    font-size: xxx-large;
+  }
+  
+}
+
 @media (max-width: 630px) {
   section {
     header {

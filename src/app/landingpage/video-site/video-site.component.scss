@@ -207,6 +207,64 @@ section {
   }
 }
 
+@media (min-width: $screanWidthQHD) {
+
+  .descriptionDivBreakout {
+    width: 620px;
+  
+    h1 {
+      font-size: 8rem;
+    }
+  
+    span {
+      font-size: xx-large;
+    }
+  }
+
+  .blueBtn{
+    @include dFlex($g: 16px);
+    padding: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border: none;
+    border-radius: 45px;
+    font-size: xx-large;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .videoDiv {
+    .videoDiv2 {
+      .videoPosition {
+        font-size: 3em;
+        .video4LoopContainer {
+          .arrowLeft {
+            button {
+              img {
+                width: 24px;
+                height: 24px;
+              }
+            }
+          }
+  
+          .arrowRight {
+            button {
+              img {
+                width: 24px;
+                height: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  
+}
+
 @media (max-width: 560px) {
   .marginBottom {
     margin-bottom: 2rem;

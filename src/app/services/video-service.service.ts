@@ -13,6 +13,7 @@ export class VideoService {
   allVideos: VideoJson[] = [];
   favVideos: VideoJson[] = [];
   public reloadFavs$ = new Subject<void>();
+  
   constructor(private http: HttpClient) {}
 
   startFetchVideos(): Observable<any> {
@@ -41,6 +42,7 @@ export class VideoService {
         this.favVideos = response;
       }
     } catch (e) {
+      console.log('Loading favorites failed:', e);
     }
   }
 
@@ -52,6 +54,7 @@ export class VideoService {
         this.http.post(loginUrl, body, { headers: this.headers })
       );
     } catch (e) {
+      console.log('Setting favorites failed:', e);
     }
   }
 }

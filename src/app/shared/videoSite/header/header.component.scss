@@ -277,6 +277,82 @@ header {
   display: none;
 }
 
+@media (min-width: $screanWidthQHD) {
+  header {
+    .logoBox {
+  
+      .logo {
+        width: 88px;
+        height: 88px;
+      }
+      .headerBtns {
+        .headerBtn {
+          font-size: xxx-large;
+          &::after {
+            height: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .btnBoxRight {
+  
+    .welcomeH1 {
+      font-size: xxx-large;
+    }
+  
+    .userNameBox {
+  
+      .role {
+        width: 100%;
+        position: relative;
+        @include dFlex($g: 0.5rem);
+        height: 44px;
+  
+        .block {
+          width: 0%;
+          height: inherit;
+          background: linear-gradient(90deg, #7f0aff, #3a44ff);
+          position: absolute;
+          animation: secBlock 2s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+          animation-delay: 1s;
+          display: flex;
+        }
+  
+        h1 {
+          font-size: xxx-large;
+          &::after {
+            height: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .categorySelection {
+    left: 444px;
+    width: 160px;
+    .profilSelectionBtn {
+      font-size: xx-large;
+    }
+  }
+
+  .profilSelection {
+    width: 240px;
+  
+    .profilSelectionBtn {
+      font-size: xx-large;
+      @include dFlex($g: 16px);
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+  
+}
+
 @media (max-width: 900px) {
   .btnBoxRight {
     display: none;

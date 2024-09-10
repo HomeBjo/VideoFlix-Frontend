@@ -1,3 +1,6 @@
+@import "./../../../../styles.scss";
+
+
 section {
   width: 100%;
   height: 100%;
@@ -15,6 +18,7 @@ section {
   }
 
   .descriptionBox {
+    font-size: large;
     position: absolute;
     top: 0;
     width: -webkit-fill-available;
@@ -78,6 +82,18 @@ section {
     height: 0;
     opacity: 0;
   }
+}
+
+@media (min-width: $screanWidthQHD) {
+  section {
+    max-width: 520px;
+    min-height: 160px;
+
+    .descriptionBox {
+      font-size: x-large;
+    }
+  }
+  
 }
 
 @media (max-width: 1200px) {

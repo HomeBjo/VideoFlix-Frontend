@@ -1,3 +1,5 @@
+@import "./../../../../styles.scss";
+
 section {
   height: calc(100dvh - 160px);
   width: calc(100% - 80px);
@@ -19,6 +21,16 @@ section {
     width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 10px;
+  }
+}
+
+@media (min-width: $screanWidthQHD) {
+
+  .videoBox {
+    margin-top: 120px;
+    .h1Div{
+      font-size: xx-large;
+    }
   }
 }
 
