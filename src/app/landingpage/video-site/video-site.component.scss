@@ -96,19 +96,15 @@ section {
           }
         }
 
-        .arrowLeft {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 4rem;
-          height: 100%;
-          @include dFlex();
-          z-index: 2;
-          background: linear-gradient(
-            to right,
-            #000000 0%,
-            rgba(30, 30, 30, 0) 100%
-          );
+                .arrowLeft {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 4rem;
+                    height: 100%;
+                    @include dFlex();
+                    z-index: 2;
+                    background: linear-gradient(to right, #000000 0%, rgba(30, 30, 30, 0) 100%);
 
           button {
             background: none;
@@ -128,19 +124,15 @@ section {
           }
         }
 
-        .arrowRight {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 4rem;
-          height: 100%;
-          @include dFlex();
-          z-index: 2;
-          background: linear-gradient(
-            to right,
-            rgba(30, 30, 30, 0) 0%,
-            #000000 100%
-          );
+                .arrowRight {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 4rem;
+                    height: 100%;
+                    @include dFlex();
+                    z-index: 2;
+                    background: linear-gradient(to right, rgba(30, 30, 30, 0) 0%, #000000 100%);
 
           button {
             background: none;
@@ -220,100 +212,45 @@ section {
     margin-bottom: 2rem;
   }
 
-  .descriptionDivBreakout {
-    top: 56%;
-    left: 2rem;
-    width: 340px;
-    @include dFlex($a: flex-start, $g: 8px);
-    h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    span {
-      font-size: medium;
-    }
-  }
-
-  .videoDiv {
-    padding-left: 2rem;
-
-    .videoDiv2 {
-      width: calc(100% - 34px);
-
-      .videoPosition {
-        font-size: 1.3em;
-        .video4LoopContainer {
-          position: relative;
-          width: 100%;
-
-          .video4LoopBox {
-            display: flex;
-            gap: 1em;
-            width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-behavior: smooth;
-            align-items: center;
-
-            &::-webkit-scrollbar {
-              height: 4px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-              background-color: #7810ff;
-              border-radius: 2px;
-            }
-
-            &::-webkit-scrollbar-track {
-              background-color: transparent;
-            }
-          }
-
-          .arrowLeft {
-            width: 2rem;
-            button {
-              background: none;
-              border: none;
-              cursor: pointer;
-              transition: 0.2s all ease-in-out;
-
-              &:hover {
-                scale: 1.2;
-              }
-
-              img {
-                width: 20px;
-                height: 20px;
-                object-fit: contain;
-              }
-            }
-          }
-
-          .arrowRight {
-            width: 2rem;
-
-            button {
-              background: none;
-              border: none;
-              cursor: pointer;
-              transition: 0.2s all ease-in-out;
-
-              &:hover {
-                scale: 1.2;
-              }
-
-              img {
-                width: 20px;
-                height: 20px;
-                object-fit: contain;
-              }
-            }
-          }
+    .descriptionDivBreakout {
+        top: 56%;
+        left: 2rem;
+        width: 340px;
+        @include dFlex($a: flex-start, $g: 8px);
+        h1 {
+            font-size: 3rem;
+            margin: 0;
         }
-      }
+    
+        span {
+            font-size: medium;
+        }
     }
-  }
+
+    .videoDiv {
+        padding-left: 2rem;
+    
+        .videoDiv2 {
+            width: calc(100% - 34px);
+    
+            .videoPosition {
+                font-size: 1.3em;
+                .video4LoopContainer {
+                    position: relative;
+                    width: 100%;
+    
+                    .arrowLeft {
+                        width: 2rem;
+                    }
+    
+                    .arrowRight {
+                        width: 2rem;
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 @media (max-width: 380px) {
@@ -324,10 +261,11 @@ section {
 }
 
 @media (max-width: 350px) {
-  .descriptionDivBreakout {
-    width: 280px;
-    span {
-      font-size: small;
+    .descriptionDivBreakout {
+        width: 280px;
+        span{
+            font-size: small;
+        }
     }
-  }
+
 }

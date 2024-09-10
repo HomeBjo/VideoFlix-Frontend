@@ -4,8 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectorRef,
-  HostListener,
+  ChangeDetectorRef
 } from '@angular/core';
 import Hls from 'hls.js';
 import { VideoJson } from '../../../interfaces/video-json';
@@ -23,20 +22,21 @@ export class VideoDisplayComponent {
   @Input() video!: VideoJson;
   @Output() closeDisplay = new EventEmitter<VideoJson>();
   isVideoVisible = false;
-  // closeOverlayPlayButton = false;
   private favoriteTimeout!: ReturnType<typeof setTimeout>;
   private inactivityTimer!: ReturnType<typeof setTimeout>;
   private fadeOutTimeout!: ReturnType<typeof setTimeout>;
-  // isFavorite: boolean = false;
+  private hoverTimer!: ReturnType<typeof setTimeout>; 
   isRequestInProgress: boolean = false;
   selectedQualitySrc: string = '';
   hls!: Hls;
   dropdownOpen: boolean = false;
+  hideQualitySelectorSlower: boolean = false;
   currentQuality: string = 'Auto';
-  showQualitySelectorBool: true| false| null = null;
+  showQualitySelectorBool: boolean | null = null;
+  isControlBarVisible: boolean = true; 
   private videoElement!: HTMLVideoElement;
-  private lastInteractionTime: number = 0; // Letzter Zeitpunkt der Benutzerinteraktion
-  private interactionTimeout!: ReturnType<typeof setTimeout>;
+  private controlBarTimer!: ReturnType<typeof setTimeout>;
+
 
   constructor(
     private videoService: VideoService,
@@ -65,50 +65,20 @@ export class VideoDisplayComponent {
   // }
   ngAfterViewInit(): void {
     this.videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
-    this.loadVideo('auto'); // Initiales Laden des Videos in Auto-Qualität
+    this.loadVideo('auto');
 
-    // Video Event Listener hinzufügen
     this.videoElement.addEventListener('play', this.onPlayPause.bind(this));
     this.videoElement.addEventListener('pause', this.onPlayPause.bind(this));
     this.videoElement.addEventListener('ended', this.onVideoEnded.bind(this));
 
-    // document.addEventListener('fullscreenchange', this.onFullScreenChange.bind(this));
+    document.addEventListener('fullscreenchange', this.onFullScreenChange.bind(this));
   }
 
-  ngOnDestroy(): void {
-    if (this.videoElement) {
-      this.videoElement.removeEventListener('play', this.onPlayPause.bind(this));
-      this.videoElement.removeEventListener('pause', this.onPlayPause.bind(this));
-      this.videoElement.removeEventListener('ended', this.onVideoEnded.bind(this));
-    }
-    if (this.fadeOutTimeout) {
-      clearTimeout(this.fadeOutTimeout);
-    }
-    // document.removeEventListener('fullscreenchange', this.onFullScreenChange.bind(this));
-  }
 
   loadVideo(quality: string): void {
     if (Hls.isSupported()) {
-      // const videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
       const videoElement = this.videoElement;
-      // entsprechende Quelle basierend auf der Qualität auswählen
-      switch (quality) {
-        case '480p':
-          this.selectedQualitySrc = this.video.video_folder.replace('_master.m3u8', '_480p.m3u8');
-          this.currentQuality = '480p';
-          break;
-        case '720p':
-          this.selectedQualitySrc = this.video.video_folder.replace('_master.m3u8', '_720p.m3u8');
-          this.currentQuality = '720p';
-          break;
-        case '1080p':
-          this.selectedQualitySrc = this.video.video_folder.replace('_master.m3u8', '_1080p.m3u8');
-          this.currentQuality = '1080p';
-          break;
-        default:
-          this.selectedQualitySrc = this.video.video_folder; // Auto (Master Playlist)
-          this.currentQuality = 'Auto'; 
-      }
+      this.checkQualityLevels(quality); 
 
       if (Hls.isSupported()) {
         this.hls = new Hls();
@@ -120,10 +90,35 @@ export class VideoDisplayComponent {
 
     }
   }
+  
+
+  checkQualityLevels(quality: string) {
+    switch (quality) {
+      case '480p':
+        this.selectedQualitySrc = this.video.video_folder.replace('_master.m3u8', '_480p.m3u8');
+        this.currentQuality = '480p';
+        break;
+      case '720p':
+        this.selectedQualitySrc = this.video.video_folder.replace('_master.m3u8', '_720p.m3u8');
+        this.currentQuality = '720p';
+        break;
+      case '1080p':
+        this.selectedQualitySrc = this.video.video_folder.replace('_master.m3u8', '_1080p.m3u8');
+        this.currentQuality = '1080p';
+        break;
+      default:
+        this.selectedQualitySrc = this.video.video_folder;
+        this.currentQuality = 'Auto'; 
+    }
+  }
+
 
   onQualityChange(quality: string): void {
+    if (this.videoElement && !this.videoElement.paused) {
+      this.videoElement.pause();
+    }
     this.loadVideo(quality);
-    this.hideDropdown(); // Dropdown schließen nach Auswahl
+    this.hideDropdown();
   }
 
 
@@ -131,30 +126,39 @@ export class VideoDisplayComponent {
     this.dropdownOpen = false;
   }
 
+
   toggleDropdown(): void {
+    if (this.videoElement && !this.videoElement.paused) {
+      this.videoElement.pause();
+    }
     this.dropdownOpen = !this.dropdownOpen;
   }
+
 
   close() {
     this.closeDisplay.emit();
   }
 
+
   onOverlayClick(event: MouseEvent) {
     this.close();
   }
 
+
   showVideo(): void {
-    // this.closeOverlayPlayButton = true;
     this.isVideoVisible = true;
   }
+
 
   close2(): void {
     this.isVideoVisible = false;
   }
 
+
   checkIfFavorite(): boolean {
     return this.videoService.favVideos.some(favVideo => favVideo.id === this.video.id);
   }
+
 
   async addFavorite(video: VideoJson) {
     if (this.isRequestInProgress) {
@@ -179,23 +183,32 @@ export class VideoDisplayComponent {
       }
     }, 300);
   }
+
   
   showQualitySelector(): void {
     this.showQualitySelectorBool = true;
-    this.startInactivityTimer();
   }
 
+
+  // @HostListener('document:mousemove')
   checkMouseMove(): void {
-    if (this.showQualitySelectorBool === null) {
-      this.showQualitySelectorBool = true;
+    this.showQualitySelectorBool = true;
+    if (this.showQualitySelectorBool) {
+      this.onPlayPause();
     }
-    this.startInactivityTimer();
   }
 
-//  @HostListener('document:mousemove')
+  resetControlBarTimer(): void {
+    if (this.controlBarTimer) {
+      clearTimeout(this.controlBarTimer);
+    }
+    this.controlBarTimer = setTimeout(() => {
+      this.isControlBarVisible = false;
+    }, 3000); 
+  }
+
+
   hideQualitySelector(): void {
-    console.log('ddd');
-    
     if (this.videoElement.paused) {
       return;
     }
@@ -204,7 +217,6 @@ export class VideoDisplayComponent {
     }
     this.dropdownOpen = false;
     this.showQualitySelectorBool = false;
-    this.cdr.detectChanges();
   }
 
   
@@ -214,7 +226,7 @@ export class VideoDisplayComponent {
     }
     this.inactivityTimer = setTimeout(() => {
       this.hideQualitySelector();
-    }, 3000);
+    }, 2600);
   }
 
 
@@ -224,21 +236,16 @@ export class VideoDisplayComponent {
     }
   }
 
-  // onPlayPause(): void {
-  //   this.showQualitySelectorBool = this.videoElement.paused ? true : null;
-  //   if (!this.videoElement.paused) {
-  //     this.hideQualitySelector();
-  //   }
-  //   this.cdr.detectChanges();
-  // }
+
   onPlayPause(): void {
     if (this.videoElement.paused) {
-      this.showQualitySelectorBool = true; // Beim Pausieren den Quality Selector anzeigen
+      this.showQualitySelectorBool = true; 
+      this.isControlBarVisible = true;
     } else {
-      this.startFadeOut(); // Beim Abspielen langsam ausblenden
+      this.startFadeOut();
     }
-    this.cdr.detectChanges();
   }
+
 
   startFadeOut(): void {
     if (this.fadeOutTimeout) {
@@ -246,22 +253,35 @@ export class VideoDisplayComponent {
     }
     this.fadeOutTimeout = setTimeout(() => {
       this.showQualitySelectorBool = false;
-      this.cdr.detectChanges();
-    }, 1000); // Langsames Ausblenden innerhalb von 1 Sekunde
+    }, 2600);
   }
 
+
   onVideoEnded(): void {
-    this.showQualitySelectorBool = null;
+    this.showQualitySelectorBool = true;
+  }
+
+
+  onFullScreenChange(): void { 
+    if (document.fullscreenElement) {
+      this.showQualitySelectorBool = true; // Qualitätsschalter im Vollbildmodus anzeigen
+    } else {
+      this.showQualitySelectorBool = false; // Qualitätsschalter im normalen Modus ausblenden
+    }
     this.cdr.detectChanges();
   }
 
-  // onFullScreenChange(): void { 
-  //   if (document.fullscreenElement) {
-  //     this.showQualitySelectorBool = true; // Qualitätsschalter im Vollbildmodus anzeigen
-  //   } else {
-  //     this.showQualitySelectorBool = false; // Qualitätsschalter im normalen Modus ausblenden
-  //   }
-  //   this.cdr.detectChanges();
-  // }
+
+  ngOnDestroy(): void {
+    if (this.videoElement) {
+      this.videoElement.removeEventListener('play', this.onPlayPause.bind(this));
+      this.videoElement.removeEventListener('pause', this.onPlayPause.bind(this));
+      this.videoElement.removeEventListener('ended', this.onVideoEnded.bind(this));
+    }
+    if (this.fadeOutTimeout) {
+      clearTimeout(this.fadeOutTimeout);
+    }
+    document.removeEventListener('fullscreenchange', this.onFullScreenChange.bind(this));
+  }
 
 }

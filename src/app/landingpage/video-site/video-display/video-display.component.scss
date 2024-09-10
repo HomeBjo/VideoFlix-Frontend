@@ -37,6 +37,7 @@ h2 {
   left: 16px;
   font-size: 50px;
 }
+
 .presents-logo {
   position: absolute;
   top: 0;
@@ -48,6 +49,7 @@ h2 {
   font-weight: 900;
   font-size: 42px;
 }
+
 .presents-text {
   position: absolute;
   top: 25px;
@@ -58,20 +60,24 @@ h2 {
   color: #6f17ff;
   font-weight: 900;
 }
+
 .img-back {
   position: absolute;
   top: 18px;
   right: 24px;
   cursor: pointer;
 }
+
 .video-img-container {
   position: relative;
+
   img {
     width: -webkit-fill-available;
     height: auto;
     mask-image: linear-gradient(to top, transparent 0%, black 5%);
   }
 }
+
 #videoPlayer {
   cursor: pointer;
   margin-top: 24px;
@@ -90,13 +96,16 @@ h2 {
   max-width: 100%;
   overflow: hidden;
   overflow-wrap: break-word;
+
   .description-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     span {
       font-size: 32px;
     }
+
     .starIconImg {
       width: 32px;
       height: 32px;
@@ -105,6 +114,7 @@ h2 {
       cursor: pointer;
     }
   }
+
   .description-text {
     font-size: 16px;
     padding-left: 8px;
@@ -139,13 +149,17 @@ h2 {
 
 //----------------------------------------------------------------------------------------------------------------
 select {
-  -webkit-appearance: none; /* Entfernt Standard-Stile in WebKit-basierten Browsern wie Chrome und Safari */
-  -moz-appearance: none; /* Entfernt Standard-Stile in Firefox */
-  appearance: none; /* Entfernt Standard-Stile in modernen Browsern */
+  -webkit-appearance: none;
+  /* Entfernt Standard-Stile in WebKit-basierten Browsern wie Chrome und Safari */
+  -moz-appearance: none;
+  /* Entfernt Standard-Stile in Firefox */
+  appearance: none;
+  /* Entfernt Standard-Stile in modernen Browsern */
 }
 
 .video-player-content {
-  position: relative; /* Damit das Dropdown-Menü relativ zum Video-Player positioniert wird */
+  position: relative;
+  /* Damit das Dropdown-Menü relativ zum Video-Player positioniert wird */
 }
 
 .quality-selector {
@@ -167,20 +181,27 @@ select {
 
   .dropdown-menu {
     position: absolute;
-    bottom: 100%; /* Öffnet das Menü nach oben */
+    bottom: 100%;
+    /* Öffnet das Menü nach oben */
     left: 0;
-    background-color: #141414; /* Dunkler Hintergrund */
-    color: #daddde; /* Heller Text */
+    background-color: #141414;
+    /* Dunkler Hintergrund */
+    color: #daddde;
+    /* Heller Text */
     border: 1px solid #333;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Hoher z-index */
+    z-index: 1000;
+    /* Hoher z-index */
     display: flex;
     flex-direction: column;
     width: 100%;
-    opacity: 1; /* Sicherstellen, dass es sichtbar ist */
-    transition: opacity 0.3s ease; /* Sanfte Übergangsanimation */
-    visibility: visible; /* Sicherstellen, dass es sichtbar ist */
+    opacity: 1;
+    /* Sicherstellen, dass es sichtbar ist */
+    transition: opacity 0.3s ease;
+    /* Sanfte Übergangsanimation */
+    visibility: visible;
+    /* Sicherstellen, dass es sichtbar ist */
 
     .qualityBtn {
       cursor: pointer;
@@ -194,13 +215,17 @@ select {
 }
 
 .show-dropdown .dropdown-menu {
-  opacity: 0; /* Anfangs unsichtbar */
-  visibility: hidden; /* Anfangs unsichtbar */
+  opacity: 0;
+  /* Anfangs unsichtbar */
+  visibility: hidden;
+  /* Anfangs unsichtbar */
 }
 
 .quality-selector.show-dropdown .dropdown-menu {
-  opacity: 1; /* Sichtbar machen, wenn Dropdown aktiv ist */
-  visibility: visible; /* Sichtbar machen */
+  opacity: 1;
+  /* Sichtbar machen, wenn Dropdown aktiv ist */
+  visibility: visible;
+  /* Sichtbar machen */
 }
 
 .hideQualitySelector {
@@ -211,10 +236,12 @@ select {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
 }
+
 
 .showQualitySelector {
   animation: showQualityBtn 0.08s linear forwards;
@@ -224,6 +251,7 @@ select {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -233,9 +261,11 @@ select {
 // style klappt nicht
 /* Vollbildmodus-Stile */
 :fullscreen .quality-selector {
-  bottom: 20px !important; /* Stelle sicher, dass der Button im Vollbildmodus sichtbar ist */
+  bottom: 20px !important;
+  /* Stelle sicher, dass der Button im Vollbildmodus sichtbar ist */
   left: 20px !important;
-  z-index: 1000 !important; /* Stelle sicher, dass der Button über anderen Elementen liegt */
+  z-index: 1000 !important;
+  /* Stelle sicher, dass der Button über anderen Elementen liegt */
   position: absolute;
   opacity: 1;
 }
@@ -243,7 +273,8 @@ select {
 :fullscreen .video-display-content {
   max-width: 100vw !important;
   max-height: 100vh !important;
-  border-radius: 0 !important; /* Entferne die Eckenrundung im Vollbildmodus */
+  border-radius: 0 !important;
+  /* Entferne die Eckenrundung im Vollbildmodus */
 }
 
 :fullscreen .video-player-content {
