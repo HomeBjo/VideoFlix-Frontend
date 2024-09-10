@@ -70,6 +70,7 @@ export class RegisterComponent {
     return false;
   }
 
+
   getLastNameError(last_name: string): string {
     if (this.checkNameLength(last_name)) {
         return 'tooLong';
@@ -88,6 +89,7 @@ export class RegisterComponent {
     return false;
   }
 
+  
   checkConfirmPassword() {
     if (this.confirm_password.length >= 5) {
       return true;
