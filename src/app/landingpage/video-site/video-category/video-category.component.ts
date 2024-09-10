@@ -47,7 +47,6 @@ export class VideoCategoryComponent {
           (data: any) => {
             this.categoryVideos = data;
             this.selectedCategory = this.firstLetterBig(category);
-            console.log('1111111111111', this.categoryVideos);
           },
           (error: any) => {
             console.error('Error fetching videos:', error);
@@ -62,16 +61,16 @@ export class VideoCategoryComponent {
     let userID = localStorage.getItem('userId')?.toString();
     this.userService.userLogout(userID!);
   }
+
   openSmallMenu() {
     this.shwonProfilSelection = !this.shwonProfilSelection;
   }
-  // toggle anzeige
+
   toggleCategoryMenu(event: MouseEvent) {
     event.stopPropagation();
     this.showCategorySelection = !this.showCategorySelection;
   }
 
-  // prüfe den klick auserhalb der div
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     this.showCategorySelection = false;
@@ -90,13 +89,11 @@ export class VideoCategoryComponent {
   }
 
   ngAfterViewChecked() {
-    //angularproblem- überprüfung der werte nach dem laden
     this.updateArrowVisibility();
     this.cdr.detectChanges();
   }
 
   updateArrowVisibility() {
-    //angularproblem- überprüfung der werte nach dem laden
     const videoLoopBoxes = [
       this.video4LoopBox0,
       this.video4LoopBox1,
