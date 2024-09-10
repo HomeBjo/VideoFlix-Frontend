@@ -1,348 +1,333 @@
-@import './../../../styles.scss';
+@import "./../../../styles.scss";
 
 section {
-    width: 100%;
-    height: auto;
-    background-color: #060606;
+  width: 100%;
+  height: auto;
+  background-color: #060606;
 }
 
 .videoPlayerBox {
-    @include dFlex();
+  @include dFlex();
+  width: 100%;
+  height: 100dvh;
+  position: absolute;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  object-fit: cover;
+  overflow: hidden;
+  background-color: #0f1f26;
+
+  .backgroundVideo {
     width: 100%;
-    height: 100dvh;
-    position: absolute;
-    flex-direction: column;
-    top: 0;
-    right: 0;
+    height: 100%;
     object-fit: cover;
-    overflow: hidden;
-    background-color: #0F1F26;
+  }
 
-    .backgroundVideo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .shadow {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        box-shadow: inset 0px -62px 80px 0px rgba(0, 0, 0, 0.80);
-        top: 0;
-        left: 0;
-        z-index: 1;
-    }
+  .shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0px -62px 80px 0px rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
 }
 
 .descriptionDivBreakout {
-    color: whitesmoke;
-    position: absolute;
-    top: 28%;
-    left: 6rem;
-    width: 400px;
-    @include dFlex($a: flex-start, $g: 32px);
-    flex-direction: column;
-    text-align: start;
+  color: whitesmoke;
+  position: absolute;
+  top: 28%;
+  left: 6rem;
+  width: 400px;
+  @include dFlex($a: flex-start, $g: 32px);
+  flex-direction: column;
+  text-align: start;
 
-    h1 {
-        font-size: 5rem;
-        margin: 0;
-    }
+  h1 {
+    font-size: 5rem;
+    margin: 0;
+  }
 
-    span {
-        font-size: large;
-    }
+  span {
+    font-size: large;
+  }
 }
-
 
 .videoDiv {
-    // min-height: 2000px;
-    margin-top: 100dvh;
-    padding-left: 6rem;
+  margin-top: 100dvh;
+  padding-left: 6rem;
 
-    .videoDiv2 {
-        position: absolute;
-        overflow-x: hidden;
-        width: calc(100% - 120px);
+  .videoDiv2 {
+    position: absolute;
+    overflow-x: hidden;
+    width: calc(100% - 120px);
 
-        .videoPosition {
-            color: whitesmoke;
-            width: 100%;
-            font-size: 1.7em;
+    .videoPosition {
+      color: whitesmoke;
+      width: 100%;
+      font-size: 1.7em;
 
-            .video4LoopContainer {
-                position: relative;
-                width: 100%;
+      .video4LoopContainer {
+        position: relative;
+        width: 100%;
 
-                .video4LoopBox {
-                    display: flex;
-                    gap: 1em;
-                    width: 100%;
-                    overflow-x: auto;
-                    overflow-y: hidden;
-                    scroll-behavior: smooth;
-                    align-items: center;
-                    
-                    // einkommentieren wenn man fest größe habe will 
-                    // & > app-video-preview {
-                    //     flex: 0 0 auto;  // Stelle sicher, dass die Größe der Elemente nicht vom gap beeinflusst wird
-                    //     min-width: 160px; 
-                    //     // min-height: 90px; 
-                    //     max-width: 240px;
-                    //     aspect-ratio: 16/9;
-                    // }
+        .video4LoopBox {
+          display: flex;
+          gap: 1em;
+          width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scroll-behavior: smooth;
+          align-items: center;
 
-                    &::-webkit-scrollbar {
-                        height: 4px;
-                    }
+          &::-webkit-scrollbar {
+            height: 4px;
+          }
 
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #7810FF;
-                        border-radius: 2px;
-                    }
+          &::-webkit-scrollbar-thumb {
+            background-color: #7810ff;
+            border-radius: 2px;
+          }
 
-                    &::-webkit-scrollbar-track {
-                        background-color: transparent;
-                    }
-                }
-
-                .arrowLeft {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 4rem;
-                    height: 100%;
-                    @include dFlex();
-                    z-index: 2;
-                    background: linear-gradient(to right, #000000 0%, rgba(30, 30, 30, 0) 100%);
-
-                    button {
-                        background: none;
-                        border: none;
-                        cursor: pointer;
-                        transition: .2s all ease-in-out;
-
-                        &:hover {
-                            scale: 1.2;
-                        }
-
-                        img {
-                            width: 20px;
-                            height: 20px;
-                            object-fit: contain;
-                        }
-                    }
-                }
-
-                .arrowRight {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    width: 4rem;
-                    height: 100%;
-                    @include dFlex();
-                    z-index: 2;
-                    background: linear-gradient(to right, rgba(30, 30, 30, 0) 0%, #000000 100%);
-
-                    button {
-                        background: none;
-                        border: none;
-                        cursor: pointer;
-                        transition: .2s all ease-in-out;
-
-                        &:hover {
-                            scale: 1.2;
-                        }
-
-                        img {
-                            width: 20px;
-                            height: 20px;
-                            object-fit: contain;
-                        }
-                    }
-                }
-            }
+          &::-webkit-scrollbar-track {
+            background-color: transparent;
+          }
         }
+
+        .arrowLeft {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 4rem;
+          height: 100%;
+          @include dFlex();
+          z-index: 2;
+          background: linear-gradient(
+            to right,
+            #000000 0%,
+            rgba(30, 30, 30, 0) 100%
+          );
+
+          button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s all ease-in-out;
+
+            &:hover {
+              scale: 1.2;
+            }
+
+            img {
+              width: 20px;
+              height: 20px;
+              object-fit: contain;
+            }
+          }
+        }
+
+        .arrowRight {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 4rem;
+          height: 100%;
+          @include dFlex();
+          z-index: 2;
+          background: linear-gradient(
+            to right,
+            rgba(30, 30, 30, 0) 0%,
+            #000000 100%
+          );
+
+          button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s all ease-in-out;
+
+            &:hover {
+              scale: 1.2;
+            }
+
+            img {
+              width: 20px;
+              height: 20px;
+              object-fit: contain;
+            }
+          }
+        }
+      }
     }
+  }
 }
 
-.marginBottom{
-    margin-bottom: 4rem;
+.marginBottom {
+  margin-bottom: 4rem;
 }
 
 .descriptionVisible {
-    animation: slideIn 0.5s linear forwards;
+  animation: slideIn 0.5s linear forwards;
 }
 
 @keyframes slideIn {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 
-    50% {
-        transform: translateY(70%);
-        opacity: 0;
-    }
+  50% {
+    transform: translateY(70%);
+    opacity: 0;
+  }
 
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-        border-radius: 12px;
-    }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    border-radius: 12px;
+  }
 }
 
 .descriptionHide {
-    animation: slideOut 0.5s linear forwards;
-    height: 0;
-    opacity: 0;
+  animation: slideOut 0.5s linear forwards;
+  height: 0;
+  opacity: 0;
 }
 
 @keyframes slideOut {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 
-    50% {
-        transform: translateY(30%);
-        opacity: 0;
-    }
+  50% {
+    transform: translateY(30%);
+    opacity: 0;
+  }
 
-    100% {
-        transform: translateY(100%);
-        border-radius: 12px;
-        height: 0;
-        opacity: 0;
-    }
+  100% {
+    transform: translateY(100%);
+    border-radius: 12px;
+    height: 0;
+    opacity: 0;
+  }
 }
 
 @media (max-width: 560px) {
-    .marginBottom{
-        margin-bottom: 2rem;
-    }    
+  .marginBottom {
+    margin-bottom: 2rem;
+  }
 
-    .descriptionDivBreakout {
-        top: 56%;
-        left: 2rem;
-        width: 340px;
-        @include dFlex($a: flex-start, $g: 8px);
-        h1 {
-            font-size: 3rem;
-            margin: 0;
-        }
-    
-        span {
-            font-size: medium;
-        }
+  .descriptionDivBreakout {
+    top: 56%;
+    left: 2rem;
+    width: 340px;
+    @include dFlex($a: flex-start, $g: 8px);
+    h1 {
+      font-size: 3rem;
+      margin: 0;
     }
 
-    .videoDiv {
-        padding-left: 2rem;
-    
-        .videoDiv2 {
-            width: calc(100% - 34px);
-    
-            .videoPosition {
-                font-size: 1.3em;
-                .video4LoopContainer {
-                    position: relative;
-                    width: 100%;
-    
-                    .video4LoopBox {
-                        display: flex;
-                        gap: 1em;
-                        width: 100%;
-                        overflow-x: auto;
-                        overflow-y: hidden;
-                        scroll-behavior: smooth;
-                        align-items: center;
-                        
-                        // einkommentieren wenn man fest größe habe will 
-                        // & > app-video-preview {
-                        //     flex: 0 0 auto;  // Stelle sicher, dass die Größe der Elemente nicht vom gap beeinflusst wird
-                        //     min-width: 160px; 
-                        //     // min-height: 90px; 
-                        //     max-width: 240px;
-                        //     aspect-ratio: 16/9;
-                        // }
-    
-                        &::-webkit-scrollbar {
-                            height: 4px;
-                        }
-    
-                        &::-webkit-scrollbar-thumb {
-                            background-color: #7810FF;
-                            border-radius: 2px;
-                        }
-    
-                        &::-webkit-scrollbar-track {
-                            background-color: transparent;
-                        }
-                    }
-    
-                    .arrowLeft {
-                        width: 2rem;
-                        button {
-                            background: none;
-                            border: none;
-                            cursor: pointer;
-                            transition: .2s all ease-in-out;
-    
-                            &:hover {
-                                scale: 1.2;
-                            }
-    
-                            img {
-                                width: 20px;
-                                height: 20px;
-                                object-fit: contain;
-                            }
-                        }
-                    }
-    
-                    .arrowRight {
-                        width: 2rem;
-    
-                        button {
-                            background: none;
-                            border: none;
-                            cursor: pointer;
-                            transition: .2s all ease-in-out;
-    
-                            &:hover {
-                                scale: 1.2;
-                            }
-    
-                            img {
-                                width: 20px;
-                                height: 20px;
-                                object-fit: contain;
-                            }
-                        }
-                    }
-                }
+    span {
+      font-size: medium;
+    }
+  }
+
+  .videoDiv {
+    padding-left: 2rem;
+
+    .videoDiv2 {
+      width: calc(100% - 34px);
+
+      .videoPosition {
+        font-size: 1.3em;
+        .video4LoopContainer {
+          position: relative;
+          width: 100%;
+
+          .video4LoopBox {
+            display: flex;
+            gap: 1em;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            align-items: center;
+
+            &::-webkit-scrollbar {
+              height: 4px;
             }
-        }
-    }
 
+            &::-webkit-scrollbar-thumb {
+              background-color: #7810ff;
+              border-radius: 2px;
+            }
+
+            &::-webkit-scrollbar-track {
+              background-color: transparent;
+            }
+          }
+
+          .arrowLeft {
+            width: 2rem;
+            button {
+              background: none;
+              border: none;
+              cursor: pointer;
+              transition: 0.2s all ease-in-out;
+
+              &:hover {
+                scale: 1.2;
+              }
+
+              img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+              }
+            }
+          }
+
+          .arrowRight {
+            width: 2rem;
+
+            button {
+              background: none;
+              border: none;
+              cursor: pointer;
+              transition: 0.2s all ease-in-out;
+
+              &:hover {
+                scale: 1.2;
+              }
+
+              img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 380px) {
-    .descriptionDivBreakout {
-        top: 54%;
-        width: 300px;
-    }
-
+  .descriptionDivBreakout {
+    top: 54%;
+    width: 300px;
+  }
 }
 
 @media (max-width: 350px) {
-    .descriptionDivBreakout {
-        width: 280px;
-        span{
-            font-size: small;
-        }
+  .descriptionDivBreakout {
+    width: 280px;
+    span {
+      font-size: small;
     }
-
+  }
 }

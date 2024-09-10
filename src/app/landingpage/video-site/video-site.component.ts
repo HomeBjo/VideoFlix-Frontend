@@ -39,7 +39,6 @@ export class VideoSiteComponent {
   @ViewChild('video4LoopBox1') video4LoopBox1!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox2') video4LoopBox2!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox3') video4LoopBox3!: ElementRef<HTMLElement>;
-  // @ViewChild('video4LoopBox4') video4LoopBox4!: ElementRef<HTMLElement>;
   @ViewChild('myVideo') myVideo!: ElementRef<HTMLVideoElement>;
   private scrollDistance = 420;
   showArrows: boolean[] = [false, false, false, false, false];
@@ -52,7 +51,6 @@ export class VideoSiteComponent {
     public videoService: VideoService
   ) {}
 
-
   ngOnInit() {
     this.checkUserLoginStatus();
     this.userService.getUserData();
@@ -60,8 +58,7 @@ export class VideoSiteComponent {
     this.fetshFavVideos();
   }
 
-
-  fetshAllVideos(){
+  fetshAllVideos() {
     this.videoService.startFetchVideos().subscribe(
       (data: any) => {
         this.newVideos = data;
@@ -74,38 +71,26 @@ export class VideoSiteComponent {
     );
   }
 
-
-  fetshFavVideos(){
-    this.videoService.reloadFavs$.pipe( // initaliere die Observable 
-      //switchMap ist ein RxJS-Operator. Er nimmt eine Observable (in diesem Fall reloadFavs$) 
-      //und projiziert jedes Ereignis auf eine neue Observable (fetshFavorites()), 
-      //wobei er die vorherige Observable abmeldet und nur die neueste Observable verwendet.
-      switchMap(() => this.videoService.fetshFavorites())
-    ).subscribe( // empfängt die neue Observable
-      (data: any) => {
-        this.videoService.favVideos = data;
-        console.log('dddd', this.videoService.favVideos);
-      },
-      (error: any) => {
-        console.error('Error fetching fav videos:', error);
-      }
-    );
-    
-    //Dies löst die Kette erneut aus. Es wird ein Ereignis in reloadFavs$ gesendet, 
-    //das den gesamten pipe- und switchMap-Prozess von vorne startet.
+  fetshFavVideos() {
+    this.videoService.reloadFavs$
+      .pipe(switchMap(() => this.videoService.fetshFavorites()))
+      .subscribe(
+        (data: any) => {
+          this.videoService.favVideos = data;
+        },
+        (error: any) => {
+          console.error('Error fetching fav videos:', error);
+        }
+      );
     this.videoService.reloadFavs$.next();
   }
 
-
   ngAfterViewChecked() {
-    //angularproblem- überprüfung der werte nach dem laden
     this.updateArrowVisibility();
     this.cdr.detectChanges();
   }
 
-
   updateArrowVisibility() {
-    //angularproblem- überprüfung der werte nach dem laden
     const videoLoopBoxes = [
       this.video4LoopBox0,
       this.video4LoopBox1,
@@ -120,7 +105,6 @@ export class VideoSiteComponent {
     });
   }
 
-
   checkUserLoginStatus() {
     this.checkUserInterval = setInterval(() => {
       let user_id = localStorage.getItem('userId')?.toString();
@@ -130,50 +114,47 @@ export class VideoSiteComponent {
     }, 500);
   }
 
-
   logout() {
     localStorage.setItem('logoutInProgress', 'true');
     let userID = localStorage.getItem('userId')?.toString();
     this.userService.userLogout(userID!);
   }
 
-
   playVideo(videoPath: string) {
-
-    if (this.myVideo && this.myVideo.nativeElement instanceof HTMLVideoElement) {
+    if (
+      this.myVideo &&
+      this.myVideo.nativeElement instanceof HTMLVideoElement
+    ) {
       const videoElement = this.myVideo.nativeElement;
-      videoElement.src = videoPath; // deklariere den path des videos an
-      videoElement.play(); // spiele das Video ab
+      videoElement.src = videoPath; 
+      videoElement.play();
 
-      if (videoElement.requestFullscreen) { // Fordere den Vollbildmodus an
+      if (videoElement.requestFullscreen) {
+       
         videoElement.requestFullscreen();
       } else if ((videoElement as any).webkitRequestFullscreen) {
-        (videoElement as any).webkitRequestFullscreen(); // Safari Unterstützung
-      } else if ((videoElement as any).msRequestFullscreen) {        
-        (videoElement as any).msRequestFullscreen();// IE/Edge Unterstützung
+        (videoElement as any).webkitRequestFullscreen(); 
+      } else if ((videoElement as any).msRequestFullscreen) {
+        (videoElement as any).msRequestFullscreen(); 
       }
 
-      videoElement.muted = false; // optional: den ton aktivieren
+      videoElement.muted = false; 
     } else {
       console.error('Video element not found');
     }
   }
 
-
   onVideoSelected(video: VideoJson) {
     this.selectedVideo = video;
   }
-
 
   closeVideoDisplay() {
     this.selectedVideo = null;
   }
 
-
   openSmallMenu() {
     this.shwonProfilSelection = !this.shwonProfilSelection;
   }
-
 
   ArrowRightClick(index: number) {
     switch (index) {
@@ -194,7 +175,6 @@ export class VideoSiteComponent {
     }
   }
 
-
   ArrowLeftClick(index: number) {
     switch (index) {
       case 0:
@@ -214,14 +194,11 @@ export class VideoSiteComponent {
     }
   }
 
-
   checkIfFavoreitesAvailable() {
-    return this.videoService.favVideos.some(v => v.is_favorite === true);
+    return this.videoService.favVideos.some((v) => v.is_favorite === true);
   }
 
-
-  getFavorites(){
-    return this.videoService.favVideos.filter(v => v.is_favorite === true);
+  getFavorites() {
+    return this.videoService.favVideos.filter((v) => v.is_favorite === true);
   }
-
 }
