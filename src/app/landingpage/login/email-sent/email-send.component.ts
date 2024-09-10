@@ -35,24 +35,6 @@ export class EmailSendComponent {
     return false;
   }
 
-  async sendEmail() {
-    const success = await this.userService.sendPasswordResetEmail(this.email);
-    if (success) {
-      console.log('E-Mail erfolgreich gesendet.');
-      // this.router.navigateByUrl('/login');
-    } else {
-      console.log('Fehler beim Senden der E-Mail.');
-    }
-  }
-
-  // async onSubmit(ngForm: NgForm) {
-  //   if (ngForm.valid && this.checkAllInputs()) {
-  //     await this.sendEmail();
-  //     ngForm.resetForm();
-  //   } else {
-  //     ngForm.resetForm();
-  //   }
-  // }
   async onSubmit(form: NgForm) {
     if (this.checkEmail()) {
       try {
