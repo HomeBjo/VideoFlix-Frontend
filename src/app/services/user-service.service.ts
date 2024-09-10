@@ -28,26 +28,53 @@ export class UserService {
     private toastService: ToastServiceService
   ) {}
 
+  // async checkGuestUser() { ----------------------------------------erst löschen, wenn keine loginbugs mehr kommen
+  //   let userId = localStorage.getItem('userId')?.toString();
+  //   const token = localStorage.getItem('token');
+  //   const rememberMe = localStorage.getItem('rememberMe');
+  //   const logoutInProgress = localStorage.getItem('logoutInProgress');
+  //   if (logoutInProgress === 'true') {
+  //     localStorage.removeItem('logoutInProgress');
+  //     return;
+  //   }
+  //   if (userId === GUEST_ID) {
+  //     localStorage.clear();
+  //   } else {
+  //     if (rememberMe === 'true') {
+  //       const user = await this.verifyToken(token!, userId!);
+  //       if (user) {
+  //         this.router.navigateByUrl('/video_site');
+  //       }
+  //     }
+  //   }
+  // }
   async checkGuestUser() {
-    let userId = localStorage.getItem('userId')?.toString();
+    const userId = localStorage.getItem('userId')?.toString();
     const token = localStorage.getItem('token');
     const rememberMe = localStorage.getItem('rememberMe');
     const logoutInProgress = localStorage.getItem('logoutInProgress');
+    
     if (logoutInProgress === 'true') {
       localStorage.removeItem('logoutInProgress');
       return;
     }
+
     if (userId === GUEST_ID) {
       localStorage.clear();
     } else {
-      if (rememberMe === 'true') {
-        const user = await this.verifyToken(token!, userId!);
+      if (rememberMe === 'true' && token) {
+        const user = await this.verifyToken(token, userId!);
         if (user) {
-          this.router.navigateByUrl('/video_site');
+            this.router.navigateByUrl('/video_site');
+        } else {
+            console.error('Token-Überprüfung fehlgeschlagen.');
         }
+      } else {
+          console.log('Remember Me ist deaktiviert oder kein gültiges Token gefunden.');
       }
     }
   }
+
 
   async registerUser(newUser: RegisterUser) {
     const checkEmailUrl = `${environment.baseUrl}/users/check-email/`;
