@@ -147,74 +147,69 @@ section {
   }
 }
 
-.successMessage{
-    @include dFlex($j: space-between);
-    flex-direction: column;
-    background-color: white;
-    border-radius: 25px;
-    padding: 2rem;
-    min-width: 400px;
-    h1 {
-      font-size: 3.5em;
-      margin: 0;
-      margin-bottom: 0.5rem;
-      color: $btnColor;
-      line-height: 1;
-    }
-   p{
+.successMessage {
+  @include dFlex($j: space-between);
+  flex-direction: column;
+  background-color: white;
+  border-radius: 25px;
+  padding: 2rem;
+  min-width: 400px;
+  h1 {
+    font-size: 3.5em;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    color: $btnColor;
+    line-height: 1;
+  }
+  p {
     color: black;
     font-size: 18px;
     font-weight: 400;
-   }
+  }
 }
 @media (max-width: 630px) {
-   
- 
-
   .contentDiv {
-      padding-bottom: 16px;
-      min-width: auto;
-      width: 254px;
-      padding: 1.5rem;
-    
-      h1 {
-          font-size: 2.3em;
-          margin: 0;
-          margin-bottom: 0.5rem;
-      }
+    padding-bottom: 16px;
+    min-width: auto;
+    width: 254px;
+    padding: 1.5rem;
+
+    h1 {
+      font-size: 2.3em;
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
   }
 
   .submitBtn {
-      padding: 0;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      font-size: medium;
-      width: 96px;
-  }
-  
-  .submitBtnDisabled{
-      padding: 0;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      font-size: medium;
-      width: 96px;
+    padding: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: medium;
+    width: 96px;
   }
 
-  input[type="checkbox"]{
-      width: 16px;
-      height: 16px;
+  .submitBtnDisabled {
+    padding: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: medium;
+    width: 96px;
+  }
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
   }
 }
 .infoText {
   padding: 4px;
-    text-align: center;
-    padding-top: 18px;
-    padding-bottom: 18px;
+  text-align: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
   span {
     color: black;
     font-size: 18px;
     font-weight: 400;
   }
 }
-
-
