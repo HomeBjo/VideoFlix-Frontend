@@ -16,6 +16,7 @@
             <button class="headerBtn" [routerLink]="['/favorites',]">Favorites</button>
         </div>
     </div>
+    
     <div class="btnBoxRight">
         <div class="userNameBox">
             <h1 class="welcomeH1">Welcome</h1>
@@ -24,21 +25,13 @@
                 <h1 (click)="openSmallMenu($event)">{{userService.currentUserFirstName}}</h1>
             </div>
         </div>
-
-
-
-        <!-- <button class="blueBtn" (click)="openSmallMenu($event)">Profile</button> -->
         <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}" (click)="$event.stopPropagation()">
             <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
             <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
         </div>
     </div>
 
-
-
-
-    
-      <!-- Dropdown-Menü (mobile Ansicht) -->
+      <!-- Dropdown-Menü (mobile View) -->
     <div (click)="$event.stopPropagation()" [ngClass]="{'mobileSection':showMobileSelection, 'mobileSectionOff':!showMobileSelection}"> 
         <button (click)="toggleMobileMenu()"  [routerLink]="['/video_site']" >Home</button>
         <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
@@ -51,8 +44,3 @@
         <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
     </div>
 </header>
-
-
-<!-- 
-<button (click)="toggleCategoryMenu($event)" [routerLink]="[{ outlets: { videoContent: ['video_categorys', 'action'] } }]" class="profilSelectionBtn">Action</button>
-<button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_site', { outlets: { videoContent: ['video_categorys', 'action'] } }]" class="profilSelectionBtn">Anime</button> -->

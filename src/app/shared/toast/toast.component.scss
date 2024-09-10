@@ -12,10 +12,10 @@
   border-radius: 20px;
   gap: 16px;
   left: 8px;
-  opacity: 0; /* Start mit 0 Opazität */
+  opacity: 0; 
 
   &.show {
-    animation: slideIn 0.5s ease-in-out forwards; /* Animation anwenden */
+    animation: slideIn 0.5s ease-in-out forwards; 
   }
 
   &.hide {
@@ -58,10 +58,8 @@
 }
 
 .left-side {
-  
   width: 20px;
   height: 80px;
-  /* border-radius: 20px; */
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
@@ -90,6 +88,4 @@
     width: 300px;
     font-size: 12px;
   }
-
-  
 }
