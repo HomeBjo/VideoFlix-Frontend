@@ -32,7 +32,6 @@ export class PasswordResetComponent {
   constructor(
     public userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
   ) {}
 
   togglePasswordVisibility(): void {
@@ -70,13 +69,8 @@ export class PasswordResetComponent {
       token
     );
     if (success) {
-      console.log('Passwort wurde erfolgreich zurückgesetzt.');
       return true;
-      // this.router.navigateByUrl('/login');
     } else {
-      
-      console.log('Fehler beim Zurücksetzen des Passworts.');
-      console.log(this.confirm_password, uid, token);
       ngForm.resetForm();
       return false;
     }
