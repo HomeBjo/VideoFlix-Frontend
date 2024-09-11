@@ -36,14 +36,14 @@
                 @if (!checkWindowWidth()) {
                     <span>Remember me 
                         <img src="../../../../assets/icons/icons-help.png" alt="icon-question-mark"
-                        (mouseenter)="shwoQuestionWindow()" (mouseleave)="shwoQuestionWindow()">
-                        <div class="questionDiv" [ngClass]="{'shwoQ-Div': shwoQesttionDiv ,'hideQ-Div' : !shwoQesttionDiv }">Remember me does not work on Guest login.</div>
+                        (mouseenter)="showQuestionWindow()" (mouseleave)="showQuestionWindow()">
+                        <div class="questionDiv" [ngClass]="{'shwoQ-Div': showQesttionDiv ,'hideQ-Div' : !showQesttionDiv }">Remember me does not work on Guest login.</div>
                     </span>
                 } @else {
                     <span>Remember me 
                         <img src="../../../../assets/icons/icons-help.png" alt="icon-question-mark"
-                        (click)="shwoQuestionWindow()">
-                        <div class="questionDiv" [ngClass]="{'shwoQ-Div': shwoQesttionDiv ,'hideQ-Div' : !shwoQesttionDiv }">Remember me does not work on Guest login.</div>
+                        (click)="showQuestionWindow()">
+                        <div class="questionDiv" [ngClass]="{'shwoQ-Div': showQesttionDiv ,'hideQ-Div' : !showQesttionDiv }">Remember me does not work on Guest login.</div>
                     </span>
                 }
             </div>

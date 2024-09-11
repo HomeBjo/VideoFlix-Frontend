@@ -22,8 +22,7 @@ section {
   transition: ease-in-out 0.3s;
 
   &:hover {
-    background-color: whitesmoke;
-    color: $btnColor;
+    background-color: rgb(0, 12, 180);
   }
 }
 
@@ -167,6 +166,24 @@ section {
     font-weight: 400;
   }
 }
+
+@media (min-width: $screanWidthQHD) {
+  .successMessage {
+    h1 {
+      font-size: 4.5em;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  .loginBtn {
+    font-size: x-large;
+  }
+  
+}
+
 @media (max-width: 630px) {
   .contentDiv {
     padding-bottom: 16px;

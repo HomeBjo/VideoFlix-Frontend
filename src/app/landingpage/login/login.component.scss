@@ -87,6 +87,7 @@ section {
   display: flex;
   align-items: flex-end;
   gap: 16px;
+  width: 300px;
 }
 
 .contentDiv {
@@ -372,5 +373,22 @@ input[type="checkbox"]:checked::after {
   input[type="checkbox"] {
     width: 16px;
     height: 16px;
+  }
+}
+
+@media (min-width: $screanWidthQHD) {
+  .mainContent {
+    .blueText {
+      font-size: 20px;
+    }
+  
+    .blackText {
+      font-size: 20px;
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .signContainer{
+    width: auto;
   }
 }

@@ -13,7 +13,6 @@ import { VideoService } from '../../services/video-service.service';
 import { VideoDisplayComponent } from './video-display/video-display.component';
 import { VideoJson } from '../../interfaces/video-json';
 import { HeaderComponent } from '../../shared/videoSite/header/header.component';
-import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -34,7 +33,6 @@ export class VideoSiteComponent {
   newVideos: VideoJson[] = [];
   shwonProfilSelection: boolean = false;
   selectedVideo: VideoJson | null = null;
-  private checkUserInterval: any;
   @ViewChild('video4LoopBox0') video4LoopBox0!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox1') video4LoopBox1!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox2') video4LoopBox2!: ElementRef<HTMLElement>;
@@ -126,7 +124,7 @@ export class VideoSiteComponent {
    * Periodically checks the user's login status and redirects to the login page if the user is not logged in.
    */
   checkUserLoginStatus() {
-    this.checkUserInterval = setInterval(() => {
+    this.userService.checkUserInterval = setInterval(() => {
       let user_id = localStorage.getItem('userId')?.toString();
       if (!user_id) {
         this.route.navigateByUrl('/login');

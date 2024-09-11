@@ -24,7 +24,7 @@ export class LoginComponent {
   isRememberMeChecked: boolean = false;
   rememberMe: boolean = false;
   questionMartMobile: boolean = false;
-  shwoQesttionDiv: boolean = false;
+  showQesttionDiv: boolean = false;
 
 
   constructor(
@@ -36,7 +36,7 @@ export class LoginComponent {
    * It checks the "Remember Me" status and checks if the user is a guest.
    */
   ngOnInit() {
-    this.checkRememberMe2();
+    this.checkRememberMeDisplayBoolean();
     this.userService.checkGuestUser();
   }
 
@@ -154,10 +154,15 @@ export class LoginComponent {
     }
   }
 
+<<<<<<< Updated upstream
    /**
    * Loads the "Remember Me" status from localStorage and sets the flag accordingly.
    */ 
   checkRememberMe2(){
+=======
+  
+  checkRememberMeDisplayBoolean(){
+>>>>>>> Stashed changes
     let remember = localStorage.getItem('rememberMe');
     if (remember === 'true') {
       this.rememberMe = true;
@@ -178,11 +183,17 @@ export class LoginComponent {
     }
   }
 
+<<<<<<< Updated upstream
   /**
    * Toggles the display of the question window.
    */
   shwoQuestionWindow(){
     this.shwoQesttionDiv = !this.shwoQesttionDiv;
+=======
+
+  showQuestionWindow(){
+    this.showQesttionDiv = !this.showQesttionDiv;
+>>>>>>> Stashed changes
   }
 
 }

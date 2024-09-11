@@ -21,6 +21,7 @@ export class UserService {
   private userDataSubject = new BehaviorSubject<UserData[] | null>(null);
   userData$ = this.userDataSubject.asObservable();
   currentUserFirstName: string = '';
+  checkUserInterval!: ReturnType<typeof setTimeout>;
 
   constructor(
     private http: HttpClient,
@@ -61,7 +62,7 @@ export class UserService {
     if (logoutInProgress === 'true') {
       localStorage.removeItem('logoutInProgress');
       return;
-    }
+    } 
 
     if (userId === GUEST_ID) {
       localStorage.clear();
@@ -178,7 +179,9 @@ export class UserService {
       if (userID === GUEST_ID || rememberMe === 'false') {
         localStorage.clear();
       }
+      clearInterval(this.checkUserInterval);
     } catch (e) {
+      console.error('Error logging out:', e);
     }
   }
 
@@ -200,6 +203,7 @@ export class UserService {
       );
       return user;
     } catch (e) {
+      console.error('Error verifying token:', e);
       return null;
     }
   }
@@ -275,7 +279,7 @@ export class UserService {
           this.userDataSubject.next(user);
         }
       } catch (e) {
-        console.error('Fehler beim Laden der UserData:', e);
+        console.error('Error by loading user data:', e);
       }
     }
   }
@@ -300,7 +304,7 @@ export class UserService {
         return true;
       }
     } catch (e) {
-      console.error('Fehler beim Laden der UserData:', e);
+      console.error('Error by updating user data:', e);
       return false;
     }
     return false;

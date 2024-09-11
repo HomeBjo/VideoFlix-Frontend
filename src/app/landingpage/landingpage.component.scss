@@ -92,6 +92,14 @@ section {
       outline: none;
       min-width: 56%;
     }
+    ::placeholder {
+      color: rgba(245, 245, 245, 0.7);
+      opacity: 1; /* Firefox */
+    }
+    
+    ::-ms-input-placeholder { /* Edge 12 -18 */
+      color: rgba(245, 245, 245, 0.7);
+    }
   }
 }
 
@@ -107,6 +115,43 @@ footer {
       color: $btnColor;
       text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke,
         -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke;
+    }
+  }
+}
+
+@media (min-width: $screanWidthQHD) {
+  .contentDiv {
+    margin-bottom: 12rem;
+    @include dFlex();
+    h1 {
+      font-size: 5rem;
+    }
+    h2 {
+      font-size: 2.6rem;
+      font-weight: 500;
+    }
+    span {
+      font-size: 2.4rem;
+      font-weight: 300;
+    }
+    .inputBox {
+      button {
+        font-size: xx-large;
+        img{
+          width: 20px;
+          height: 20px;
+        }
+      }
+      input {
+        border: 2px solid whitesmoke;
+        font-size: xx-large;
+      }
+    }
+  }
+
+  footer {
+    span {
+      font-size: xx-large;
     }
   }
 }

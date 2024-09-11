@@ -211,6 +211,13 @@ section {
   }
 }
 
+@media (min-width: $screanWidthQHD) {
+  .textDiv {
+    max-width: 480px;
+    font-size: x-large;
+  }
+}
+
 @media (max-width: 630px) {
   .textDiv {
     max-width: 254px;

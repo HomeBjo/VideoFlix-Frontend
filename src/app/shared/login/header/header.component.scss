@@ -30,6 +30,24 @@
   }
 }
 
+.logoPosTopLeft{
+  position: absolute;
+  left: 2.8rem;
+}
+
+@media (min-width: $screanWidthQHD) {
+  .headerDiv {
+    img {
+      width: 30rem;
+    }
+  
+    .loginBtn {
+      font-size: xx-large;
+    }
+  }
+
+}
+
 @media (max-width: 600px) {
   .headerDiv {
     width: calc(100vw - 2.1rem);
