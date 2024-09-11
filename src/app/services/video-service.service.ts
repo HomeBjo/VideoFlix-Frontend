@@ -16,21 +16,38 @@ export class VideoService {
   
   constructor(private http: HttpClient) {}
 
+    /**
+   * Starts fetching all videos from the server.
+   * @returns {Observable<any>} - An observable with the video data.
+   */
   startFetchVideos(): Observable<any> {
     const url = `${environment.baseUrl}/videos/get_videos/get_videos/`;
     return this.http.get<any>(url, { headers: this.headers });
   }
 
+    /**
+   * Fetches the user's favorite videos from the server.
+   * @returns {Observable<any>} - An observable containing the user's favorite videos.
+   */
   fetshFavorites(): Observable<any> {
     const url = `${environment.baseUrl}/videos/get_videos/favorites/`;
     return this.http.get<any>(url, { headers: this.headers });
   }
 
+    /**
+   * Loads videos from a specific category.
+   * @param {string} category - The name of the category to load videos from.
+   * @returns {Observable<any>} - An observable containing the videos from the specified category.
+   */
   loadCategoryVideos(category: string): Observable<any> {
     const url = `${environment.baseUrl}/videos/category/${category}/`;
     return this.http.get<any>(url, { headers: this.headers });
   }
 
+    /**
+   * Fetches favorite videos to display them on the favorite page.
+   * Updates the `favVideos` property with the retrieved favorite videos.
+   */
   async fetshFavForFavoriteSite() {
     const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
 
@@ -46,6 +63,10 @@ export class VideoService {
     }
   }
 
+    /**
+   * Adds or removes a video from the user's favorites.
+   * @param {FavoriteBody} body - The body containing the video information to be toggled as favorite.
+   */
   async addFavoriteVideo(body: FavoriteBody) {
     const loginUrl = `${environment.baseUrl}/videos/get_videos/toggle_favorite/`;
 

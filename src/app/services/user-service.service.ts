@@ -48,6 +48,10 @@ export class UserService {
   //     }
   //   }
   // }
+
+    /**
+   * Checks if the current user is a guest user and handles token verification or clearing of local storage.
+   */
   async checkGuestUser() {
     const userId = localStorage.getItem('userId')?.toString();
     const token = localStorage.getItem('token');
@@ -75,7 +79,11 @@ export class UserService {
     }
   }
 
-
+  /**
+   * Registers a new user by first checking if the email already exists, then sends the registration request.
+   * @param {RegisterUser} newUser - The new user object containing registration information.
+   * @returns {Promise<boolean>} - Returns true if registration is successful, otherwise false.
+   */
   async registerUser(newUser: RegisterUser) {
     const checkEmailUrl = `${environment.baseUrl}/users/check-email/`;
     const registerUrl = `${environment.baseUrl}/users/register/`;
@@ -101,6 +109,13 @@ export class UserService {
     }
   }
 
+  /**
+   * Registers a new user by sending their details to the registration endpoint.
+   * 
+   * @param {RegisterUser} newUser - The new user object containing registration details.
+   * @param {string} registerUrl - The URL for the registration endpoint.
+   * @returns {Promise<boolean>} - Returns true if the registration is successful, otherwise false.
+   */
   async checkUserToken(newUser: RegisterUser, registerUrl: string) {
     this.user_name = newUser.first_name;
     this.user_email = newUser.email;
@@ -118,6 +133,12 @@ export class UserService {
     }
   }
 
+  /**
+   * Logs the user in using the provided email and password.
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   * @returns {Promise<LoginResponse | null>} - Returns the login response or null if login fails.
+   */
   async login(email: string, password: string) {
     const loginUrl = `${environment.baseUrl}/users/login/`;
     let userData = {
@@ -144,6 +165,10 @@ export class UserService {
     }
   }
 
+    /**
+   * Logs the user out and optionally clears local storage if the user is a guest or if "Remember Me" is disabled.
+   * @param {string} userID - The ID of the user to log out.
+   */
   async userLogout(userID: string) {
     const loginUrl = `${environment.baseUrl}/users/logout/`;
     const rememberMe = localStorage.getItem('rememberMe');
@@ -157,6 +182,12 @@ export class UserService {
     }
   }
 
+    /**
+   * Verifies the user's token to ensure the session is still valid.
+   * @param {string} token - The user's authentication token.
+   * @param {string} userId - The user's ID.
+   * @returns {Promise<LoginResponse | null>} - Returns the user data if the token is valid, otherwise null.
+   */
   async verifyToken(token: string, userId: string) {
     const verifyUrl = `${environment.baseUrl}/users/verify-token/`;
     const body = JSON.stringify({ token, user_id: userId });
@@ -173,6 +204,11 @@ export class UserService {
     }
   }
 
+    /**
+   * Sends a password reset email to the user.
+   * @param {string} email - The email of the user who requested the reset.
+   * @returns {Promise<boolean>} - Returns true if the email was sent successfully, otherwise false.
+   */
   async sendPasswordResetEmail(email: string): Promise<boolean> {
     const resetUrl = `${environment.baseUrl}/password_reset/`;
 
@@ -188,6 +224,14 @@ export class UserService {
     }
   }
 
+    /**
+   * Sends a new password for a user based on the provided user ID and token.
+   * 
+   * @param {string} newPassword - The new password to be set.
+   * @param {string | null} uid - The user ID for which the password reset is being done.
+   * @param {string | null} token - The token provided for the password reset.
+   * @returns {Promise<boolean>} - Returns true if the password reset was successful, otherwise false.
+   */
   async sendNewPassword(
     newPassword: string,
     uid: string | null,
@@ -211,6 +255,10 @@ export class UserService {
     }
   }
 
+    /**
+   * Retrieves the user's data if it has not been loaded yet.
+   * If successful, the user's first name and other details are stored and the data is emitted via the `userDataSubject`.
+   */
   async getUserData() {
     if (this.userData === undefined) {
       const url = `${environment.baseUrl}/users/user-data/`;
@@ -232,6 +280,11 @@ export class UserService {
     }
   }
 
+    /**
+   * Updates the user's data with new information.
+   * @param {UserData} newUserData - The new user data to be updated.
+   * @returns {Promise<boolean>} - Returns true if the update was successful, otherwise false.
+   */
   async updateUserData(newUserData: UserData) {
     const url = `${environment.baseUrl}/users/update-user-data/${newUserData.id}/`;
     const token = localStorage.getItem('token');

@@ -15,6 +15,14 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private router: Router) {}
 
+    /**
+   * Intercepts HTTP requests to add an Authorization header if a token is present in localStorage.
+   * It also handles HTTP errors, such as unauthorized (401) and forbidden (403) responses.
+   * 
+   * @param {HttpRequest<any>} req - The outgoing HTTP request.
+   * @param {HttpHandler} next - The next handler in the HTTP request chain.
+   * @returns {Observable<HttpEvent<any>>} - The observable stream containing the HTTP response or an error.
+   */
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
