@@ -153,6 +153,8 @@ section {
   border-radius: 25px;
   padding: 2rem;
   min-width: 400px;
+  margin: 2rem;
+  text-align: center;
   h1 {
     font-size: 3.5em;
     margin: 0;
@@ -218,7 +220,7 @@ section {
     width: 16px;
     height: 16px;
   }
-}
+
 .infoText {
   padding: 4px;
   text-align: center;
@@ -230,3 +232,6 @@ section {
     font-weight: 400;
   }
 }
+.successMessage{
+  min-width: 210px;
+}}
