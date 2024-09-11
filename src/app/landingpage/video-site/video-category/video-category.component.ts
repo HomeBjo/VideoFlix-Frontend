@@ -39,6 +39,10 @@ export class VideoCategoryComponent {
     private cdr: ChangeDetectorRef
   ) {}
 
+    /**
+   * Lifecycle hook that is called after the component is initialized.
+   * Fetches videos based on the selected category.
+   */
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       const category = params.get('category');
@@ -56,43 +60,78 @@ export class VideoCategoryComponent {
     });
   }
 
+    /**
+   * Logs the user out by calling the `userLogout` method from `UserService`.
+   */
   logout() {
     localStorage.setItem('logoutInProgress', 'true');
     let userID = localStorage.getItem('userId')?.toString();
     this.userService.userLogout(userID!);
   }
 
+    /**
+   * Toggles the visibility of the profile selection menu.
+   */
   openSmallMenu() {
     this.shwonProfilSelection = !this.shwonProfilSelection;
   }
 
+    /**
+   * Toggles the visibility of the category selection menu.
+   * @param {MouseEvent} event - The mouse event that triggers the toggle.
+   */
   toggleCategoryMenu(event: MouseEvent) {
     event.stopPropagation();
     this.showCategorySelection = !this.showCategorySelection;
   }
 
+   /**
+   * Hides the category selection menu when clicking outside of it.
+   * @param {MouseEvent} event - The click event used to check where the user clicked.
+   */
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     this.showCategorySelection = false;
   }
 
+    /**
+   * Sets the selected video for display in the video preview component.
+   * 
+   * @param {any} video - The selected video.
+   */
   onVideoSelected(video: any) {
     this.selectedVideo = video;
   }
 
+    /**
+   * Closes the video display and deselects the video.
+   */
   closeVideoDisplay() {
     this.selectedVideo = null;
   }
 
+    /**
+   * Capitalizes the first letter of a given string.
+   * 
+   * @param {string} string - The string to capitalize.
+   * @returns {string} - The string with the first letter capitalized.
+   */
   firstLetterBig(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+    /**
+   * Lifecycle hook called after the view has been checked for updates.
+   * Updates the visibility of scroll arrows based on video box widths.
+   */
   ngAfterViewChecked() {
     this.updateArrowVisibility();
     this.cdr.detectChanges();
   }
 
+    /**
+   * Updates the visibility of scroll arrows based on the scroll width and client width of each video box.
+   */
   updateArrowVisibility() {
     const videoLoopBoxes = [
       this.video4LoopBox0,
@@ -108,6 +147,11 @@ export class VideoCategoryComponent {
     });
   }
 
+    /**
+   * Scrolls the video loop box to the right based on the provided index.
+   * 
+   * @param {number} index - The index of the video box to scroll.
+   */
   ArrowRightClick(index: number) {
     switch (index) {
       case 0:
@@ -127,6 +171,11 @@ export class VideoCategoryComponent {
     }
   }
 
+    /**
+   * Scrolls the video loop box to the left based on the provided index.
+   * 
+   * @param {number} index - The index of the video box to scroll.
+   */
   ArrowLeftClick(index: number) {
     switch (index) {
       case 0:

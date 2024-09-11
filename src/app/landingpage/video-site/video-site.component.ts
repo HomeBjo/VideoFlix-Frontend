@@ -51,6 +51,10 @@ export class VideoSiteComponent {
     public videoService: VideoService
   ) {}
 
+    /**
+   * Lifecycle hook that is called after the component is initialized.
+   * It checks the user's login status, fetches user data, and loads videos.
+   */
   ngOnInit() {
     this.checkUserLoginStatus();
     this.userService.getUserData();
@@ -58,6 +62,9 @@ export class VideoSiteComponent {
     this.fetshFavVideos();
   }
 
+    /**
+   * Fetches all videos and assigns them to the `newVideos` array.
+   */
   fetshAllVideos() {
     this.videoService.startFetchVideos().subscribe(
       (data: any) => {
@@ -71,6 +78,9 @@ export class VideoSiteComponent {
     );
   }
 
+    /**
+   * Fetches the user's favorite videos and updates the `favVideos` array in the `VideoService`.
+   */
   fetshFavVideos() {
     this.videoService.reloadFavs$
       .pipe(switchMap(() => this.videoService.fetshFavorites()))
@@ -85,11 +95,18 @@ export class VideoSiteComponent {
     this.videoService.reloadFavs$.next();
   }
 
+    /**
+   * Lifecycle hook called after the view has been checked for updates.
+   * Updates the visibility of scroll arrows based on video box widths.
+   */
   ngAfterViewChecked() {
     this.updateArrowVisibility();
     this.cdr.detectChanges();
   }
 
+    /**
+   * Updates the visibility of scroll arrows based on the scroll width and client width of each video box.
+   */
   updateArrowVisibility() {
     const videoLoopBoxes = [
       this.video4LoopBox0,
@@ -105,6 +122,9 @@ export class VideoSiteComponent {
     });
   }
 
+    /**
+   * Periodically checks the user's login status and redirects to the login page if the user is not logged in.
+   */
   checkUserLoginStatus() {
     this.checkUserInterval = setInterval(() => {
       let user_id = localStorage.getItem('userId')?.toString();
@@ -114,12 +134,20 @@ export class VideoSiteComponent {
     }, 500);
   }
 
+    /**
+   * Logs the user out by calling the `userLogout` method from `UserService`.
+   */
   logout() {
     localStorage.setItem('logoutInProgress', 'true');
     let userID = localStorage.getItem('userId')?.toString();
     this.userService.userLogout(userID!);
   }
 
+    /**
+   * Plays the selected video and requests fullscreen mode.
+   * 
+   * @param {string} videoPath - The path to the video file.
+   */
   playVideo(videoPath: string) {
     if (
       this.myVideo &&
@@ -144,18 +172,34 @@ export class VideoSiteComponent {
     }
   }
 
+    /**
+   * Sets the selected video for display in the video preview component.
+   * 
+   * @param {VideoJson} video - The selected video.
+   */
   onVideoSelected(video: VideoJson) {
     this.selectedVideo = video;
   }
 
+    /**
+   * Closes the video display and deselects the video.
+   */
   closeVideoDisplay() {
     this.selectedVideo = null;
   }
 
+    /**
+   * Toggles the visibility of the profile selection menu.
+   */
   openSmallMenu() {
     this.shwonProfilSelection = !this.shwonProfilSelection;
   }
 
+    /**
+   * Scrolls the video loop box to the right based on the provided index.
+   * 
+   * @param {number} index - The index of the video box to scroll.
+   */
   ArrowRightClick(index: number) {
     switch (index) {
       case 0:
@@ -175,6 +219,11 @@ export class VideoSiteComponent {
     }
   }
 
+    /**
+   * Scrolls the video loop box to the left based on the provided index.
+   * 
+   * @param {number} index - The index of the video box to scroll.
+   */
   ArrowLeftClick(index: number) {
     switch (index) {
       case 0:
@@ -194,10 +243,20 @@ export class VideoSiteComponent {
     }
   }
 
+    /**
+   * Checks if there are any videos marked as favorites.
+   * 
+   * @returns {boolean} - Returns true if there are favorite videos.
+   */
   checkIfFavoreitesAvailable() {
     return this.videoService.favVideos.some((v) => v.is_favorite === true);
   }
 
+    /**
+   * Returns an array of videos that are marked as favorites.
+   * 
+   * @returns {VideoJson[]} - The list of favorite videos.
+   */
   getFavorites() {
     return this.videoService.favVideos.filter((v) => v.is_favorite === true);
   }

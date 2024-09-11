@@ -15,15 +15,23 @@ export class VideoPreviewComponent {
   @Output() videoSelected = new EventEmitter<any>();
   isDescriptionVisible: true | false | null = null;
 
-
+  /**
+   * Toggles the visibility of the video description.
+   */
   shwowDescription(){
     this.isDescriptionVisible = !this.isDescriptionVisible;
   }
 
+  /**
+   * Hides the video description.
+   */
   hideDescription(){
     this.isDescriptionVisible = !this.isDescriptionVisible;
   }
   
+    /**
+   * Emits an event to show more details about the selected video.
+   */
   showVideoDetails() {
     this.videoSelected.emit(this.video);
   }

@@ -20,14 +20,26 @@ export class FavoritesComponent {
 
   constructor(public videoService: VideoService) { }
 
+    /**
+   * Lifecycle hook that is called after the component is initialized.
+   * Fetches the user's favorite videos to display them on the favorites page.
+   */
   ngOnInit(){
     this.videoService.fetshFavForFavoriteSite();
   }
 
+    /**
+   * Sets the selected video for display in the video preview component.
+   * 
+   * @param {VideoJson} video - The selected video.
+   */
   onVideoSelected(video: VideoJson) {
     this.selectedVideo = video;
   }
 
+    /**
+   * Closes the video display and deselects the video.
+   */
   closeVideoDisplay() {
     this.selectedVideo = null;
   }

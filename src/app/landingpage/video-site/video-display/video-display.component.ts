@@ -63,6 +63,11 @@ export class VideoDisplayComponent {
   //     videoElement.src = this.video.video_folder;
   //   }
   // }
+
+    /**
+   * Lifecycle hook that is called after the view is initialized.
+   * Sets up the video player and event listeners.
+   */
   ngAfterViewInit(): void {
     this.videoElement = document.getElementById('videoPlayer') as HTMLVideoElement;
     this.loadVideo('auto');
@@ -74,7 +79,10 @@ export class VideoDisplayComponent {
     document.addEventListener('fullscreenchange', this.onFullScreenChange.bind(this));
   }
 
-
+  /**
+   * Loads the video with the specified quality.
+   * @param {string} quality - The selected video quality (Auto, 480p, 720p, 1080p).
+   */
   loadVideo(quality: string): void {
     if (Hls.isSupported()) {
       const videoElement = this.videoElement;
@@ -91,7 +99,10 @@ export class VideoDisplayComponent {
     }
   }
   
-
+  /**
+   * Sets the appropriate video source URL based on the selected quality.
+   * @param {string} quality - The quality to load (e.g., '480p', '720p', '1080p', 'Auto').
+   */
   checkQualityLevels(quality: string) {
     switch (quality) {
       case '480p':
@@ -112,7 +123,10 @@ export class VideoDisplayComponent {
     }
   }
 
-
+  /**
+   * Changes the video quality and reloads the video.
+   * @param {string} quality - The quality to switch to.
+   */
   onQualityChange(quality: string): void {
     if (this.videoElement && !this.videoElement.paused) {
       this.videoElement.pause();
@@ -121,12 +135,16 @@ export class VideoDisplayComponent {
     this.hideDropdown();
   }
 
-
+  /**
+   * Hides the quality selection dropdown.
+   */
   hideDropdown(): void {
     this.dropdownOpen = false;
   }
 
-
+  /**
+   * Toggles the visibility of the quality selection dropdown.
+   */
   toggleDropdown(): void {
     if (this.videoElement && !this.videoElement.paused) {
       this.videoElement.pause();
@@ -134,32 +152,47 @@ export class VideoDisplayComponent {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-
+  /**
+   * Closes the video display and emits the close event.
+   */
   close() {
     this.closeDisplay.emit();
   }
 
-
+  /**
+   * Handles clicks on the overlay and closes the video display.
+   * @param {MouseEvent} event - The click event that triggers the method.
+   */
   onOverlayClick(event: MouseEvent) {
     this.close();
   }
 
-
+  /**
+   * Shows the video by setting `isVideoVisible` to true.
+   */
   showVideo(): void {
     this.isVideoVisible = true;
   }
 
-
+  /**
+   * Closes the video by setting `isVideoVisible` to false.
+   */
   close2(): void {
     this.isVideoVisible = false;
   }
 
-
+  /**
+   * Checks if the current video is marked as a favorite.
+   * @returns {boolean} - Returns true if the video is a favorite.
+   */
   checkIfFavorite(): boolean {
     return this.videoService.favVideos.some(favVideo => favVideo.id === this.video.id);
   }
 
-
+  /**
+   * Adds or removes the video from the user's favorites.
+   * @param {VideoJson} video - The video to add or remove from favorites.
+   */
   async addFavorite(video: VideoJson) {
     if (this.isRequestInProgress) {
       return;
@@ -184,13 +217,18 @@ export class VideoDisplayComponent {
     }, 300);
   }
 
-  
+   /**
+   * Displays the quality selector for the video.
+   */
   showQualitySelector(): void {
     this.showQualitySelectorBool = true;
   }
 
 
-  // @HostListener('document:mousemove')
+  /**
+   * Handles mouse movement events and shows the quality selector when the mouse is moved.
+   * Triggers the `onPlayPause` method if the quality selector is visible.
+   */
   checkMouseMove(): void {
     this.showQualitySelectorBool = true;
     if (this.showQualitySelectorBool) {
@@ -198,6 +236,9 @@ export class VideoDisplayComponent {
     }
   }
 
+    /**
+   * Resets the control bar timer and hides the control bar after 3 seconds of inactivity.
+   */
   resetControlBarTimer(): void {
     if (this.controlBarTimer) {
       clearTimeout(this.controlBarTimer);
@@ -207,7 +248,9 @@ export class VideoDisplayComponent {
     }, 3000); 
   }
 
-
+  /**
+   * Hides the quality selector and closes the dropdown if the video is not paused.
+   */
   hideQualitySelector(): void {
     if (this.videoElement.paused) {
       return;
@@ -219,7 +262,9 @@ export class VideoDisplayComponent {
     this.showQualitySelectorBool = false;
   }
 
-  
+    /**
+   * Starts a timer to hide the quality selector after 2.6 seconds of inactivity.
+   */
   startInactivityTimer(): void {
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
@@ -229,14 +274,18 @@ export class VideoDisplayComponent {
     }, 2600);
   }
 
-
+  /**
+   * Resets the inactivity timer to prevent the quality selector from hiding.
+   */
   resetTimer(): void {
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
     }
   }
 
-
+  /**
+   * Handles play/pause events and shows/hides UI controls accordingly.
+   */
   onPlayPause(): void {
     if (this.videoElement.paused) {
       this.showQualitySelectorBool = true; 
@@ -246,7 +295,9 @@ export class VideoDisplayComponent {
     }
   }
 
-
+  /**
+   * Starts a timer to fade out the quality selector after a period of inactivity.
+   */
   startFadeOut(): void {
     if (this.fadeOutTimeout) {
       clearTimeout(this.fadeOutTimeout);
@@ -256,12 +307,16 @@ export class VideoDisplayComponent {
     }, 2600);
   }
 
-
+  /**
+   * Handles the event when the video ends, showing the control bar and quality selector.
+   */
   onVideoEnded(): void {
     this.showQualitySelectorBool = true;
   }
 
-
+  /**
+   * Handles changes in fullscreen mode and adjusts the visibility of the quality selector.
+   */
   onFullScreenChange(): void { 
     if (document.fullscreenElement) {
       this.showQualitySelectorBool = true; // Qualitätsschalter im Vollbildmodus anzeigen
@@ -271,7 +326,9 @@ export class VideoDisplayComponent {
     this.cdr.detectChanges();
   }
 
-
+  /**
+   * Cleanup method to remove event listeners and clear timers when the component is destroyed.
+   */
   ngOnDestroy(): void {
     if (this.videoElement) {
       this.videoElement.removeEventListener('play', this.onPlayPause.bind(this));
