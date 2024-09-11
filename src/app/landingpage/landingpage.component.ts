@@ -16,6 +16,10 @@ export class LandingpageComponent {
 
   constructor(public userService: UserService) { }
 
+    /**
+   * Lifecycle hook that is called after the component is initialized.
+   * Calls the UserService to check if the current user is a guest user.
+   */
     ngOnInit() {
       this.userService.checkGuestUser();
     }

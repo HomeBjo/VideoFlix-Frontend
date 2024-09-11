@@ -31,27 +31,43 @@ export class LoginComponent {
     public userService: UserService,
   ) {}
 
-
+  /**
+   * Lifecycle hook that runs when the component is initialized.
+   * It checks the "Remember Me" status and checks if the user is a guest.
+   */
   ngOnInit() {
     this.checkRememberMe2();
     this.userService.checkGuestUser();
   }
 
+    /**
+   * Listens to window resize events and adjusts the display for mobile or desktop views.
+   */
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
     this.checkWindowWidth();
   }
 
+    /**
+   * Logs the user in with the email and password entered.
+   */
   async login() {
     this.loadLogin(this.userService.user_email, this.password);
   }
 
-
+  /**
+   * Logs the user in as a guest using predefined guest email and password.
+   */
   guestLogin() {
     this.loadLogin(this.GUEST_MAIL, this.GUEST_PW);
   }
 
-
+  /**
+   * Loads the login process using the provided email and password.
+   * 
+   * @param {string} email - The email to use for login.
+   * @param {string} password - The password to use for login.
+   */
   async loadLogin(email: string, password: string) {
     try {
       const user = await this.userService.login(email, password);
@@ -68,7 +84,10 @@ export class LoginComponent {
     }
   }
 
-
+  /**
+   * Validates the email format and length.
+   * @returns {boolean} - Returns true if the email is valid.
+   */
   checkEmail(): boolean {
     const emailPattern = /^[^@]+@[^\.]+\..+$/;
     if (this.userService.user_email.length >= 5 && emailPattern.test(this.userService.user_email)) {
@@ -77,7 +96,10 @@ export class LoginComponent {
     return false;
   }
 
-
+  /**
+   * Checks if the password meets the minimum length requirement.
+   * @returns {boolean} - Returns true if the password is valid.
+   */
   checkPassword() {
     if (this.password.length >= 5) {
       return true;
@@ -85,7 +107,10 @@ export class LoginComponent {
     return false;
   }
 
-
+  /**
+   * Verifies if both email and password inputs are valid.
+   * @returns {boolean} - Returns true if both inputs are valid.
+   */
   checkAllInputs() {
     if (this.checkEmail() && this.checkPassword()) {
       return true;
@@ -93,7 +118,11 @@ export class LoginComponent {
     return false;
   }
 
-
+  /**
+   * Handles form submission and triggers the login process if inputs are valid.
+   * 
+   * @param {NgForm} ngForm - The form object containing the user's input.
+   */
   onSubmit(ngForm: NgForm) {
     if (ngForm.valid && this.checkAllInputs()) {
       this.loadLogin(this.userService.user_email, this.password);
@@ -105,13 +134,17 @@ export class LoginComponent {
     }
   }
 
-
+  /**
+   * Toggles the visibility of the password field between 'text' and 'password'.
+   */
   togglePasswordVisibility(): void {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-
+  /**
+   * Toggles the "Remember Me" option and stores its value in localStorage.
+   */
   checkRememberMe(){
     this.rememberMe = !this.rememberMe;
     if (this.rememberMe) {
@@ -121,7 +154,9 @@ export class LoginComponent {
     }
   }
 
-  
+   /**
+   * Loads the "Remember Me" status from localStorage and sets the flag accordingly.
+   */ 
   checkRememberMe2(){
     let remember = localStorage.getItem('rememberMe');
     if (remember === 'true') {
@@ -131,7 +166,10 @@ export class LoginComponent {
     }
   }
 
-
+  /**
+   * Checks if the window width is less than 1200px to adjust for mobile view.
+   * @returns {boolean} - Returns true if the window is less than 1200px wide.
+   */
   checkWindowWidth(){
     if (window.innerWidth < 1200) {
       return true;
@@ -140,7 +178,9 @@ export class LoginComponent {
     }
   }
 
-
+  /**
+   * Toggles the display of the question window.
+   */
   shwoQuestionWindow(){
     this.shwoQesttionDiv = !this.shwoQesttionDiv;
   }

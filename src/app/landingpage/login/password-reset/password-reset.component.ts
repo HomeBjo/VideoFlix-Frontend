@@ -34,24 +34,42 @@ export class PasswordResetComponent {
     private route: ActivatedRoute,
   ) {}
 
+    /**
+   * Toggles the visibility of the password field between 'text' and 'password'.
+   */
   togglePasswordVisibility(): void {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
+    /**
+   * Toggles the visibility of the confirm password field between 'text' and 'password'.
+   */
   toggleConfirmPasswordVisibility(): void {
     this.confirmPasswordFieldType =
       this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
   }
 
+    /**
+   * Checks if the password entered meets the minimum length requirement (5 characters).
+   * @returns {boolean} - Returns true if the password is valid, otherwise false.
+   */
   checkPassword() {
     return this.password && this.password.length >= 5;
   }
 
+    /**
+   * Checks if the confirm password entered meets the minimum length requirement (5 characters).
+   * @returns {boolean} - Returns true if the confirm password is valid, otherwise false.
+   */
   checkConfirmPassword() {
     return this.confirm_password && this.confirm_password.length >= 5;
   }
 
+    /**
+   * Checks if the password and confirm password fields match.
+   * @returns {boolean} - Returns true if both passwords match, otherwise false.
+   */
   checkEvenPasswords() {
     if (this.password === this.confirm_password) {
       return true;
@@ -59,6 +77,11 @@ export class PasswordResetComponent {
     return false;
   }
 
+    /**
+   * Sends the new password to the server using the uid and token from the URL parameters.
+   * @param {NgForm} ngForm - The form object containing the user's input.
+   * @returns {Promise<boolean>} - Returns true if the password reset was successful, otherwise false.
+   */
   async setNewPassword(ngForm: NgForm) {
     const uid = this.route.snapshot.paramMap.get('uid');
     const token = this.route.snapshot.paramMap.get('token');
@@ -76,11 +99,18 @@ export class PasswordResetComponent {
     }
   }
 
+    /**
+   * Resets the password and confirm password fields.
+   */
   resetValues() {
     this.password = '';
     this.confirm_password = '';
   }
 
+    /**
+   * Checks all inputs (password, confirm password, and their match).
+   * @returns {boolean} - Returns true if all checks pass, otherwise false.
+   */
   checkAllInputs() {
     if (
       this.checkPassword() &&
@@ -92,6 +122,10 @@ export class PasswordResetComponent {
     return false;
   }
 
+    /**
+   * Handles form submission and triggers the password reset process if inputs are valid.
+   * @param {NgForm} ngForm - The form object containing the user's input.
+   */
   async onSubmit(ngForm: NgForm) {
     if (ngForm.valid && this.checkAllInputs()) {
       try {

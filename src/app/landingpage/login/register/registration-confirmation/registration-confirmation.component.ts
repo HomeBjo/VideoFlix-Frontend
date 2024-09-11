@@ -17,6 +17,10 @@ export class RegistrationConfirmationComponent {
 
   constructor(public userService: UserService){}
 
+    /**
+   * Lifecycle hook that is called when the component is destroyed.
+   * It resets the user name and email copy fields in the UserService.
+   */
   ngOnDestroy(): void {
     this.userService.user_name = '';
     this.userService.user_email_copy = '';

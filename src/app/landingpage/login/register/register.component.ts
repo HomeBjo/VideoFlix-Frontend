@@ -25,19 +25,26 @@ export class RegisterComponent {
 
   constructor(public userService: UserService) {}
 
-
+  /**
+   * Toggles the visibility of the password field between 'text' and 'password'.
+   */
   togglePasswordVisibility(): void {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
-
+  /**
+   * Toggles the visibility of the confirm password field between 'text' and 'password'.
+   */
   toggleConfirmPasswordVisibility(): void {
     this.confirmPasswordFieldType =
       this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
   }
 
-
+  /**
+   * Validates if the first name has a minimum length of 3 characters.
+   * @returns {boolean} - Returns true if the first name is valid.
+   */
   checkFirstName() {
     if (this.first_name.length >= 3) {
       return true;
@@ -45,7 +52,10 @@ export class RegisterComponent {
     return false;
   }
 
-
+  /**
+   * Validates if the last name has a minimum length of 3 characters.
+   * @returns {boolean} - Returns true if the last name is valid.
+   */
   checkLastName() {
     if (this.last_name.length >= 3) {
       return true;
@@ -53,7 +63,10 @@ export class RegisterComponent {
     return false;
   }
 
-
+  /**
+   * Validates if the email entered is in a proper format and length.
+   * @returns {boolean} - Returns true if the email is valid.
+   */
   checkEmail(): boolean {
     const emailPattern = /^[^@]+@[^\.]+\..+$/;
     if (this.userService.user_email.length >= 5 && emailPattern.test(this.userService.user_email)) {
@@ -62,7 +75,10 @@ export class RegisterComponent {
     return false;
   }
 
-
+  /**
+   * Validates if the password has a minimum length of 5 characters.
+   * @returns {boolean} - Returns true if the password is valid.
+   */
   checkPassword() {
     if (this.password.length >= 5) {
       return true;
@@ -70,7 +86,11 @@ export class RegisterComponent {
     return false;
   }
 
-
+  /**
+   * Returns an error message based on the validation of the last name.
+   * @param {string} last_name - The last name to validate.
+   * @returns {string} - Error message based on the validation result.
+   */
   getLastNameError(last_name: string): string {
     if (this.checkNameLength(last_name)) {
         return 'tooLong';
@@ -81,7 +101,11 @@ export class RegisterComponent {
     }
 }
 
-
+  /**
+   * Checks if the provided name exceeds the maximum allowed length.
+   * @param {string} name - The name to check.
+   * @returns {boolean} - Returns true if the name exceeds 20 characters.
+   */
   checkNameLength(name: string) {
     if (name.length >= 20) {
       return true;
@@ -89,7 +113,10 @@ export class RegisterComponent {
     return false;
   }
 
-  
+   /**
+   * Validates if the confirmation password has a minimum length of 5 characters.
+   * @returns {boolean} - Returns true if the confirmation password is valid.
+   */ 
   checkConfirmPassword() {
     if (this.confirm_password.length >= 5) {
       return true;
@@ -97,7 +124,10 @@ export class RegisterComponent {
     return false;
   }
 
-
+  /**
+   * Checks if the password and confirmation password match.
+   * @returns {boolean} - Returns true if both passwords match.
+   */
   checkEvenPasswords() {
     if (this.password === this.confirm_password) {
       return true;
@@ -105,7 +135,10 @@ export class RegisterComponent {
     return false;
   }
 
-
+  /**
+   * Registers the new user with the provided details.
+   * Resets the form if the registration is successful.
+   */
   async registerUser() {
     let newUSer: RegisterUser = {
       username: this.first_name + '_' + this.last_name,
@@ -121,7 +154,9 @@ export class RegisterComponent {
     }
   }
 
-
+ /**
+   * Resets the form fields.
+   */
   resetValues() {
     this.first_name = '';
     this.last_name = '';
@@ -130,7 +165,10 @@ export class RegisterComponent {
     this.confirm_password = '';
   }
 
-
+  /**
+   * Validates all form inputs (first name, last name, email, password, and confirmation).
+   * @returns {boolean} - Returns true if all inputs are valid.
+   */
   checkAllInputs() {
     if (
       this.checkFirstName() &&
@@ -145,7 +183,10 @@ export class RegisterComponent {
     return false;
   }
 
-
+ /**
+   * Handles form submission and triggers the user registration process if all inputs are valid.
+   * @param {NgForm} ngForm - The form object containing the user's input.
+   */
   onSubmit(ngForm: NgForm) {
     if (ngForm.valid && this.checkAllInputs()) {
       this.registerUser();

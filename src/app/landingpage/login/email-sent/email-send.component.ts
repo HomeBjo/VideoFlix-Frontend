@@ -25,6 +25,10 @@ export class EmailSendComponent {
   emailSent: boolean = false;
   constructor(public userService: UserService, private router: Router) {}
 
+    /**
+   * Validates the email format entered by the user.
+   * @returns {boolean} - Returns true if the email is in a valid format, otherwise false.
+   */
   checkEmail(): boolean {
     const emailPattern = /^[^@]+@[^\.]+\..+$/;
 
@@ -35,6 +39,12 @@ export class EmailSendComponent {
     return false;
   }
 
+    /**
+   * Handles the form submission to send a password reset email.
+   * If the email is valid and the password reset request is successful, it updates the view to indicate the email was sent.
+   * 
+   * @param {NgForm} form - The form object containing the email input.
+   */
   async onSubmit(form: NgForm) {
     if (this.checkEmail()) {
       try {
