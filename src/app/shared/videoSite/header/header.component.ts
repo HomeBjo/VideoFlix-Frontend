@@ -18,14 +18,26 @@ export class HeaderComponent {
   showCategorySelection: boolean = false;
   showMobileSelection: boolean = false;
 
+    /**
+   * Toggles the visibility of the category selection menu.
+   * @param {MouseEvent} event - The mouse event that triggers the menu toggle.
+   */
   toggleCategoryMenu(event: MouseEvent) {
     event.stopPropagation();
     this.showCategorySelection = !this.showCategorySelection;
   }
+
+    /**
+   * Toggles the visibility of the mobile menu.
+   */
   toggleMobileMenu() {
     this.showMobileSelection = !this.showMobileSelection;
   }
 
+    /**
+   * Listens for document clicks and closes menus if clicks occur outside.
+   * @param {MouseEvent} event - The click event used to check where the user clicked.
+   */
   @HostListener('document:click', ['$event'])
   handleOutsideClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -51,11 +63,19 @@ export class HeaderComponent {
     }
   }
 
+    /**
+   * Logs the user out by triggering the logout process in the UserService.
+   */
   logout() {
     localStorage.setItem('logoutInProgress', 'true');
     let userID = localStorage.getItem('userId')?.toString();
     this.userService.userLogout(userID!);
   }
+
+    /**
+   * Toggles the visibility of the profile selection menu.
+   * @param {MouseEvent} event - The mouse event that triggers the profile menu toggle.
+   */
   openSmallMenu(event: MouseEvent) {
     event.stopPropagation();
     this.shwonProfilSelection = !this.shwonProfilSelection;

@@ -15,10 +15,19 @@ import { ToastServiceService } from './services/toast-service.service';
 })
 export class AppComponent {
   title = 'Videoflix';
+  /** Reference to the ToastComponent */
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
   
   isVideoSitePage = false;
 
+    /**
+   * Constructor for the AppComponent.
+   * Sets up router event listener to track URL changes.
+   * 
+   * @param {Router} router - The Angular Router instance used for navigation events.
+   * @param {ToastServiceService} toastService - Service for managing toast notifications.
+   */
+  
   constructor(private router: Router,private toastService: ToastServiceService) {
     
     this.router.events.pipe(
@@ -29,6 +38,11 @@ export class AppComponent {
       this.isVideoSitePage = url.includes('video_categorys') || url.includes('video_site') || url.includes('favorite') ;
     });
   }
+
+    /**
+   * Lifecycle hook that runs after the view has been initialized.
+   * Assigns the ToastComponent to the ToastService for centralized management.
+   */
   ngAfterViewInit() {
     this.toastService.setToastComponent(this.toastComponent);
   }

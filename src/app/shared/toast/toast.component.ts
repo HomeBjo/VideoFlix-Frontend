@@ -15,6 +15,9 @@ export class ToastComponent {
   show: boolean = false;
   hide: boolean = false;
 
+    /**
+   * Displays the toast and hides it after 5 seconds with a fade-out animation.
+   */
   showToast() {
     this.show = true;
     this.hide = false;
@@ -28,6 +31,9 @@ export class ToastComponent {
     }, 5000);
   }
 
+    /**
+   * Manually closes the toast.
+   */
   closeToast() {
     this.show = false;
   }
