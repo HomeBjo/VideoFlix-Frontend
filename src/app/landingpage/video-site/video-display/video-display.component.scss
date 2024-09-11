@@ -309,6 +309,14 @@ select {
     top: 25px;
     left: 54px;
   }
+
+  .quality-selector {
+    bottom: 30px;
+  
+    .dropdown-menu {
+      margin-bottom: -16px;
+    }
+  }
   
 }
 
