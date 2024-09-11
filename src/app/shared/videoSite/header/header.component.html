@@ -6,7 +6,7 @@
             <button [routerLink]="['/video_site']" class="headerBtn">Home</button>
             <button class="headerBtn" (click)="toggleCategoryMenu($event)">Category</button>
             
-            <div class="categorySelection" [ngClass]="{'slideInAnimation': showCategorySelection, 'slideOutAnimation': !showCategorySelection}"(click)="$event.stopPropagation()">
+            <div class="categorySelection" [ngClass]="{'d-none': showCategorySelection === null, 'slideInAnimation': showCategorySelection, 'slideOutAnimation': !showCategorySelection}"(click)="$event.stopPropagation()">
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'anime']" class="profilSelectionBtn">Anime</button>
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'drama']" class="profilSelectionBtn">Drama</button>
@@ -25,14 +25,14 @@
                 <h1 (click)="openSmallMenu($event)">{{userService.currentUserFirstName}}</h1>
             </div>
         </div>
-        <div class="profilSelection" [ngClass]="{'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}" (click)="$event.stopPropagation()">
+        <div class="profilSelection" [ngClass]="{'d-none': shwonProfilSelection === null, 'slideInAnimation': shwonProfilSelection, 'slideOutAnimation': !shwonProfilSelection}" (click)="$event.stopPropagation()">
             <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
             <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
         </div>
     </div>
 
       <!-- Dropdown-Menü (mobile View) -->
-    <div (click)="$event.stopPropagation()" [ngClass]="{'mobileSection':showMobileSelection, 'mobileSectionOff':!showMobileSelection}"> 
+    <div (click)="$event.stopPropagation()" [ngClass]="{'d-none': shwonProfilSelection === null,'mobileSection':showMobileSelection, 'mobileSectionOff':!showMobileSelection}"> 
         <button (click)="toggleMobileMenu()"  [routerLink]="['/video_site']" >Home</button>
         <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
         <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'anime']" >Anime</button>

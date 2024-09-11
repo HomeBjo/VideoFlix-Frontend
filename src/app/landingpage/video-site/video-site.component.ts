@@ -67,7 +67,6 @@ export class VideoSiteComponent {
     this.videoService.startFetchVideos().subscribe(
       (data: any) => {
         this.newVideos = data;
-        console.log(this.newVideos);
         this.videoService.allVideos = this.newVideos;
       },
       (error: any) => {

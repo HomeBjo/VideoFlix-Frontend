@@ -11,12 +11,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  constructor(
-    public userService: UserService
-  ) {}
-  shwonProfilSelection: boolean = false;
-  showCategorySelection: boolean = false;
-  showMobileSelection: boolean = false;
+
+  
+  shwonProfilSelection: boolean | null = null;
+  showCategorySelection: boolean | null = null;
+  showMobileSelection: boolean | null = null;
+
+  constructor(public userService: UserService) {
+    this.showCategorySelection = null;
+  }
 
     /**
    * Toggles the visibility of the category selection menu.

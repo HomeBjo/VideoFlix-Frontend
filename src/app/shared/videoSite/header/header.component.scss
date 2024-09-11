@@ -200,6 +200,11 @@ header {
   }
 }
 
+.categorySelection.d-none,
+.profilSelection.d-none {
+  display: none !important;
+}
+
 .slideInAnimation {
   animation: slideDown 0.1s forwards;
 }
