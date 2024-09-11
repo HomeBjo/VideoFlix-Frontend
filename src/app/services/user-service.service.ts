@@ -29,28 +29,7 @@ export class UserService {
     private toastService: ToastServiceService
   ) {}
 
-  // async checkGuestUser() { ----------------------------------------erst löschen, wenn keine loginbugs mehr kommen
-  //   let userId = localStorage.getItem('userId')?.toString();
-  //   const token = localStorage.getItem('token');
-  //   const rememberMe = localStorage.getItem('rememberMe');
-  //   const logoutInProgress = localStorage.getItem('logoutInProgress');
-  //   if (logoutInProgress === 'true') {
-  //     localStorage.removeItem('logoutInProgress');
-  //     return;
-  //   }
-  //   if (userId === GUEST_ID) {
-  //     localStorage.clear();
-  //   } else {
-  //     if (rememberMe === 'true') {
-  //       const user = await this.verifyToken(token!, userId!);
-  //       if (user) {
-  //         this.router.navigateByUrl('/video_site');
-  //       }
-  //     }
-  //   }
-  // }
-
-    /**
+  /**
    * Checks if the current user is a guest user and handles token verification or clearing of local storage.
    */
   async checkGuestUser() {
@@ -74,8 +53,6 @@ export class UserService {
         } else {
             console.error('Token-Überprüfung fehlgeschlagen.');
         }
-      } else {
-          console.log('Remember Me ist deaktiviert oder kein gültiges Token gefunden.');
       }
     }
   }
