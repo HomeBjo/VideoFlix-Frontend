@@ -135,3 +135,8 @@ section {
     }
   }
 }
+@media (min-width: $screanWidthQHD) {
+  .videoPosition {
+    font-size: xx-large;
+  }
+}
