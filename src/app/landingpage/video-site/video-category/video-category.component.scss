@@ -3,7 +3,7 @@
 section {
   width: 100%;
   height: auto;
-  background: linear-gradient(to bottom, #0f1f26 3%, #060606 16%, #060606 100%);
+  background: linear-gradient(to bottom, #0f1f26 1%, #060606 6%, #060606 100%);
 }
 .videoPlayerBox {
   @include dFlex();
@@ -40,6 +40,7 @@ section {
     position: absolute;
     overflow-x: hidden;
     width: calc(100% - 120px);
+    margin-top: 80px;
 
     .videoPosition {
       color: whitesmoke;

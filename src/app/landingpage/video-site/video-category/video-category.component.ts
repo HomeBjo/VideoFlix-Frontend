@@ -24,13 +24,12 @@ export class VideoCategoryComponent {
   showCategorySelection: boolean = false;
   selectedVideo: any;
   categoryVideos: VideoJson[] = [];
+  top5Videos: VideoJson[] = [];
   selectedCategory: string | null = null;
   private scrollDistance = 420;
   showArrows: boolean[] = [false, false, false, false, false];
   @ViewChild('video4LoopBox0') video4LoopBox0!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox1') video4LoopBox1!: ElementRef<HTMLElement>;
-  @ViewChild('video4LoopBox2') video4LoopBox2!: ElementRef<HTMLElement>;
-  @ViewChild('video4LoopBox3') video4LoopBox3!: ElementRef<HTMLElement>;
 
   constructor(
     public userService: UserService,
@@ -41,14 +40,23 @@ export class VideoCategoryComponent {
 
     /**
    * Lifecycle hook that is called after the component is initialized.
-   * Fetches videos based on the selected category.
+   * Calls methods to load videos based on the selected category and loads the top 5 videos.
    */
-  ngOnInit() {
+    ngOnInit() {
+      this.loadCategory();
+      this.loadTop5();
+    }
+
+    /**
+   * Loads videos based on the selected category from the route parameters.
+   * Subscribes to the `paramMap` to get the current category and fetches the corresponding videos.
+   */
+    loadCategory() {
     this.route.paramMap.subscribe((params) => {
       const category = params.get('category');
       if (category) {
         this.videoService.loadCategoryVideos(category).subscribe(
-          (data: any) => {
+          (data: VideoJson[]) => {
             this.categoryVideos = data;
             this.selectedCategory = this.firstLetterBig(category);
           },
@@ -58,6 +66,21 @@ export class VideoCategoryComponent {
         );
       }
     });
+  }
+
+    /**
+   * Loads the top 5 videos.
+   * Subscribes to the `loadTop5Videos` method from `VideoService` and assigns the data to `top5Videos`.
+   */
+  loadTop5(){
+    this.videoService.loadTop5Videos().subscribe(
+       (data: VideoJson[]) => {
+        this.top5Videos = data;
+      },
+      (error: any) => {
+        console.error('Error fetching videos:', error);
+      }
+    )
   }
 
     /**
@@ -136,8 +159,6 @@ export class VideoCategoryComponent {
     const videoLoopBoxes = [
       this.video4LoopBox0,
       this.video4LoopBox1,
-      this.video4LoopBox2,
-      this.video4LoopBox3,
     ];
 
     videoLoopBoxes.forEach((box, index) => {
@@ -160,12 +181,6 @@ export class VideoCategoryComponent {
       case 1:
         this.video4LoopBox1!.nativeElement.scrollLeft += this.scrollDistance;
         break;
-      case 2:
-        this.video4LoopBox2!.nativeElement.scrollLeft += this.scrollDistance;
-        break;
-      case 3:
-        this.video4LoopBox3!.nativeElement.scrollLeft += this.scrollDistance;
-        break;
       default:
         console.error('Invalid index on rigth arrow:', index);
     }
@@ -185,11 +200,6 @@ export class VideoCategoryComponent {
         this.video4LoopBox1!.nativeElement.scrollLeft -= this.scrollDistance;
         break;
       case 2:
-        this.video4LoopBox2!.nativeElement.scrollLeft -= this.scrollDistance;
-        break;
-      case 3:
-        this.video4LoopBox3!.nativeElement.scrollLeft -= this.scrollDistance;
-        break;
       default:
         console.error('Invalid index on left arrow:', index);
     }

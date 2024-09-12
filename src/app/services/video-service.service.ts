@@ -44,6 +44,15 @@ export class VideoService {
     return this.http.get<any>(url, { headers: this.headers });
   }
 
+  /**
+ * Loads the top 5 most recent videos.
+ * @returns {Observable<any>} - An observable containing the top 5 videos.
+ */
+  loadTop5Videos(): Observable<any> {
+    const url = `${environment.baseUrl}/videos/get_videos/top5/`;
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
     /**
    * Fetches favorite videos to display them on the favorite page.
    * Updates the `favVideos` property with the retrieved favorite videos.
