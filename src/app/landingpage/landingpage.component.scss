@@ -124,19 +124,19 @@ footer {
     margin-bottom: 12rem;
     @include dFlex();
     h1 {
-      font-size: 5rem;
+      font-size: 4rem;
     }
     h2 {
-      font-size: 2.6rem;
+      font-size: 2.0rem;
       font-weight: 500;
     }
     span {
-      font-size: 2.4rem;
+      font-size: 2.0rem;
       font-weight: 300;
     }
     .inputBox {
       button {
-        font-size: xx-large;
+        font-size: x-large;
         img{
           width: 20px;
           height: 20px;
@@ -144,14 +144,14 @@ footer {
       }
       input {
         border: 2px solid whitesmoke;
-        font-size: xx-large;
+        font-size: x-large;
       }
     }
   }
 
   footer {
     span {
-      font-size: xx-large;
+      font-size: x-large;
     }
   }
 }

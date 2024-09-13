@@ -9,6 +9,7 @@ section {
   min-height: 120px;
   position: relative;
   cursor: pointer;
+  min-height: 203px;
 
   img {
     width: 100%;
@@ -86,8 +87,8 @@ section {
 
 @media (min-width: $screanWidthQHD) {
   section {
-    max-width: 520px;
-    min-height: 160px;
+    max-width: 360px;
+    min-height: 203px;
 
     .descriptionBox {
       font-size: x-large;

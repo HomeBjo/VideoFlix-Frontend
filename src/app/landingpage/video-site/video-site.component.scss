@@ -213,7 +213,7 @@ section {
     width: 620px;
   
     h1 {
-      font-size: 6rem;
+      font-size: 5rem;
     }
   
     span {
@@ -222,8 +222,8 @@ section {
   }
 
   .blueBtn{
-    @include dFlex($g: 16px);
-    padding: 32px;
+    @include dFlex($g: 8px);
+    padding: px;
     padding-top: 16px;
     padding-bottom: 16px;
     border: none;
@@ -238,7 +238,7 @@ section {
   .videoDiv {
     .videoDiv2 {
       .videoPosition {
-        font-size: 2.4em;
+        font-size: 1.8rem;
         .video4LoopContainer {
           .arrowLeft {
             button {
