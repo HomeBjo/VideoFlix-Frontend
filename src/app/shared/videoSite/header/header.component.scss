@@ -336,7 +336,7 @@ header {
     left: 227px;
     width: 360px;
     .profilSelectionBtn {
-      font-size: xx-large;
+      font-size: x-large;
     }
   }
 
@@ -344,11 +344,11 @@ header {
     width: 285px;
   
     .profilSelectionBtn {
-      font-size: xx-large;
+      font-size: x-large;
       @include dFlex($g: 16px);
       img {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
       }
     }
   }
