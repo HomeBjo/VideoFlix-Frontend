@@ -6,7 +6,6 @@ section {
   height: 100%;
   max-width: 360px;
   aspect-ratio: 16/9;
-  min-height: 120px;
   position: relative;
   cursor: pointer;
   min-height: 203px;
@@ -102,5 +101,14 @@ section {
     .descriptionBox {
       display: none;
     }
+  }
+}
+
+
+@media (max-width: 560px) {
+  section {
+    max-width: 304px;
+    aspect-ratio: 16/9;
+    min-height: 182px;  
   }
 }
