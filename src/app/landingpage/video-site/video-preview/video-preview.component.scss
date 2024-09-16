@@ -23,6 +23,7 @@ section {
     top: 0;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
+    word-break: break-all;
     background: linear-gradient(
       to bottom,
       #202020a3 0%,
@@ -88,10 +89,6 @@ section {
   section {
     max-width: 360px;
     min-height: 203px;
-
-    .descriptionBox {
-      font-size: x-large;
-    }
   }
   
 }
