@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseUrl:'http://staging.irgendwandeineseite',
+    baseUrl:'http://gruppe49345.developerakademie.org',
 }
