@@ -4,7 +4,7 @@ export interface VideoJson {
   description: string;
   id: number;
   is_favorite: boolean;
-  screenshot: string;
+  image: string;
   title: string;
   url?: null;
   video_folder: string;

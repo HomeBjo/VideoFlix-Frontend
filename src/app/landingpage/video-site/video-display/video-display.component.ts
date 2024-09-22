@@ -41,28 +41,11 @@ export class VideoDisplayComponent {
   constructor(
     private videoService: VideoService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    console.log(this.videoService.allVideos);
+    
+  }
 
-  // ngAfterViewInit(): void {
-  //   // Initialisiere den Video.js-Player und das Plugin nach dem DOM-Laden
-  //   if (Hls.isSupported()) {
-  //     const videoElement = document.getElementById(
-  //       'videoPlayer'
-  //     ) as HTMLVideoElement;
-  //     const hls = new Hls();
-  //     hls.loadSource(this.video.video_folder);
-  //     hls.attachMedia(videoElement);
-  //   } else if (
-  //     (document.getElementById('videoPlayer') as HTMLVideoElement).canPlayType(
-  //       'application/vnd.apple.mpegurl'
-  //     )
-  //   ) {
-  //     const videoElement = document.getElementById(
-  //       'videoPlayer'
-  //     ) as HTMLVideoElement;
-  //     videoElement.src = this.video.video_folder;
-  //   }
-  // }
 
     /**
    * Lifecycle hook that is called after the view is initialized.
@@ -205,7 +188,6 @@ export class VideoDisplayComponent {
     this.isRequestInProgress = true;
     this.favoriteTimeout = setTimeout(async () => {
       try {
-        console.log('_____update fav');
         await this.videoService.addFavoriteVideo(body);
         this.videoService.reloadFavs$.next();
       } catch (e) {
