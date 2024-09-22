@@ -14,6 +14,7 @@ import { VideoDisplayComponent } from './video-display/video-display.component';
 import { VideoJson } from '../../interfaces/video-json';
 import { HeaderComponent } from '../../shared/videoSite/header/header.component';
 import { switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-video-site',
@@ -41,6 +42,7 @@ export class VideoSiteComponent {
   private scrollDistance = 420;
   showArrows: boolean[] = [false, false, false, false, false];
   showFavDiv: true | false | null = null;
+  private favVideosSubscription: Subscription | null = null;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -79,7 +81,7 @@ export class VideoSiteComponent {
    * Fetches the user's favorite videos and updates the `favVideos` array in the `VideoService`.
    */
   fetshFavVideos() {
-    this.videoService.reloadFavs$
+    this.favVideosSubscription = this.videoService.reloadFavs$
       .pipe(switchMap(() => this.videoService.fetshFavorites()))
       .subscribe(
         (data: any) => {
@@ -257,4 +259,17 @@ export class VideoSiteComponent {
   getFavorites() {
     return this.videoService.favVideos.filter((v) => v.is_favorite === true);
   }
+
+  /**
+ * Lifecycle hook that is called when the component is destroyed.
+ * This method ensures that the subscription to `favVideosSubscription`
+ * is properly cleaned up to prevent memory leaks and multiple executions.
+ * If a subscription exists, it will be unsubscribed with `unsubscribe()`.
+ */
+  ngOnDestroy() {
+    if (this.favVideosSubscription) {
+      this.favVideosSubscription.unsubscribe();
+    }
+  }
+
 }
