@@ -112,7 +112,6 @@ export class LoginComponent {
    * @returns {boolean} - Returns true if both inputs are valid.
    */
   checkAllInputs() {
-    // if (this.checkEmail() && this.checkPassword()) {
     if (this.checkEmail()) {
       return true;
     }
