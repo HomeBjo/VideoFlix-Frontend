@@ -62,6 +62,17 @@ export class ProfileDetailsComponent {
       this.isFormValid();
     }
   }
+
+  /**
+   * Checks if the current user is a guest by comparing the stored token with a predefined guest token.
+   * @returns {boolean} - Returns true if the user is not a guest, false otherwise.
+   */
+  checkIfUserIsGuest() {
+    let guestUser = '4f7d878076990fefb97cf23cd64ea5dfc19c4618';
+    let storageToken = localStorage.getItem('token');
+    return storageToken == guestUser;
+  }
+
   
   /**
    * Checks if any profile field is currently being edited.

@@ -191,6 +191,14 @@ form {
   }
 }
 
+.guestUserWarning{
+  @include dFlex($g: 16px);
+  flex-direction: column;
+  button{
+    margin: 0;
+  }
+}
+
 //------------------ animation ---------------------
 @keyframes lights {
   0% {
