@@ -29,7 +29,7 @@ export class VideoService {
    * Fetches the user's favorite videos from the server.
    * @returns {Observable<any>} - An observable containing the user's favorite videos.
    */
-  fetshFavorites(): Observable<any> {
+  fetchFavorites(): Observable<any> {
     const url = `${environment.baseUrl}/videos/get_videos/favorites/`;
     return this.http.get<any>(url, { headers: this.headers });
   }
@@ -57,7 +57,7 @@ export class VideoService {
    * Fetches favorite videos to display them on the favorite page.
    * Updates the `favVideos` property with the retrieved favorite videos.
    */
-  async fetshFavForFavoriteSite() {
+  async fetchFavForFavoriteSite() {
     const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
 
     try {

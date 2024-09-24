@@ -25,7 +25,7 @@ export class FavoritesComponent {
    * Fetches the user's favorite videos to display them on the favorites page.
    */
   ngOnInit(){
-    this.videoService.fetshFavForFavoriteSite();
+    this.videoService.fetchFavForFavoriteSite();
   }
 
     /**

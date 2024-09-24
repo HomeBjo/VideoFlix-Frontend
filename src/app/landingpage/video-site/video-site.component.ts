@@ -58,14 +58,14 @@ export class VideoSiteComponent {
   ngOnInit() {
     this.checkUserLoginStatus();
     this.userService.getUserData();
-    this.fetshAllVideos();
-    this.fetshFavVideos();
+    this.fetchAllVideos();
+    this.fetchFavVideos();
   }
 
     /**
    * Fetches all videos and assigns them to the `newVideos` array.
    */
-  fetshAllVideos() {
+  fetchAllVideos() {
     this.videoService.startFetchVideos().subscribe(
       (data: any) => {
         this.newVideos = data;
@@ -80,9 +80,9 @@ export class VideoSiteComponent {
     /**
    * Fetches the user's favorite videos and updates the `favVideos` array in the `VideoService`.
    */
-  fetshFavVideos() {
+  fetchFavVideos() {
     this.favVideosSubscription = this.videoService.reloadFavs$
-      .pipe(switchMap(() => this.videoService.fetshFavorites()))
+      .pipe(switchMap(() => this.videoService.fetchFavorites()))
       .subscribe(
         (data: any) => {
           this.videoService.favVideos = data;
