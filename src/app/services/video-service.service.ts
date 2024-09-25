@@ -4,6 +4,7 @@ import { lastValueFrom, map, Observable, Subject } from 'rxjs';
 import { FavoriteBody } from '../interfaces/favorite-body';
 import { environment } from '../../environments/environments';
 import { VideoJson } from '../interfaces/video-json';
+import { ToastServiceService } from './toast-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class VideoService {
   favVideos: VideoJson[] = [];
   public reloadFavs$ = new Subject<void>();
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastService: ToastServiceService) {}
 
     /**
    * Starts fetching all videos from the server.
@@ -68,7 +69,8 @@ export class VideoService {
         this.favVideos = response;
       }
     } catch (e) {
-      console.log('Loading favorites failed:', e);
+      const errorMessage = 'Oops, something went wrong. Please try again.';
+      this.toastService.showMessage(errorMessage, 'error');
     }
   }
 
@@ -84,7 +86,8 @@ export class VideoService {
         this.http.post(loginUrl, body, { headers: this.headers })
       );
     } catch (e) {
-      console.log('Setting favorites failed:', e);
+      const errorMessage = 'Oops, something went wrong. Please try again.';
+      this.toastService.showMessage(errorMessage, 'error');
     }
   }
 }

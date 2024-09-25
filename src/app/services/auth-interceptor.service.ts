@@ -35,7 +35,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         },
       });
     } else {
-      console.log('Current no token found');
+      
     }
 
     return next.handle(req).pipe(

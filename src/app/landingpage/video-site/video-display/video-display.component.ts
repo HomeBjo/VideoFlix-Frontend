@@ -10,6 +10,7 @@ import Hls from 'hls.js';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoService } from '../../../services/video-service.service';
 import { FavoriteBody } from '../../../interfaces/favorite-body';
+import { ToastServiceService } from '../../../services/toast-service.service';
 
 @Component({
   selector: 'app-video-display',
@@ -40,7 +41,8 @@ export class VideoDisplayComponent {
 
   constructor(
     private videoService: VideoService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastService: ToastServiceService
   ) {}
 
 
@@ -188,7 +190,8 @@ export class VideoDisplayComponent {
         await this.videoService.addFavoriteVideo(body);
         this.videoService.reloadFavs$.next();
       } catch (e) {
-        console.log('Fehler beim Favorisieren:', e);
+        const errorMessage = 'Oops, something went wrong. Please try again.';
+        this.toastService.showMessage(errorMessage, 'error');
       } finally {
         this.isRequestInProgress = false;
       }
