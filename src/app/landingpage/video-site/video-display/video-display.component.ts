@@ -41,10 +41,7 @@ export class VideoDisplayComponent {
   constructor(
     private videoService: VideoService,
     private cdr: ChangeDetectorRef
-  ) {
-    console.log(this.videoService.allVideos);
-    
-  }
+  ) {}
 
 
     /**
@@ -194,7 +191,6 @@ export class VideoDisplayComponent {
         console.log('Fehler beim Favorisieren:', e);
       } finally {
         this.isRequestInProgress = false;
-        this.videoService.reloadFavs$.next();
       }
     }, 300);
   }
