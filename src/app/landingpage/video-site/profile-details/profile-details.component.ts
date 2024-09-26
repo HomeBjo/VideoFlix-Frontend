@@ -68,7 +68,8 @@ export class ProfileDetailsComponent {
    * @returns {boolean} - Returns true if the user is not a guest, false otherwise.
    */
   checkIfUserIsGuest() {
-    let guestUser = '4f7d878076990fefb97cf23cd64ea5dfc19c4618';
+    // let guestUser = '4f7d878076990fefb97cf23cd64ea5dfc19c4618';  Server DA
+    let guestUser = '1c2dae108e8899881043014c08f6495446c341ba';     
     let storageToken = localStorage.getItem('token');
     return storageToken == guestUser;
   }

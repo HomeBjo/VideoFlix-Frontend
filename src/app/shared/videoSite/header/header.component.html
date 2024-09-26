@@ -7,13 +7,14 @@
             <button class="headerBtn" (click)="toggleCategoryMenu($event)">Category</button>
             
             <div class="categorySelection" [ngClass]="{'d-none': showCategorySelection === null, 'slideInAnimation': showCategorySelection, 'slideOutAnimation': !showCategorySelection}"(click)="$event.stopPropagation()">
-                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'city']" class="profilSelectionBtn">City</button>
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'anime']" class="profilSelectionBtn">Anime</button>
-                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'drama']" class="profilSelectionBtn">Drama</button>
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'forest']" class="profilSelectionBtn">Forest</button>
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'romance']" class="profilSelectionBtn">Romance</button>
                 <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'adventure']" class="profilSelectionBtn">Adventure</button>
+                <button (click)="toggleCategoryMenu($event)" [routerLink]="['/video_categorys', 'animal']" class="profilSelectionBtn">Animal</button>
             </div>
-            <button class="headerBtn" [routerLink]="['/favorites',]">Favorites</button>
+            <button class="headerBtn" [routerLink]="['/favorites',]">Favorite</button>
         </div>
     </div>
     
@@ -34,12 +35,13 @@
       <!-- Dropdown-Menü (mobile View) -->
     <div (click)="$event.stopPropagation()" [ngClass]="{'d-none': shwonProfilSelection === null,'mobileSection':showMobileSelection, 'mobileSectionOff':!showMobileSelection}"> 
         <button (click)="toggleMobileMenu()"  [routerLink]="['/video_site']" >Home</button>
-        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'action']" class="profilSelectionBtn">Action</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'city']" class="profilSelectionBtn">City</button>
         <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'anime']" >Anime</button>
-        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'drama']">Drama</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'forest']">Forest</button>
         <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'romance']" >Romance</button>
         <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'adventure']">Adventure</button>
-        <button (click)="toggleMobileMenu()" [routerLink]="['/favorites',]">Favorites</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/video_categorys', 'animal']">Animal</button>
+        <button (click)="toggleMobileMenu()" [routerLink]="['/favorites',]">Favorite</button>
         <button  class="profilSelectionBtn" [routerLink]="['/profile_details']">Manage profile</button>
         <button  (click)="logout()" class="profilSelectionBtn" ><img src="../../../assets/icons/logout.svg" alt="log out img"/>Log out</button>
     </div>
