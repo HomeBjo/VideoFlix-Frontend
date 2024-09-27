@@ -38,6 +38,7 @@ export class VideoSiteComponent {
   @ViewChild('video4LoopBox1') video4LoopBox1!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox2') video4LoopBox2!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox3') video4LoopBox3!: ElementRef<HTMLElement>;
+  @ViewChild('video4LoopBox4') video4LoopBox4!: ElementRef<HTMLElement>;
   @ViewChild('myVideo') myVideo!: ElementRef<HTMLVideoElement>;
   private scrollDistance = 420;
   showArrows: boolean[] = [false, false, false, false, false];
@@ -112,6 +113,7 @@ export class VideoSiteComponent {
       this.video4LoopBox1,
       this.video4LoopBox2,
       this.video4LoopBox3,
+      this.video4LoopBox4,
     ];
 
     videoLoopBoxes.forEach((box, index) => {
@@ -213,6 +215,9 @@ export class VideoSiteComponent {
       case 3:
         this.video4LoopBox3!.nativeElement.scrollLeft += this.scrollDistance;
         break;
+      case 4:
+        this.video4LoopBox3!.nativeElement.scrollLeft += this.scrollDistance;
+        break;
       default:
         console.error('Invalid index on rigth arrow:', index);
     }
@@ -235,6 +240,9 @@ export class VideoSiteComponent {
         this.video4LoopBox2!.nativeElement.scrollLeft -= this.scrollDistance;
         break;
       case 3:
+        this.video4LoopBox3!.nativeElement.scrollLeft -= this.scrollDistance;
+        break;
+      case 4:
         this.video4LoopBox3!.nativeElement.scrollLeft -= this.scrollDistance;
         break;
       default:
