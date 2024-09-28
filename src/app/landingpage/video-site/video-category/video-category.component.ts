@@ -6,7 +6,8 @@ import { RouterLink, ActivatedRoute } from '@angular/router';
 import { VideoJson } from '../../../interfaces/video-json';
 import { VideoPreviewComponent } from '../video-preview/video-preview.component';
 import { VideoDisplayComponent } from '../video-display/video-display.component';
-
+import { switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-video-category',
   standalone: true,
@@ -30,6 +31,7 @@ export class VideoCategoryComponent {
   showArrows: boolean[] = [false, false, false, false, false];
   @ViewChild('video4LoopBox0') video4LoopBox0!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox1') video4LoopBox1!: ElementRef<HTMLElement>;
+  private favVideosSubscription: Subscription | null = null;
 
   constructor(
     public userService: UserService,
@@ -45,7 +47,23 @@ export class VideoCategoryComponent {
     ngOnInit() {
       this.loadCategory();
       this.loadTop5();
+      this.fetchFavVideos();
     }
+
+    fetchFavVideos() {
+      this.favVideosSubscription = this.videoService.reloadFavs$
+        .pipe(switchMap(() => this.videoService.fetchFavorites()))
+        .subscribe(
+          (data: any) => {
+            this.videoService.favVideos = data;
+          },
+          (error: any) => {
+            console.error('Error fetching fav videos:', error);
+          }
+        );
+      this.videoService.reloadFavs$.next();
+    }
+  
 
     /**
    * Loads videos based on the selected category from the route parameters.
@@ -202,6 +220,12 @@ export class VideoCategoryComponent {
       case 2:
       default:
         console.error('Invalid index on left arrow:', index);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.favVideosSubscription) {
+      this.favVideosSubscription.unsubscribe();
     }
   }
 }

@@ -58,21 +58,21 @@ export class VideoService {
    * Fetches favorite videos to display them on the favorite page.
    * Updates the `favVideos` property with the retrieved favorite videos.
    */
-  async fetchFavForFavoriteSite() {
-    const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
+  // async fetchFavForFavoriteSite() {
+  //   const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
 
-    try {
-      const response = await lastValueFrom(
-        this.http.get<VideoJson[]>(loginUrl, { headers: this.headers })
-      );
-      if (response) {
-        this.favVideos = response;
-      }
-    } catch (e) {
-      const errorMessage = 'Oops, something went wrong. Please try again.';
-      this.toastService.showMessage(errorMessage, 'error');
-    }
-  }
+  //   try {
+  //     const response = await lastValueFrom(
+  //       this.http.get<VideoJson[]>(loginUrl, { headers: this.headers })
+  //     );
+  //     if (response) {
+  //       this.favVideos = response;
+  //     }
+  //   } catch (e) {
+  //     const errorMessage = 'Oops, something went wrong. Please try again.';
+  //     this.toastService.showMessage(errorMessage, 'error');
+  //   }
+  // }
 
     /**
    * Adds or removes a video from the user's favorites.

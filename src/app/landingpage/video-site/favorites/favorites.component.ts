@@ -5,6 +5,8 @@ import { VideoService } from '../../../services/video-service.service';
 import { VideoPreviewComponent } from '../video-preview/video-preview.component';
 import { VideoDisplayComponent } from '../video-display/video-display.component';
 import { VideoJson } from '../../../interfaces/video-json';
+import { switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -18,6 +20,8 @@ export class FavoritesComponent {
 
   selectedVideo: VideoJson | null = null;
 
+  private favVideosSubscription: Subscription | null = null;
+
   constructor(public videoService: VideoService) { }
 
     /**
@@ -25,7 +29,22 @@ export class FavoritesComponent {
    * Fetches the user's favorite videos to display them on the favorites page.
    */
   ngOnInit(){
-    this.videoService.fetchFavForFavoriteSite();
+    // this.videoService.fetchFavForFavoriteSite();
+    this.fetchFavVideos();
+  }
+
+  fetchFavVideos() {
+    this.favVideosSubscription = this.videoService.reloadFavs$
+      .pipe(switchMap(() => this.videoService.fetchFavorites()))
+      .subscribe(
+        (data: any) => {
+          this.videoService.favVideos = data;
+        },
+        (error: any) => {
+          console.error('Error fetching fav videos:', error);
+        }
+      );
+    this.videoService.reloadFavs$.next();
   }
 
     /**
@@ -42,5 +61,11 @@ export class FavoritesComponent {
    */
   closeVideoDisplay() {
     this.selectedVideo = null;
+  }
+
+  ngOnDestroy() {
+    if (this.favVideosSubscription) {
+      this.favVideosSubscription.unsubscribe();
+    }
   }
 }
