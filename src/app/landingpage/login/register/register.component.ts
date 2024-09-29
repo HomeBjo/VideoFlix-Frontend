@@ -140,6 +140,7 @@ export class RegisterComponent {
    * Resets the form if the registration is successful.
    */
   async registerUser() {
+    const currentHost = this.getHost();
     let newUSer: RegisterUser = {
       username: this.first_name + '_' + this.last_name,
       first_name: this.first_name,
@@ -147,10 +148,25 @@ export class RegisterComponent {
       email: this.userService.user_email,
       password: this.password,
       confirm_password: this.confirm_password,
+      domain_user: currentHost
     };
     let done = this.userService.registerUser(newUSer);
     if (await done) {
       this.resetValues();
+    }
+  }
+
+  /**
+   * Check the url to determine the host.
+   */
+  getHost(){
+    const currentHost = window.location.host;
+    if (currentHost.includes("videoflix.aleksanderdemyanovych.de")) {
+      return 1;
+    } else if (currentHost.includes("videoflix.xn--bjrnteneicken-jmb.de")) {
+      return 2;
+    } else {
+      return 0;
     }
   }
 

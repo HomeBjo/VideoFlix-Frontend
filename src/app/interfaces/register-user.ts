@@ -6,4 +6,5 @@ export interface RegisterUser {
   phone?: number;
   password: string;
   confirm_password: string;
+  domain_user: number;
 }

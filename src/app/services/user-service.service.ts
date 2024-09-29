@@ -68,12 +68,7 @@ export class UserService {
 
     try {
       const checkEmailResponse = await lastValueFrom(
-        this.http.post<{ exists: boolean }>(
-          checkEmailUrl,
-          { email: newUser.email },
-          { headers: this.headers }
-        )
-      );
+        this.http.post<{ exists: boolean }>(checkEmailUrl, { email: newUser.email }));
       if (checkEmailResponse.exists) {
         this.router.navigateByUrl('/email_exists');
         return true;
@@ -83,6 +78,7 @@ export class UserService {
     } catch (e) {
       const errorMessage = 'Oops, something went wrong. Please try again.';
       this.toastService.showMessage(errorMessage, 'error');
+      console.error('Error during registration:', e);
       return false;
     }
   }
@@ -107,6 +103,7 @@ export class UserService {
       this.router.navigateByUrl('/registration_confirmation');
       return true;
     } catch (e) {
+      console.error('Error during token check:', e);
       return false;
     }
   }

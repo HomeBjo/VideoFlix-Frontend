@@ -34,8 +34,6 @@ export class AuthInterceptorService implements HttpInterceptor {
           Authorization: `Token ${authToken}`,
         },
       });
-    } else {
-      
     }
 
     return next.handle(req).pipe(
