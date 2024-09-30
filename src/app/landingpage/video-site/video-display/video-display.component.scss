@@ -297,7 +297,7 @@ select {
   .video-img-container {
     img {
       height: 520px;
-      object-fit: cover;  
+      object-fit: contain;  
     }
   }
 

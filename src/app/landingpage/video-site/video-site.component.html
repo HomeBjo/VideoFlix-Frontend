@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="videoPosition">
-                <h1>Adventure</h1>
+                <h1>Citys</h1>
                 <div class="video4LoopContainer">
                     @if (showArrows[2]) {
                         <div class="arrowLeft">
@@ -77,7 +77,7 @@
                     }
                     <div class="video4LoopBox" #video4LoopBox2>
                         @for (video of newVideos; track $index) {
-                            @if (video.category === 'adventure') {
+                            @if (video.category === 'city') {
                                 <app-video-preview
                                     [video]="video"
                                     (videoSelected)="onVideoSelected($event)"
