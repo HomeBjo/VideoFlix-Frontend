@@ -59,6 +59,7 @@ export class LoginComponent {
    * Logs the user in as a guest using predefined guest email and password.
    */
   guestLogin() {
+    localStorage.clear();
     this.loadLogin(this.GUEST_MAIL, this.GUEST_PW);
   }
 
