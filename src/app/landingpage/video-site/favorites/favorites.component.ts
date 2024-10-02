@@ -29,10 +29,18 @@ export class FavoritesComponent {
    * Fetches the user's favorite videos to display them on the favorites page.
    */
   ngOnInit(){
-    // this.videoService.fetchFavForFavoriteSite();
     this.fetchFavVideos();
   }
 
+    /**
+   * Fetches the favorite videos by subscribing to the `reloadFavs$` observable.
+   * The favorite videos are then updated in the video service.
+   * 
+   * This method listens for any triggers on `reloadFavs$`, makes an API call to
+   * fetch the favorite videos, and updates the `favVideos` property in the video service.
+   * 
+   * In case of an error during fetching, it logs the error to the console.
+   */
   fetchFavVideos() {
     this.favVideosSubscription = this.videoService.reloadFavs$
       .pipe(switchMap(() => this.videoService.fetchFavorites()))

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, map, Observable, Subject } from 'rxjs';
+import { lastValueFrom, Observable, Subject } from 'rxjs';
 import { FavoriteBody } from '../interfaces/favorite-body';
 import { environment } from '../../environments/environments';
 import { VideoJson } from '../interfaces/video-json';
@@ -53,26 +53,6 @@ export class VideoService {
     const url = `${environment.baseUrl}/videos/get_videos/top5/`;
     return this.http.get<any>(url, { headers: this.headers });
   }
-
-    /**
-   * Fetches favorite videos to display them on the favorite page.
-   * Updates the `favVideos` property with the retrieved favorite videos.
-   */
-  // async fetchFavForFavoriteSite() {
-  //   const loginUrl = `${environment.baseUrl}/videos/get_videos/favorites/`;
-
-  //   try {
-  //     const response = await lastValueFrom(
-  //       this.http.get<VideoJson[]>(loginUrl, { headers: this.headers })
-  //     );
-  //     if (response) {
-  //       this.favVideos = response;
-  //     }
-  //   } catch (e) {
-  //     const errorMessage = 'Oops, something went wrong. Please try again.';
-  //     this.toastService.showMessage(errorMessage, 'error');
-  //   }
-  // }
 
     /**
    * Adds or removes a video from the user's favorites.

@@ -43,6 +43,7 @@ export class VideoCategoryComponent {
     /**
    * Lifecycle hook that is called after the component is initialized.
    * Calls methods to load videos based on the selected category and loads the top 5 videos.
+   * and fetches the user's favorite videos.
    */
     ngOnInit() {
       this.loadCategory();
@@ -50,6 +51,15 @@ export class VideoCategoryComponent {
       this.fetchFavVideos();
     }
 
+    /**
+   * Fetches the favorite videos by subscribing to the `reloadFavs$` observable.
+   * The favorite videos are then updated in the video service.
+   * 
+   * This method listens for any triggers on `reloadFavs$`, makes an API call to
+   * fetch the favorite videos, and updates the `favVideos` property in the video service.
+   * 
+   * In case of an error during fetching, it logs the error to the console.
+   */
     fetchFavVideos() {
       this.favVideosSubscription = this.videoService.reloadFavs$
         .pipe(switchMap(() => this.videoService.fetchFavorites()))
@@ -64,7 +74,6 @@ export class VideoCategoryComponent {
       this.videoService.reloadFavs$.next();
     }
   
-
     /**
    * Loads videos based on the selected category from the route parameters.
    * Subscribes to the `paramMap` to get the current category and fetches the corresponding videos.
