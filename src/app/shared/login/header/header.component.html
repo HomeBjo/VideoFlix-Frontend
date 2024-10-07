@@ -3,7 +3,7 @@
         <source media="(min-width: 768px)" srcset="../../assets/img/Logo.svg">
         <source media="(max-width: 600px)" srcset="../../assets/img/logo_small.svg">
         <!-- default -->
-        <img src="../../assets/img/Logo.svg" alt="Logo" [ngClass]="{'logoPosTopLeft': !showImage}">      
+        <img src="../../assets/img/Logo.svg" alt="Logo">      
     </picture>
     @if (showImage) {
         <button [routerLink]="['/login']" class="loginBtn">Log in</button>
