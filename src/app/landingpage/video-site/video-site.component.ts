@@ -130,6 +130,7 @@ export class VideoSiteComponent {
     this.userService.checkUserInterval = setInterval(() => {
       let user_id = localStorage.getItem('userId')?.toString();
       if (!user_id) {
+        clearTimeout(this.userService.checkUserInterval);
         this.route.navigateByUrl('/login');
       }
     }, 500);
