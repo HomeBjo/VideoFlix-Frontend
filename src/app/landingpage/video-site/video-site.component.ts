@@ -39,7 +39,7 @@ export class VideoSiteComponent {
   @ViewChild('video4LoopBox2') video4LoopBox2!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox3') video4LoopBox3!: ElementRef<HTMLElement>;
   @ViewChild('video4LoopBox4') video4LoopBox4!: ElementRef<HTMLElement>;
-  @ViewChild('myVideo') myVideo!: ElementRef<HTMLVideoElement>;
+  @ViewChild('myVideo', { static: true }) myVideo!: ElementRef<HTMLVideoElement>;
   private scrollDistance = 420;
   showArrows: boolean[] = [false, false, false, false, false];
   showFavDiv: true | false | null = null;
@@ -61,6 +61,7 @@ export class VideoSiteComponent {
     this.userService.getUserData();
     this.fetchAllVideos();
     this.fetchFavVideos();
+    this.checkWindowWidth();
   }
 
     /**
@@ -268,6 +269,26 @@ export class VideoSiteComponent {
   getFavorites() {
     return this.videoService.favVideos.filter((v) => v.is_favorite === true);
   }
+
+
+/**
+ * Adjusts the autoplay behavior of the video based on the window's width.
+ * If the window width is less than 1200 pixels, the video will be paused and autoplay will be disabled.
+ * Otherwise, the video will play and autoplay will be enabled.
+ */
+  checkWindowWidth(){
+    const videoElement = this.myVideo.nativeElement;
+
+    if (window.innerWidth <= 1200) {
+      videoElement.autoplay = false;
+      videoElement.pause();
+    } else {
+      videoElement.muted = true;
+      videoElement.autoplay = true;
+      videoElement.play();
+    }
+  }
+
 
   /**
  * Lifecycle hook that is called when the component is destroyed.
