@@ -161,7 +161,6 @@ export class VideoSiteComponent {
       const videoElement = this.myVideo.nativeElement as HTMLVideoElementWithFullscreen;
       videoElement.src = videoPath; 
       videoElement.play();
-      console.log(videoElement);
       
       if (videoElement.requestFullscreen) {
         videoElement.requestFullscreen();
