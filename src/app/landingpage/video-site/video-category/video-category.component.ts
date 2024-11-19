@@ -8,6 +8,8 @@ import { VideoPreviewComponent } from '../video-preview/video-preview.component'
 import { VideoDisplayComponent } from '../video-display/video-display.component';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+
+
 @Component({
   selector: 'app-video-category',
   standalone: true,
@@ -23,7 +25,7 @@ import { Subscription } from 'rxjs';
 export class VideoCategoryComponent {
   shwonProfilSelection: boolean = false;
   showCategorySelection: boolean = false;
-  selectedVideo: any;
+  selectedVideo: VideoJson | null = null;
   categoryVideos: VideoJson[] = [];
   top5Videos: VideoJson[] = [];
   selectedCategory: string | null = null;
@@ -64,10 +66,10 @@ export class VideoCategoryComponent {
       this.favVideosSubscription = this.videoService.reloadFavs$
         .pipe(switchMap(() => this.videoService.fetchFavorites()))
         .subscribe(
-          (data: any) => {
+          (data: VideoJson[]) => {
             this.videoService.favVideos = data;
           },
-          (error: any) => {
+          (error: VideoJson[]) => {
             console.error('Error fetching fav videos:', error);
           }
         );
@@ -87,7 +89,7 @@ export class VideoCategoryComponent {
             this.categoryVideos = data;
             this.selectedCategory = this.firstLetterBig(category);
           },
-          (error: any) => {
+          (error: VideoJson[]) => {
             console.error('Error fetching videos:', error);
           }
         );
@@ -104,7 +106,7 @@ export class VideoCategoryComponent {
        (data: VideoJson[]) => {
         this.top5Videos = data;
       },
-      (error: any) => {
+      (error: VideoJson[]) => {
         console.error('Error fetching videos:', error);
       }
     )
@@ -147,9 +149,9 @@ export class VideoCategoryComponent {
     /**
    * Sets the selected video for display in the video preview component.
    * 
-   * @param {any} video - The selected video.
+   * @param {VideoJson} video - The selected video.
    */
-  onVideoSelected(video: any) {
+  onVideoSelected(video: VideoJson) {
     this.selectedVideo = video;
   }
 
