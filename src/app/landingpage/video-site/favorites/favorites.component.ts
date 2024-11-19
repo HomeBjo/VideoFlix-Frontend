@@ -45,10 +45,10 @@ export class FavoritesComponent {
     this.favVideosSubscription = this.videoService.reloadFavs$
       .pipe(switchMap(() => this.videoService.fetchFavorites()))
       .subscribe(
-        (data: any) => {
+        (data: VideoJson[]) => {
           this.videoService.favVideos = data;
         },
-        (error: any) => {
+        (error: VideoJson[]) => {
           console.error('Error fetching fav videos:', error);
         }
       );
