@@ -19,39 +19,39 @@ export class VideoService {
 
     /**
    * Starts fetching all videos from the server.
-   * @returns {Observable<any>} - An observable with the video data.
+   * @returns {Observable<VideoJson[]>} - An observable with the video data.
    */
-  startFetchVideos(): Observable<any> {
+  startFetchVideos(): Observable<VideoJson[]> {
     const url = `${environment.baseUrl}/videos/get_videos/get_videos/`;
-    return this.http.get<any>(url, { headers: this.headers });
+    return this.http.get<VideoJson[]>(url, { headers: this.headers });
   }
 
     /**
    * Fetches the user's favorite videos from the server.
-   * @returns {Observable<any>} - An observable containing the user's favorite videos.
+   * @returns {Observable<VideoJson[]>} - An observable containing the user's favorite videos.
    */
-  fetchFavorites(): Observable<any> {
+  fetchFavorites(): Observable<VideoJson[]> {
     const url = `${environment.baseUrl}/videos/get_videos/favorites/`;
-    return this.http.get<any>(url, { headers: this.headers });
+    return this.http.get<VideoJson[]>(url, { headers: this.headers });
   }
 
     /**
    * Loads videos from a specific category.
    * @param {string} category - The name of the category to load videos from.
-   * @returns {Observable<any>} - An observable containing the videos from the specified category.
+   * @returns {Observable<VideoJson[]>} - An observable containing the videos from the specified category.
    */
-  loadCategoryVideos(category: string): Observable<any> {
+  loadCategoryVideos(category: string): Observable<VideoJson[]> {
     const url = `${environment.baseUrl}/videos/category/${category}/`;
-    return this.http.get<any>(url, { headers: this.headers });
+    return this.http.get<VideoJson[]>(url, { headers: this.headers });
   }
 
   /**
  * Loads the top 5 most recent videos.
- * @returns {Observable<any>} - An observable containing the top 5 videos.
+ * @returns {Observable<VideoJson[]>} - An observable containing the top 5 videos.
  */
-  loadTop5Videos(): Observable<any> {
+  loadTop5Videos(): Observable<VideoJson[]> {
     const url = `${environment.baseUrl}/videos/get_videos/top5/`;
-    return this.http.get<any>(url, { headers: this.headers });
+    return this.http.get<VideoJson[]>(url, { headers: this.headers });
   }
 
     /**
