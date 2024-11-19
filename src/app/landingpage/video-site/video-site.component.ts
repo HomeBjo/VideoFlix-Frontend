@@ -15,6 +15,8 @@ import { VideoJson } from '../../interfaces/video-json';
 import { HeaderComponent } from '../../shared/videoSite/header/header.component';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { HTMLVideoElementWithFullscreen } from '../../interfaces/html-elements';
+
 
 @Component({
   selector: 'app-video-site',
@@ -69,11 +71,11 @@ export class VideoSiteComponent {
    */
   fetchAllVideos() {
     this.videoService.startFetchVideos().subscribe(
-      (data: any) => {
+      (data: VideoJson[]) => {
         this.newVideos = data;
         this.videoService.allVideos = this.newVideos;
       },
-      (error: any) => {
+      (error: VideoJson[]) => {
         console.error('Error fetching videos:', error);
       }
     );
@@ -86,10 +88,10 @@ export class VideoSiteComponent {
     this.favVideosSubscription = this.videoService.reloadFavs$
       .pipe(switchMap(() => this.videoService.fetchFavorites()))
       .subscribe(
-        (data: any) => {
+        (data: VideoJson[]) => {
           this.videoService.favVideos = data;
         },
-        (error: any) => {
+        (error: VideoJson[]) => {
           console.error('Error fetching fav videos:', error);
         }
       );
@@ -156,17 +158,17 @@ export class VideoSiteComponent {
       this.myVideo &&
       this.myVideo.nativeElement instanceof HTMLVideoElement
     ) {
-      const videoElement = this.myVideo.nativeElement;
+      const videoElement = this.myVideo.nativeElement as HTMLVideoElementWithFullscreen;
       videoElement.src = videoPath; 
       videoElement.play();
-
+      console.log(videoElement);
+      
       if (videoElement.requestFullscreen) {
-       
         videoElement.requestFullscreen();
-      } else if ((videoElement as any).webkitRequestFullscreen) {
-        (videoElement as any).webkitRequestFullscreen(); 
-      } else if ((videoElement as any).msRequestFullscreen) {
-        (videoElement as any).msRequestFullscreen(); 
+      } else if (videoElement.webkitRequestFullscreen) {
+        videoElement.webkitRequestFullscreen(); 
+      } else if (videoElement.msRequestFullscreen) {
+        videoElement.msRequestFullscreen(); 
       }
 
       videoElement.muted = false; 
