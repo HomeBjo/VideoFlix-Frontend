@@ -217,7 +217,6 @@ export class VideoCategoryComponent {
 
     /**
    * Scrolls the video loop box to the left based on the provided index.
-   * 
    * @param {number} index - The index of the video box to scroll.
    */
   ArrowLeftClick(index: number) {
