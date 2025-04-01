@@ -76,11 +76,11 @@ export class LoginComponent {
         localStorage.setItem('userId', user.user_id.toString());
       } else {
         console.error(
-          'Login fehlgeschlagen: Kein gültiges Token oder User-ID erhalten.'
+          'Login failed: No valid token or user ID received.'
         );
       }
     } catch (error) {
-      console.error('Fehler beim Login:', error);
+      console.error('Login failed:', error);
     }
   }
 

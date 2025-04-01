@@ -51,7 +51,7 @@ export class UserService {
         if (user) {
             this.router.navigateByUrl('/video_site');
         } else {
-            console.error('Token-Überprüfung fehlgeschlagen.');
+            console.error('Token verification failed.');
         }
       }
     }
