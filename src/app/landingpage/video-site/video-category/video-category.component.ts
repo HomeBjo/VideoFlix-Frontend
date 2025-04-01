@@ -158,6 +158,7 @@ export class VideoCategoryComponent {
     /**
    * Closes the video display and deselects the video.
    */
+  
   closeVideoDisplay() {
     this.selectedVideo = null;
   }
